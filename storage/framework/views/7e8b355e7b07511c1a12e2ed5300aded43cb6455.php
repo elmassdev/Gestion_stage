@@ -1,11 +1,9 @@
-
-
 <?php $__env->startSection('content'); ?>
 <div class="container col-md-12">
-    
-    <div class="row col-md-12">        
+
+    <div class="row col-md-12">
         <div class="col-md-9" style="overflow-y: scroll;">
-            
+
             <div class="card">
                 <div class="card-header"><?php echo e(__('Ajouter un stagiaire')); ?></div>
 
@@ -19,7 +17,7 @@
                                 let today = new Date();
                                 const holidays = [];
                                 const year = new Date().getFullYear();
-                                
+
                                 // New Year's Day
                                 holidays.push(`${year}-01-01`);
                                 for (let i = 1; i <= 10; i++) {
@@ -46,7 +44,7 @@
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                
+
                                     //20 aout
                                 holidays.push(`${year}-08-20`);
                                 for (let i = 1; i <= 10; i++) {
@@ -58,21 +56,21 @@
                                     holidays.push(`${year+i}-01-01`);
                                     }
 
-                                //almassira 
+                                //almassira
                                 holidays.push(`${year}-11-06`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                //independance 
+                                //independance
                                 holidays.push(`${year}-11-18`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                
-                                
+
+
                                 const startDateInput = document.getElementById("date_debut");
                                 const endDateInput = document.getElementById("date_fin");
-                                
+
                                 // Get the selected dates
                                 const startDate = new Date(startDateInput.value);
                                 const endDate = new Date(endDateInput.value);
@@ -92,30 +90,30 @@
                                     return false;
                                 }
 
-                                
+
                                 // Check if either date is not a valid date
                                 if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
                                     alert("Merci d'entrer des dates valides.");
                                     return false;
-                                } 
+                                }
 
-                                
+
                                 if (startDate.getTime() >= endDate.getTime()) {
                                     alert("La date de début doit être antérieure à la date de fin.");
                                     return false;
                                 }
-                                if ( startDate.getTime() < today ) {
+                                if ( startDate.getTime() < today+1 ) {
                                     alert("La date de début ne peut pas être antérieure à aujourd'hui.");
                                     return false;
-                                }                              
+                                }
                                 if (startDate.getDay()===6 || startDate.getDay()===0) {
                                     alert("La date de début correspond à un weekend");
                                     return false;
-                                } 
+                                }
                                 if (endDate.getDay()===6 || endDate.getDay()===0) {
                                     alert("La date de fin correspond à un weekend");
                                     return false;
-                                }                                
+                                }
                                 // All validation checks passed
                                 return true;
                                 }
@@ -155,8 +153,8 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -179,14 +177,14 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-                            
+
                         </div>
 
                         <div class="row mb-3">
                             <label for="site" class="col-md-3 col-form-label text-md-left"> site de stage</label>
 
                             <div class="col-md-8">
-                               
+
                                 <select id="site" type="text" class="form-control  <?php $__errorArgs = ['site'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -197,7 +195,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" name="site"  autocomplete="site">
                                     <option value="Benguerir" <?php if(Auth::user()->site =='Benguerir'): ?> selected     <?php endif; ?>>Benguerir</option>
                                     <option value="Youssoufia" <?php if(Auth::user()->site =='Youssoufia'): ?> selected     <?php endif; ?> > Youssoufia</option>
-                                </select>                            
+                                </select>
                                 <?php $__errorArgs = ['site'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -210,7 +208,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <label for="photo" class="col-md-3 col-form-label text-md-left">Photo de profile</label>
@@ -234,7 +232,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" name="civilite" required autocomplete="civilite">
                                     <option value="M." selected>Monsieur</option>
                                     <option value="Mlle">Mademoiselle</option>
-                                    <option value="Mme">Madame</option>                              
+                                    <option value="Mme">Madame</option>
                             </select>
                                 <?php $__errorArgs = ['civilite'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -391,7 +389,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-                        
+
 
                         <div class="row mb-3">
                             <label for="niveau" class="col-md-3 col-form-label text-md-left"> niveau</label>
@@ -408,8 +406,8 @@ unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau">
                                     <option value="1ère année" >1ère année</option>
                                     <option value="2ème année">2ème année</option>
                                     <option value="3ème année">3ème année</option>
-                                    <option value="4ème année">4ème année</option> 
-                                    <option value="5ème année">5ème année</option>                              
+                                    <option value="4ème année">4ème année</option>
+                                    <option value="5ème année">5ème année</option>
                             </select>
                                 <?php $__errorArgs = ['niveau'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -443,15 +441,15 @@ unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
-                                    <option value="DUT">DUT</option> 
-                                    <option value="DUT">BTS</option> 
-                                    <option value="Licence fondamentale">Licence fondamentale</option> 
-                                    <option value="Licence professionnelle">Licence professionnelle</option> 
-                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>   
-                                    <option value="Master">Master</option> 
-                                    <option value="Master spécialisé">Master spécialisé</option> 
+                                    <option value="DUT">DUT</option>
+                                    <option value="DUT">BTS</option>
+                                    <option value="Licence fondamentale">Licence fondamentale</option>
+                                    <option value="Licence professionnelle">Licence professionnelle</option>
+                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>
+                                    <option value="Master">Master</option>
+                                    <option value="Master spécialisé">Master spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
-                                    <option value=" ">Master ENCG</option>                            
+                                    <option value=" ">Master ENCG</option>
                             </select>
                                 <?php $__errorArgs = ['diplome'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -482,7 +480,7 @@ unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere">
                                 <option selected disabled> ----- </option>
                                 <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($f->filiere); ?>"><?php echo e($f->filiere); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['filiere'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -517,7 +515,7 @@ unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="eta
                                 <option selected disabled></option>
                                 <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['etablissement'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -548,9 +546,9 @@ unset($__errorArgs, $__bag); ?>" name="ville"  autocomplete="ville">
                                     <option selected hidden></option>
                                        <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($ville->ville); ?>"><?php echo e($ville->ville); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
-                      
-                                </select>                   
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                </select>
 
                                 <?php $__errorArgs = ['ville'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -582,7 +580,7 @@ unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
                                     <option value="stage ouvrier" selected>stage ouvrier</option>
                                     <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
-                                    <option value="stage PFE">Stage PFE</option>                              
+                                    <option value="stage PFE">Stage PFE</option>
                             </select>
                                 <?php $__errorArgs = ['type_stage'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -611,7 +609,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
                                     
-                                                  
+
                             </select>
                                 <?php $__errorArgs = ['service'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -625,7 +623,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                
+
                             </div>
                         </div>
 
@@ -644,7 +642,7 @@ unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadra
                                 <option selected disabled></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['encadrant'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -663,8 +661,8 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_debut" type="date"  class="form-control datepicker  <?php $__errorArgs = ['date_debut'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -688,14 +686,14 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                             <span class="bg-warning text-danger" id="dd"></span>
-                            
+
                         </div>
 
 
                         <div class="row mb-3">
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_fin" type="date"  class="form-control datepicker  <?php $__errorArgs = ['date_fin'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -720,7 +718,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                             <span class="bg-warning text-danger" id="df"></span>
-                            
+
                         </div>
 
                         <div class="row mb-3">
@@ -735,7 +733,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="sujet" value="<?php echo e(old('sujet')); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="sujet"  autofocus ></textarea>
-                            
+
                                 <?php $__errorArgs = ['sujet'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -763,7 +761,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="observation" value="<?php echo e(old('observation')); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="observation"  autofocus ></textarea>
-                            
+
                                 <?php $__errorArgs = ['observation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -787,8 +785,8 @@ unset($__errorArgs, $__bag); ?>
                             <div class="col-md-6">
                                 <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
                             <input type="checkbox" name="EI" id="EI" value="true">
-                            </div>                           
-                            
+                            </div>
+
                         </div>
 
                         
@@ -800,20 +798,20 @@ unset($__errorArgs, $__bag); ?>
                                     return services.site === site;
                                 });
                                 //alert(JSON.stringify(filtered_services));
-                        
+
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
                                     service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
-                            }                            
+                            }
                             document.getElementById('site').addEventListener('change', function() {
                                 site = this.value;
                                 var filtered_services = tab.filter(function(services) {
                                     return services.site === site;
                                 });
                                 //alert(JSON.stringify(filtered_services));
-                        
+
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
@@ -822,8 +820,8 @@ unset($__errorArgs, $__bag); ?>
                             });
                         </script>
 
-                        
-                        
+
+
 
 
 
@@ -852,7 +850,7 @@ unset($__errorArgs, $__bag); ?>
                         <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
                     </tr>
                 </table>
-            </div>          
+            </div>
         </div>
     </div>
 </div>

@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container col-md-12">
-    
-    <div class="row col-md-12">        
+
+    <div class="row col-md-12">
         <div class="col-md-9" style="overflow-y: scroll;">
-            
+
             <div class="card">
                 <div class="card-header">{{ __('Ajouter un stagiaire') }}</div>
 
@@ -19,7 +19,7 @@
                                 let today = new Date();
                                 const holidays = [];
                                 const year = new Date().getFullYear();
-                                
+
                                 // New Year's Day
                                 holidays.push(`${year}-01-01`);
                                 for (let i = 1; i <= 10; i++) {
@@ -46,7 +46,7 @@
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                
+
                                     //20 aout
                                 holidays.push(`${year}-08-20`);
                                 for (let i = 1; i <= 10; i++) {
@@ -58,21 +58,21 @@
                                     holidays.push(`${year+i}-01-01`);
                                     }
 
-                                //almassira 
+                                //almassira
                                 holidays.push(`${year}-11-06`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                //independance 
+                                //independance
                                 holidays.push(`${year}-11-18`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                
-                                
+
+
                                 const startDateInput = document.getElementById("date_debut");
                                 const endDateInput = document.getElementById("date_fin");
-                                
+
                                 // Get the selected dates
                                 const startDate = new Date(startDateInput.value);
                                 const endDate = new Date(endDateInput.value);
@@ -92,30 +92,30 @@
                                     return false;
                                 }
 
-                                
+
                                 // Check if either date is not a valid date
                                 if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
                                     alert("Merci d'entrer des dates valides.");
                                     return false;
-                                } 
+                                }
 
-                                
+
                                 if (startDate.getTime() >= endDate.getTime()) {
                                     alert("La date de début doit être antérieure à la date de fin.");
                                     return false;
                                 }
-                                if ( startDate.getTime() < today ) {
+                                if ( startDate.getTime() < today+1 ) {
                                     alert("La date de début ne peut pas être antérieure à aujourd'hui.");
                                     return false;
-                                }                              
+                                }
                                 if (startDate.getDay()===6 || startDate.getDay()===0) {
                                     alert("La date de début correspond à un weekend");
                                     return false;
-                                } 
+                                }
                                 if (endDate.getDay()===6 || endDate.getDay()===0) {
                                     alert("La date de fin correspond à un weekend");
                                     return false;
-                                }                                
+                                }
                                 // All validation checks passed
                                 return true;
                                 }
@@ -141,8 +141,8 @@
                         </div>
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  @error('date_demande') is-invalid @enderror"   name="date_demande" value="{{ old('date_demande') }}" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
 
                                 @error('date_demande')
@@ -151,24 +151,24 @@
                                     </span>
                                 @enderror
                             </div>
-                            
+
                         </div>
 
                         <div class="row mb-3">
                             <label for="site" class="col-md-3 col-form-label text-md-left"> site de stage</label>
 
                             <div class="col-md-8">
-                               
+
                                 <select id="site" type="text" class="form-control  @error('site') is-invalid @enderror" name="site"  autocomplete="site">
                                     <option value="Benguerir" @if (Auth::user()->site =='Benguerir') selected     @endif>Benguerir</option>
                                     <option value="Youssoufia" @if (Auth::user()->site =='Youssoufia') selected     @endif > Youssoufia</option>
-                                </select>                            
+                                </select>
                                 @error('site')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>                            
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <label for="photo" class="col-md-3 col-form-label text-md-left">Photo de profile</label>
@@ -185,7 +185,7 @@
                                 <select id="civilite" type="text" class="form-control @error('civilite') is-invalid @enderror" name="civilite" required autocomplete="civilite">
                                     <option value="M." selected>Monsieur</option>
                                     <option value="Mlle">Mademoiselle</option>
-                                    <option value="Mme">Madame</option>                              
+                                    <option value="Mme">Madame</option>
                             </select>
                                 @error('civilite')
                                     <span class="invalid-feedback" role="alert">
@@ -265,7 +265,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
 
                         <div class="row mb-3">
                             <label for="niveau" class="col-md-3 col-form-label text-md-left"> niveau</label>
@@ -275,8 +275,8 @@
                                     <option value="1ère année" >1ère année</option>
                                     <option value="2ème année">2ème année</option>
                                     <option value="3ème année">3ème année</option>
-                                    <option value="4ème année">4ème année</option> 
-                                    <option value="5ème année">5ème année</option>                              
+                                    <option value="4ème année">4ème année</option>
+                                    <option value="5ème année">5ème année</option>
                             </select>
                                 @error('niveau')
                                     <span class="invalid-feedback" role="alert">
@@ -296,15 +296,15 @@
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
-                                    <option value="DUT">DUT</option> 
-                                    <option value="DUT">BTS</option> 
-                                    <option value="Licence fondamentale">Licence fondamentale</option> 
-                                    <option value="Licence professionnelle">Licence professionnelle</option> 
-                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>   
-                                    <option value="Master">Master</option> 
-                                    <option value="Master spécialisé">Master spécialisé</option> 
+                                    <option value="DUT">DUT</option>
+                                    <option value="DUT">BTS</option>
+                                    <option value="Licence fondamentale">Licence fondamentale</option>
+                                    <option value="Licence professionnelle">Licence professionnelle</option>
+                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>
+                                    <option value="Master">Master</option>
+                                    <option value="Master spécialisé">Master spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
-                                    <option value=" ">Master ENCG</option>                            
+                                    <option value=" ">Master ENCG</option>
                             </select>
                                 @error('diplome')
                                     <span class="invalid-feedback" role="alert">
@@ -321,7 +321,7 @@
                                 <option selected disabled> ----- </option>
                                 @foreach($filieres as $f)
                                 <option value="{{ $f->filiere}}">{{$f->filiere}}</option>
-                                @endforeach                         
+                                @endforeach
                             </select>
                                 @error('filiere')
                                     <span class="invalid-feedback" role="alert">
@@ -342,7 +342,7 @@
                                 <option selected disabled></option>
                                 @foreach($etablissements as $etab)
                                 <option value="{{ $etab->sigle_etab}}">{{$etab->sigle_etab}} - {{ $etab->Etab}}</option>
-                                @endforeach                         
+                                @endforeach
                             </select>
                                 @error('etablissement')
                                     <span class="invalid-feedback" role="alert">
@@ -359,9 +359,9 @@
                                     <option selected hidden></option>
                                        @foreach($villes as $ville)
                                 <option value="{{ $ville->ville }}">{{$ville->ville}}</option>
-                                @endforeach  
-                      
-                                </select>                   
+                                @endforeach
+
+                                </select>
 
                                 @error('ville')
                                     <span class="invalid-feedback" role="alert">
@@ -379,7 +379,7 @@
                                     <option value="stage ouvrier" selected>stage ouvrier</option>
                                     <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
-                                    <option value="stage PFE">Stage PFE</option>                              
+                                    <option value="stage PFE">Stage PFE</option>
                             </select>
                                 @error('type_stage')
                                     <span class="invalid-feedback" role="alert">
@@ -397,14 +397,14 @@
                                         @foreach($services as $service)
                                         <option value="{{ $service->sigle_service}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
                                         @endforeach    --}}
-                                                  
+
                             </select>
                                 @error('service')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                
+
                             </div>
                         </div>
 
@@ -416,7 +416,7 @@
                                 <option selected disabled></option>
                                 @foreach($encadrants as $encadrant)
                                 <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
-                                @endforeach                         
+                                @endforeach
                             </select>
                                 @error('encadrant')
                                     <span class="invalid-feedback" role="alert">
@@ -428,8 +428,8 @@
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_debut" type="date"  class="form-control datepicker  @error('date_debut') is-invalid @enderror"   name="date_debut" value="{{ old('date_debut') }}" pattern="dd/mm/yyyy"  required autocomplete="date_debut" placeholder="dd/mm/yyyy" value="" min="1997-01-01" max="2045-12-31" autofocus>
 
                                 @error('date_debut')
@@ -439,14 +439,14 @@
                                 @enderror
                             </div>
                             <span class="bg-warning text-danger" id="dd"></span>
-                            
+
                         </div>
 
 
                         <div class="row mb-3">
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_fin" type="date"  class="form-control datepicker  @error('date_fin') is-invalid @enderror"   name="date_fin" value="{{ old('date_fin') }}" pattern="dd/mm/yyyy"  required autocomplete="date_fin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
                                 <span class=" bg-warning tex-danger" id="datewarning"></span>
 
@@ -457,7 +457,7 @@
                                 @enderror
                             </div>
                             <span class="bg-warning text-danger" id="df"></span>
-                            
+
                         </div>
 
                         <div class="row mb-3">
@@ -465,7 +465,7 @@
 
                             <div class="col-md-8">
                                 <textarea id="sujet" oninput="validateDates()" class="form-control @error('sujet') is-invalid @enderror" name="sujet" value="{{ old('sujet') }}"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="sujet"  autofocus ></textarea>
-                            
+
                                 @error('sujet')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -479,7 +479,7 @@
 
                             <div class="col-md-8">
                                 <textarea id="observation" class="form-control @error('observation') is-invalid @enderror" name="observation" value="{{ old('observation') }}"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="observation"  autofocus ></textarea>
-                            
+
                                 @error('observation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -496,8 +496,8 @@
                             <div class="col-md-6">
                                 <label for="EI" class="col-md-4 col-form-label text-md-left">{{ __('Elève Ingénieur') }}</label>
                             <input type="checkbox" name="EI" id="EI" value="true">
-                            </div>                           
-                            
+                            </div>
+
                         </div>
 
                         {{-- filter services by site;  Made By ELHASSOUNI --}}
@@ -509,20 +509,20 @@
                                     return services.site === site;
                                 });
                                 //alert(JSON.stringify(filtered_services));
-                        
+
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
                                     service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
-                            }                            
+                            }
                             document.getElementById('site').addEventListener('change', function() {
                                 site = this.value;
                                 var filtered_services = tab.filter(function(services) {
                                     return services.site === site;
                                 });
                                 //alert(JSON.stringify(filtered_services));
-                        
+
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
@@ -531,8 +531,8 @@
                             });
                         </script>
 
-                        
-                        
+
+
 
 
 
@@ -560,7 +560,7 @@
                         <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
                     </tr>
                 </table>
-            </div>          
+            </div>
         </div>
     </div>
 </div>

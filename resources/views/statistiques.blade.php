@@ -49,7 +49,7 @@
                 <form method="GET" action="/statistiques" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <h4 class="text-success col-md-5"><u>Liste des stagiaires pour une date:</u></h4>                        
+                        <h4 class="text-success col-md-5"><u>Liste des stagiaires pour une date:</u></h4>
                         <div class="col-md-3">
                             <input id="search" type="date" class="form-control @error('search') is-invalid @enderror"   name="search" value="{{ old('search') }}"  required autocomplete="search"   autofocus>
                             @error('search')
@@ -66,7 +66,7 @@
                     </div>
                 </form>
             </div>
-        </div>            
+        </div>
     </div>
     <div class="row card border border-success" style="overflow-y: scroll;">
         @if(count($results))
@@ -75,7 +75,7 @@
         <tr class="small">
             <th>titre</th>
             <th>Prenom</th>
-            <th>Nom</th>        
+            <th>Nom</th>
             <th>type de stage</th>
             <th>niveau</th>
             <th>diplome</th>
@@ -84,24 +84,24 @@
             <th>Service</th>
             <th>Encadrant</th>
             <th>date debut</th>
-            <th>date fin</th>            
+            <th>date fin</th>
         </tr>
     </thead>
     <tbody>@foreach($results as $res)
     <tr class=" table table-row my-auto h-10 small">
                         <td>{{ $res->civilite}}</td>
                         <td>{{ $res->prenom}}</td>
-                        <td>{{ $res->nom}}</td>                                
+                        <td>{{ $res->nom}}</td>
                         <td>{{ $res->type_stage}}</td>
                         <td>{{ $res->niveau}}</td>
-                        <td>{{ $res->diplome}}</td>                                
+                        <td>{{ $res->diplome}}</td>
                         <td>{{ $res->etablissement}}</td>
                         <td>{{ $res->ville}}</td>
                         <td>{{ $res->service}}</td>
                         <td>{{ $res->nomenc}}</td>
                         <td>{{ $res->date_debut}}</td>
                         <td>{{ $res->date_fin}}</td>
-                        <td> <a  href="/stagiaires/{{$res->id}}"><i class="fa fa-print text-primary"></i></a></td>                           
+                        <td> <a  href="/stagiaires/{{$res->id}}"><i class="fa fa-print text-primary"></i></a></td>
                     </tr>
 @endforeach
 
@@ -111,6 +111,63 @@
 @else
 <p> Pas de stagiaires pour cette date</p>
 @endif
-    </div> 
+    </div>
+
+    <div class="row card">
+        <div class="card-header">
+            <div class="card-body">
+                <form method="GET" action="/statistiques" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <h4 class="text-success col-md-5"><u>Liste des stagiaires pour aujourd'hui:</u></h4>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row card border border-success" style="overflow-y: scroll;">
+        @if(count($statoday))
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr class="small">
+            <th>titre</th>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th>type de stage</th>
+            <th>niveau</th>
+            <th>diplome</th>
+            <th>Etablissement</th>
+            <th>Ville</th>
+            <th>Service</th>
+            <th>Encadrant</th>
+            <th>date debut</th>
+            <th>date fin</th>
+        </tr>
+    </thead>
+    <tbody>@foreach($statoday as $statdy)
+    <tr class=" table table-row my-auto h-10 small">
+                        <td>{{ $statdy->civilite}}</td>
+                        <td>{{ $statdy->prenom}}</td>
+                        <td>{{ $statdy->nom}}</td>
+                        <td>{{ $statdy->type_stage}}</td>
+                        <td>{{ $statdy->niveau}}</td>
+                        <td>{{ $statdy->diplome}}</td>
+                        <td>{{ $statdy->etablissement}}</td>
+                        <td>{{ $statdy->ville}}</td>
+                        <td>{{ $statdy->service}}</td>
+                        <td>{{ $statdy->nomenc}}</td>
+                        <td>{{ $statdy->date_debut}}</td>
+                        <td>{{ $statdy->date_fin}}</td>
+                        <td> <a  href="/stagiaires/{{$statdy->id}}"><i class="fa fa-print text-primary"></i></a></td>
+                    </tr>
+@endforeach
+
+    </tbody>
+</table>
+
+@else
+<p> Pas de stagiaires pour aujourd'hui</p>
+@endif
+    </div>
 </div>
 @endsection

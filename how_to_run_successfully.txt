@@ -1,0 +1,5 @@
+
+1- create a database with the name that goes with .env file
+2- php artisan migrate
+3- if the images does not appear : delete the storage folder from public the run the command line : php artisan storage:link if the problem persist run: chmod -R 775 storage
+4- 

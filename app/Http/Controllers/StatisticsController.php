@@ -7,6 +7,7 @@ use App\Models\Encadrant;
 use app\Models\Stagiaire;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+use Carbon\Carbon;
 
 
 Paginator::useBootstrap();
@@ -20,6 +21,7 @@ class StatisticsController extends Controller
      */
     public function index(Request $request)
     {
+        $tday =Carbon::today();
         $stagiaires = DB::table('stagiaires')
             ->select(DB::raw('count(*) as total, service'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
@@ -31,12 +33,17 @@ class StatisticsController extends Controller
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->groupBy('nomenc')
             ->get();
-            $query = $request->input('search');            
+            $query = $request->input('search');
         $results = DB::table('stagiaires')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
         ->where('date_debut', '=', $query)->paginate(6);
-        return view('statistiques',compact('stagiaires','stagenc','results'));
+
+        $statoday = DB::table('stagiaires')
+        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
+        ->where('date_debut', '=', $tday)->paginate(6);
+        return view('statistiques',compact('stagiaires','stagenc','statoday','results'));
     }
 
     /**
