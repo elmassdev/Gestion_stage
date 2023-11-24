@@ -101,4 +101,4 @@
     </div>
 </body>
 </html>
-<?php /**PATH C:\Users\L\Desktop\Laravel\Gestion_stage\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\Github\Gestion_stage\resources\views/layouts/app.blade.php ENDPATH**/ ?>

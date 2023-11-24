@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">      
+<div class="container">
     <div class="row">
         {{-- the left part of the page --}}
         <div class="col-md-7">
             <div class="card p-1 bg-light">
                 <div class="row ">
-                    <div class="row ">                        
+                    <div class="row ">
                             <div class="col-md-3  p-2">
-                                <div class="center mx-4">                    
+                                <div class="center mx-4">
                                     <img src="{{ asset('storage/images/profile/'.$stagiaire->photo)}}"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
-                                </div>                               
+                                </div>
                             </div>
                             <div class="col-md-8  position my-auto top-0 end-0">
                                 <div class="allergy"><b>{{$stagiaire->civilite}} {{$stagiaire->prenom}} {{$stagiaire->nom}}</b></div>
@@ -19,9 +19,9 @@
                                 <div class="allergy text-secondary"><i class="fa fa-phone" aria-hidden="true"></i> -  <a href="tel:{{$stagiaire->phone}}">{{$stagiaire->phone}}</a> </div>
                                 <div class="allergy text-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> - <a href="mailto:{{$stagiaire->email}}">{{$stagiaire->email}}</a></div>
 
-                            </div>                       
-                        
-                            
+                            </div>
+
+
                             <div class="stats">
                                 <table class="table table-borderless">
                                     <tbody>
@@ -31,7 +31,7 @@
                                             </td>
                                             <td class="col-md-3">
                                                 <div class="d-flex flex-column"> <span class="text-left head">Diplome</span> <span class="text-left bottom">{{$stagiaire->diplome}}</span> </div>
-                                            </td>                                      
+                                            </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Etablissement</span> <span class="text-left bottom">{{$stagiaire->etablissement}}</span> </div>
                                             </td>
@@ -45,7 +45,7 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom">{{$stagiaire->date_fin}}</span> </div>
-                                            </td>                                      
+                                            </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom">{{$stagiaire->service}}</span> </div>
                                             </td>
@@ -81,11 +81,11 @@
                     <table>
                         <tr class="col-md-12  float-left">
                             <td>
-                                @if ($stagiaire->date_fin<=now())               
+                                @if ($stagiaire->date_fin<=now())
                         <div class="card col-md-12 my-2">
                             <a  href="/stagiaires/{{$stagiaire->id}}/attestation"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
-                            
-                        </div>                            
+
+                        </div>
                     @endif
                             </td>
                             <td></td>
@@ -95,7 +95,7 @@
                             <td>
                                 <div class=" card col-md-11 ">
                                     <a  href="/stagiaires/{{$stagiaire->id}}/convocation"><i class="fa fa-print text-primary mx-2"></i> Lettre d'offre de stage</a>
-                                </div> 
+                                </div>
                             </td>
                             <td>
                                 <div>
@@ -104,12 +104,12 @@
                                         <a  href="/stagiaires/{{$stagiaire->id}}/sujet"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
                                     </div>
                                  @endif
-                               </div>  
+                               </div>
                             </td>
                             @endif
                         </tr>
                     </table>
-                </div>       
+                </div>
         </div>
 
         {{-- the right part of the page --}}
@@ -118,7 +118,7 @@
                 <div class=" card  p-1">
                     <div class="card-header">{{ __('Rechercher un stagiaire') }}</div>
                     <div class=" card-body py-2">
-                    
+
                 <form method="GET" action="/stagiaires/{{$stagiaire->id}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
@@ -128,7 +128,7 @@
                             <select id="column" type="text" class="form-control @error('column') is-invalid @enderror" name="column" required autocomplete="column">
                                 <option value="nom" selected>Rechercher par nom</option>
                                 <option value="cin">Rechercher par CIN</option>
-                                <option value="code">Rechercher par code</option>                        
+                                <option value="code">Rechercher par code</option>
                         </select>
                             @error('column')
                                 <span class="invalid-feedback" role="alert">
@@ -171,19 +171,19 @@
                         <th>date_fin</th>
                         <tbody>
                             @foreach ($results as $result)
-                            
+
                             <tr>
-                                
+
                                 <td><a href="/stagiaires/{{$result->id}}">{{$result->nom}}</a></td>
                                 <td><a href="/stagiaires/{{$result->id}}">{{$result->prenom}}</a></td>
                                 <td><a href="/stagiaires/{{$result->id}}">{{$result->cin}}</a></td>
                                 <td><a href="/stagiaires/{{$result->id}}">{{$result->date_debut}}</a></td>
                                 <td><a href="/stagiaires/{{$result->id}}">{{$result->date_fin}}</a></td>
-                            
+
                             </tr>
-                            
+
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                     {{ $results->links() }}
@@ -193,15 +193,15 @@
                     </p>
                     @endif
 
-        
+
                 </div>
 
-            
-            </div>            
+
+            </div>
         </div>
     </div>
 </div>
 
-            
+
 
 @endsection

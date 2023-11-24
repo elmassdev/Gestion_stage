@@ -28,7 +28,7 @@ class StagiaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {      
+    {
         $stagiaires = DB::table('stagiaires')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))->paginate(6);
@@ -42,12 +42,12 @@ class StagiaireController extends Controller
      */
     public function create()
     {
-        $etablissements = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();        
-        $villes = DB::table('villes')->orderBy('ville', 'asc')->get();        
+        $etablissements = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
+        $villes = DB::table('villes')->orderBy('ville', 'asc')->get();
         $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();
-        //$servicesY = DB::table('services')->orderBy('sigle_service', 'asc')->where('site','=','Youssoufia')->get();       
+        //$servicesY = DB::table('services')->orderBy('sigle_service', 'asc')->where('site','=','Youssoufia')->get();
         $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();
-        $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get(); 
+        $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
 
         //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
         //$villes = Ville::orderBy('ville', 'asc')->get();
@@ -113,7 +113,7 @@ class StagiaireController extends Controller
         $stagiaire->code = $request->input('code');
         $stagiaire->Date_demande = $request->input('date_demande');
         $stagiaire->site = $request->input('site');
-        $stagiaire->civilite = $request->input('civilite');        
+        $stagiaire->civilite = $request->input('civilite');
         $stagiaire->prenom =ucwords($request->input('prenom'));
         $stagiaire->nom = ucwords($request->input('nom'));
         $stagiaire->cin = strtoupper($request->input('cin'));
@@ -121,33 +121,37 @@ class StagiaireController extends Controller
         $stagiaire->email = $request->input('email');
         if($request->hasFile('photo')){
             $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
-            $path = $request->file('photo')->storeAs('images/profile', $fileName,'public');
-            $requestData["photo"] = $fileName;//'storage/images/profile/'.$path;  
-            $stagiaire->photo = $requestData["photo"];            
+            $request->file('photo')->storeAs('images/profile', $fileName,'public');
+            $requestData["photo"] = $fileName;//'storage/images/profile/'.$path;
+            $stagiaire->photo = $requestData["photo"];
         }else{
-            $stagiaire->photo ='default.png';
-        }                
+            if($stagiaire->civilite=="M."){
+                $stagiaire->photo ='default_m.jpg';
+            }else{
+                $stagiaire->photo ='default_f.png';
+            }
+        }
         $stagiaire->niveau = $request->input('niveau');
         $stagiaire->diplome = $request->input('diplome');
         $stagiaire->filiere = $request->input('filiere');
         $stagiaire->etablissement = $request->input('etablissement');
-        $stagiaire->ville = $request->input('ville');    
+        $stagiaire->ville = $request->input('ville');
         $stagiaire->type_stage = $request->input('type_stage');
         $stagiaire->service = $request->input('service');
         $stagiaire->encadrant = $request->input('encadrant');
         $stagiaire->date_debut = $request->input('date_debut');
-        $stagiaire->date_fin = $request->input('date_fin');    
-        $stagiaire->sujet= $request->input('sujet'); 			
+        $stagiaire->date_fin = $request->input('date_fin');
+        $stagiaire->sujet= $request->input('sujet');
         $stagiaire->remunere = $request->boolean('remunere');
-        $stagiaire->EI = $request->boolean('EI');    
+        $stagiaire->EI = $request->boolean('EI');
         $stagiaire->annule = $request->boolean('annule');
         $stagiaire->prolongation = $request->input('prolongation');
-        $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');        
-        $stagiaire->Attestation_remise = $request->input('Attestation_remise'); 
-        $stagiaire->Att_remise_a = $request->input('Att_remise_a');    
+        $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
+        $stagiaire->Attestation_remise = $request->input('Attestation_remise');
+        $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
-        $stagiaire->save();  
-             
+        $stagiaire->save();
+
         //$stagiaires =Stagiaire::create($request->all());
         //return redirect('/stagiaires')->with('msg','Enregistré avec succès');
         return back()->with('success', 'Form updated successfully.');
@@ -161,10 +165,10 @@ class StagiaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id, Request $request)
-    {         
-    
+    {
+
         $columns = ['nom', 'cin', 'code'];
-    
+
         $results = DB::table('stagiaires')
             ->where(function($query) use($request, $columns) {
                 foreach ($columns as $column) {
@@ -173,10 +177,10 @@ class StagiaireController extends Controller
                     }
                 }
             })->paginate(6);
-        $stagiaire = Stagiaire::findOrFail($id);        
+        $stagiaire = Stagiaire::findOrFail($id);
         $previous = Stagiaire::where('id', '<', $stagiaire->id)->max('id');
-        $next = Stagiaire::where('id', '>', $stagiaire->id)->min('id');  
-        $encadrant = Encadrant::where('id','=',$stagiaire->encadrant)->first();      
+        $next = Stagiaire::where('id', '>', $stagiaire->id)->min('id');
+        $encadrant = Encadrant::where('id','=',$stagiaire->encadrant)->first();
         return view('stagiaires.show', compact('stagiaire','encadrant','results'))->with('previous', $previous)->with('next', $next);
     }
 
@@ -189,17 +193,17 @@ class StagiaireController extends Controller
     public function edit($id)
     {
         $stagiaire = Stagiaire::findOrFail($id);
-        $etablissements = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();        
-        $villes = DB::table('villes')->orderBy('ville', 'asc')->get();        
-        $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();       
-        $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();        
-        $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get(); 
+        $etablissements = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
+        $villes = DB::table('villes')->orderBy('ville', 'asc')->get();
+        $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();
+        $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();
+        $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
         //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
         //$villes = Ville::orderBy('ville', 'asc')->get();
         //$services = Service::orderBy('sigle_service', 'asc')->get();
         //$filieres = filiere::orderBy('filiere', 'asc')->get();
         //$encadrants =Encadrant::orderBy('nom', 'asc')->get();
-        return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants')); 
+        return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants'));
     }
 
     /**
@@ -225,7 +229,7 @@ class StagiaireController extends Controller
         $stagiaire->code = $request->input('code');
         $stagiaire->Date_demande = $request->input('date_demande');
         $stagiaire->site = $request->input('site');
-        $stagiaire->civilite = $request->input('civilite');        
+        $stagiaire->civilite = $request->input('civilite');
         $stagiaire->prenom =ucwords($request->input('prenom'));
         $stagiaire->nom = ucwords($request->input('nom'));
         $stagiaire->cin = strtoupper($request->input('cin'));
@@ -233,42 +237,42 @@ class StagiaireController extends Controller
         $stagiaire->email = $request->input('email');
 
 
-        if($request->input('editphoto')=="1"){  
+        if($request->input('editphoto')=="1"){
             $old_photo ='storage/images/profile/'.$stagiaire->photo;
                 if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
                     File::delete($old_photo);
-                }          
-            if($request->hasFile('photo')){                                
+                }
+            if($request->hasFile('photo')){
                 $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
                 $path = $request->file('photo')->storeAs('images/profile', $fileName,'public');
-                $requestData["photo"] = $fileName;//'storage/images/profile/'.$path;  
-                $stagiaire->photo = $requestData["photo"];         
+                $requestData["photo"] = $fileName;//'storage/images/profile/'.$path;
+                $stagiaire->photo = $requestData["photo"];
             }else{
                 if($stagiaire->civilite=="M."){
                     $stagiaire->photo ='default_m.jpg';
                 }else{
                     $stagiaire->photo ='default_f.png';
-                }                
-            }   
-        }    
+                }
+            }
+        }
         $stagiaire->niveau = $request->input('niveau');
         $stagiaire->diplome = $request->input('diplome');
         $stagiaire->filiere = $request->input('filiere');
         $stagiaire->etablissement = $request->input('etablissement');
-        $stagiaire->ville = $request->input('ville');    
+        $stagiaire->ville = $request->input('ville');
         $stagiaire->type_stage = $request->input('type_stage');
         $stagiaire->service = $request->input('service');
         $stagiaire->encadrant = $request->input('encadrant');
         $stagiaire->date_debut = $request->input('date_debut');
-        $stagiaire->date_fin = $request->input('date_fin');    
-        $stagiaire->sujet= $request->input('sujet'); 			
+        $stagiaire->date_fin = $request->input('date_fin');
+        $stagiaire->sujet= $request->input('sujet');
         $stagiaire->remunere = $request->boolean('remunere');
-        $stagiaire->EI = $request->boolean('EI');    
+        $stagiaire->EI = $request->boolean('EI');
         $stagiaire->annule = $request->boolean('annule');
         $stagiaire->prolongation = $request->input('prolongation');
-        $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');        
-        $stagiaire->Attestation_remise = $request->input('Attestation_remise'); 
-        $stagiaire->Att_remise_a = $request->input('Att_remise_a');    
+        $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
+        $stagiaire->Attestation_remise = $request->input('Attestation_remise');
+        $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
         //$remunere = ($request->input('remunere') == 'on') ? 1 : 0;
         // $stagiaire->remunere = $remunere;
@@ -301,7 +305,7 @@ class StagiaireController extends Controller
             $stagiaire->EI
         ]);
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
-        
+
         //return back()->with('success', 'Form updated successfully.');
     }
 
@@ -324,9 +328,9 @@ class StagiaireController extends Controller
         return redirect('/stagiaires/');
     }
 
-    //the below code will be used in the printable documents 
+    //the below code will be used in the printable documents
 
-    public function generer_attestation($id){ 
+    public function generer_attestation($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('Services', 'stagiaires.service','=','services.sigle_service')
@@ -334,10 +338,10 @@ class StagiaireController extends Controller
                ->get(['civilite.civilite as titre','stagiaires.nom','stagiaires.prenom', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
         $today = date('d F Y');
         $now = Carbon::now();
-        
 
-        $dd = $stagiaire->date_debut;        
-        $dd = Carbon::parse($dd)->format('d F Y');     
+
+        $dd = $stagiaire->date_debut;
+        $dd = Carbon::parse($dd)->format('d F Y');
         $fin=$stagiaire->date_fin;
         $fin = Carbon::parse($fin)->format('d F Y');
         //2 - prepare the arrays to translate the date
@@ -345,7 +349,7 @@ class StagiaireController extends Controller
         $frenchMonths = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
         $dd_short = str_replace($englishMonths, $frenchMonths, $dd);
         $fin_short = str_replace($englishMonths, $frenchMonths, $fin);
-        //3- longer date form 
+        //3- longer date form
         $dayNumber = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
         $dayNumberText = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-Sept","dix-huit","dix-neuf","vingt","vingt et un","vingt deux","vingt trois","vingt quatre","vingt cinq","vingt six","vingt sept","vingt huit","vingt neuf","trente","trente et un");
         $yearNumber = array("2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
@@ -356,18 +360,18 @@ class StagiaireController extends Controller
         $fin_long = str_replace($dayNumber, $dayNumberText, $fin_long1);
         $today = str_replace($englishMonths, $frenchMonths,$today);
 
-        
+
             if($stagiaire->EI){
                 $pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
             }else{
                 $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
-            }   
-     
+            }
+
         //final touch :)
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
-        return $pdf->stream();    
-        //return $pdf->download();  
-    }  
+        return $pdf->stream();
+        //return $pdf->download();
+    }
 
     public function generer_sujet($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
@@ -376,19 +380,19 @@ class StagiaireController extends Controller
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
-               
+
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
         $year = date('Y');
         $now = Carbon::now();
-        
 
-        $dd = $stagiaire->date_debut; 
-        $ddemande      = $stagiaire->date_demande; 
+
+        $dd = $stagiaire->date_debut;
+        $ddemande      = $stagiaire->date_demande;
         $ddemande = Carbon::parse($ddemande)->format('d F Y');
-        $dd = Carbon::parse($dd)->format('d F Y');     
-        $fin=$stagiaire->date_fin; 
+        $dd = Carbon::parse($dd)->format('d F Y');
+        $fin=$stagiaire->date_fin;
 
         $fin = Carbon::parse($fin)->format('d F Y');
         $date_debut = Carbon::parse($dd)->format('d/m/Y');
@@ -399,7 +403,7 @@ class StagiaireController extends Controller
         $dd_short = str_replace($englishMonths, $frenchMonths, $dd);
         $fin_short = str_replace($englishMonths, $frenchMonths, $fin);
         $ddemande = str_replace($englishMonths, $frenchMonths, $ddemande);
-        //3- longer date form 
+        //3- longer date form
         $dayNumber = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
         $dayNumberText = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-Sept","dix-huit","dix-neuf","vingt","vingt et un","vingt deux","vingt trois","vingt quatre","vingt cinq","vingt six","vingt sept","vingt huit","vingt neuf","trente","trente et un");
         $yearNumber = array("2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
@@ -412,33 +416,33 @@ class StagiaireController extends Controller
 
         $pdf =Pdf::loadView('/stagiaires/sujet',compact('stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
         return $pdf->stream();
-        
-                  
-             
+
+
+
 
     }
 
 
-    public function generer_convocation($id){  
+    public function generer_convocation($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('Services', 'stagiaires.service','=','services.sigle_service')
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc'])->first();
-               
+
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
         $year = date('Y');
         $now = Carbon::now();
-        
 
-        $dd = $stagiaire->date_debut; 
-        $ddemande      = $stagiaire->date_demande; 
+
+        $dd = $stagiaire->date_debut;
+        $ddemande      = $stagiaire->date_demande;
         $ddemande = Carbon::parse($ddemande)->format('d F Y');
-        $dd = Carbon::parse($dd)->format('d F Y');     
-        $fin=$stagiaire->date_fin; 
+        $dd = Carbon::parse($dd)->format('d F Y');
+        $fin=$stagiaire->date_fin;
 
         $fin = Carbon::parse($fin)->format('d F Y');
         $date_debut = Carbon::parse($dd)->format('d/m/Y');
@@ -449,7 +453,7 @@ class StagiaireController extends Controller
         $dd_short = str_replace($englishMonths, $frenchMonths, $dd);
         $fin_short = str_replace($englishMonths, $frenchMonths, $fin);
         $ddemande = str_replace($englishMonths, $frenchMonths, $ddemande);
-        //3- longer date form 
+        //3- longer date form
         $dayNumber = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
         $dayNumberText = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-Sept","dix-huit","dix-neuf","vingt","vingt et un","vingt deux","vingt trois","vingt quatre","vingt cinq","vingt six","vingt sept","vingt huit","vingt neuf","trente","trente et un");
         $yearNumber = array("2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
@@ -460,14 +464,14 @@ class StagiaireController extends Controller
         $fin_long = str_replace($dayNumber, $dayNumberText, $fin_long1);
         $today = str_replace($englishMonths, $frenchMonths,$today);
 
-        
+
             if($stagiaire->EI){
                 $pdf =Pdf::loadView('/stagiaires/convocation',compact('stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }else{
                 $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
-            }        
-            return $pdf->stream();    
+            }
+            return $pdf->stream();
 
-    }  
+    }
 
 }

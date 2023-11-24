@@ -67,4 +67,4 @@ Société anonyme au capital de 8.287.500.000 DH - Registre de Commerce : 40327 
     </footer>
 </body>
 </html>
-<?php /**PATH C:\Users\L\Desktop\Laravel\Gestion_stage\resources\views/layouts/doc.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\Github\Gestion_stage\resources\views/layouts/doc.blade.php ENDPATH**/ ?>

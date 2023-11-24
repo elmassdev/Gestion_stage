@@ -134,4 +134,4 @@ a::after {
   <p class="output">La page est introuvable.</p>
   <p class="output">Appuyez <a href="/home">ici</a> pour retourner à  <a href="/home">la page d'accueil</a>.</p>
   <p class="output">Bonne chance.</p>
-</div><?php /**PATH C:\Users\L\Desktop\Laravel\Gestion_stage\resources\views/errors/404.blade.php ENDPATH**/ ?>
+</div><?php /**PATH D:\Github\Gestion_stage\resources\views/errors/404.blade.php ENDPATH**/ ?>

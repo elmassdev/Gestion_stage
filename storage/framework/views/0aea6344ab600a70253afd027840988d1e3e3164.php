@@ -1,16 +1,15 @@
-
 <?php $__env->startSection('content'); ?>
-<div class="container">      
+<div class="container">
     <div class="row">
         
         <div class="col-md-7">
             <div class="card p-1 bg-light">
                 <div class="row ">
-                    <div class="row ">                        
+                    <div class="row ">
                             <div class="col-md-3  p-2">
-                                <div class="center mx-4">                    
+                                <div class="center mx-4">
                                     <img src="<?php echo e(asset('storage/images/profile/'.$stagiaire->photo)); ?>"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
-                                </div>                               
+                                </div>
                             </div>
                             <div class="col-md-8  position my-auto top-0 end-0">
                                 <div class="allergy"><b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?></b></div>
@@ -19,9 +18,9 @@
                                 <div class="allergy text-secondary"><i class="fa fa-phone" aria-hidden="true"></i> -  <a href="tel:<?php echo e($stagiaire->phone); ?>"><?php echo e($stagiaire->phone); ?></a> </div>
                                 <div class="allergy text-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> - <a href="mailto:<?php echo e($stagiaire->email); ?>"><?php echo e($stagiaire->email); ?></a></div>
 
-                            </div>                       
-                        
-                            
+                            </div>
+
+
                             <div class="stats">
                                 <table class="table table-borderless">
                                     <tbody>
@@ -31,7 +30,7 @@
                                             </td>
                                             <td class="col-md-3">
                                                 <div class="d-flex flex-column"> <span class="text-left head">Diplome</span> <span class="text-left bottom"><?php echo e($stagiaire->diplome); ?></span> </div>
-                                            </td>                                      
+                                            </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Etablissement</span> <span class="text-left bottom"><?php echo e($stagiaire->etablissement); ?></span> </div>
                                             </td>
@@ -45,7 +44,7 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom"><?php echo e($stagiaire->date_fin); ?></span> </div>
-                                            </td>                                      
+                                            </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom"><?php echo e($stagiaire->service); ?></span> </div>
                                             </td>
@@ -81,11 +80,11 @@
                     <table>
                         <tr class="col-md-12  float-left">
                             <td>
-                                <?php if($stagiaire->date_fin<=now()): ?>               
+                                <?php if($stagiaire->date_fin<=now()): ?>
                         <div class="card col-md-12 my-2">
                             <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
-                            
-                        </div>                            
+
+                        </div>
                     <?php endif; ?>
                             </td>
                             <td></td>
@@ -95,7 +94,7 @@
                             <td>
                                 <div class=" card col-md-11 ">
                                     <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation"><i class="fa fa-print text-primary mx-2"></i> Lettre d'offre de stage</a>
-                                </div> 
+                                </div>
                             </td>
                             <td>
                                 <div>
@@ -104,12 +103,12 @@
                                         <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
                                     </div>
                                  <?php endif; ?>
-                               </div>  
+                               </div>
                             </td>
                             <?php endif; ?>
                         </tr>
                     </table>
-                </div>       
+                </div>
         </div>
 
         
@@ -118,7 +117,7 @@
                 <div class=" card  p-1">
                     <div class="card-header"><?php echo e(__('Rechercher un stagiaire')); ?></div>
                     <div class=" card-body py-2">
-                    
+
                 <form method="GET" action="/stagiaires/<?php echo e($stagiaire->id); ?>" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="row mb-3">
@@ -135,7 +134,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" name="column" required autocomplete="column">
                                 <option value="nom" selected>Rechercher par nom</option>
                                 <option value="cin">Rechercher par CIN</option>
-                                <option value="code">Rechercher par code</option>                        
+                                <option value="code">Rechercher par code</option>
                         </select>
                             <?php $__errorArgs = ['column'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -200,19 +199,19 @@ unset($__errorArgs, $__bag); ?>
                         <th>date_fin</th>
                         <tbody>
                             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            
+
                             <tr>
-                                
+
                                 <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->nom); ?></a></td>
                                 <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->prenom); ?></a></td>
                                 <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->cin); ?></a></td>
                                 <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_debut); ?></a></td>
                                 <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_fin); ?></a></td>
-                            
+
                             </tr>
-                            
+
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            
+
                         </tbody>
                     </table>
                     <?php echo e($results->links()); ?>
@@ -223,16 +222,17 @@ unset($__errorArgs, $__bag); ?>
                     </p>
                     <?php endif; ?>
 
-        
+
                 </div>
 
-            
-            </div>            
+
+            </div>
         </div>
     </div>
 </div>
 
-            
+
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\L\Desktop\Laravel\Gestion_stage\resources\views/stagiaires/show.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Github\Gestion_stage\resources\views/stagiaires/show.blade.php ENDPATH**/ ?>
