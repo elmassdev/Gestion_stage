@@ -164,23 +164,21 @@
                 <div>
                     @if(count($results))
                     <table>
-                        <th>nom</th>
-                        <th>prenom</th>
-                        <th>cin</th>
-                        <th>date_debut</th>
-                        <th>date_fin</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>CIN</th>
+                        <th>Date_debut</th>
+                        <th>Date_fin</th>
                         <tbody>
                             @foreach ($results as $result)
 
-                            <tr>
-
-                                <td><a href="/stagiaires/{{$result->id}}">{{$result->nom}}</a></td>
-                                <td><a href="/stagiaires/{{$result->id}}">{{$result->prenom}}</a></td>
-                                <td><a href="/stagiaires/{{$result->id}}">{{$result->cin}}</a></td>
-                                <td><a href="/stagiaires/{{$result->id}}">{{$result->date_debut}}</a></td>
-                                <td><a href="/stagiaires/{{$result->id}}">{{$result->date_fin}}</a></td>
-
-                            </tr>
+                                <tr>
+                                    <td><a href="/stagiaires/{{$result->id}}">{{$result->nom}}</a></td>
+                                    <td><a href="/stagiaires/{{$result->id}}">{{$result->prenom}}</a></td>
+                                    <td><a href="/stagiaires/{{$result->id}}">{{$result->cin}}</a></td>
+                                    <td><a href="/stagiaires/{{$result->id}}">{{$result->date_debut}}</a></td>
+                                    <td><a href="/stagiaires/{{$result->id}}">{{$result->date_fin}}</a></td>
+                                </tr>
 
                             @endforeach
 
@@ -192,11 +190,7 @@
                         pas de résultats
                     </p>
                     @endif
-
-
                 </div>
-
-
             </div>
         </div>
     </div>

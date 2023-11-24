@@ -155,7 +155,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="site" class="col-md-3 col-form-label text-md-left"> site de stage</label>
+                            <label for="site" class="col-md-3 col-form-label text-md-left"> Site de stage</label>
 
                             <div class="col-md-8">
 
@@ -196,7 +196,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="prenom" class="col-md-3 col-form-label text-md-left">{{ __('prenom') }}</label>
+                            <label for="prenom" class="col-md-3 col-form-label text-md-left">{{ __('Prénom') }}</label>
 
                             <div class="col-md-8">
                                 <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="prenom" value="{{ old('prenom') }}"  required autocomplete="prenom"  autofocus>
@@ -211,7 +211,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="nom" class="col-md-3 col-form-label text-md-left">{{ __('nom') }}</label>
+                            <label for="nom" class="col-md-3 col-form-label text-md-left">{{ __('Nom') }}</label>
 
                             <div class="col-md-8">
                                 <input id="nom" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" required autocomplete="nom"  autofocus>
@@ -225,7 +225,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="cin" class="col-md-3 col-form-label text-md-left">{{ __('cin') }}</label>
+                            <label for="cin" class="col-md-3 col-form-label text-md-left">{{ __('CIN') }}</label>
 
                             <div class="col-md-8">
                                 <input id="cin" type="text" class="form-control @error('cin') is-invalid @enderror" name="cin" value="{{ old('cin') }}" oninput="this.value = this.value.toUpperCase()" required autocomplete="cin" autofocus>
@@ -239,7 +239,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-3 col-form-label text-md-left">{{ __('phone') }}</label>
+                            <label for="phone" class="col-md-3 col-form-label text-md-left">{{ __('Phone') }}</label>
 
                             <div class="col-md-8">
                                 <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  autocomplete="phone" placeholder="ex: +212662077439" autofocus>
@@ -253,7 +253,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-3 col-form-label text-md-left">{{ __('email') }}</label>
+                            <label for="email" class="col-md-3 col-form-label text-md-left">{{ __('Email') }}</label>
 
                             <div class="col-md-8">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
@@ -268,7 +268,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> niveau</label>
+                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
 
                             <div class="col-md-8">
                                 <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau"  autocomplete="niveau">
@@ -288,11 +288,11 @@
 
 
                         <div class="row mb-3">
-                            <label for="diplome" class="col-md-3 col-form-label text-md-left"> diplome</label>
+                            <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplôme</label>
 
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                                    <option value="" disabled>----Diplome----</option>
+                                    <option value="" disabled>----Diplôme----</option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -461,7 +461,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="sujet" class="col-md-3 col-form-label text-md-left">{{ __('sujet') }}</label>
+                            <label for="sujet" class="col-md-3 col-form-label text-md-left">{{ __('Sujet') }}</label>
 
                             <div class="col-md-8">
                                 <textarea id="sujet" oninput="validateDates()" class="form-control @error('sujet') is-invalid @enderror" name="sujet" value="{{ old('sujet') }}"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="sujet"  autofocus ></textarea>
@@ -475,7 +475,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="observation" class="col-md-3 col-form-label text-md-left">{{ __('observation') }}</label>
+                            <label for="observation" class="col-md-3 col-form-label text-md-left">{{ __('Observation') }}</label>
 
                             <div class="col-md-8">
                                 <textarea id="observation" class="form-control @error('observation') is-invalid @enderror" name="observation" value="{{ old('observation') }}"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="observation"  autofocus ></textarea>

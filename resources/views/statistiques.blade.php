@@ -73,18 +73,18 @@
 <table class="table table-striped table-responsive">
     <thead>
         <tr class="small">
-            <th>titre</th>
+            <th>Titre</th>
             <th>Prenom</th>
             <th>Nom</th>
-            <th>type de stage</th>
-            <th>niveau</th>
-            <th>diplome</th>
+            <th>Type de stage</th>
+            <th>Niveau</th>
+            <th>Diplôme</th>
             <th>Etablissement</th>
             <th>Ville</th>
             <th>Service</th>
             <th>Encadrant</th>
-            <th>date debut</th>
-            <th>date fin</th>
+            <th>Date debut</th>
+            <th>Date fin</th>
         </tr>
     </thead>
     <tbody>@foreach($results as $res)
@@ -130,40 +130,40 @@
 <table class="table table-striped table-responsive">
     <thead>
         <tr class="small">
-            <th>titre</th>
+            <th>Titre</th>
             <th>Prenom</th>
             <th>Nom</th>
-            <th>type de stage</th>
-            <th>niveau</th>
-            <th>diplome</th>
+            <th>Type de stage</th>
+            <th>Niveau</th>
+            <th>Diplôme</th>
             <th>Etablissement</th>
             <th>Ville</th>
             <th>Service</th>
             <th>Encadrant</th>
-            <th>date debut</th>
-            <th>date fin</th>
+            <th>Date debut</th>
+            <th>Date fin</th>
         </tr>
     </thead>
-    <tbody>@foreach($statoday as $statdy)
-    <tr class=" table table-row my-auto h-10 small">
-                        <td>{{ $statdy->civilite}}</td>
-                        <td>{{ $statdy->prenom}}</td>
-                        <td>{{ $statdy->nom}}</td>
-                        <td>{{ $statdy->type_stage}}</td>
-                        <td>{{ $statdy->niveau}}</td>
-                        <td>{{ $statdy->diplome}}</td>
-                        <td>{{ $statdy->etablissement}}</td>
-                        <td>{{ $statdy->ville}}</td>
-                        <td>{{ $statdy->service}}</td>
-                        <td>{{ $statdy->nomenc}}</td>
-                        <td>{{ $statdy->date_debut}}</td>
-                        <td>{{ $statdy->date_fin}}</td>
-                        <td> <a  href="/stagiaires/{{$statdy->id}}"><i class="fa fa-print text-primary"></i></a></td>
-                    </tr>
-@endforeach
+            <tbody>@foreach($statoday as $statdy)
+            <tr class=" table table-row my-auto h-10 small">
+                                <td>{{ $statdy->civilite}}</td>
+                                <td>{{ $statdy->prenom}}</td>
+                                <td>{{ $statdy->nom}}</td>
+                                <td>{{ $statdy->type_stage}}</td>
+                                <td>{{ $statdy->niveau}}</td>
+                                <td>{{ $statdy->diplome}}</td>
+                                <td>{{ $statdy->etablissement}}</td>
+                                <td>{{ $statdy->ville}}</td>
+                                <td>{{ $statdy->service}}</td>
+                                <td>{{ $statdy->nomenc}}</td>
+                                <td>{{ $statdy->date_debut}}</td>
+                                <td>{{ $statdy->date_fin}}</td>
+                                <td> <a  href="/stagiaires/{{$statdy->id}}"><i class="fa fa-print text-primary"></i></a></td>
+                            </tr>
+        @endforeach
 
-    </tbody>
-</table>
+            </tbody>
+        </table>
 
 @else
 <p> Pas de stagiaires pour aujourd'hui</p>

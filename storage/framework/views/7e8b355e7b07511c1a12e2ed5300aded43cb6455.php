@@ -250,7 +250,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="prenom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('prenom')); ?></label>
+                            <label for="prenom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('prénom')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="prenom" type="text" class="form-control <?php $__errorArgs = ['prenom'];

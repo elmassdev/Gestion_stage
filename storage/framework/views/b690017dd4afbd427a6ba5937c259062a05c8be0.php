@@ -86,18 +86,18 @@ unset($__errorArgs, $__bag); ?>
 <table class="table table-striped table-responsive">
     <thead>
         <tr class="small">
-            <th>titre</th>
+            <th>Titre</th>
             <th>Prenom</th>
             <th>Nom</th>
-            <th>type de stage</th>
-            <th>niveau</th>
-            <th>diplome</th>
+            <th>Type de stage</th>
+            <th>Niveau</th>
+            <th>Diplôme</th>
             <th>Etablissement</th>
             <th>Ville</th>
             <th>Service</th>
             <th>Encadrant</th>
-            <th>date debut</th>
-            <th>date fin</th>
+            <th>Date debut</th>
+            <th>Date fin</th>
         </tr>
     </thead>
     <tbody><?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -143,18 +143,18 @@ unset($__errorArgs, $__bag); ?>
 <table class="table table-striped table-responsive">
     <thead>
         <tr class="small">
-            <th>titre</th>
+            <th>Titre</th>
             <th>Prenom</th>
             <th>Nom</th>
-            <th>type de stage</th>
-            <th>niveau</th>
-            <th>diplome</th>
+            <th>Type de stage</th>
+            <th>Niveau</th>
+            <th>Diplome</th>
             <th>Etablissement</th>
             <th>Ville</th>
             <th>Service</th>
             <th>Encadrant</th>
-            <th>date debut</th>
-            <th>date fin</th>
+            <th>Date debut</th>
+            <th>Date fin</th>
         </tr>
     </thead>
     <tbody><?php $__currentLoopData = $statoday; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statdy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

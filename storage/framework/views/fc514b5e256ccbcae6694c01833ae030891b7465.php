@@ -1,12 +1,10 @@
-
-
 <?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Modifier les informations de <?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->nom); ?></div>
-                
+
 
                 <div class="card-body">
                     <form method="POST" action="/stagiaires/<?php echo e($stagiaire->id); ?>/modification" enctype="multipart/form-data" onsubmit="return validateDates()">
@@ -14,10 +12,10 @@
                         <?php echo method_field('PUT'); ?>
 
                         <script>
-                            function validateDates() {                                
+                            function validateDates() {
                                 const holidays = [];
                                 const year = new Date().getFullYear();
-                                
+
                                 // New Year
                                 holidays.push(`${year}-01-01`);
                                 for (let i = 1; i <= 10; i++) {
@@ -44,7 +42,7 @@
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                
+
                                     //20 aout
                                 holidays.push(`${year}-08-20`);
                                 for (let i = 1; i <= 10; i++) {
@@ -56,21 +54,21 @@
                                     holidays.push(`${year+i}-01-01`);
                                     }
 
-                                //almassira 
+                                //almassira
                                 holidays.push(`${year}-11-06`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                //independance 
+                                //independance
                                 holidays.push(`${year}-11-18`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-                                
-                                
+
+
                                 const startDateInput = document.getElementById("date_debut");
                                 const endDateInput = document.getElementById("date_fin");
-                                
+
                                 // Get the selected dates
                                 const startDate = new Date(startDateInput.value);
                                 const endDate = new Date(endDateInput.value);
@@ -90,26 +88,26 @@
                                     return false;
                                 }
 
-                                
+
                                 // Check if either date is not a valid date
                                 if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
                                     alert("Merci d'entrer des dates valides.");
                                     return false;
-                                } 
+                                }
 
-                                
+
                                 if (startDate.getTime() >= endDate.getTime()) {
                                     alert("La date de début doit être antérieure à la date de fin.");
                                     return false;
-                                }                            
+                                }
                                 if (startDate.getDay()===6 || startDate.getDay()===0) {
                                     alert("La date de début correspond à un weekend");
                                     return false;
-                                } 
+                                }
                                 if (endDate.getDay()===6 || endDate.getDay()===0) {
                                     alert("La date de fin correspond à un weekend");
                                     return false;
-                                }                                
+                                }
                                 // All validation checks passed
                                 return true;
                                 }
@@ -146,8 +144,8 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_demande" type="date" value = "<?php echo e($stagiaire->date_demande); ?>" class="form-control datepicker  <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -170,14 +168,14 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-                            
+
                         </div>
 
                         <div class="row mb-3">
                             <label for="site" class="col-md-3 col-form-label text-md-left"> site de stage</label>
 
                             <div class="col-md-8">
-                               
+
                                 <select id="site" type="text"   class="form-control  <?php $__errorArgs = ['site'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -190,7 +188,7 @@ unset($__errorArgs, $__bag); ?>" name="site"  autocomplete="site">
                                     <option value="Benguerir">Benguerir</option>
                                     <option value="Youssoufia"> Youssoufia</option>
                                     
-                            </select>                            
+                            </select>
                                 <?php $__errorArgs = ['site'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -203,12 +201,12 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <label for="editphoto" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Modifier la photo?')); ?></label>
                             <input type="checkbox" name="editphoto" id="editphoto" value="1">
-                        </div>                       
+                        </div>
                         <div class="row mb-3" id="photo">
                             <label for="photo" class="col-md-3 col-form-label text-md-left">Photo de profile</label>
                             <div class="col-md-8">
@@ -231,7 +229,7 @@ unset($__errorArgs, $__bag); ?>" name="civilite" required autocomplete="civilite
                                     <option value="<?php echo e($stagiaire->civilite); ?>" selected><?php echo e($stagiaire->civilite); ?></option>
                                     <option value="M." >Monsieur</option>
                                     <option value="Mlle">Mademoiselle</option>
-                                    <option value="Mme">Madame</option>                              
+                                    <option value="Mme">Madame</option>
                             </select>
                                 <?php $__errorArgs = ['civilite'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -249,7 +247,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="prenom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('prenom')); ?></label>
+                            <label for="prenom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Prénom')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="prenom" type="text" value="<?php echo e($stagiaire->prenom); ?>" class="form-control <?php $__errorArgs = ['prenom'];
@@ -278,7 +276,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mb-3">
-                            <label for="nom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('nom')); ?></label>
+                            <label for="nom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Nom')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="nom" type="text" class="form-control <?php $__errorArgs = ['nom'];
@@ -306,7 +304,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="cin" class="col-md-3 col-form-label text-md-left"><?php echo e(__('cin')); ?></label>
+                            <label for="cin" class="col-md-3 col-form-label text-md-left"><?php echo e(__('CIN')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="cin" type="text" class="form-control <?php $__errorArgs = ['cin'];
@@ -334,7 +332,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-3 col-form-label text-md-left"><?php echo e(__('phone')); ?></label>
+                            <label for="phone" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Phone')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="phone" type="tel" class="form-control <?php $__errorArgs = ['phone'];
@@ -362,7 +360,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-3 col-form-label text-md-left"><?php echo e(__('email')); ?></label>
+                            <label for="email" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Email')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="email" type="email" class="form-control <?php $__errorArgs = ['email'];
@@ -388,10 +386,10 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-                        
+
 
                         <div class="row mb-3">
-                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> niveau</label>
+                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
 
                             <div class="col-md-8">
                                 <select id="niveau" type="text" class="form-control <?php $__errorArgs = ['niveau'];
@@ -406,8 +404,8 @@ unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau">
                                     <option value="1ère année" >1ère année</option>
                                     <option value="2ème année">2ème année</option>
                                     <option value="3ème année">3ème année</option>
-                                    <option value="4ème année">4ème année</option> 
-                                    <option value="5ème année">5ème année</option>                              
+                                    <option value="4ème année">4ème année</option>
+                                    <option value="5ème année">5ème année</option>
                             </select>
                                 <?php $__errorArgs = ['niveau'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -426,7 +424,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mb-3">
-                            <label for="diplome" class="col-md-3 col-form-label text-md-left"> diplome</label>
+                            <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
 
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control <?php $__errorArgs = ['diplome'];
@@ -437,19 +435,19 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                                    <option value="<?php echo e($stagiaire->diplome); ?>" selected><?php echo e($stagiaire->diplome); ?></option>                                    
+                                    <option value="<?php echo e($stagiaire->diplome); ?>" selected><?php echo e($stagiaire->diplome); ?></option>
                                     <option value="Qualification Professionnelle" >Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
-                                    <option value="DUT">DUT</option> 
-                                    <option value="DUT">BTS</option> 
-                                    <option value="Licence fondamentale">Licence fondamentale</option> 
-                                    <option value="Licence professionnelle">Licence professionnelle</option> 
-                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>   
-                                    <option value="Master">Master</option> 
-                                    <option value="Master spécialisé">Master spécialisé</option> 
+                                    <option value="DUT">DUT</option>
+                                    <option value="DUT">BTS</option>
+                                    <option value="Licence fondamentale">Licence fondamentale</option>
+                                    <option value="Licence professionnelle">Licence professionnelle</option>
+                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>
+                                    <option value="Master">Master</option>
+                                    <option value="Master spécialisé">Master spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
-                                    <option value=" ">Master ENCG</option>                            
+                                    <option value=" ">Master ENCG</option>
                             </select>
                                 <?php $__errorArgs = ['diplome'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -480,7 +478,7 @@ unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere">
                                 <option value="<?php echo e($stagiaire->filiere); ?>" selected ><?php echo e($stagiaire->filiere); ?></option>
                                 <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($f->filiere); ?>"><?php echo e($f->filiere); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['filiere'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -501,7 +499,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mb-3">
-                            <label for="etablissement" class="col-md-3 col-form-label text-md-left"> etablissement</label>
+                            <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
                             <div class="col-md-8">
                                 <select id="etablissement" type="text" class="form-control <?php $__errorArgs = ['etablissement'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -514,7 +512,7 @@ unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="eta
                                 <option  value="<?php echo e($stagiaire->etablissement); ?>" selected ><?php echo e($stagiaire->etablissement); ?></option>
                                 <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['etablissement'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -545,9 +543,9 @@ unset($__errorArgs, $__bag); ?>" name="ville"  autocomplete="ville">
                                     <option value="<?php echo e($stagiaire->ville); ?>" selected><?php echo e($stagiaire->ville); ?></option>
                                        <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($ville->ville); ?>"><?php echo e($ville->ville); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
-                      
-                                </select>                   
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                </select>
 
                                 <?php $__errorArgs = ['ville'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -580,7 +578,7 @@ unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
                                     <option value="stage ouvrier" selected>stage ouvrier</option>
                                     <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
-                                    <option value="stage PFE">Stage PFE</option>                              
+                                    <option value="stage PFE">Stage PFE</option>
                             </select>
                                 <?php $__errorArgs = ['type_stage'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -611,7 +609,7 @@ unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
                                 <option  value="<?php echo e($stagiaire->service); ?>" selected ><?php echo e($stagiaire->service); ?></option>
                                 <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($service->sigle_service); ?>"><?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['service'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -643,7 +641,7 @@ unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadra
                                 <option value="<?php echo e($stagiaire->encadrant); ?>" selected ><?php echo e($stagiaire->encadrant); ?></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['encadrant'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -662,8 +660,8 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_debut" type="date"  class="form-control datepicker  <?php $__errorArgs = ['date_debut'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -686,14 +684,14 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-                            
+
                         </div>
 
 
                         <div class="row mb-3">
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
-                        
-                            <div class="col-md-8">                                
+
+                            <div class="col-md-8">
                                 <input id="date_fin" type="date"  class="form-control datepicker  <?php $__errorArgs = ['date_fin'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -716,11 +714,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-                            
+
                         </div>
 
                         <div class="row mb-3">
-                            <label for="sujet" class="col-md-3 col-form-label text-md-left"><?php echo e(__('sujet')); ?></label>
+                            <label for="sujet" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Sujet')); ?></label>
 
                             <div class="col-md-8">
                                 <textarea id="sujet" class="form-control <?php $__errorArgs = ['sujet'];
@@ -731,7 +729,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="sujet" value="<?php echo e($stagiaire->sujet); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="sujet"  autofocus oninput="validateDates()" ><?php echo e($stagiaire->sujet); ?></textarea>
-                            
+
                                 <?php $__errorArgs = ['sujet'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -748,7 +746,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="observation" class="col-md-3 col-form-label text-md-left"><?php echo e(__('observation')); ?></label>
+                            <label for="observation" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Observation')); ?></label>
 
                             <div class="col-md-8">
                                 <textarea id="observation" class="form-control <?php $__errorArgs = ['observation'];
@@ -759,7 +757,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="observation" value="<?php echo e($stagiaire->observation); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="observation"  autofocus ><?php echo e($stagiaire->observation); ?></textarea>
-                            
+
                                 <?php $__errorArgs = ['observation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -798,7 +796,7 @@ unset($__errorArgs, $__bag); ?>
 
                         </script>
 
-                        
+
 
 
 
