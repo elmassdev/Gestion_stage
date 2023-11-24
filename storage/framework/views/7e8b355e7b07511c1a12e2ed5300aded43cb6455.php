@@ -1,8 +1,50 @@
 <?php $__env->startSection('content'); ?>
-<div class="container col-md-12">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        display: flex;
+        height: 100vh;
+    }
+
+    #left {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    #right {
+        flex-shrink: 0;
+        width: 300px;
+        height: 100%;
+        position: fixed;
+        top: 5;
+        right: 0;
+        overflow-y: auto;
+    }
+
+    @media (max-width: 767px) {
+        #container {
+            flex-direction: column;
+        }
+
+        #right {
+            position: relative;
+            width: 100%;
+            top: auto;
+            bottom: 0;
+        }
+    }
+</style>
+
+<div class="container col-md-12" id="container">
 
     <div class="row col-md-12">
-        <div class="col-md-9" style="overflow-y: scroll;">
+        <div class="col-md-9" style="overflow-y: scroll;" id="left">
 
             <div class="card">
                 <div class="card-header"><?php echo e(__('Ajouter un stagiaire')); ?></div>
@@ -181,7 +223,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="site" class="col-md-3 col-form-label text-md-left"> site de stage</label>
+                            <label for="site" class="col-md-3 col-form-label text-md-left"> Site de stage</label>
 
                             <div class="col-md-8">
 
@@ -250,7 +292,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="prenom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('prénom')); ?></label>
+                            <label for="prenom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Prénom')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="prenom" type="text" class="form-control <?php $__errorArgs = ['prenom'];
@@ -279,7 +321,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mb-3">
-                            <label for="nom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('nom')); ?></label>
+                            <label for="nom" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Nom')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="nom" type="text" class="form-control <?php $__errorArgs = ['nom'];
@@ -307,7 +349,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="cin" class="col-md-3 col-form-label text-md-left"><?php echo e(__('cin')); ?></label>
+                            <label for="cin" class="col-md-3 col-form-label text-md-left"><?php echo e(__('CIN')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="cin" type="text" class="form-control <?php $__errorArgs = ['cin'];
@@ -335,7 +377,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-3 col-form-label text-md-left"><?php echo e(__('phone')); ?></label>
+                            <label for="phone" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Phone')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="phone" type="tel" class="form-control <?php $__errorArgs = ['phone'];
@@ -363,7 +405,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-3 col-form-label text-md-left"><?php echo e(__('email')); ?></label>
+                            <label for="email" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Email')); ?></label>
 
                             <div class="col-md-8">
                                 <input id="email" type="email" class="form-control <?php $__errorArgs = ['email'];
@@ -392,7 +434,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mb-3">
-                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> niveau</label>
+                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
 
                             <div class="col-md-8">
                                 <select id="niveau" type="text" class="form-control <?php $__errorArgs = ['niveau'];
@@ -426,7 +468,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mb-3">
-                            <label for="diplome" class="col-md-3 col-form-label text-md-left"> diplome</label>
+                            <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplôme</label>
 
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control <?php $__errorArgs = ['diplome'];
@@ -437,7 +479,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                                    <option value="" disabled>----Diplome----</option>
+                                    <option value="" disabled>----Diplôme----</option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -722,7 +764,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="sujet" class="col-md-3 col-form-label text-md-left"><?php echo e(__('sujet')); ?></label>
+                            <label for="sujet" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Sujet')); ?></label>
 
                             <div class="col-md-8">
                                 <textarea id="sujet" oninput="validateDates()" class="form-control <?php $__errorArgs = ['sujet'];
@@ -750,7 +792,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="observation" class="col-md-3 col-form-label text-md-left"><?php echo e(__('observation')); ?></label>
+                            <label for="observation" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Observation')); ?></label>
 
                             <div class="col-md-8">
                                 <textarea id="observation" class="form-control <?php $__errorArgs = ['observation'];
@@ -838,7 +880,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 float-right" style="top: 5; right: 0;">
+        <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
             <div class="card bg-secondary col-md-12">
                 <div class="card-header bg-warning"><?php echo e(__('Autre informations à ajouter:')); ?></div>
                 <table>

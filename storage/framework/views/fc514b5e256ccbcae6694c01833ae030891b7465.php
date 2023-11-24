@@ -1,9 +1,51 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        display: flex;
+        height: 100vh;
+    }
+
+    #left {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    #right {
+        flex-shrink: 0;
+        width: 300px;
+        height: 100%;
+        position: fixed;
+        top: 5;
+        right: 0;
+        overflow-y: auto;
+    }
+
+    @media (max-width: 767px) {
+        #container {
+            flex-direction: column;
+        }
+
+        #right {
+            position: relative;
+            width: 100%;
+            top: auto;
+            bottom: 0;
+        }
+    }
+</style>
+
+<div class="container col-md-12" id="container">
+    <div class="row col-md-12">
+        <div class="col-md-9" style="overflow-y: scroll;" id="left">
             <div class="card">
-                <div class="card-header">Modifier les informations de <?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->nom); ?></div>
+                <div class="card-header">Modifier les informations de <b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->nom); ?></b> </div>
 
 
                 <div class="card-body">
@@ -638,7 +680,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
-                                <option value="<?php echo e($stagiaire->encadrant); ?>" selected ><?php echo e($stagiaire->encadrant); ?></option>
+                                <option value="<?php echo e($encadr->id); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -812,6 +854,20 @@ unset($__errorArgs, $__bag); ?>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
+        <div class="card bg-secondary col-md-12">
+            <div class="card-header bg-warning"><?php echo e(__('Autre informations à ajouter:')); ?></div>
+            <table>
+                <tr>
+                    <a href="/filiere" target="/blank"  class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une filière</a>
+                    <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un établissement</a>
+                    <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
+                    <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
+                    <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

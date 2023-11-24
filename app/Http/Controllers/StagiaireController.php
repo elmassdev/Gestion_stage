@@ -198,12 +198,14 @@ class StagiaireController extends Controller
         $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();
         $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();
         $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
+        $encadr = Encadrant::where('id','=',$stagiaire->encadrant)->first();
+
         //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
         //$villes = Ville::orderBy('ville', 'asc')->get();
         //$services = Service::orderBy('sigle_service', 'asc')->get();
         //$filieres = filiere::orderBy('filiere', 'asc')->get();
         //$encadrants =Encadrant::orderBy('nom', 'asc')->get();
-        return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants'));
+        return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants','encadr'));
     }
 
     /**

@@ -192,23 +192,21 @@ unset($__errorArgs, $__bag); ?>
                 <div>
                     <?php if(count($results)): ?>
                     <table>
-                        <th>nom</th>
-                        <th>prenom</th>
-                        <th>cin</th>
-                        <th>date_debut</th>
-                        <th>date_fin</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>CIN</th>
+                        <th>Date_debut</th>
+                        <th>Date_fin</th>
                         <tbody>
                             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                            <tr>
-
-                                <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->nom); ?></a></td>
-                                <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->prenom); ?></a></td>
-                                <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->cin); ?></a></td>
-                                <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_debut); ?></a></td>
-                                <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_fin); ?></a></td>
-
-                            </tr>
+                                <tr>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->nom); ?></a></td>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->prenom); ?></a></td>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->cin); ?></a></td>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_debut); ?></a></td>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_fin); ?></a></td>
+                                </tr>
 
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -221,11 +219,7 @@ unset($__errorArgs, $__bag); ?>
                         pas de résultats
                     </p>
                     <?php endif; ?>
-
-
                 </div>
-
-
             </div>
         </div>
     </div>

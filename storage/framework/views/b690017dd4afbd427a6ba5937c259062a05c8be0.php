@@ -148,7 +148,7 @@ unset($__errorArgs, $__bag); ?>
             <th>Nom</th>
             <th>Type de stage</th>
             <th>Niveau</th>
-            <th>Diplome</th>
+            <th>Diplôme</th>
             <th>Etablissement</th>
             <th>Ville</th>
             <th>Service</th>
@@ -157,26 +157,26 @@ unset($__errorArgs, $__bag); ?>
             <th>Date fin</th>
         </tr>
     </thead>
-    <tbody><?php $__currentLoopData = $statoday; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statdy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <tr class=" table table-row my-auto h-10 small">
-                        <td><?php echo e($statdy->civilite); ?></td>
-                        <td><?php echo e($statdy->prenom); ?></td>
-                        <td><?php echo e($statdy->nom); ?></td>
-                        <td><?php echo e($statdy->type_stage); ?></td>
-                        <td><?php echo e($statdy->niveau); ?></td>
-                        <td><?php echo e($statdy->diplome); ?></td>
-                        <td><?php echo e($statdy->etablissement); ?></td>
-                        <td><?php echo e($statdy->ville); ?></td>
-                        <td><?php echo e($statdy->service); ?></td>
-                        <td><?php echo e($statdy->nomenc); ?></td>
-                        <td><?php echo e($statdy->date_debut); ?></td>
-                        <td><?php echo e($statdy->date_fin); ?></td>
-                        <td> <a  href="/stagiaires/<?php echo e($statdy->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
-                    </tr>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <tbody><?php $__currentLoopData = $statoday; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statdy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <tr class=" table table-row my-auto h-10 small">
+                                <td><?php echo e($statdy->civilite); ?></td>
+                                <td><?php echo e($statdy->prenom); ?></td>
+                                <td><?php echo e($statdy->nom); ?></td>
+                                <td><?php echo e($statdy->type_stage); ?></td>
+                                <td><?php echo e($statdy->niveau); ?></td>
+                                <td><?php echo e($statdy->diplome); ?></td>
+                                <td><?php echo e($statdy->etablissement); ?></td>
+                                <td><?php echo e($statdy->ville); ?></td>
+                                <td><?php echo e($statdy->service); ?></td>
+                                <td><?php echo e($statdy->nomenc); ?></td>
+                                <td><?php echo e($statdy->date_debut); ?></td>
+                                <td><?php echo e($statdy->date_fin); ?></td>
+                                <td> <a  href="/stagiaires/<?php echo e($statdy->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
+                            </tr>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    </tbody>
-</table>
+            </tbody>
+        </table>
 
 <?php else: ?>
 <p> Pas de stagiaires pour aujourd'hui</p>

@@ -21,16 +21,14 @@
                             <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
                             <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
                             <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
-
                         </div>
                         <div class="col-md-6">
                             <a href="/statistiques" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-success">Statistiques</a>
-                            <a href="/stagiaires" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">liste des stagiaires</a>
+                            <a href="/stagiaires" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Liste des stagiaires</a>
                             <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un établissement</a>
                             <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
                             <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
                             <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
-
                         </div>
                     </div>
                 </div>

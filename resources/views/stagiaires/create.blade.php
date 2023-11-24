@@ -1,10 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container col-md-12">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        display: flex;
+        height: 100vh;
+    }
+
+    #left {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    #right {
+        flex-shrink: 0;
+        width: 300px;
+        height: 100%;
+        position: fixed;
+        top: 5;
+        right: 0;
+        overflow-y: auto;
+    }
+
+    @media (max-width: 767px) {
+        #container {
+            flex-direction: column;
+        }
+
+        #right {
+            position: relative;
+            width: 100%;
+            top: auto;
+            bottom: 0;
+        }
+    }
+</style>
+
+<div class="container col-md-12" id="container">
 
     <div class="row col-md-12">
-        <div class="col-md-9" style="overflow-y: scroll;">
+        <div class="col-md-9" style="overflow-y: scroll;" id="left">
 
             <div class="card">
                 <div class="card-header">{{ __('Ajouter un stagiaire') }}</div>
@@ -548,7 +590,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 float-right" style="top: 5; right: 0;">
+        <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
             <div class="card bg-secondary col-md-12">
                 <div class="card-header bg-warning">{{ __('Autre informations à ajouter:') }}</div>
                 <table>

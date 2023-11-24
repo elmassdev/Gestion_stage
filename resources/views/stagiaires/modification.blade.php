@@ -1,11 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        display: flex;
+        height: 100vh;
+    }
+
+    #left {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    #right {
+        flex-shrink: 0;
+        width: 300px;
+        height: 100%;
+        position: fixed;
+        top: 5;
+        right: 0;
+        overflow-y: auto;
+    }
+
+    @media (max-width: 767px) {
+        #container {
+            flex-direction: column;
+        }
+
+        #right {
+            position: relative;
+            width: 100%;
+            top: auto;
+            bottom: 0;
+        }
+    }
+</style>
+
+<div class="container col-md-12" id="container">
+    <div class="row col-md-12">
+        <div class="col-md-9" style="overflow-y: scroll;" id="left">
             <div class="card">
-                <div class="card-header">Modifier les informations de {{$stagiaire->civilite}} {{$stagiaire->nom}}</div>
+                <div class="card-header">Modifier les informations de <b>{{$stagiaire->civilite}} {{$stagiaire->nom}}</b> </div>
 
 
                 <div class="card-body">
@@ -411,7 +453,7 @@
                             <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
                             <div class="col-md-8">
                                 <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
-                                <option value="{{$stagiaire->encadrant}}" selected >{{$stagiaire->encadrant}}</option>
+                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
                                 @foreach($encadrants as $encadrant)
                                 <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
                                 @endforeach
@@ -521,6 +563,20 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
+        <div class="card bg-secondary col-md-12">
+            <div class="card-header bg-warning">{{ __('Autre informations à ajouter:') }}</div>
+            <table>
+                <tr>
+                    <a href="/filiere" target="/blank"  class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une filière</a>
+                    <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un établissement</a>
+                    <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
+                    <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
+                    <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
