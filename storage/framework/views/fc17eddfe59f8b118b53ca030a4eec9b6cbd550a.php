@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 
 <style>
@@ -9,7 +7,7 @@
   font-size: 20px;
   max-width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   flex-flow: wrap;
 }
@@ -21,19 +19,19 @@
 }
 
 .B,.Y{
-  background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png"); 
+    background-color: #8ac04d;
+    background-image: url(http://www.transparenttextures.com/patterns/shattered-dark.png);
   font-family: Nunito;
-  background-color: rgb(105, 107, 102);
   font-display:auto;
   font-weight: 400;
   font-size: 16px;
   width: 25rem;
-  max-width: 90%;
+  max-width: 80%;
   min-width: 45%;
   box-sizing: border-box;
   margin-bottom: 1rem;
-  padding: 1rem;  
-  
+  padding: 1rem;
+
 }
 
 .B a , .Y a{
@@ -51,8 +49,8 @@ ul{
 }
 
 .B, .Y{
-  box-shadow: 10px 10px 5px grey;   
-  
+  box-shadow: 10px 10px 5px grey;
+
 }
 
 
@@ -60,21 +58,21 @@ ul{
   text-align: center;
   font-size: 25px;
   color: olivedrab;
-  padding: 5px 0px; 
+  padding: 5px 0px;
 }
 
-span{
+.sitename{
   background: #34495e;
   color: #fff;
   padding: 4px 10px;
   margin-bottom: 40px;
   font-size: 18px;
 }
-i{
+/* .card B, ul, li, i, .card A i{
   margin:1rem;
-}
+} */
 
-@media screen and (max-width:1200px){
+/* @media screen and (max-width:1200px){
   .B,.Y{
       width:45%;
   }
@@ -83,7 +81,7 @@ i{
   .B,.Y{
       width:90%;
   }
-}
+} */
 label{
   text-align: left;
 }
@@ -93,7 +91,7 @@ label{
         <div class="cards">
 
             <div class=" card B">
-                <span>Section des stages: Benguerir</span>
+                <span class="sitename">Section des stages: Benguerir</span>
                 <ul>
                     <li>
                         <i class="fas fa-mobile-alt"></i>
@@ -101,15 +99,7 @@ label{
                     </li>
                     <li>
                         <i class="far fa-envelope"></i>
-                        <a href="mailto:abdelaadim.elmassoudi@ocpgroup.ma">Abdelaadim.elmassoudi@ocpgroup.ma</a>
-                    </li>
-                    <li>
-                      <i class="far fa-envelope"></i>
-                      <a href="mailto:ed-dhhak@ocpgroup.ma">ed-dhhak@ocpgroup.ma</a>
-                  </li>
-                    <li>
-                        <i class="far fa-envelope"></i>
-                        <a href="mailto:essaadia.khomri@ocpgroup.ma">Essaadia.khomri@ocpgroup.ma</a>
+                        <a href="mailto:stagebg@ocpgroup.ma">stagebg@ocpgroup.ma</a>
                     </li>
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
@@ -117,27 +107,24 @@ label{
                     </li>
                 </ul>
             </div>
-            
-            
+
+
             <div class=" card Y">
-                <span>Section des stages: Youssoufia</span>
+                <span class="sitename">Section des stages: Youssoufia</span>
                 <ul>
                     <li>
                         <i class="fas fa-mobile-alt"></i> <a href="tel:+212666050185">+212666050185</a>
                     </li>
                     <li>
-                        <i class="far fa-envelope"></i> <a href="mailto:kourimi@ocpgroup.ma">kourimi@ocpgroup.ma</a>
-                    </li>
-                    <li>
-                        <i class="far fa-envelope"></i> <a href="mailto:rabbou@ocpgroup.ma">rabbou@ocpgroup.ma</a>
+                        <i class="far fa-envelope"></i> <a href="mailto:stageyfia@ocpgroup.ma">stageyfia@ocpgroup.ma</a>
                     </li>
                     <li>
                         <i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/HVV3rtx9KczENhNJ8" target="_blank">Centre de Formation, Youssoufia</a>
                     </li>
                 </ul>
             </div>
-            
+
         </div>
-<?php $__env->stopSection(); ?> 
- 
+<?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Github\Gestion_stage\resources\views/contact.blade.php ENDPATH**/ ?>

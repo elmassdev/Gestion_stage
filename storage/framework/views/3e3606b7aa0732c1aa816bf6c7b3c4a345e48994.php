@@ -25,9 +25,31 @@
     <!-- Scripts -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
 </head>
-<body>
+<body data-bs-theme="dark" id="body-element">
+    <style>
+        .toggleThemeBtn > div > i {
+  margin-right: 5px;
+}
+
+.toggleThemeBtn #darkThemeBtn {
+  display:none;
+}
+
+body.dark #lightThemeBtn {
+  display: none;
+}
+
+body.dark #darkThemeBtn {
+  display: block;
+}
+
+.toggleThemeBtn i {
+  font-size: 24px;
+}
+
+    </style>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-md bg-secondary shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
                     <img src="/images/logo.svg" alt="">
@@ -42,6 +64,7 @@
                         <style>
                             .navbarli{
                                 margin-left: 10rem;
+                                font-size: 18px;
                             }
                             a{
                                 text-decoration: none;
@@ -51,6 +74,12 @@
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
                         <li class="navbarli"><a href="/stagiaires/create">Ajouter un stagiaire</a></li>
                         <li class="navbarli"><a href="/contact">Contact</a></li>
+                        <li class="navbarli"><span class="toggleThemeBtn" id="toggleThemeBtn">
+                            <div id="lightThemeBtn"><i class="fas fa-sun"></i></div>
+                            <div id="darkThemeBtn"><i class="fas fa-moon"></i></div>
+                        </span></li>
+
+
 
                     </ul>
 
@@ -94,11 +123,35 @@
                 </div>
             </div>
         </nav>
-        
+
         <main class="py-4">
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
+<script>
+    document.getElementById("lightThemeBtn")?.addEventListener('click', (e) => {
+    const body = document.querySelector("body");
+
+    body.classList.add('dark');
+});
+document.getElementById("darkThemeBtn")?.addEventListener('click', (e) => {
+    const body = document.querySelector("body");
+
+    body.classList.remove('dark');
+});
+
+const bodyElement = document.getElementById('body-element');
+const toggleThemeButton = document.getElementById('toggleThemeBtn');
+const lightThemeBtn = document.getElementById('lightThemeBtn');
+const darkThemeBtn = document.getElementById('darkThemeBtn');
+
+toggleThemeButton.addEventListener('click', () => {
+  const currentTheme = bodyElement.getAttribute('data-bs-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  bodyElement.setAttribute('data-bs-theme', newTheme);});
+
+
+</script>
 </body>
 </html>
 <?php /**PATH D:\Github\Gestion_stage\resources\views/layouts/app.blade.php ENDPATH**/ ?>
