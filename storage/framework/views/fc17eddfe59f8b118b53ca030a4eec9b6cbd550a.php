@@ -19,8 +19,8 @@
 }
 
 .B,.Y{
-    background-color: #8ac04d;
-    background-image: url(http://www.transparenttextures.com/patterns/shattered-dark.png);
+    background-color: #af5b07;
+background-image: url(http://www.transparenttextures.com/patterns/escheresque-dark.png);
   font-family: Nunito;
   font-display:auto;
   font-weight: 400;
@@ -42,7 +42,7 @@
 
 a{
   text-decoration: none !important;
-  color:#34495e !important;
+  color:#d7dde4 !important;
 }
 ul{
   list-style-type: none;
@@ -62,7 +62,7 @@ ul{
 }
 
 .sitename{
-  background: #34495e;
+  background: #81858a;
   color: #fff;
   padding: 4px 10px;
   margin-bottom: 40px;

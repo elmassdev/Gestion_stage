@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card p-1 bg-light">
+                <div class="card p-1">
                     <table>
                         <tbody>
                             <tr>
@@ -76,13 +76,13 @@
                     </table>
 
                 </div>
-                <div class="card p-1 bg-light">
+                <div class="card p-1">
                     <table>
                         <tr class="col-md-12  float-left">
                             <td>
                                 <?php if($stagiaire->date_fin<=now()): ?>
                         <div class="card col-md-12 my-2">
-                            <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
+                            <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation" class="btn btn-warning text-dark"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
 
                         </div>
                     <?php endif; ?>
@@ -92,15 +92,15 @@
                         <tr class="col-md-12  float-left">
                             <?php if($stagiaire->date_debut>=now()): ?>
                             <td>
-                                <div class=" card col-md-11 ">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation"><i class="fa fa-print text-primary mx-2"></i> Lettre d'offre de stage</a>
+                                <div class=" card col-md-11 bg-warning">
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn btn-warning text-dark" ><i class="fa fa-print text-primary  mx-2"></i> Lettre d'offre de stage</a>
                                 </div>
                             </td>
                             <td>
                                 <div>
                                     <?php if($stagiaire->sujet!=''): ?>
-                                    <div class="card col-md-11">
-                                        <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
+                                    <div class="card col-md-11 bg-warning">
+                                        <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet" class="btn btn-warning text-dark"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
                                     </div>
                                  <?php endif; ?>
                                </div>
@@ -113,7 +113,7 @@
 
         
         <div class="col-md-5">
-            <div class="card p-1 bg-light">
+            <div class="card p-1 ">
                 <div class=" card  p-1">
                     <div class="card-header"><?php echo e(__('Rechercher un stagiaire')); ?></div>
                     <div class=" card-body py-2">
@@ -190,6 +190,12 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
                 <div>
+                    <style>
+                        a{
+                            color: inherit;
+                            text-decoration: none;
+                        }
+                    </style>
                     <?php if(count($results)): ?>
                     <table>
                         <th>Nom</th>
@@ -197,7 +203,7 @@ unset($__errorArgs, $__bag); ?>
                         <th>CIN</th>
                         <th>Date_debut</th>
                         <th>Date_fin</th>
-                        <tbody>
+                        <tbody >
                             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                                 <tr>

@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card p-1 bg-light">
+                <div class="card p-1">
                     <table>
                         <tbody>
                             <tr>
@@ -77,13 +77,13 @@
                     </table>
 
                 </div>
-                <div class="card p-1 bg-light">
+                <div class="card p-1">
                     <table>
                         <tr class="col-md-12  float-left">
                             <td>
                                 @if ($stagiaire->date_fin<=now())
                         <div class="card col-md-12 my-2">
-                            <a  href="/stagiaires/{{$stagiaire->id}}/attestation"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
+                            <a  href="/stagiaires/{{$stagiaire->id}}/attestation" class="btn btn-warning text-dark"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
 
                         </div>
                     @endif
@@ -93,15 +93,15 @@
                         <tr class="col-md-12  float-left">
                             @if($stagiaire->date_debut>=now())
                             <td>
-                                <div class=" card col-md-11 ">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation"><i class="fa fa-print text-primary mx-2"></i> Lettre d'offre de stage</a>
+                                <div class=" card col-md-11 bg-warning">
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn btn-warning text-dark" ><i class="fa fa-print text-primary  mx-2"></i> Lettre d'offre de stage</a>
                                 </div>
                             </td>
                             <td>
                                 <div>
                                     @if ($stagiaire->sujet!='')
-                                    <div class="card col-md-11">
-                                        <a  href="/stagiaires/{{$stagiaire->id}}/sujet"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
+                                    <div class="card col-md-11 bg-warning">
+                                        <a  href="/stagiaires/{{$stagiaire->id}}/sujet" class="btn btn-warning text-dark"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
                                     </div>
                                  @endif
                                </div>
@@ -114,7 +114,7 @@
 
         {{-- the right part of the page --}}
         <div class="col-md-5">
-            <div class="card p-1 bg-light">
+            <div class="card p-1 ">
                 <div class=" card  p-1">
                     <div class="card-header">{{ __('Rechercher un stagiaire') }}</div>
                     <div class=" card-body py-2">
@@ -162,6 +162,12 @@
                     </div>
                 </div>
                 <div>
+                    <style>
+                        a{
+                            color: inherit;
+                            text-decoration: none;
+                        }
+                    </style>
                     @if(count($results))
                     <table>
                         <th>Nom</th>
@@ -169,7 +175,7 @@
                         <th>CIN</th>
                         <th>Date_debut</th>
                         <th>Date_fin</th>
-                        <tbody>
+                        <tbody >
                             @foreach ($results as $result)
 
                                 <tr>

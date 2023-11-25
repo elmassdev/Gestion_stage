@@ -25,7 +25,7 @@
     <!-- Scripts -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
 </head>
-<body data-bs-theme="dark" id="body-element">
+<body  id="body-element" data-bs-theme="dark">
     <style>
         .toggleThemeBtn > div > i {
   margin-right: 5px;
@@ -65,10 +65,14 @@ body.dark #darkThemeBtn {
                             .navbarli{
                                 margin-left: 10rem;
                                 font-size: 18px;
+
+                            }
+                            @media screen and (max-width:600px){
+                                .navbarli{margin-left: 0rem;}
                             }
                             a{
                                 text-decoration: none;
-                                color:#34495e;
+                                color:#d7dde4;
                             }
                         </style>
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
@@ -129,28 +133,28 @@ body.dark #darkThemeBtn {
         </main>
     </div>
 <script>
-    document.getElementById("lightThemeBtn")?.addEventListener('click', (e) => {
-    const body = document.querySelector("body");
+    const bodyElement = document.getElementById('body-element');
+        const toggleThemeButton = document.getElementById('toggleThemeBtn');
+        const lightThemeBtn = document.getElementById('lightThemeBtn');
+        const darkThemeBtn = document.getElementById('darkThemeBtn');
 
-    body.classList.add('dark');
-});
-document.getElementById("darkThemeBtn")?.addEventListener('click', (e) => {
-    const body = document.querySelector("body");
+        // Function to set the theme based on user preference
+        const setTheme = (theme) => {
+            bodyElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
 
-    body.classList.remove('dark');
-});
+        // Check for user's theme preference in local storage
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        }
 
-const bodyElement = document.getElementById('body-element');
-const toggleThemeButton = document.getElementById('toggleThemeBtn');
-const lightThemeBtn = document.getElementById('lightThemeBtn');
-const darkThemeBtn = document.getElementById('darkThemeBtn');
-
-toggleThemeButton.addEventListener('click', () => {
-  const currentTheme = bodyElement.getAttribute('data-bs-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  bodyElement.setAttribute('data-bs-theme', newTheme);});
-
-
+        toggleThemeButton.addEventListener('click', () => {
+            const currentTheme = bodyElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
 </script>
 </body>
 </html>

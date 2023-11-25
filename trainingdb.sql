@@ -1360,7 +1360,7 @@ CREATE TABLE `stagiaires` (
   `cin` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `photo` varchar(300) DEFAULT 'storage/images/profile/default.png',
+  `photo` varchar(300) DEFAULT 'default.png',
   `niveau` varchar(255) NOT NULL,
   `diplome` varchar(255) DEFAULT NULL,
   `filiere` varchar(255) NOT NULL,

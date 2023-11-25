@@ -566,7 +566,7 @@
         </div>
     </div>
     <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
-        <div class="card bg-secondary col-md-12">
+        <div class="card col-md-12">
             <div class="card-header bg-warning">{{ __('Autre informations à ajouter:') }}</div>
             <table>
                 <tr>
