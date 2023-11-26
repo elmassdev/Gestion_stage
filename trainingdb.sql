@@ -17,27 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `hassouni`
---
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `civilite`
---
-
-CREATE TABLE `civilite` (
-  `titre` varchar(255) NOT NULL,
-  `civilite` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL,
-  `sexe` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `civilite`
 --
 
 INSERT INTO `civilite` (`titre`, `civilite`, `genre`, `sexe`, `created_at`, `updated_at`) VALUES
@@ -50,75 +33,62 @@ INSERT INTO `civilite` (`titre`, `civilite`, `genre`, `sexe`, `created_at`, `upd
 -- Table structure for table `encadrants`
 --
 
-CREATE TABLE `encadrants` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `titre` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `service` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Dumping data for table `encadrants`
 --
 
-INSERT INTO `encadrants` (`id`, `titre`, `prenom`, `nom`, `phone`, `email`, `service`, `created_at`, `updated_at`) VALUES
-(1, 'M.', 'Mohammed', 'ABOU ABDALLAH', '212666106983', 'Mohammed.ABOUABDALLA@ocpgroup.ma', 'OIG/H/A/B', NULL, NULL),
-(2, 'M.', 'Rachid', 'AHANOU', '212661564476', 'R.Ahanou@ocpgroup.ma', 'OIG/H/D/Y', NULL, NULL),
-(3, 'M.', 'Ismail', 'AIT AHMAD', '212661770917', 'AITAHMED@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
-(4, 'M.', 'Noureddine', 'AJIM', '212661447836', 'AJIM@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
-(5, 'M.', 'Youness', 'ALAMI', '212671801060', 'younes.alami@ocpgroup.ma', 'OIG/B/M', NULL, NULL),
-(6, 'Mme.', 'Farah', 'ALKADI ALOUAHABI', '212668276456', 'F.ALKADIALOUAHABI@ocpgroup.ma', 'OIG/B/H', NULL, NULL),
-(7, 'M.', 'Hassan', 'AMARDOUL', '212661228071', 'AMARDOUL@ocpgroup.ma', 'OIG/H/A/A/B', NULL, NULL),
-(8, 'M.', 'Khalid', 'AZOUKENNI', '', 'K.AZOUKENNI@ocpgroup.ma', '', NULL, NULL),
-(9, 'M.', 'Khalid', 'BELAKHDAR', '212668273686', 'K.BELAKHDAR@ocpgroup.ma', 'OIG/B/B', NULL, NULL),
-(10, 'Mme.', 'Saloua', 'BELHABCHIA', '212667020497', 'S.BELHABCHIA@ocpgroup.ma', 'OIG/B/M/E', NULL, NULL),
-(11, 'Mme.', 'Imane', 'BELKARI', '212661331895', 'I.BELKARI@ocpgroup.ma', 'OIG/M/T/B', NULL, NULL),
-(12, 'Mme.', 'Sahar', 'BENDAOUD', '212661717674', 'S.bendaoud@ocpgroup.ma', 'OIG/M/G/B', NULL, NULL),
-(13, 'M.', 'Abdellali', 'BOUFKER', '668926581', 'BOUFKER@ocpgroup.ma', 'OIG/M/E/B', NULL, NULL),
-(14, 'M.', 'Abdellah', 'BOURKOKO', '212662151786', 'Abdellah.BOURKOKO@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
-(15, 'M.', 'Khalil', 'CHIKHAOUI', '212661960640', 'k.CHIKHAOUI@ocpgroup.ma', 'OIG/A/B', NULL, NULL),
-(16, 'Mme.', 'Nour Elhouda', 'DADI', '212666106941', 'NourElhouda.DADI@ocpgroup.ma', 'OIG/H/D/Y', NULL, NULL),
-(17, 'M.', 'Abdelkebir', 'EDDIBOUCHE', '212661807423', 'EDDIBOUCHE@ocpgroup.ma', 'OIG/B/M/E-DM', NULL, NULL),
-(18, 'M.', 'Mohamed', 'EL AAMRANI', '212661467680', 'M.ELAAMRANI@ocpgroup.ma', 'OIG/T/C/B', NULL, NULL),
-(19, 'M.', 'Khalid', 'EL BOURY', '212661479167', 'Elboury@ocpgroup.ma', 'OIG/M', NULL, NULL),
-(20, 'M.', 'Fouad', 'EL KADI', '212661447845', 'F.ELKADI@ocpgroup.ma', 'OIG/M', NULL, NULL),
-(21, 'Mme.', 'Souad', 'EL KHADRI', '212661248376', 'ELKHADRI@ocpgroup.ma', 'FIG/CG/B', NULL, NULL),
-(22, 'M.', 'EL Mourchid', 'EL KHALIDI', '212661456736', 'E.ELKHALIDI@ocpgroup.ma', 'DSI/O/P/G/B', NULL, NULL),
-(23, 'M.', 'El houssine', 'EL MAHFOUDI', '212661447831', 'E.ELMAHFOUDI@ocpgroup.ma', 'OIG/B/P', NULL, NULL),
-(24, 'M.', 'Moulay hafid', 'EL YAZIDI', '212661230276', 'M.ELYAZIDI2@ocpgroup.ma', 'OIG/B/M', NULL, NULL),
-(25, 'M.', 'Benaissa', 'ELAZZOUZI', '212671801113', 'Benaissa.ELAZZOUZI@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
-(26, 'M.', 'Mohamed-Amine', 'ELGHAZI', '212671800804', 'Mohamed.elghazi@ocpgroup.ma', 'OIG/M/M/E', NULL, NULL),
-(27, 'M.', 'Soufyane', 'ELKASMI', '212671801206', 'soufyane.elkasmi@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
-(28, 'M.', 'Yassine', 'ELMAJIDI IDRISSI', '212661786299', 'ELMAJIDI@ocpgroup.ma', 'OIG/B/M', NULL, NULL),
-(29, 'Mme.', 'Nazha', 'ESSEBBAR', '212661286470', 'essebbar@ocpgroup.ma', 'OIG/H/D/Y', NULL, NULL),
-(30, 'M.', 'Abderrahim', 'FAHMI', '212662137914', 'fahmi@ocpgroup.ma', 'OIG/B/M/E', NULL, NULL),
-(31, 'M.', 'Abdelali', 'FAIK', '212661447829', 'FAIK@ocpgroup.ma', 'OIG/E/H/B', NULL, NULL),
-(32, 'Mme.', 'Rajaa', 'FELLAH', '212671800799', 'rajaa.fellah@ocpgroup.ma', '', NULL, NULL),
-(33, 'M.', 'Mohamed', 'GOUAHMANE', '212661792407', 'gouahmane@ocpgroup.ma', 'OIG/B/M/E-IE', NULL, NULL),
-(34, 'M.', 'Abdel-Hamid', 'HADDI', '212661327193', 'HADDI@ocpgroup.ma', 'OIG/B/E/I', NULL, NULL),
-(35, 'M.', 'Nadir', 'JELDA', '212662084539', 'jelda@ocpgroup.ma', 'OIG/B/M/M', NULL, NULL),
-(36, 'M.', 'Alaeddine', 'KACHOUANI', '212661239898', 'A.KACHOUANI@ocpgroup.ma', 'DSI', NULL, NULL),
-(37, 'M.', 'Zohair', 'KROMBI', '212661447857', 'KROMBI@ocpgroup.ma', 'OIG/H/M/B', NULL, NULL),
-(38, 'M.', 'Youness', 'LAADRAOUI', '212662791109', 'laadraoui@ocpgroup.ma', 'OIG/M/B', NULL, NULL),
-(39, 'M.', 'Mustapha', 'LAMAACHI', '212661074587', 'LAMAACHI@ocpgroup.ma', 'OIG/B/M/E-DM', NULL, NULL),
-(40, 'M.', 'Khalil', 'LAOUANE', '212662093935', 'khalil.laouane@ocpgroup.ma', 'OIG/B/E/', NULL, NULL),
-(41, 'M.', 'Faissal', 'LEFRERE', '212661262197', 'F.LEFRERE@ocpgroup.ma', 'FIG/CG/B', NULL, NULL),
-(42, 'M.', 'My mhamed', 'MAHZI', '212661325834', 'MAHZI@ocpgroup.ma', 'OIG/M/M/E', NULL, NULL),
-(43, 'M.', 'Cheikh Lakbir', 'MAOULAININE', '212671801331', 'CheikhLakbir.Maoulainine@ocpgroup.ma', 'OIG/M/E/B', NULL, NULL),
-(44, 'Mme.', 'Hajar', 'MOUMANE', '212678744309', 'MOUMANE.Hajar@ocpgroup.ma', 'OIG/B/M/M', NULL, NULL),
-(45, 'M.', 'Jamal', 'MOUSTAKIM', '212668125081', 'moustakim@ocpgroup.ma', 'OIG/B/E/I', NULL, NULL),
-(46, 'M.', 'Lahcen', 'NAIT BELAID', '212661495436', 'L.NAITBELAID@ocpgroup.ma', 'CCI', NULL, NULL),
-(47, 'Mme.', 'Laila', 'OUAHBI', '212671800854', 'laila.ouahbi@ocpgroup.ma', 'OIG/M/T', NULL, NULL),
-(48, 'M.', 'Hicham', 'SLITNI AMGHARI', '212668123458', 'SLITNIAMGHARI@ocpgroup.ma', 'OIG/M', NULL, NULL),
-(49, 'M.', 'Mohammed', 'TARISSI', '212661447853', 'M.TARISSI@ocpgroup.ma', 'OIG/R', NULL, NULL),
-(50, 'M.', 'Salah', 'ZAKARYA', '212661447659', 'S.ZAKARYA@ocpgroup.ma', 'OIG/M', NULL, NULL),
-(51, 'M.', 'Essaid', 'ZEROUALI', '212661078190', 'ZEROUALI@ocpgroup.ma', 'OIG/B/P', NULL, NULL),
-(52, '-', '-', '-', '-', '-', '-', NULL, NULL);
+INSERT INTO `encadrants` ( `titre`, `prenom`, `nom`, `phone`, `email`, `service`, `created_at`, `updated_at`) VALUES
+( 'M.', 'Mohammed', 'ABOU ABDALLAH', '212666106983', 'Mohammed.ABOUABDALLA@ocpgroup.ma', 'OIG/H/A/B', NULL, NULL),
+( 'M.', 'Rachid', 'AHANOU', '212661564476', 'R.Ahanou@ocpgroup.ma', 'OIG/H/D/Y', NULL, NULL),
+('M.', 'Ismail', 'AIT AHMAD', '212661770917', 'AITAHMED@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
+('M.', 'Noureddine', 'AJIM', '212661447836', 'AJIM@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
+('M.', 'Youness', 'ALAMI', '212671801060', 'younes.alami@ocpgroup.ma', 'OIG/B/M', NULL, NULL),
+('Mme.', 'Farah', 'ALKADI ALOUAHABI', '212668276456', 'F.ALKADIALOUAHABI@ocpgroup.ma', 'OIG/B/H', NULL, NULL),
+('M.', 'Hassan', 'AMARDOUL', '212661228071', 'AMARDOUL@ocpgroup.ma', 'OIG/H/A/A/B', NULL, NULL),
+('M.', 'Khalid', 'AZOUKENNI', '', 'K.AZOUKENNI@ocpgroup.ma', '', NULL, NULL),
+('M.', 'Khalid', 'BELAKHDAR', '212668273686', 'K.BELAKHDAR@ocpgroup.ma', 'OIG/B/B', NULL, NULL),
+('Mme.', 'Saloua', 'BELHABCHIA', '212667020497', 'S.BELHABCHIA@ocpgroup.ma', 'OIG/B/M/E', NULL, NULL),
+('Mme.', 'Imane', 'BELKARI', '212661331895', 'I.BELKARI@ocpgroup.ma', 'OIG/M/T/B', NULL, NULL),
+('Mme.', 'Sahar', 'BENDAOUD', '212661717674', 'S.bendaoud@ocpgroup.ma', 'OIG/M/G/B', NULL, NULL),
+('M.', 'Abdellali', 'BOUFKER', '668926581', 'BOUFKER@ocpgroup.ma', 'OIG/M/E/B', NULL, NULL),
+('M.', 'Abdellah', 'BOURKOKO', '212662151786', 'Abdellah.BOURKOKO@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
+('M.', 'Khalil', 'CHIKHAOUI', '212661960640', 'k.CHIKHAOUI@ocpgroup.ma', 'OIG/A/B', NULL, NULL),
+('Mme.', 'Nour Elhouda', 'DADI', '212666106941', 'NourElhouda.DADI@ocpgroup.ma', 'OIG/H/D/Y', NULL, NULL),
+('M.', 'Abdelkebir', 'EDDIBOUCHE', '212661807423', 'EDDIBOUCHE@ocpgroup.ma', 'OIG/B/M/E-DM', NULL, NULL),
+('M.', 'Mohamed', 'EL AAMRANI', '212661467680', 'M.ELAAMRANI@ocpgroup.ma', 'OIG/T/C/B', NULL, NULL),
+('M.', 'Khalid', 'EL BOURY', '212661479167', 'Elboury@ocpgroup.ma', 'OIG/M', NULL, NULL),
+('M.', 'Fouad', 'EL KADI', '212661447845', 'F.ELKADI@ocpgroup.ma', 'OIG/M', NULL, NULL),
+('Mme.', 'Souad', 'EL KHADRI', '212661248376', 'ELKHADRI@ocpgroup.ma', 'FIG/CG/B', NULL, NULL),
+('M.', 'EL Mourchid', 'EL KHALIDI', '212661456736', 'E.ELKHALIDI@ocpgroup.ma', 'DSI/O/P/G/B', NULL, NULL),
+('M.', 'El houssine', 'EL MAHFOUDI', '212661447831', 'E.ELMAHFOUDI@ocpgroup.ma', 'OIG/B/P', NULL, NULL),
+('M.', 'Moulay hafid', 'EL YAZIDI', '212661230276', 'M.ELYAZIDI2@ocpgroup.ma', 'OIG/B/M', NULL, NULL),
+('M.', 'Benaissa', 'ELAZZOUZI', '212671801113', 'Benaissa.ELAZZOUZI@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
+('M.', 'Mohamed-Amine', 'ELGHAZI', '212671800804', 'Mohamed.elghazi@ocpgroup.ma', 'OIG/M/M/E', NULL, NULL),
+('M.', 'Soufyane', 'ELKASMI', '212671801206', 'soufyane.elkasmi@ocpgroup.ma', 'OIG/B/E', NULL, NULL),
+('M.', 'Yassine', 'ELMAJIDI IDRISSI', '212661786299', 'ELMAJIDI@ocpgroup.ma', 'OIG/B/M', NULL, NULL),
+('Mme.', 'Nazha', 'ESSEBBAR', '212661286470', 'essebbar@ocpgroup.ma', 'OIG/H/D/Y', NULL, NULL),
+('M.', 'Abderrahim', 'FAHMI', '212662137914', 'fahmi@ocpgroup.ma', 'OIG/B/M/E', NULL, NULL),
+('M.', 'Abdelali', 'FAIK', '212661447829', 'FAIK@ocpgroup.ma', 'OIG/E/H/B', NULL, NULL),
+('Mme.', 'Rajaa', 'FELLAH', '212671800799', 'rajaa.fellah@ocpgroup.ma', '', NULL, NULL),
+('M.', 'Mohamed', 'GOUAHMANE', '212661792407', 'gouahmane@ocpgroup.ma', 'OIG/B/M/E-IE', NULL, NULL),
+('M.', 'Abdel-Hamid', 'HADDI', '212661327193', 'HADDI@ocpgroup.ma', 'OIG/B/E/I', NULL, NULL),
+('M.', 'Nadir', 'JELDA', '212662084539', 'jelda@ocpgroup.ma', 'OIG/B/M/M', NULL, NULL),
+('M.', 'Alaeddine', 'KACHOUANI', '212661239898', 'A.KACHOUANI@ocpgroup.ma', 'DSI', NULL, NULL),
+('M.', 'Zohair', 'KROMBI', '212661447857', 'KROMBI@ocpgroup.ma', 'OIG/H/M/B', NULL, NULL),
+('M.', 'Youness', 'LAADRAOUI', '212662791109', 'laadraoui@ocpgroup.ma', 'OIG/M/B', NULL, NULL),
+('M.', 'Mustapha', 'LAMAACHI', '212661074587', 'LAMAACHI@ocpgroup.ma', 'OIG/B/M/E-DM', NULL, NULL),
+('M.', 'Khalil', 'LAOUANE', '212662093935', 'khalil.laouane@ocpgroup.ma', 'OIG/B/E/', NULL, NULL),
+('M.', 'Faissal', 'LEFRERE', '212661262197', 'F.LEFRERE@ocpgroup.ma', 'FIG/CG/B', NULL, NULL),
+('M.', 'My mhamed', 'MAHZI', '212661325834', 'MAHZI@ocpgroup.ma', 'OIG/M/M/E', NULL, NULL),
+('M.', 'Cheikh Lakbir', 'MAOULAININE', '212671801331', 'CheikhLakbir.Maoulainine@ocpgroup.ma', 'OIG/M/E/B', NULL, NULL),
+('Mme.', 'Hajar', 'MOUMANE', '212678744309', 'MOUMANE.Hajar@ocpgroup.ma', 'OIG/B/M/M', NULL, NULL),
+('M.', 'Jamal', 'MOUSTAKIM', '212668125081', 'moustakim@ocpgroup.ma', 'OIG/B/E/I', NULL, NULL),
+('M.', 'Lahcen', 'NAIT BELAID', '212661495436', 'L.NAITBELAID@ocpgroup.ma', 'CCI', NULL, NULL),
+('Mme.', 'Laila', 'OUAHBI', '212671800854', 'laila.ouahbi@ocpgroup.ma', 'OIG/M/T', NULL, NULL),
+('M.', 'Hicham', 'SLITNI AMGHARI', '212668123458', 'SLITNIAMGHARI@ocpgroup.ma', 'OIG/M', NULL, NULL),
+('M.', 'Mohammed', 'TARISSI', '212661447853', 'M.TARISSI@ocpgroup.ma', 'OIG/R', NULL, NULL),
+('M.', 'Salah', 'ZAKARYA', '212661447659', 'S.ZAKARYA@ocpgroup.ma', 'OIG/M', NULL, NULL),
+('M.', 'Essaid', 'ZEROUALI', '212661078190', 'ZEROUALI@ocpgroup.ma', 'OIG/B/P', NULL, NULL);
+
 
 -- --------------------------------------------------------
 
@@ -126,18 +96,6 @@ INSERT INTO `encadrants` (`id`, `titre`, `prenom`, `nom`, `phone`, `email`, `ser
 -- Table structure for table `etablissements`
 --
 
-CREATE TABLE `etablissements` (
-  `sigle_etab` varchar(255) NOT NULL,
-  `Etab` varchar(255) NOT NULL,
-  `statut` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `article` varchar(255) NOT NULL,
-  `Pays` varchar(255) NOT NULL DEFAULT 'Maroc',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Dumping data for table `etablissements`
 --
 
@@ -452,38 +410,8 @@ INSERT INTO `etablissements` (`sigle_etab`, `Etab`, `statut`, `type`, `article`,
 ('URCA', 'Université de Reims Champagne-Ardenne', 'ETRANGERES', 'FACULTES', 'à l\'', 'Maroc', NULL, NULL),
 ('WISIG', 'Wafa Institut Privé Spécialisé en Informatique et en Gestion', 'PRIVEE', 'OFPPT', 'au', 'Maroc', NULL, NULL);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `failed_jobs`
---
 
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `filieres`
---
-
-CREATE TABLE `filieres` (
-  `filiere` varchar(255) NOT NULL,
-  `profil` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `filieres`
---
 
 INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Administration et organisation de l\'entreprise', 'Administration', NULL, NULL),
@@ -847,7 +775,7 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Hôtelerie', 'TOURISME', NULL, NULL),
 ('Hydrogéologie et Géologie de l\'Ingénieur', 'MINES', NULL, NULL),
 ('Hygiène Sécurité Environnement', 'HSE', NULL, NULL),
-('ICMAO', NULL, NULL, NULL),
+('ICMAO', 'commun', NULL, NULL),
 ('Industrie Agro-Alimentaire', 'Agriculture', NULL, NULL),
 ('Industrie des ressources minérales et societé', 'Mine', NULL, NULL),
 ('Infermière polyvalente', 'SANTE', NULL, NULL),
@@ -878,67 +806,67 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Ingénerie Informatique et Réseaux', 'INFORMATIQUE', NULL, NULL),
 ('Ingénerie Mécanique', 'Mécanique', NULL, NULL),
 ('Ingénerie Minière', 'MINES', NULL, NULL),
-('Ingénierie', NULL, NULL, NULL),
+('Ingénierie', 'commun', NULL, NULL),
 ('Ingénierie Chimique et Sciences des Matériaux', 'Chimie', NULL, NULL),
 ('Ingénierie de Conception et de Développement d\'Applications', 'INFORMATIQUE', NULL, NULL),
 ('Ingénierie de l\'aéronautique', 'Aéronautique', NULL, NULL),
 ('Ingénierie de l\'Automatisme et Informatique Industrielle', 'INFORMATIQUE', NULL, NULL),
-('Ingénierie de l’Hydraulique et de l\'Environnement', NULL, NULL, NULL),
+('Ingénierie de l’Hydraulique et de l\'Environnement', 'commun', NULL, NULL),
 ('Ingénierie de la Finance et de l\'Assurance', 'ECONOMIE', NULL, NULL),
-('Ingénierie des Automatismes et Informatique Industrielle', NULL, NULL, NULL),
-('Ingénierie des Connaissances et des Données', NULL, NULL, NULL),
-('Ingénierie des Procédés', NULL, NULL, NULL),
-('Ingénierie des Procédés Industriels', NULL, NULL, NULL),
+('Ingénierie des Automatismes et Informatique Industrielle', 'commun', NULL, NULL),
+('Ingénierie des Connaissances et des Données', 'commun', NULL, NULL),
+('Ingénierie des Procédés', 'commun', NULL, NULL),
+('Ingénierie des Procédés Industriels', 'commun', NULL, NULL),
 ('Ingénierie des Réseaux Infrmatiques et des Systèmes de Télécommunications Inélégantes', 'Informatique', NULL, NULL),
 ('Ingénierie des Systèmes & Réseaux Informatiques', 'INFORMATIQUE', NULL, NULL),
-('Ingénierie des Systèmes Automatisés', NULL, NULL, NULL),
-('Ingénierie des Systèmes Automobiles', NULL, NULL, NULL),
-('Ingénierie des Systèmes d\'Information', NULL, NULL, NULL),
+('Ingénierie des Systèmes Automatisés', 'commun', NULL, NULL),
+('Ingénierie des Systèmes Automobiles', 'commun', NULL, NULL),
+('Ingénierie des Systèmes d\'Information', 'commun', NULL, NULL),
 ('Ingénierie des Systèmes Informatiques', 'INFO', NULL, NULL),
-('Ingénierie des Technologies de l\'Information et Réseaux de Communication', NULL, NULL, NULL),
-('Ingénierie Ecologique et Méthodologies d\'Analyse et de Gestion de la Biodiversité', NULL, NULL, NULL),
-('Ingénierie Electrique', NULL, NULL, NULL),
+('Ingénierie des Technologies de l\'Information et Réseaux de Communication', 'commun', NULL, NULL),
+('Ingénierie Ecologique et Méthodologies d\'Analyse et de Gestion de la Biodiversité', 'commun', NULL, NULL),
+('Ingénierie Electrique', 'commun', NULL, NULL),
 ('Ingénierie en Actuariat Finances', 'ECONOMIE', NULL, NULL),
-('Ingénierie en Actuariat Finances et Calcul Scientifique', NULL, NULL, NULL),
+('Ingénierie en Actuariat Finances et Calcul Scientifique', 'commun', NULL, NULL),
 ('Ingénierie en Génie Civil', 'GENIE CIVIL', NULL, NULL),
-('Ingénierie en Génie des Matériaux', NULL, NULL, NULL),
-('Ingénierie en Intelligence Artificielle', NULL, NULL, NULL),
-('Ingénierie en Mécatronique', NULL, NULL, NULL),
-('Ingénierie en Réseaux Informatique et Systèmes d\'Informations', NULL, NULL, NULL),
-('Ingénierie en Sciences Appliquées', NULL, NULL, NULL),
-('Ingénierie en Systèmes Electriques et Télécommunications', NULL, NULL, NULL),
-('Ingénierie et la Gestion de l\'Environnement Industriel', NULL, NULL, NULL),
-('Ingénierie et Management du Développement', NULL, NULL, NULL),
-('Ingénierie et Technologies pour l\'Education et Formation', NULL, NULL, NULL),
-('Ingénierie Financière', NULL, NULL, NULL),
-('Ingénierie Financière et Audit', NULL, NULL, NULL),
-('Ingénierie Informatique', NULL, NULL, NULL),
-('Ingénierie Informatique Electronique et Automatique', NULL, NULL, NULL),
-('Ingénierie Informatique et Electronique', NULL, NULL, NULL),
-('Ingénierie Informatique et Réseaux', NULL, NULL, NULL),
-('Ingénierie Informatique, Big data et Cloud Computing-II-BDCC', NULL, NULL, NULL),
-('Ingénierie Mathématique et Info. Appliquée à l\'Economie', NULL, NULL, NULL),
+('Ingénierie en Génie des Matériaux', 'commun', NULL, NULL),
+('Ingénierie en Intelligence Artificielle', 'commun', NULL, NULL),
+('Ingénierie en Mécatronique', 'commun', NULL, NULL),
+('Ingénierie en Réseaux Informatique et Systèmes d\'Informations', 'commun', NULL, NULL),
+('Ingénierie en Sciences Appliquées', 'commun', NULL, NULL),
+('Ingénierie en Systèmes Electriques et Télécommunications', 'commun', NULL, NULL),
+('Ingénierie et la Gestion de l\'Environnement Industriel', 'commun', NULL, NULL),
+('Ingénierie et Management du Développement', 'commun', NULL, NULL),
+('Ingénierie et Technologies pour l\'Education et Formation', 'commun', NULL, NULL),
+('Ingénierie Financière', 'commun', NULL, NULL),
+('Ingénierie Financière et Audit', 'commun', NULL, NULL),
+('Ingénierie Informatique', 'commun', NULL, NULL),
+('Ingénierie Informatique Electronique et Automatique', 'commun', NULL, NULL),
+('Ingénierie Informatique et Electronique', 'commun', NULL, NULL),
+('Ingénierie Informatique et Réseaux', 'commun', NULL, NULL),
+('Ingénierie Informatique, Big data et Cloud Computing-II-BDCC', 'commun', NULL, NULL),
+('Ingénierie Mathématique et Info. Appliquée à l\'Economie', 'commun', NULL, NULL),
 ('ingénierie Mécanique Pour l\'Industrie Aeronautique', 'AERONAUTIQUE', NULL, NULL),
-('Ingénierie Réseaux et Télécommunications', NULL, NULL, NULL),
-('Ingénierie Systèmes, Réseaux et Sécurité', NULL, NULL, NULL),
-('Ingénieur des Systèmes & Services Numériques', NULL, NULL, NULL),
-('Ingénieur Généraliste', NULL, NULL, NULL),
+('Ingénierie Réseaux et Télécommunications', 'commun', NULL, NULL),
+('Ingénierie Systèmes, Réseaux et Sécurité', 'commun', NULL, NULL),
+('Ingénieur des Systèmes & Services Numériques', 'commun', NULL, NULL),
+('Ingénieur Généraliste', 'commun', NULL, NULL),
 ('ingénieur Innovation & AMOA', 'DIGITALISATION', NULL, NULL),
 ('Ingénieur Innovation et AMOA', 'Innovation', NULL, NULL),
 ('Inorganiques, Physico-chimie et Analyse des Matériaux', 'Chimie', NULL, NULL),
-('Installation Thermique et Sanitaire', NULL, NULL, NULL),
-('Installations Sanitaires et Thermiques', NULL, NULL, NULL),
+('Installation Thermique et Sanitaire', 'commun', NULL, NULL),
+('Installations Sanitaires et Thermiques', 'commun', NULL, NULL),
 ('INSTITUT SPECIALISE INDUSTRUEL', 'GESTION', NULL, NULL),
-('INSTRUMENATION ET SYSEMES', NULL, NULL, NULL),
-('Instrumentation et Systèmes', NULL, NULL, NULL),
+('INSTRUMENATION ET SYSEMES', 'commun', NULL, NULL),
+('Instrumentation et Systèmes', 'commun', NULL, NULL),
 ('Instrumentation Réseaux et Energie Renouvelable', 'Energie', NULL, NULL),
-('Jardinier', NULL, NULL, NULL),
-('LOGISTIQUE', NULL, NULL, NULL),
-('Logistique Aéroportuaire', NULL, NULL, NULL),
-('LOGISTIQUE DE DISTRIBUTION', NULL, NULL, NULL),
-('Logistique de Distribution et Supply Chain Management', NULL, NULL, NULL),
+('Jardinier', 'commun', NULL, NULL),
+('LOGISTIQUE', 'commun', NULL, NULL),
+('Logistique Aéroportuaire', 'commun', NULL, NULL),
+('LOGISTIQUE DE DISTRIBUTION', 'commun', NULL, NULL),
+('Logistique de Distribution et Supply Chain Management', 'commun', NULL, NULL),
 ('Logistique et Commerce', 'Economie', NULL, NULL),
-('Logistique et Transport', NULL, NULL, NULL),
+('Logistique et Transport', 'commun', NULL, NULL),
 ('Maintenance de Véhicule Automobile', 'MAINTENANCE', NULL, NULL),
 ('Maintenance des Appareils Informatiques et Réseaux', 'MAINTENANCE', NULL, NULL),
 ('Maintenance des Engins Lourds et Véhicules Industriels', 'MAINTENANCE', NULL, NULL),
@@ -969,7 +897,7 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Management de la Sécurité, de l\'Hygiène, de l\'Environnement', 'MANAGEMENT', NULL, NULL),
 ('Management des Organisations', 'MANAGEMENT', NULL, NULL),
 ('Management des Ressources Humaines', 'MANAGEMENT', NULL, NULL),
-('Management des Systèmes d\'Information et de Production', NULL, NULL, NULL),
+('Management des Systèmes d\'Information et de Production', 'commun', NULL, NULL),
 ('Management des Systèmes Électriques Intelligents', 'Enérgie', NULL, NULL),
 ('Management du Sport', 'Sport', NULL, NULL),
 ('Management et Ingénierie Logistique', 'MANAGEMENT', NULL, NULL),
@@ -995,8 +923,8 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Marketing stratégique et négociations', 'ECONOMIE', NULL, NULL),
 ('Matériaux Avancés Multifonctionnels et Environnement', 'MAINTENANCE', NULL, NULL),
 ('Matériaux de construction', 'MAINTENANCE', NULL, NULL),
-('Matériaux et Application pour l\'Energie Photovoltaïque', NULL, NULL, NULL),
-('Matériaux et Contrôle Qualité', NULL, NULL, NULL),
+('Matériaux et Application pour l\'Energie Photovoltaïque', 'commun', NULL, NULL),
+('Matériaux et Contrôle Qualité', 'commun', NULL, NULL),
 ('Matériaux et Technologie de soudage', 'Soudage', NULL, NULL),
 ('Matériaux Fonctionnels', 'MAINTENANCE', NULL, NULL),
 ('Mathématiques et Informatiques', 'INFORMATIQUE', NULL, NULL),
@@ -1016,12 +944,12 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Menuiserie d\'Art', 'QUALIFICATION PROFESSIONNELLE', NULL, NULL),
 ('Menuiserie Métallique', 'QUALIFICATION PROFESSIONNELLE', NULL, NULL),
 ('Mesures et Contrôles Physico-Chimie', 'CHIMIE', NULL, NULL),
-('Méthodes de Cuir', NULL, NULL, NULL),
+('Méthodes de Cuir', 'commun', NULL, NULL),
 ('méthodes en fabrication mécanique', 'MECANIQUE', NULL, NULL),
 ('Méthodes Informatiques Appliquées à la Gestion d\'Entreprises', 'GESTION', NULL, NULL),
 ('Métier Chef Comptable', 'ECONOMIE', NULL, NULL),
 ('Métier Fiscaliste', 'ECONOMIE', NULL, NULL),
-('Métrologie et Qualité', NULL, NULL, NULL),
+('Métrologie et Qualité', 'commun', NULL, NULL),
 ('Mines', 'MINES', NULL, NULL),
 ('Mines & Carrières', 'MINES', NULL, NULL),
 ('Mise en Œuvre et Administration des Systèmes et Réseaux', 'GESTION', NULL, NULL),
@@ -1032,7 +960,7 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Multimédia et Conception des Sites Web', 'INFORMATIQUE', NULL, NULL),
 ('Nurse', 'SANTE', NULL, NULL),
 ('Opérateur de Saisie', 'QUALIFICATION PROFESSIONNELLE', NULL, NULL),
-('Opérateur Logistique', NULL, NULL, NULL),
+('Opérateur Logistique', 'commun', NULL, NULL),
 ('Opérateur sur Machines Outils à Commande Numérique', 'QUALIFICATION PROFESSIONNELLE', NULL, NULL),
 ('Opérations Industrielles et Digitalisation', 'industrie', NULL, NULL),
 ('Ouvrier Polyvalent en Construction Métallique', 'QUALIFICATION PROFESSIONNELLE', NULL, NULL),
@@ -1045,39 +973,39 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Physique', 'CHIMIE', NULL, NULL),
 ('Physique Chimie', 'CHIMIE', NULL, NULL),
 ('physique Informatique', 'physique', NULL, NULL),
-('Plasturgie', NULL, NULL, NULL),
-('Plomberie Sanitaire', NULL, NULL, NULL),
-('Politiques Publiques et Ingénierie Territoriale', NULL, NULL, NULL),
-('Polyvalent d\'Usinage', NULL, NULL, NULL),
-('Postes et Télécommunications', NULL, NULL, NULL),
-('Poyculture - Elevage', NULL, NULL, NULL),
-('Procédés et Ingénierie Chimique', NULL, NULL, NULL),
+('Plasturgie', 'commun', NULL, NULL),
+('Plomberie Sanitaire', 'commun', NULL, NULL),
+('Politiques Publiques et Ingénierie Territoriale', 'commun', NULL, NULL),
+('Polyvalent d\'Usinage', 'commun', NULL, NULL),
+('Postes et Télécommunications', 'commun', NULL, NULL),
+('Poyculture - Elevage', 'commun', NULL, NULL),
+('Procédés et Ingénierie Chimique', 'commun', NULL, NULL),
 ('Procédés Industriels et Plasturgie', 'Procédé', NULL, NULL),
-('Production d\'Energie et des Systèmes de Gestion', NULL, NULL, NULL),
-('Production en Costruction Métallique', NULL, NULL, NULL),
-('Production et Valorisation des Substances Natur.et Biopoly.', NULL, NULL, NULL),
+('Production d\'Energie et des Systèmes de Gestion', 'commun', NULL, NULL),
+('Production en Costruction Métallique', 'commun', NULL, NULL),
+('Production et Valorisation des Substances Natur.et Biopoly.', 'commun', NULL, NULL),
 ('Production industrielle/Mécatronique', 'production', NULL, NULL),
-('Productique', NULL, NULL, NULL),
-('Productique et Management', NULL, NULL, NULL),
+('Productique', 'commun', NULL, NULL),
+('Productique et Management', 'commun', NULL, NULL),
 ('Productique mécatronique', 'mécatronique', NULL, NULL),
-('Programme Informatique', NULL, NULL, NULL),
-('Prospection et Valorisation des Ressources Minerales', NULL, NULL, NULL),
-('Protection de l\'Environnement', NULL, NULL, NULL),
-('Psychologie du Travail, Management des Relations Humaines et des Communications Organisationnelles', NULL, NULL, NULL),
-('Psychologie Sociale', NULL, NULL, NULL),
-('Qualification Agricole', NULL, NULL, NULL),
-('Qualité Maintenance Sécurité Industrielle', NULL, NULL, NULL),
-('Qualité, Sécurité et Environnement', NULL, NULL, NULL),
-('Réception Hôtel', NULL, NULL, NULL),
-('Recherche Opérationnelle et Aide à la Décision', NULL, NULL, NULL),
+('Programme Informatique', 'commun', NULL, NULL),
+('Prospection et Valorisation des Ressources Minerales', 'commun', NULL, NULL),
+('Protection de l\'Environnement', 'commun', NULL, NULL),
+('Psychologie du Travail, Management des Relations Humaines et des Communications Organisationnelles', 'commun', NULL, NULL),
+('Psychologie Sociale', 'commun', NULL, NULL),
+('Qualification Agricole', 'commun', NULL, NULL),
+('Qualité Maintenance Sécurité Industrielle', 'commun', NULL, NULL),
+('Qualité, Sécurité et Environnement', 'commun', NULL, NULL),
+('Réception Hôtel', 'commun', NULL, NULL),
+('Recherche Opérationnelle et Aide à la Décision', 'commun', NULL, NULL),
 ('Relations Internationales - Economie politique', 'Gouvernance', NULL, NULL),
-('Réparateur de Véhicules Automobiles', NULL, NULL, NULL),
-('Réparateur des Engins à Moteur', NULL, NULL, NULL),
-('Réparateur Engins à Moteur (Poids Lourds)', NULL, NULL, NULL),
-('Réparation Automobile', NULL, NULL, NULL),
-('Réparation des Engins à Moteur (Option : Automobile)', NULL, NULL, NULL),
-('Réparation des Engins à Moteur Option : Poids Lourds', NULL, NULL, NULL),
-('Réparation des Engins a Moteur Option Réparti', NULL, NULL, NULL),
+('Réparateur de Véhicules Automobiles', 'commun', NULL, NULL),
+('Réparateur des Engins à Moteur', 'commun', NULL, NULL),
+('Réparateur Engins à Moteur (Poids Lourds)', 'commun', NULL, NULL),
+('Réparation Automobile', 'commun', NULL, NULL),
+('Réparation des Engins à Moteur (Option : Automobile)', 'commun', NULL, NULL),
+('Réparation des Engins à Moteur Option : Poids Lourds', 'commun', NULL, NULL),
+('Réparation des Engins a Moteur Option Réparti', 'commun', NULL, NULL),
 ('Réseau et Energies Electriques', 'energie', NULL, NULL),
 ('Réseau, Système & Services Programmables', 'informatique', NULL, NULL),
 ('Réseaux', 'INFORMATIQUE', NULL, NULL),
@@ -1085,10 +1013,10 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 ('Réseaux et Systèmes de Télécommunication', 'INFORMATIQUE', NULL, NULL),
 ('Réseaux et systèmes informatiques', 'INFORMATIQUE', NULL, NULL),
 ('Reseaux et Télécommunication', 'INFORMATIQUE', NULL, NULL),
-('Réseaux Informatiques', NULL, NULL, NULL),
-('Réseaux sécurité et systèmes informatiques', NULL, NULL, NULL),
-('Responsable d\'Exploitation Logistique', NULL, NULL, NULL),
-('Responsable en Logistique', NULL, NULL, NULL),
+('Réseaux Informatiques', 'commun', NULL, NULL),
+('Réseaux sécurité et systèmes informatiques', 'commun', NULL, NULL),
+('Responsable d\'Exploitation Logistique', 'commun', NULL, NULL),
+('Responsable en Logistique', 'commun', NULL, NULL),
 ('Responsable QHSE', 'HSE', NULL, NULL),
 ('Systèmes Eoliens', '', NULL, NULL),
 ('Systèmes et Réseaux', '', NULL, NULL),
@@ -1149,96 +1077,6 @@ INSERT INTO `filieres` (`filiere`, `profil`, `created_at`, `updated_at`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_01_06_115617_create_civilite_table', 1),
-(6, '2023_01_06_115640_create_stagiaires_table', 1),
-(7, '2023_01_06_115702_create_encadrants_table', 1),
-(8, '2023_01_06_115731_create_etablissements_table', 1),
-(9, '2023_01_06_115753_create_services_table', 1),
-(10, '2023_01_06_115812_create_filieres_table', 1),
-(11, '2023_01_06_115910_create_villes_table', 1),
-(12, '2023_01_08_142612_drop_stagiaire_table', 2),
-(13, '2023_01_08_142635_drop_stagiaires_table', 2),
-(14, '2023_01_08_142752_create_stagiaires_table', 3),
-(15, '2023_01_08_143008_create_stagiaires_table', 4),
-(16, '2023_01_08_164108_drop_stagiaires_table', 5),
-(17, '2023_01_08_164204_create_stagiaires_table', 6),
-(18, '2023_01_16_131500_drop_stagiaires_table', 7),
-(19, '2023_01_16_131536_drop_stagiaires_table', 7),
-(20, '2023_01_16_131629_drop_stagiaires_table', 7),
-(21, '2023_01_16_131650_create_stagiaires_table', 8),
-(22, '2023_01_20_000649_add__e_i_to_stagiaires_table', 9),
-(23, '2023_01_30_195815_add_site_to_users_table', 10);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `services`
---
-
-CREATE TABLE `services` (
-  `sigle_service` varchar(255) NOT NULL,
-  `libelle` varchar(255) NOT NULL,
-  `entite` varchar(255) NOT NULL,
-  `site` varchar(255) NOT NULL,
-  `direction` varchar(255) NOT NULL,
-  `EPI` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `services`
---
 
 INSERT INTO `services` (`sigle_service`, `libelle`, `entite`, `site`, `direction`, `EPI`, `created_at`, `updated_at`) VALUES
 ('ACG', 'ACT4COMMUNITY', 'ACG', 'Benguerir', 'Direction du Site Gantour', 0, NULL, NULL),
@@ -1346,56 +1184,19 @@ INSERT INTO `services` (`sigle_service`, `libelle`, `entite`, `site`, `direction
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stagiaires`
---
-
-CREATE TABLE `stagiaires` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `code` int(11) NOT NULL,
-  `date_demande` date NOT NULL,
-  `site` varchar(255) DEFAULT NULL,
-  `civilite` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `cin` varchar(255) NOT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `photo` varchar(300) DEFAULT 'default.png',
-  `niveau` varchar(255) NOT NULL,
-  `diplome` varchar(255) DEFAULT NULL,
-  `filiere` varchar(255) NOT NULL,
-  `etablissement` varchar(255) NOT NULL,
-  `ville` varchar(255) NOT NULL,
-  `type_stage` varchar(255) NOT NULL,
-  `service` varchar(255) NOT NULL,
-  `encadrant` int(11) DEFAULT 52,
-  `date_debut` date NOT NULL,
-  `date_fin` date NOT NULL,
-  `sujet` text DEFAULT NULL,
-  `remunere` tinyint(1) DEFAULT NULL,
-  `EI` tinyint(1) DEFAULT NULL,
-  `annule` tinyint(1) DEFAULT NULL,
-  `prolongation` tinyint(1) DEFAULT NULL,
-  `date_fin_finale` date DEFAULT NULL,
-  `Attestation_remise` date DEFAULT NULL,
-  `Att_remise_a` varchar(255) DEFAULT NULL,
-  `observation` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `stagiaires`
 --
 
-INSERT INTO `stagiaires` (`id`, `code`, `date_demande`, `site`, `civilite`, `prenom`, `nom`, `cin`, `phone`, `email`, `photo`, `niveau`, `diplome`, `filiere`, `etablissement`, `ville`, `type_stage`, `service`, `encadrant`, `date_debut`, `date_fin`, `sujet`, `remunere`, `EI`, `annule`, `prolongation`, `date_fin_finale`, `Attestation_remise`, `Att_remise_a`, `observation`, `created_at`, `updated_at`) VALUES
-(90, 2, '2023-02-04', 'Benguerir', 'M.', 'Jad', 'Mhammedi', 'EA345243', '+212677556645', 'jadox@gmail.com', 'Mhammedi-Jad-1675520005.jpg', '3ème année', 'Cycle d\'ingénieur', 'Génie Civil', 'EMI', 'RABAT', 'stage PFE', 'OIG/B/M', 48, '2023-02-06', '2023-03-15', 'La maintenance vise à maintenir ou à rétablir un bien dans un état spécifié afin que celui-ci soit en mesure d\'assurer un service déterminé1\r\n\r\nLa maintenance regroupe ainsi les actions de dépannage et de réparation, de réglage, de révision, de contrôle et de vérification des équipements matériels (machines, véhicules, objets manufacturés, etc.) ou même immatériels (logiciels).\r\n\r\nUn service de maintenance peut également être amené à participer à des études d\'amélioration du processus industriel, et doit, comme d\'autres services de l\'entreprise, prendre en considération de nombreuses contraintes comme la qualité, la sécurité, l\'environnement, le coût, etc.', 1, 1, 0, NULL, NULL, NULL, NULL, 'Ras', '2023-02-04 13:13:25', '2023-02-04 13:13:25'),
-(91, 44444, '2023-02-04', 'Benguerir', 'M.', 'Nassima', 'Solh', 'EA345243', '0662666733', 'nassolh@gmail.com', 'default.png', '3ème année', 'Cycle d\'ingénieur', 'Energétique', 'EMBTP', 'SETTAT', 'stage PFE', 'OIG/F/M', 15, '2023-02-13', '2023-02-26', 'La maintenance vise à maintenir ou à rétablir un bien dans un état spécifié afin que celui-ci soit en mesure d\'assurer un service déterminé1\r\n\r\nLa maintenance regroupe ainsi les actions de dépannage et de réparation, de réglage, de révision, de contrôle et de vérification des équipements matériels (machines, véhicules, objets manufacturés, etc.) ou même immatériels (logiciels).\r\n\r\nUn service de maintenance peut également être amené à participer à des études d\'amélioration du processus industriel, et doit, comme d\'autres services de l\'entreprise, prendre en considération de nombreuses contraintes comme la qualité, la sécurité, l\'environnement, le coût, etc.', 1, 1, 0, NULL, NULL, NULL, NULL, 'R', '2023-02-04 13:17:19', '2023-02-04 13:17:19'),
-(92, 4, '2023-02-07', 'Benguerir', 'M.', 'Hassan', 'Najdi', 'Y234321', '+212610776647', 'elmassoudi@gmail.com', 'Najdi-Hassan-1675795876.png', '3ème année', 'Cycle d\'ingénieur', 'Génie Civil', 'EHTP', 'CASABLANCA', 'stage PFE', 'OIG/M/G/B', 12, '2023-03-01', '2023-02-07', 'Test', 1, 1, 0, NULL, NULL, NULL, NULL, 'Test', '2023-02-07 17:51:16', '2023-02-07 17:51:16'),
-(93, 7, '2023-02-07', 'Youssoufia', 'M.', 'Sami', 'Dani', 'EA123', '77', 'samdan@gmail.com', 'default.png', '3ème année', 'Cycle d\'ingénieur', 'Génie des Mines', 'EMI', 'RABAT', 'stage PFE', 'OIG/Y', 11, '2023-02-01', '2023-06-30', NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, '2023-02-07 17:55:11', '2023-02-07 17:55:11'),
-(95, 1, '2023-02-19', 'Benguerir', 'Mlle', 'Amal', 'Bendani', 'NXASKX', '0610776646`', 'test@mail.com', 'Bendani-Amal-1676832147.png', '1ère année', 'Doctorat', 'Aide Soignante', 'UM6P', 'BENGUERIR', 'stage d\'observation', 'ACG', 12, '2023-02-20', '2023-02-28', 'Test', 1, 1, 0, NULL, NULL, NULL, NULL, 'Test', '2023-02-19 17:42:27', '2023-02-19 17:42:27'),
-(98, 12, '2023-02-19', 'Benguerir', 'Mlle', 'Samira', 'Bendali', 'EA6789', '066166666661', 'test@mail.com', 'Bendali-Salma-1676836601.jpg', '1ère année', 'Cycle d\'ingénieur', 'Génie des Procédés', 'EMI', 'RABAT', 'stage ouvrier', 'OIG/B', 11, '2023-02-20', '2023-05-13', 'Test', 1, 1, 0, NULL, NULL, NULL, NULL, 'Test', '2023-02-19 18:56:41', '2023-02-19 18:57:59'),
-(99, 2023145, '2023-02-20', 'Benguerir', 'M.', 'Ismail', 'Elhassouni', 'EA247560', '1234567891', 'skli@gmail.com', 'default.png', '1ère année', 'Technicien spécialisé', 'Agent Magasinier', 'AUI', 'AGADIR', 'stage PFE', 'FIG/CG/B', 2, '2023-02-21', '2023-02-21', 'Did hxdjxj', 0, 1, 0, NULL, NULL, NULL, NULL, 'Go Dkd', '2023-02-20 10:26:19', '2023-02-20 10:26:19');
+INSERT INTO `stagiaires` ( `code`, `date_demande`, `site`, `civilite`, `prenom`, `nom`, `cin`, `phone`, `email`, `photo`, `niveau`, `diplome`, `filiere`, `etablissement`, `ville`, `type_stage`, `service`, `encadrant`, `date_debut`, `date_fin`, `sujet`, `remunere`, `EI`, `annule`, `prolongation`, `date_fin_finale`, `Attestation_remise`, `Att_remise_a`, `observation`, `created_at`, `updated_at`) VALUES
+(90, '2023-02-04', 'Benguerir', 'M.', 'Jad', 'Mhammedi', 'EA345243', '+212677556645', 'jadox@gmail.com', 'Mhammedi-Jad-1675520005.jpg', '3ème année', 'Cycle d\'ingénieur', 'Génie Civil', 'EMI', 'RABAT', 'stage PFE', 'OIG/B/M', 48, '2023-02-06', '2023-03-15', 'La maintenance vise à maintenir ou à rétablir un bien dans un état spécifié afin que celui-ci soit en mesure d\'assurer un service déterminé1\r\n\r\nLa maintenance regroupe ainsi les actions de dépannage et de réparation, de réglage, de révision, de contrôle et de vérification des équipements matériels (machines, véhicules, objets manufacturés, etc.) ou même immatériels (logiciels).\r\n\r\nUn service de maintenance peut également être amené à participer à des études d\'amélioration du processus industriel, et doit, comme d\'autres services de l\'entreprise, prendre en considération de nombreuses contraintes comme la qualité, la sécurité, l\'environnement, le coût, etc.', 1, 1, 0, NULL, NULL, NULL, NULL, 'Ras', '2023-02-04 13:13:25', '2023-02-04 13:13:25'),
+(91 , '2023-02-04', 'Benguerir', 'M.', 'Nassima', 'Solh', 'EA345243', '0662666733', 'nassolh@gmail.com', 'default.png', '3ème année', 'Cycle d\'ingénieur', 'Energétique', 'EMBTP', 'SETTAT', 'stage PFE', 'OIG/F/M', 15, '2023-02-13', '2023-02-26', 'La maintenance vise à maintenir ou à rétablir un bien dans un état spécifié afin que celui-ci soit en mesure d\'assurer un service déterminé1\r\n\r\nLa maintenance regroupe ainsi les actions de dépannage et de réparation, de réglage, de révision, de contrôle et de vérification des équipements matériels (machines, véhicules, objets manufacturés, etc.) ou même immatériels (logiciels).\r\n\r\nUn service de maintenance peut également être amené à participer à des études d\'amélioration du processus industriel, et doit, comme d\'autres services de l\'entreprise, prendre en considération de nombreuses contraintes comme la qualité, la sécurité, l\'environnement, le coût, etc.', 1, 1, 0, NULL, NULL, NULL, NULL, 'R', '2023-02-04 13:17:19', '2023-02-04 13:17:19'),
+(92, '2023-02-07', 'Benguerir', 'M.', 'Hassan', 'Najdi', 'Y234321', '+212610776647', 'elmassoudi@gmail.com', 'Najdi-Hassan-1675795876.png', '3ème année', 'Cycle d\'ingénieur', 'Génie Civil', 'EHTP', 'CASABLANCA', 'stage PFE', 'OIG/M/G/B', 12, '2023-03-01', '2023-02-07', 'Test', 1, 1, 0, NULL, NULL, NULL, NULL, 'Test', '2023-02-07 17:51:16', '2023-02-07 17:51:16'),
+(93, '2023-02-07', 'Youssoufia', 'M.', 'Sami', 'Dani', 'EA123', '77', 'samdan@gmail.com', 'default.png', '3ème année', 'Cycle d\'ingénieur', 'Génie des Mines', 'EMI', 'RABAT', 'stage PFE', 'OIG/Y', 11, '2023-02-01', '2023-06-30', NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, '2023-02-07 17:55:11', '2023-02-07 17:55:11'),
+(95, '2023-02-19', 'Benguerir', 'Mlle', 'Amal', 'Bendani', 'NXASKX', '0610776646`', 'test@mail.com', 'Bendani-Amal-1676832147.png', '1ère année', 'Doctorat', 'Aide Soignante', 'UM6P', 'BENGUERIR', 'stage d\'observation', 'ACG', 12, '2023-02-20', '2023-02-28', 'Test', 1, 1, 0, NULL, NULL, NULL, NULL, 'Test', '2023-02-19 17:42:27', '2023-02-19 17:42:27'),
+(98, '2023-02-19', 'Benguerir', 'Mlle', 'Samira', 'Bendali', 'EA6789', '066166666661', 'test@mail.com', 'Bendali-Salma-1676836601.jpg', '1ère année', 'Cycle d\'ingénieur', 'Génie des Procédés', 'EMI', 'RABAT', 'stage ouvrier', 'OIG/B', 11, '2023-02-20', '2023-05-13', 'Test', 1, 1, 0, NULL, NULL, NULL, NULL, 'Test', '2023-02-19 18:56:41', '2023-02-19 18:57:59'),
+(99, '2023-02-20', 'Benguerir', 'M.', 'Ismail', 'Elhassouni', 'EA247560', '1234567891', 'skli@gmail.com', 'default.png', '1ère année', 'Technicien spécialisé', 'Agent Magasinier', 'AUI', 'AGADIR', 'stage PFE', 'FIG/CG/B', 2, '2023-02-21', '2023-02-21', 'Did hxdjxj', 0, 1, 0, NULL, NULL, NULL, NULL, 'Go Dkd', '2023-02-20 10:26:19', '2023-02-20 10:26:19');
 
 -- --------------------------------------------------------
 
@@ -1403,42 +1204,17 @@ INSERT INTO `stagiaires` (`id`, `code`, `date_demande`, `site`, `civilite`, `pre
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `site` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `site`) VALUES
-(1, 'elmassoudi', 'elmassoudi@h', NULL, '$2y$10$OoVMETDLaKf4aria3rvP.uw6WdXmlv6KyLafCSgilwQUYU36hKHwu', NULL, '2023-01-09 12:28:43', '2023-01-09 12:28:43', 'Benguerir'),
-(2, 'kourimi', 'kourimi@ocpgroup.ma', NULL, '$2y$10$SN37CqxZiFe0nl1frWD.2OiTvFFbro.uTO1IBNhAZdRPC/xYxMQZa', NULL, '2023-01-29 12:56:48', '2023-01-29 12:56:48', 'Youssoufia'),
-(3, 'Rabbou', 'Rabbou@ocpgroup.ma', NULL, '$2y$10$ex3tewLpjHVKx8UW.Qn4EupH9/coD1s9whU84tfcrzsvpUX2d5YAm', NULL, '2023-01-30 19:09:20', '2023-01-30 19:09:20', 'Youssoufia');
+INSERT INTO `users` ( `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `site`,`role`) VALUES
+('elmassoudi', 'elmassoudi@h', NULL, '$2y$10$OoVMETDLaKf4aria3rvP.uw6WdXmlv6KyLafCSgilwQUYU36hKHwu', NULL, '2023-01-09 12:28:43', '2023-01-09 12:28:43', 'Benguerir','Admin'),
+('kourimi', 'kourimi@ocpgroup.ma', NULL, '$2y$10$SN37CqxZiFe0nl1frWD.2OiTvFFbro.uTO1IBNhAZdRPC/xYxMQZa', NULL, '2023-01-29 12:56:48', '2023-01-29 12:56:48', 'Youssoufia','Admin'),
+('Rabbou', 'Rabbou@ocpgroup.ma', NULL, '$2y$10$ex3tewLpjHVKx8UW.Qn4EupH9/coD1s9whU84tfcrzsvpUX2d5YAm', NULL, '2023-01-30 19:09:20', '2023-01-30 19:09:20', 'Youssoufia','Admin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `villes`
---
 
-CREATE TABLE `villes` (
-  `ville` varchar(255) NOT NULL,
-  `pays` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `villes`
 --
 
 INSERT INTO `villes` (`ville`, `pays`, `created_at`, `updated_at`) VALUES
@@ -1552,127 +1328,4 @@ INSERT INTO `villes` (`ville`, `pays`, `created_at`, `updated_at`) VALUES
 ('VAL DE LOIRE', 'FRANCE', NULL, NULL),
 ('YOUSSOUFIA', 'MAROC', NULL, NULL);
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `civilite`
---
-ALTER TABLE `civilite`
-  ADD PRIMARY KEY (`titre`);
-
---
--- Indexes for table `encadrants`
---
-ALTER TABLE `encadrants`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `etablissements`
---
-ALTER TABLE `etablissements`
-  ADD PRIMARY KEY (`sigle_etab`);
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Indexes for table `filieres`
---
-ALTER TABLE `filieres`
-  ADD PRIMARY KEY (`filiere`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD PRIMARY KEY (`email`);
-
---
--- Indexes for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
--- Indexes for table `services`
---
-ALTER TABLE `services`
-  ADD PRIMARY KEY (`sigle_service`);
-
---
--- Indexes for table `stagiaires`
---
-ALTER TABLE `stagiaires`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- Indexes for table `villes`
---
-ALTER TABLE `villes`
-  ADD PRIMARY KEY (`ville`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `encadrants`
---
-ALTER TABLE `encadrants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `stagiaires`
---
-ALTER TABLE `stagiaires`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-

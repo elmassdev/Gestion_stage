@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('etablissements', function (Blueprint $table) {
-            $table->string('sigle_etab')->primary();
+            $table->bigIncrements('id');
+            $table->string('sigle_etab')->unique();
             $table->string('Etab');
             $table->string('statut');
             $table->string('type');

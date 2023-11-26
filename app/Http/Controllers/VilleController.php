@@ -6,124 +6,74 @@ use Illuminate\Http\Request;
 use App\Models\Ville;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
+
 
 Paginator::useBootstrap();
 
 class VilleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $msg='';
-        $editmsg='';
-        $villes = Ville::orderBy('ville', 'asc')->paginate(7);
-        return view('villes',compact('villes','msg','editmsg'));
-
+        $vs= Ville::orderBy('ville', 'asc')->paginate(10);
+        return view('villes.index', compact('vs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $editmsg='';
-        $msg='';
-        $villes = Ville::orderBy('ville', 'asc')->get();
-        return view('villes',compact('villes','msg','editmsg'));
+        return view('villes.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-    {    $msg=''; 
-
-        try {
-            // code that performs the database operation
-            $villes =ville::create($request->all());
-            return view('villes')->with('results',[])->with('msg','<p class=" col-md-6 my-2 rounded bg-success  text-light">Enregistré avec succès</p>');
-        } catch (\Illuminate\Database\QueryException $e) {
-            // handle the exception
-            if($e->getCode() == 23000){
-                return view('villes')->with('results',[])->with('msg','<p class=" col-md-6 my-2  rounded warning bg-warning text-light">La ville existe</p>');
-            }else{
-                return view('villes')->with('results',[])->with('msg','<p class="col-md-6 my-2  rounded  bg-warning text-danger">Merci de vérifier les entrées!</p>');
-            }
-        }        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
     {
-        $ville =Ville::findOrFail($id); 
-        return view('ville',['msg'=>'Enregistré avec succes']);
-    }
+            // Define custom error messages
+        $customMessages = [
+            'ville.required' => 'Merci d\'entrer le nom de la ville.',
+            'ville.unique' => 'Cette ville existe!',
+            'pays.required' => 'Merci d\'entrer le nom de payse.',
+        ];
 
-    public function search(Request $request)
-    {
-        $editmsg ='';
-        $msg ='';
-        $results=[];
-        $query = $request->input('search');
-        $results = DB::table('villes')->where('ville', 'like', "%$query%")->paginate(7);
-        return view('villes', compact('results','msg','editmsg'));
-    }
+        // Validate the request data with custom error messages
+        $request->validate([
+            'ville' => [
+                'required',
+                Rule::unique('villes')->where(function ($query) use ($request) {
+                    return $query->where('pays', $request->pays);
+                }),
+            ],
+            'pays' => 'required',
+        ], $customMessages);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        $editmsg='';
-        $villes = Ville::orderBy('ville', 'asc')->get();
-        return view('villes/modification', compact('villes','editmsg'));
-    }
+        // Attempt to create the Ville
+        $createdVille = Ville::create($request->all());
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $editmsg ='';
-        $oldville = $request->input('oldville');
-        $newville = $request->input('newville');
-        $newpays =$request->input('newpays');
-        DB::table('villes')
-            ->where('ville', '$oldville')
-            ->update(['ville' => '$newville','pays' => '$newpays']);
-        return view('villes', compact('villes'))->with('editmsg','Modifié avec succes');
+        // Check if the creation was successful
+        if ($createdVille) {
+            // Flash a success message to the session
+            Session::flash('success', 'Ville created successfully.');
+            return redirect()->route('villes.index');
+        } else {
+            // Flash an error message to the session
+            Session::flash('error', 'Failed to create Ville. Please try again.');
+            return redirect()->back();
+        }
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function edit(Ville $ville)
     {
-        //
+        return view('villes.edit', compact('ville'));
+    }
+
+    public function update(Request $request, Ville $ville)
+    {
+        $ville->update($request->all());
+        return redirect()->route('villes.index');
+    }
+
+    public function destroy(Ville $ville)
+    {
+        $ville->delete();
+        return redirect()->route('villes.index');
     }
 }

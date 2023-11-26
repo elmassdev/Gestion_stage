@@ -128,8 +128,8 @@ a::after {
 </style>
 <div class="noise"></div>
 <div class="overlay"></div>
-<div class="terminal">  
-  <img src="storage/images/logo.png" alt="logo" srcset="storage/images/logo.png" height="45px" width="45px" max-width="45px">
+<div class="terminal">
+  <img src="/images/logo.svg" alt="logo" srcset="/images/logo.svg" height="45px" width="45px" max-width="45px">
   <h1>Error <span class="errorcode">404</span></h1>
   <p class="output">La page est introuvable.</p>
   <p class="output">Appuyez <a href="/home">ici</a> pour retourner à  <a href="/home">la page d'accueil</a>.</p>

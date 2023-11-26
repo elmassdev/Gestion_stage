@@ -176,7 +176,7 @@ class StagiaireController extends Controller
                         $query->orWhere($column, '=', $request->input('term'));
                     }
                 }
-            })->paginate(6);
+            })->paginate(10);
         $stagiaire = Stagiaire::findOrFail($id);
         $previous = Stagiaire::where('id', '<', $stagiaire->id)->max('id');
         $next = Stagiaire::where('id', '>', $stagiaire->id)->min('id');

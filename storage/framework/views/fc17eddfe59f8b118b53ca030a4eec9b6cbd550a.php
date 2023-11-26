@@ -19,7 +19,7 @@
 }
 
 .B,.Y{
-    background-color: #af5b07;
+    background-color: #e67700;
 background-image: url(http://www.transparenttextures.com/patterns/escheresque-dark.png);
   font-family: Nunito;
   font-display:auto;

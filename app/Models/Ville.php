@@ -9,6 +9,6 @@ class Ville extends Model
 {
     use HasFactory;
     protected $table = 'villes';
-    protected $primaryKey = 'ville';
+    protected $primaryKey = 'id';
     protected $fillable = ['ville','pays'];
 }
