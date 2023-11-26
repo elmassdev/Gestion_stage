@@ -30,7 +30,7 @@ class EncadrantController extends Controller
     public function create()
     {
         $services = Service::orderBy('sigle_service', 'asc')->get();
-        return view('encadrants/create',compact('services'));
+        return view('encadrants.create',compact('services'));
     }
 
     /**
@@ -44,20 +44,20 @@ class EncadrantController extends Controller
         $request->validate([
             'titre'=>'required',
             'prenom'=>'required',
-            'nom'=>'required',            
+            'nom'=>'required',
             'phone'=>'required',
             'email'=>'required',
             'service'=>'required',
         ]);
         $encadrant = new Encadrant();
-        $encadrant->titre = $request->input('titre');       
+        $encadrant->titre = $request->input('titre');
         $encadrant->prenom =ucwords($request->input('prenom'));
         $encadrant->nom = ucwords($request->input('nom'));
         $encadrant->phone = $request->input('phone');
         $encadrant->email = $request->input('email');
-        $encadrant->service = $request->input('service');    
-        $encadrant->save();  
-             
+        $encadrant->service = $request->input('service');
+        $encadrant->save();
+
         //$encadrants =Encadrant::create($request->all());
         return redirect('/encadrants')->with('msg','Enregistré avec succès');
     }
@@ -71,7 +71,7 @@ class EncadrantController extends Controller
     public function show($id, Request $request)
     {
         $columns = ['nom', 'prenom', 'service'];
-    
+
         $results = DB::table('encadrants')
             ->where(function($query) use($request, $columns) {
                 foreach ($columns as $column) {
@@ -79,10 +79,10 @@ class EncadrantController extends Controller
                         $query->orWhere($column, '=', $request->input('term'));
                     }
                 }
-            })->paginate(6);
-        $encadrant = Encadrant::findOrFail($id);        
+            })->paginate(10);
+        $encadrant = Encadrant::findOrFail($id);
         $previous = Encadrant::where('id', '<', $encadrant->id)->max('id');
-        $next = Encadrant::where('id', '>', $encadrant->id)->min('id');      
+        $next = Encadrant::where('id', '>', $encadrant->id)->min('id');
         return view('encadrants.show', compact('encadrant','results'))->with('previous', $previous)->with('next', $next);
     }
 
@@ -94,9 +94,9 @@ class EncadrantController extends Controller
      */
     public function edit($id)
     {
-        $encadrant = Encadrant::findOrFail($id);        
-        $services = Service::orderBy('sigle_service', 'asc')->get();        
-        return view('encadrants.modification',compact('encadrant','services')); 
+        $encadrant = Encadrant::findOrFail($id);
+        $services = Service::orderBy('sigle_service', 'asc')->get();
+        return view('encadrants.modification',compact('encadrant','services'));
     }
 
     /**

@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('sigle_service')->unique();
+            $table->string('sigle_service')->primary();
             $table->string('libelle');
             $table->string('entite');
             $table->string('site');

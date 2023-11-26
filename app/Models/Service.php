@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    protected $table = 'id';
+    protected $casts = [
+        'sigle_service' => 'string',
+    ];
+
+    protected $table = 'services';
     protected $primaryKey = 'sigle_service';
     protected $fillable = ['sigle_service','libelle','entite','site','direction','EPI'];
 
