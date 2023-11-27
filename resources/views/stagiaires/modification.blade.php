@@ -570,9 +570,9 @@
             <div class="card-header bg-secondary">{{ __('Autre informations à ajouter:') }}</div>
             <table>
                 <tr>
-                    <a href="/filiere" target="/blank"  class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une filière</a>
-                    <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un établissement</a>
-                    <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un service</a>
+                    <a href="/filieres" target="/blank"  class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une filière</a>
+                    <a href="/etablissements" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un établissement</a>
+                    <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un service</a>
                     <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un encadrant </a>
                     <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une ville</a>
                 </tr>

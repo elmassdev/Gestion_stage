@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Etablissement extends Model
 {
+    protected $casts = [
+        'sigle_etab' => 'string',
+    ];
+
     use HasFactory;
     protected $table = 'etablissements';
     protected $primaryKey = 'sigle_etab';

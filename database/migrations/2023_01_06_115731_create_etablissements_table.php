@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('statut');
             $table->string('type');
             $table->string('article');
-            $table->string('Pays');
+            $table->string('Pays')->default('Maroc');
             $table->timestamps();
         });
     }

@@ -885,8 +885,8 @@ unset($__errorArgs, $__bag); ?>
                 <div class="card-header bg-primary"><?php echo e(__('Autre informations à ajouter:')); ?></div>
                 <table>
                     <tr>
-                        <a href="/filiere" target="/blank"  class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
-                        <a href="/etablissement" target="/blank" class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
+                        <a href="/filieres" target="/blank"  class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
+                        <a href="/etablissements" target="/blank" class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
                         <a href="/services" target="/blank" class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter un service</a>
                         <a href="/encadrants/create" target="/blank" class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
                         <a href="/villes" target="/blank" class=" col-md-11 mx-auto my-2 btn btn-primary">Ajouter une ville</a>

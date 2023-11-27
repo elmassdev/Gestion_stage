@@ -13,12 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
+        // Schema::create('filieres', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->string('filiere')->unique();
+        //     $table->string('profil')->default('commun');
+        //     $table->timestamps();
+        // });
+
         Schema::create('filieres', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('filiere')->unique();
-            $table->string('profil')->default('commun');
+            $table->id();
+            $table->string('filiere');
+            $table->string('profil');
             $table->timestamps();
+
+            $table->unique(['filiere', 'profil']);
         });
+
     }
 
     /**
