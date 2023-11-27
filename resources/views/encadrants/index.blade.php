@@ -1,44 +1,62 @@
 @extends('layouts.app')
 @section('content')
-@if(count($encadrants))
-<table class="table table-striped table-responsive">
-    <thead>
-        <tr class="small">
-            <th>titre</th>
-            <th>Prenom</th>
-            <th>Nom</th>  
-            <th>phone</th>
-            <th>email</th>              
-            <th>Service</th>          
-        </tr>
-    </thead>
-    <tbody>@foreach($encadrants as $encadrant)
-    <tr class=" table table-row my-auto h-10 small">
-                        <td>{{ $encadrant->titre}}</td>
-                        <td>{{ $encadrant->prenom}}</td>
-                        <td>{{ $encadrant->nom}}</td>                                
-                        <td>{{ $encadrant->phone}}</td>
-                        <td>{{ $encadrant->email}}</td>                                
-                        <td>{{ $encadrant->service}}</td>
-                        <td ><a  href="/encadrants/{{$encadrant->id}}/modification"> <i class="fa fa-edit text-warning"></i></a></td>
-                        <td > 
-                        <form action="/encadrants/{{$encadrant->id}}" method="POST">
+<div class="row">
+    <div class="col-md-9">
+        @if(count($encadrants))
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr class="small">
+                    <th>titre</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>phone</th>
+                    <th>email</th>
+                    <th>Service</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($encadrants as $encadrant)
+                <tr class=" table table-row my-auto h-10 small">
+                    <td>{{ $encadrant->titre}}</td>
+                    <td>{{ $encadrant->prenom}}</td>
+                    <td>{{ $encadrant->nom}}</td>
+                    <td>{{ $encadrant->phone}}</td>
+                    <td>{{ $encadrant->email}}</td>
+                    <td>{{ $encadrant->service}}</td>
+                    <td>
+                        <a  href="/encadrants/{{$encadrant->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
+                        <form action="/encadrants/{{$encadrant->id}}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')
-                            <button class="fa fa-trash text-danger"></button>
+                            <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet encadrant?')"><i class="fa fa-trash text-danger"></i></button>
                         </form>
-                        </td>
-                        <td> <a  href="/encadrants/{{$encadrant->id}}"><i class="fa fa-print text-primary"></i></a></td>                           
-                    </tr>
-@endforeach
+                        <a  href="/encadrants/{{$encadrant->id}}"><i class="fa fa-print text-primary"></i></a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {{ $encadrants->links() }}
+        @else
+        <p> Pas de encadrants</p>
+        @endif
+    </div>
 
-    </tbody>
-</table>
-{{ $encadrants->links() }}
-
-@else
-<p> Pas de encadrants</p>
-@endif
-
+    <div class="col-md-3 float-right" style="top: 5; right: 0;">
+        <div class="card col-md-8">
+            <div class="card-header bg-secondary">{{ __('Autre informations à ajouter:') }}</div>
+            <table >
+                <tr>
+                    <a href="/encadrants" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Liste des encadrants</a>
+                    <a href="/encadrants/1" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Rechercher un encadrant</a>
+                    <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un service</a>
+                    <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un stagiaire </a>
+                    <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une ville</a>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 
 @endsection

@@ -2,7 +2,7 @@
 
 
 <?php $__env->startSection('content'); ?>
-
+<div class="row">
 <div class="col-md-6">
 
     <div class="card">
@@ -62,6 +62,24 @@
 
         </div>
     </div>
+</div>
+
+
+    <div class="col-md-3 float-right" style="top: 5; right: 0;">
+        <div class="card col-md-8">
+            <div class="card-header bg-warning"><?php echo e(__('Autre informations à ajouter:')); ?></div>
+            <table >
+                <tr>
+                    <a href="/encadrants" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Liste des encadrants</a>
+                    <a href="/encadrants/1" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Rechercher un encadrant</a>
+                    <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
+                    <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un stagiaire </a>
+                    <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Github\Gestion_stage\resources\views/services/edit.blade.php ENDPATH**/ ?>

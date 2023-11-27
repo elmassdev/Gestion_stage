@@ -19,6 +19,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
     <link rel="stylesheet" href="resources/css/app.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
@@ -46,6 +47,20 @@
         .toggleThemeBtn i {
             font-size: 24px;
         }
+
+        /*
+        body[data-bs-theme='light'] {
+        background-color: #b4b4b8; }
+        .container [data-bs-theme='light']{
+            background-color: #b4b4b8;
+        }
+        body[data-bs-theme='dark'] {
+        background-color: #000000;
+        color: white; Set your text color for dark mode}; */
+
+
+
+
     </style>
 
 

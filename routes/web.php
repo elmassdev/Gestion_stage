@@ -42,6 +42,9 @@ Route::view('/contact', 'contact');
 Route::resource('villes', VilleController::class);
 Route::resource('encadrants', EncadrantController::class);
 Route::resource('services', ServiceController::class);
+Route::get('encadrants/{id}/modification', 'App\Http\Controllers\EncadrantController@edit');
+Route::post('encadrants/{id}/modification', 'App\Http\Controllers\EncadrantController@update');
+Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
 
 
 
@@ -54,11 +57,11 @@ Route::get('/etablissement', [App\Http\Controllers\EtabController::class, 'show'
 
 // Route::get('/encadrants', [App\Http\Controllers\EncadrantController::class, 'index'])->name('encadrants/index')->middleware('auth');
 // Route::get('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'create'])->name('encadrants/create')->middleware('auth');
-// Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
+
 // Route::get('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@show')->name('encadrants.show')->middleware('auth'); //second method
 // Route::get('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@search')->name('encadrants.show')->middleware('auth'); //second method
 // Route::delete('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@destroy')->name('encadrant.destroy')->middleware('auth');
-// Route::get('encadrants/{id}/modification', 'App\Http\Controllers\EncadrantController@edit');
+
 // Route::post('/encadrants/{id}/modification', [App\Http\Controllers\EncadrantController::class, 'update'])->name('modification')->middleware('auth');
 // Route::get('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service')->middleware('auth');
 // Route::post('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service')->middleware('auth');

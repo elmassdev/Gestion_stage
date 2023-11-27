@@ -15,20 +15,20 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un stagiaire</a>
-                            <a href="/filiere" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une filière</a>
-                            <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un établissement</a>
-                            <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
-                            <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
-                            <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
+                            <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un stagiaire</a>
+                            <a href="/filiere" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
+                            <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
+                            <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un service</a>
+                            <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
+                            <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
                         </div>
                         <div class="col-md-6">
-                            <a href="/statistiques" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Statistiques</a>
-                            <a href="/stagiaires" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Liste des stagiaires</a>
-                            <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un établissement</a>
-                            <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
-                            <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
-                            <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
+                            <a href="/statistiques" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Statistiques</a>
+                            <a href="/stagiaires" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Liste des stagiaires</a>
+                            <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
+                            <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un service</a>
+                            <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
+                            <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
                         </div>
                     </div>
                 </div>

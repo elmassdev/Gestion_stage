@@ -25,7 +25,6 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Voulez-vous supprimer cette ville?')"><i class="fa fa-trash text-danger"></i></button>
-                            {{-- <button type="submit" class="btn btn-sm btn-danger">Delete</button> --}}
                         </form>
                     </td>
                 </tr>

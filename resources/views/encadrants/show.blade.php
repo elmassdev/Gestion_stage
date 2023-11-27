@@ -1,25 +1,25 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">      
+<div class="container">
     <div class="row">
         {{-- the left part of the page --}}
         <div class="col-md-6">
-            <div class="card p-1 bg-light">
+            <div class="card p-1">
                 <div class="row ">
-                    <div class="row ">                        
+                    <div class="row ">
                             <div class="col-md-8  position my-auto top-0 end-0">
                                 <div class="allergy"><b>{{$encadrant->titre}} {{$encadrant->prenom}} {{$encadrant->nom}}</b></div>
                                 <div class="allergy"><b>{{$encadrant->service}}</b></div>
                                 <div class="allergy text-secondary"><i class="fa fa-phone" aria-hidden="true"></i> -  <a href="tel:{{$encadrant->phone}}">{{$encadrant->phone}}</a> </div>
                                 <div class="allergy text-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> - <a href="mailto:{{$encadrant->email}}">{{$encadrant->email}}</a></div>
 
-                            </div>                       
-                        
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="card p-1 bg-light">
+                <div class="card p-1">
                     <table>
                         <tbody>
                             <tr>
@@ -37,16 +37,16 @@
                     </table>
 
                 </div>
-          
+
         </div>
 
         {{-- the right part of the page --}}
         <div class="col-md-6">
-            <div class="card p-1 bg-light">
+            <div class="card p-1">
                 <div class=" card  p-1">
                     <div class="card-header">{{ __('Rechercher un encadrant') }}</div>
                     <div class=" card-body py-2">
-                    
+
                 <form method="GET" action="/encadrants/{{$encadrant->id}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
@@ -56,7 +56,7 @@
                             <select id="column" type="text" class="form-control @error('column') is-invalid @enderror" name="column" required autocomplete="column">
                                 <option value="nom" selected>Rechercher par nom</option>
                                 <option value="prenom">Rechercher par prenom</option>
-                                <option value="service">Rechercher service </option>                        
+                                <option value="service">Rechercher service </option>
                         </select>
                             @error('column')
                                 <span class="invalid-feedback" role="alert">
@@ -98,18 +98,18 @@
                         <th>service</th>
                         <tbody>
                             @foreach ($results as $result)
-                            
+
                             <tr>
-                                
+
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->titre}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->nom}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->prenom}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->service}}</a></td>
-                            
+
                             </tr>
-                            
+
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                     {{ $results->links() }}
@@ -119,15 +119,15 @@
                     </p>
                     @endif
 
-        
+
                 </div>
 
-            
-            </div>            
+
+            </div>
         </div>
     </div>
 </div>
 
-            
+
 
 @endsection

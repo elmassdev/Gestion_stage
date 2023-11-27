@@ -4,6 +4,7 @@
 <?php $__env->startSection('content'); ?>
 
 <a href="<?php echo e(route('services.create')); ?>" class="btn btn-btn btn-primary my-3 mt-2">Ajouter un Service</a>
+<div class="row">
 
 <div class="col-md-6">
 
@@ -40,6 +41,22 @@
 
         </div>
     </div>
+</div>
+<div class="col-md-3 float-right" style="top: 5; right: 0;">
+    <div class="card col-md-8">
+        <div class="card-header bg-secondary"><?php echo e(__('Autre informations à ajouter:')); ?></div>
+        <table >
+            <tr>
+                <a href="/encadrants" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Liste des encadrants</a>
+                <a href="/encadrants/1" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Rechercher un encadrant</a>
+                <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un service</a>
+                <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un stagiaire </a>
+                <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une ville</a>
+            </tr>
+        </table>
+    </div>
+</div>
+
 </div>
 
 <?php $__env->stopSection(); ?>

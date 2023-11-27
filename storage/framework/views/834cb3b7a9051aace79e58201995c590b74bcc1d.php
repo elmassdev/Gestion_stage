@@ -1,11 +1,9 @@
-
-
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    
-    <div class="row ">        
+
+    <div class="row ">
         <div class="col-md-9" style="overflow-y: scroll;">
-            
+
             <div class="card">
                 <div class="card-header"><?php echo e(__('Ajouter un encadrant')); ?></div>
 
@@ -13,7 +11,7 @@
                     <form method="POST" action="/encadrants/create" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
 
-                        
+
                         <div class="row mb-3">
                             <label for="titre" class="col-md-3 col-form-label text-md-left"> Titre de civilité</label>
 
@@ -28,7 +26,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" name="titre" required autocomplete="titre">
                                     <option value="M." selected>Monsieur</option>
                                     <option value="Mlle">Mademoiselle</option>
-                                    <option value="Mme">Madame</option>                              
+                                    <option value="Mme">Madame</option>
                             </select>
                                 <?php $__errorArgs = ['titre'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -158,7 +156,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-                                             
+
 
                         <div class="row mb-3">
                             <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
@@ -174,7 +172,7 @@ unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
                                 <option selected hidden></option>
                                 <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($service->sigle_service); ?>"><?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                         
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['service'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -209,18 +207,13 @@ unset($__errorArgs, $__bag); ?>
                 <table>
                     <tr>
                         <a href="/encadrants" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Liste des encadrants</a>
-                        <a href="/encadrants/show" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Rechercher un encadrant</a>
-                        <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
+                        <a href="/encadrants/1" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Rechercher un encadrant</a>
+                        <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
                         <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un stagiaire </a>
                         <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
                     </tr>
                 </table>
-
             </div>
-            
-
-            
-
         </div>
     </div>
 </div>

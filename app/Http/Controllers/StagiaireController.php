@@ -31,7 +31,7 @@ class StagiaireController extends Controller
     {
         $stagiaires = DB::table('stagiaires')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-        ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))->paginate(6);
+        ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))->paginate(10);
         return view('stagiaires.index',compact('stagiaires'));
     }
 

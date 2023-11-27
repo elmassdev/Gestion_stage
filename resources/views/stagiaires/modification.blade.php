@@ -567,14 +567,14 @@
     </div>
     <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
         <div class="card col-md-12">
-            <div class="card-header bg-warning">{{ __('Autre informations à ajouter:') }}</div>
+            <div class="card-header bg-secondary">{{ __('Autre informations à ajouter:') }}</div>
             <table>
                 <tr>
-                    <a href="/filiere" target="/blank"  class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une filière</a>
-                    <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un établissement</a>
-                    <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un service</a>
-                    <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter un encadrant </a>
-                    <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-warning">Ajouter une ville</a>
+                    <a href="/filiere" target="/blank"  class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une filière</a>
+                    <a href="/etablissement" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un établissement</a>
+                    <a href="/service" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un service</a>
+                    <a href="/encadrants/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter un encadrant </a>
+                    <a href="/villes" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-secondary">Ajouter une ville</a>
                 </tr>
             </table>
         </div>
