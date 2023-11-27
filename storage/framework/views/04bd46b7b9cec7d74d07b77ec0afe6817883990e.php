@@ -135,4 +135,4 @@ a::after {
   <p class="output">Appuyez <a href="/home">ici</a> pour retourner à  <a href="/home">la page d'accueil</a>.</p>
   <p class="output">Bonne chance.</p>
 </div>
-<?php /**PATH D:\Github\Gestion_stage\resources\views/errors/404.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\Share\27-11\Gestion_stage\resources\views/errors/404.blade.php ENDPATH**/ ?>

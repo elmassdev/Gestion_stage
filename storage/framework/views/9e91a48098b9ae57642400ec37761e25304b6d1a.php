@@ -15,6 +15,7 @@
             <th>Encadrant</th>
             <th>Date debut</th>
             <th>Date fin</th>
+            <th>Actions</th>
 
         </tr>
     </thead>
@@ -32,15 +33,14 @@
                         <td><?php echo e($stagiaire->nomenc); ?></td>
                         <td><?php echo e($stagiaire->date_debut); ?></td>
                         <td><?php echo e($stagiaire->date_fin); ?></td>
-                        <td ><a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"> <i class="fa fa-edit text-warning"></i></a></td>
-                        <td >
-                        <form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST">
-                            <?php echo csrf_field(); ?>
-                            <?php echo method_field('DELETE'); ?>
-                            <button class="fa fa-trash text-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"></button>
-                        </form>
+                        <td><a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"> <i class="fa fa-edit text-warning"></i></a>
+                            <form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST"  style="display:inline">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
+                                <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
+                            </form>
+                            <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>"><i class="fa fa-print text-primary"></i></a>
                         </td>
-                        <td> <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
                     </tr>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -56,4 +56,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Github\Gestion_stage\resources\views/stagiaires/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\27-11\Gestion_stage\resources\views/stagiaires/index.blade.php ENDPATH**/ ?>

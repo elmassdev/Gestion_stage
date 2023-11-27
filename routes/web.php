@@ -8,6 +8,7 @@ use App\Http\Controllers\EncadrantController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EtabController;
 use App\Http\Controllers\FiliereController;
+use App\Http\Controllers\IndicatorsController;
 
 
 
@@ -51,7 +52,9 @@ Route::post('encadrants/{id}/modification', 'App\Http\Controllers\EncadrantContr
 Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
 Route::resource('etablissements', EtabController::class);
 Route::resource('filieres', FiliereController::class);
+Route::resource('indicators/index', IndicatorsController::class);
+//Route::resource('indicators/parservice', IndicatorsController::class);
 
-
-Route::get('/statistiques', [App\Http\Controllers\StatisticsController::class, 'index'])->name('statistiques')->middleware('auth');
-Route::get('/statistiques', [App\Http\Controllers\StatisticsController::class, 'show'])->name('statistiques')->middleware('auth');
+Route::get('/indicators/parservice', [IndicatorsController::class, 'ParService']);
+//Route::get('/indicators', [App\Http\Controllers\IndicatorsController::class, 'index'])->name('indicators')->middleware('auth');
+//Route::get('/indicators', [App\Http\Controllers\IndicatorsController::class, 'show'])->name('indicators')->middleware('auth');

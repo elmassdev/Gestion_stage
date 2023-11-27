@@ -16,6 +16,7 @@
             <th>Encadrant</th>
             <th>Date debut</th>
             <th>Date fin</th>
+            <th>Actions</th>
 
         </tr>
     </thead>
@@ -33,15 +34,14 @@
                         <td>{{ $stagiaire->nomenc}}</td>
                         <td>{{ $stagiaire->date_debut}}</td>
                         <td>{{ $stagiaire->date_fin}}</td>
-                        <td ><a  href="/stagiaires/{{$stagiaire->id}}/modification"> <i class="fa fa-edit text-warning"></i></a></td>
-                        <td >
-                        <form action="/stagiaires/{{$stagiaire->id}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="fa fa-trash text-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"></button>
-                        </form>
+                        <td><a  href="/stagiaires/{{$stagiaire->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
+                            <form action="/stagiaires/{{$stagiaire->id}}" method="POST"  style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
+                            </form>
+                            <a  href="/stagiaires/{{$stagiaire->id}}"><i class="fa fa-print text-primary"></i></a>
                         </td>
-                        <td> <a  href="/stagiaires/{{$stagiaire->id}}"><i class="fa fa-print text-primary"></i></a></td>
                     </tr>
 @endforeach
 

@@ -92,7 +92,7 @@
                             }
                         </style>
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
-                        <li class="navbarli"><a href="/stagiaires/create">Ajouter un stagiaire</a></li>
+                        <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
                         <li class="navbarli"><a href="/contact">Contact</a></li>
                         <li class="navbarli"><span class="toggleThemeBtn" id="toggleThemeBtn">
                             <div id="lightThemeBtn"><i class="fas fa-moon"></i></div>

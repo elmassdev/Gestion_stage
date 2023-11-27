@@ -46,7 +46,7 @@
     <div class="row card">
         <div class="card-header">
             <div class="card-body">
-                <form method="GET" action="/statistiques" enctype="multipart/form-data">
+                <form method="GET" action="/indicators/index" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <h4 class="text-success col-md-5"><u>Liste des stagiaires pour une date:</u></h4>
@@ -116,7 +116,7 @@
     <div class="row card">
         <div class="card-header">
             <div class="card-body">
-                <form method="GET" action="/statistiques" enctype="multipart/form-data">
+                <form method="GET" action="/indicators/index" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <h4 class="text-success col-md-5"><u>Liste des stagiaires pour aujourd'hui:</u></h4>
