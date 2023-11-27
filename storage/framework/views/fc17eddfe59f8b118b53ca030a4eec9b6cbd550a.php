@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 
 <style>
@@ -90,7 +88,7 @@ label{
 </style>
 
 <p class="title"> Pour plus d'information:</p>
-        <div class="cards">
+        <div class="cards col-md-6 mx-auto">
 
             <div class=" card B">
                 <span class="sitename">Section des stages: Benguerir</span>
