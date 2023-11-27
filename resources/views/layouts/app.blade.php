@@ -28,26 +28,27 @@
 <body  id="body-element" data-bs-theme="dark">
     <style>
         .toggleThemeBtn > div > i {
-  margin-right: 5px;
-}
+            margin-right: 5px;
+        }
 
-.toggleThemeBtn #darkThemeBtn {
-  display:none;
-}
+        #darkThemeBtn {
+            display: none;
+        }
 
-body.dark #lightThemeBtn {
-  display: none;
-}
+        body[data-bs-theme='dark'] #lightThemeBtn {
+            display: none;
+        }
 
-body.dark #darkThemeBtn {
-  display: block;
-}
+        body[data-bs-theme='dark'] #darkThemeBtn {
+            display: block;
+        }
 
-.toggleThemeBtn i {
-  font-size: 24px;
-}
-
+        .toggleThemeBtn i {
+            font-size: 24px;
+        }
     </style>
+
+
     <div id="app">
         <nav class="navbar navbar-expand-md bg-secondary shadow-sm sticky-top">
             <div class="container">
@@ -79,8 +80,8 @@ body.dark #darkThemeBtn {
                         <li class="navbarli"><a href="/stagiaires/create">Ajouter un stagiaire</a></li>
                         <li class="navbarli"><a href="/contact">Contact</a></li>
                         <li class="navbarli"><span class="toggleThemeBtn" id="toggleThemeBtn">
-                            <div id="lightThemeBtn"><i class="fas fa-sun"></i></div>
-                            <div id="darkThemeBtn"><i class="fas fa-moon"></i></div>
+                            <div id="lightThemeBtn"><i class="fas fa-moon"></i></div>
+                            <div id="darkThemeBtn"><i class="fas fa-sun"></i></div>
                         </span></li>
 
 
