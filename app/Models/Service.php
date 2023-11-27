@@ -13,7 +13,7 @@ class Service extends Model
     ];
 
     protected $table = 'services';
-    protected $primaryKey = 'sigle_service';
+    protected $primaryKey = 'id';
     protected $fillable = ['sigle_service','libelle','entite','site','direction','EPI'];
 
 }

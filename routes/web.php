@@ -5,6 +5,7 @@ use App\Http\Controllers\VilleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EncadrantController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,10 @@ Route::get('/stagiaires/{id}/convocation_n','App\Http\Controllers\StagiaireContr
 Route::get('/stagiaires/{id}/sujet','App\Http\Controllers\StagiaireController@generer_sujet')->name('sujet');
 Route::view('/contact', 'contact');
 Route::resource('villes', VilleController::class);
-Route::resource('villes', EncadrantController::class);
+Route::resource('encadrants', EncadrantController::class);
+Route::resource('services', ServiceController::class);
+
+
 
 Route::get('/filiere', [App\Http\Controllers\FiliereController::class, 'index'])->name('filiere')->middleware('auth');
 Route::post('/filiere', [App\Http\Controllers\FiliereController::class, 'store'])->name('filiere')->middleware('auth');
@@ -47,16 +51,18 @@ Route::get('/filiere', [App\Http\Controllers\FiliereController::class, 'show'])-
 Route::get('/etablissement', [App\Http\Controllers\EtabController::class, 'index'])->name('etablissement')->middleware('auth');
 Route::post('/etablissement', [App\Http\Controllers\EtabController::class, 'store'])->name('etablissement')->middleware('auth');
 Route::get('/etablissement', [App\Http\Controllers\EtabController::class, 'show'])->name('etablissement')->middleware('auth');
-Route::get('/encadrants', [App\Http\Controllers\EncadrantController::class, 'index'])->name('encadrants/index')->middleware('auth');
-Route::get('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'create'])->name('encadrants/create')->middleware('auth');
-Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
-Route::get('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@show')->name('encadrants.show')->middleware('auth'); //second method
-Route::get('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@search')->name('encadrants.show')->middleware('auth'); //second method
-Route::delete('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@destroy')->name('encadrant.destroy')->middleware('auth');
-Route::get('encadrants/{id}/modification', 'App\Http\Controllers\EncadrantController@edit');
-Route::post('/encadrants/{id}/modification', [App\Http\Controllers\EncadrantController::class, 'update'])->name('modification')->middleware('auth');
-Route::post('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service')->middleware('auth');
-Route::post('/service', [App\Http\Controllers\ServiceController::class, 'store'])->name('service')->middleware('auth');
-Route::get('/service', [App\Http\Controllers\ServiceController::class, 'show'])->name('service')->middleware('auth');
-Route::get('/statistiques', [App\Http\Controllers\StatisticsController::class, 'index'])->name('statistiques')->middleware('auth');
+
+// Route::get('/encadrants', [App\Http\Controllers\EncadrantController::class, 'index'])->name('encadrants/index')->middleware('auth');
+// Route::get('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'create'])->name('encadrants/create')->middleware('auth');
+// Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
+// Route::get('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@show')->name('encadrants.show')->middleware('auth'); //second method
+// Route::get('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@search')->name('encadrants.show')->middleware('auth'); //second method
+// Route::delete('/encadrants/{id}', 'App\Http\Controllers\EncadrantController@destroy')->name('encadrant.destroy')->middleware('auth');
+// Route::get('encadrants/{id}/modification', 'App\Http\Controllers\EncadrantController@edit');
+// Route::post('/encadrants/{id}/modification', [App\Http\Controllers\EncadrantController::class, 'update'])->name('modification')->middleware('auth');
+// Route::get('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service')->middleware('auth');
+// Route::post('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service')->middleware('auth');
+// Route::post('/service', [App\Http\Controllers\ServiceController::class, 'store'])->name('service')->middleware('auth');
+// Route::get('/service', [App\Http\Controllers\ServiceController::class, 'show'])->name('service')->middleware('auth');
+// Route::get('/statistiques', [App\Http\Controllers\StatisticsController::class, 'index'])->name('statistiques')->middleware('auth');
 //Route::get('/statistiques', [App\Http\Controllers\StatisticsController::class, 'show'])->name('statistiques')->middleware('auth');

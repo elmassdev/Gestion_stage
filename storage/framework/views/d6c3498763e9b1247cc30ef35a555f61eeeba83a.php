@@ -1,10 +1,6 @@
-
-
-
-
 <?php $__env->startSection('content'); ?>
     <h1>Villes</h1>
-    <a href="<?php echo e(route('villes.create')); ?>" class="btn btn-primary">Create Ville</a>
+    <a href="<?php echo e(route('villes.create')); ?>" class="btn btn-primary">Ajouter une ville</a>
 
     <table class="table table-row my-auto h-8 small">
         <thead>

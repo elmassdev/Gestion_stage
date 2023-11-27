@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Villes</h1>
-    <a href="{{ route('villes.create') }}" class="btn btn-primary">Create Ville</a>
+    <a href="{{ route('villes.create') }}" class="btn btn-primary">Ajouter une ville</a>
 
     <table class="table table-row my-auto h-8 small">
         <thead>
