@@ -1,4 +1,5 @@
 <?php $__env->startSection('content'); ?>
+<a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
 <?php if(count($stagiaires)): ?>
 <table class="table table-striped table-responsive">
     <thead>
@@ -31,8 +32,8 @@
                         <td><?php echo e($stagiaire->ville); ?></td>
                         <td><?php echo e($stagiaire->service); ?></td>
                         <td><?php echo e($stagiaire->nomenc); ?></td>
-                        <td><?php echo e($stagiaire->date_debut); ?></td>
-                        <td><?php echo e($stagiaire->date_fin); ?></td>
+                        <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')); ?></td>
+                        <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></td>
                         <td><a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"> <i class="fa fa-edit text-warning"></i></a>
                             <form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST"  style="display:inline">
                                 <?php echo csrf_field(); ?>

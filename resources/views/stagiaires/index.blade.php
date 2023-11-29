@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
 @if(count($stagiaires))
 <table class="table table-striped table-responsive">
     <thead>
@@ -32,8 +33,8 @@
                         <td>{{ $stagiaire->ville}}</td>
                         <td>{{ $stagiaire->service}}</td>
                         <td>{{ $stagiaire->nomenc}}</td>
-                        <td>{{ $stagiaire->date_debut}}</td>
-                        <td>{{ $stagiaire->date_fin}}</td>
+                        <td>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</td>
+                        <td>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</td>
                         <td><a  href="/stagiaires/{{$stagiaire->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
                             <form action="/stagiaires/{{$stagiaire->id}}" method="POST"  style="display:inline">
                                 @csrf

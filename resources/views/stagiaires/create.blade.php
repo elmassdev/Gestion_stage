@@ -185,6 +185,10 @@
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 
                             <div class="col-md-8">
+                                {{-- <input id="date_demande" type="text" class="form-control datepicker @error('date_demande') is-invalid @enderror" name="date_demande" value="{{ old('date_demande', date('d/m/Y')) }}" pattern="\d{2}/\d{2}/\d{4}" required autocomplete="date_demande" placeholder="dd/mm/yyyy" minlength="10" maxlength="10" oninput="formatDate(this)" onchange="validateDate(this)" title="Enter a date in the format dd/mm/yyyy" /> --}}
+
+                                {{-- <input id="date_demande" type="text" class="form-control datepicker @error('date_demande') is-invalid @enderror" name="date_demande" value="{{ old('date_demande') }}" pattern="\d{2}/\d{2}/\d{4}" required autocomplete="date_demande" placeholder="dd/mm/yyyy" minlength="10" maxlength="10" oninput="formatDate(this)" onchange="validateDate(this)" title="Enter a date in the format dd/mm/yyyy" /> --}}
+
                                 <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  @error('date_demande') is-invalid @enderror"   name="date_demande" value="{{ old('date_demande') }}" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
 
                                 @error('date_demande')
@@ -472,6 +476,8 @@
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
 
                             <div class="col-md-8">
+                                {{-- <input id="date_debut" type="date" class="form-control datepicker @error('date_debut') is-invalid @enderror" name="date_debut" value="{{ old('date_debut') }}" required autocomplete="date_debut" placeholder="dd/mm/yyyy" min="1997-01-01" max="2045-12-31" autofocus> --}}
+
                                 <input id="date_debut" type="date"  class="form-control datepicker  @error('date_debut') is-invalid @enderror"   name="date_debut" value="{{ old('date_debut') }}" pattern="dd/mm/yyyy"  required autocomplete="date_debut" placeholder="dd/mm/yyyy" value="" min="1997-01-01" max="2045-12-31" autofocus>
 
                                 @error('date_debut')
@@ -489,6 +495,8 @@
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
 
                             <div class="col-md-8">
+                                {{-- <input id="date_fin" type="text" class="form-control datepicker @error('date_fin') is-invalid @enderror" name="date_fin" value="{{ old('date_fin') }}" pattern="\d{2}/\d{2}/\d{4}" required autocomplete="date_fin" placeholder="dd/mm/yyyy" minlength="10" maxlength="10" oninput="formatDate(this)" onchange="validateDate(this)" title="Enter a date in the format dd/mm/yyyy" /> --}}
+
                                 <input id="date_fin" type="date"  class="form-control datepicker  @error('date_fin') is-invalid @enderror"   name="date_fin" value="{{ old('date_fin') }}" pattern="dd/mm/yyyy"  required autocomplete="date_fin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
                                 <span class=" bg-warning tex-danger" id="datewarning"></span>
 

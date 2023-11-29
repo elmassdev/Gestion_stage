@@ -3,7 +3,7 @@
     <div class="row">
         
         <div class="col-md-7">
-            <div class="card p-1 bg-light">
+            <div class="card p-1 py-2" >
                 <div class="row ">
                     <div class="row ">
                             <div class="col-md-3  p-2">
@@ -40,10 +40,10 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Date de début</span> <span class="text-left bottom"><?php echo e($stagiaire->date_debut); ?></span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head">Date de début</span> <span class="text-left bottom"><?php echo e(\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')); ?></span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom"><?php echo e($stagiaire->date_fin); ?></span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom"><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></span> </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom"><?php echo e($stagiaire->service); ?></span> </div>
@@ -58,25 +58,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="card p-1">
+                <div class="card p-1 my-2">
                     <table>
                         <tbody>
                             <tr>
-                                <td> <a href="<?php echo e(URL::to( 'stagiaires/' . $previous )); ?>" class="btn btn-success text-light"> Precedant </a></td>
-                                <td><a href="<?php echo e(URL::to( 'stagiaires/' . $next )); ?>" class="btn btn-success text-light"> Suivant</a></td>
-                                <td><a href="/stagiaires/" class="btn btn-primary text-light"> Liste stagiaires</a></td>
-                                <td><a href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"  class="btn btn-warning text-dark">Modifier</a></td>
+                                <td> <a href="<?php echo e(URL::to( 'stagiaires/' . $previous )); ?>" class="btn btn-success text-light"> <i class="fa fa-chevron-left" aria-hidden="true"></i> </a></td>
+                                <td><a href="<?php echo e(URL::to( 'stagiaires/' . $next )); ?>" class="btn btn-success text-light"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+                                <td><a href="/stagiaires/" class="btn btn-primary text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
+                                <td><a href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                                 <td><form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <?php echo method_field('DELETE'); ?>
-                                    <button class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')">Supprimer</button></form>
+                                    <button class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
-                <div class="card p-1">
+                <div class="card">
                     <table>
                         <tr class="col-md-12  float-left">
                             <td>
@@ -114,7 +114,7 @@
         
         <div class="col-md-5">
             <div class="card p-1 ">
-                <div class=" card  p-1">
+                <div class=" card  p-1 my-2 ">
                     <div class="card-header"><?php echo e(__('Rechercher un stagiaire')); ?></div>
                     <div class=" card-body py-2">
 
@@ -197,21 +197,21 @@ unset($__errorArgs, $__bag); ?>
                         }
                     </style>
                     <?php if(count($results)): ?>
-                    <table>
+                    <table class="table table-striped col-md-12 border-solid">
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>CIN</th>
                         <th>Date_debut</th>
                         <th>Date_fin</th>
-                        <tbody >
+                        <tbody class="table-striped">
                             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                                 <tr>
                                     <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->nom); ?></a></td>
                                     <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->prenom); ?></a></td>
                                     <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->cin); ?></a></td>
-                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_debut); ?></a></td>
-                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e($result->date_fin); ?></a></td>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e(\Carbon\Carbon::parse($result->date_debut)->format('d/m/Y')); ?></a></td>
+                                    <td><a href="/stagiaires/<?php echo e($result->id); ?>"><?php echo e(\Carbon\Carbon::parse($result->date_fin)->format('d/m/Y')); ?></a></td>
                                 </tr>
 
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

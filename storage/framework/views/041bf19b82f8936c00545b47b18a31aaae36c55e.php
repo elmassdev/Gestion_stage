@@ -1,8 +1,10 @@
 <?php $__env->startSection('content'); ?>
+
+
 <div class="container">
     <div class="row">
-        <div class="col-md-6 border border-success">
-            <h4 class="text-success"> <u> Nombre des stagiaires en cours par services </u></h4>
+        <div class="col-md-6 border">
+            <h4> <u> Nombre des stagiaires en cours par services </u></h4>
             <table class="table table-striped table-responsive">
                 <thead>
                     <tr class="small">
@@ -21,8 +23,8 @@
             </table>
         </div>
 
-        <div class="col-md-6 border border-success">
-            <h4 class="text-success"> <u>Nombre des stagiaires en cours par encadrants </u></h4>
+        <div class="col-md-6 border">
+            <h4> <u>Nombre des stagiaires en cours par encadrants </u></h4>
             <table class="table table-striped table-responsive">
                 <thead>
                     <tr class="small">
@@ -41,13 +43,13 @@
             </table>
         </div>
     </div>
-    <div class="row card">
+    <div class="row card my-2">
         <div class="card-header">
-            <div class="card-body">
+            <div class="card">
                 <form method="GET" action="/indicators/index" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="row">
-                        <h4 class="text-success col-md-5"><u>Liste des stagiaires pour une date:</u></h4>
+                        <h4 class="col-md-5"><u>Liste des stagiaires pour une date:</u></h4>
                         <div class="col-md-3">
                             <input id="search" type="date" class="form-control <?php $__errorArgs = ['search'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -81,106 +83,104 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
-    <div class="row card border border-success" style="overflow-y: scroll;">
+    <div class="row card border" style="overflow-y: scroll;">
         <?php if(count($results)): ?>
-<table class="table table-striped table-responsive">
-    <thead>
-        <tr class="small">
-            <th>Titre</th>
-            <th>Prenom</th>
-            <th>Nom</th>
-            <th>Type de stage</th>
-            <th>Niveau</th>
-            <th>Diplôme</th>
-            <th>Etablissement</th>
-            <th>Ville</th>
-            <th>Service</th>
-            <th>Encadrant</th>
-            <th>Date debut</th>
-            <th>Date fin</th>
-        </tr>
-    </thead>
-    <tbody><?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <tr class=" table table-row my-auto h-10 small">
-                        <td><?php echo e($res->civilite); ?></td>
-                        <td><?php echo e($res->prenom); ?></td>
-                        <td><?php echo e($res->nom); ?></td>
-                        <td><?php echo e($res->type_stage); ?></td>
-                        <td><?php echo e($res->niveau); ?></td>
-                        <td><?php echo e($res->diplome); ?></td>
-                        <td><?php echo e($res->etablissement); ?></td>
-                        <td><?php echo e($res->ville); ?></td>
-                        <td><?php echo e($res->service); ?></td>
-                        <td><?php echo e($res->nomenc); ?></td>
-                        <td><?php echo e($res->date_debut); ?></td>
-                        <td><?php echo e($res->date_fin); ?></td>
-                        <td> <a  href="/stagiaires/<?php echo e($res->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
-                    </tr>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-    </tbody>
-</table>
-
-<?php else: ?>
-<p> Pas de stagiaires pour cette date</p>
-<?php endif; ?>
-    </div>
-
-    <div class="row card">
-        <div class="card-header">
-            <div class="card-body">
-                <form method="GET" action="/indicators/index" enctype="multipart/form-data">
-                    <?php echo csrf_field(); ?>
-                    <div class="row">
-                        <h4 class="text-success col-md-5"><u>Liste des stagiaires pour aujourd'hui:</u></h4>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="row card border border-success" style="overflow-y: scroll;">
-        <?php if(count($statoday)): ?>
-<table class="table table-striped table-responsive">
-    <thead>
-        <tr class="small">
-            <th>Titre</th>
-            <th>Prenom</th>
-            <th>Nom</th>
-            <th>Type de stage</th>
-            <th>Niveau</th>
-            <th>Diplôme</th>
-            <th>Etablissement</th>
-            <th>Ville</th>
-            <th>Service</th>
-            <th>Encadrant</th>
-            <th>Date debut</th>
-            <th>Date fin</th>
-        </tr>
-    </thead>
-            <tbody><?php $__currentLoopData = $statoday; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statdy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr class="small">
+                    <th>Titre</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Type de stage</th>
+                    <th>Niveau</th>
+                    <th>Diplôme</th>
+                    <th>Etablissement</th>
+                    <th>Ville</th>
+                    <th>Service</th>
+                    <th>Encadrant</th>
+                    <th>Date debut</th>
+                    <th>Date fin</th>
+                </tr>
+            </thead>
+            <tbody><?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr class=" table table-row my-auto h-10 small">
-                                <td><?php echo e($statdy->civilite); ?></td>
-                                <td><?php echo e($statdy->prenom); ?></td>
-                                <td><?php echo e($statdy->nom); ?></td>
-                                <td><?php echo e($statdy->type_stage); ?></td>
-                                <td><?php echo e($statdy->niveau); ?></td>
-                                <td><?php echo e($statdy->diplome); ?></td>
-                                <td><?php echo e($statdy->etablissement); ?></td>
-                                <td><?php echo e($statdy->ville); ?></td>
-                                <td><?php echo e($statdy->service); ?></td>
-                                <td><?php echo e($statdy->nomenc); ?></td>
-                                <td><?php echo e($statdy->date_debut); ?></td>
-                                <td><?php echo e($statdy->date_fin); ?></td>
-                                <td> <a  href="/stagiaires/<?php echo e($statdy->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
+                                <td><?php echo e($res->civilite); ?></td>
+                                <td><?php echo e($res->prenom); ?></td>
+                                <td><?php echo e($res->nom); ?></td>
+                                <td><?php echo e($res->type_stage); ?></td>
+                                <td><?php echo e($res->niveau); ?></td>
+                                <td><?php echo e($res->diplome); ?></td>
+                                <td><?php echo e($res->etablissement); ?></td>
+                                <td><?php echo e($res->ville); ?></td>
+                                <td><?php echo e($res->service); ?></td>
+                                <td><?php echo e($res->nomenc); ?></td>
+                                <td><?php echo e(\Carbon\Carbon::parse($res->date_debut)->format('d/m/Y')); ?></td>
+                                <td><?php echo e(\Carbon\Carbon::parse($res->date_fin)->format('d/m/Y')); ?></td>
+                                <td> <a  href="/stagiaires/<?php echo e($res->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
                             </tr>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                    <p> Pas de stagiaires pour cette date</p>
+                    <?php endif; ?>
+                        </div>
 
-            </tbody>
-        </table>
+                        <div class="row card">
+                            <div class="card-header">
+                                <div class="card-body">
+                                    <form method="GET" action="/indicators/index" enctype="multipart/form-data">
+                                        <?php echo csrf_field(); ?>
+                                        <div class="row">
+                                            <h4 class="col-md-5"><u>Liste des stagiaires pour aujourd'hui:</u></h4>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row card border" style="overflow-y: scroll;">
+                                <?php if(count($statoday)): ?>
+                                <table class="table table-striped table-responsive">
+                                    <thead>
+                                        <tr class="small">
+                                            <th>Titre</th>
+                                            <th>Prenom</th>
+                                            <th>Nom</th>
+                                            <th>Type de stage</th>
+                                            <th>Niveau</th>
+                                            <th>Diplôme</th>
+                                            <th>Etablissement</th>
+                                            <th>Ville</th>
+                                            <th>Service</th>
+                                            <th>Encadrant</th>
+                                            <th>Date debut</th>
+                                            <th>Date fin</th>
+                                        </tr>
+                                    </thead>
+                                            <tbody><?php $__currentLoopData = $statoday; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $statdy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <tr class=" table table-row my-auto h-10 small">
+                                                                <td><?php echo e($statdy->civilite); ?></td>
+                                                                <td><?php echo e($statdy->prenom); ?></td>
+                                                                <td><?php echo e($statdy->nom); ?></td>
+                                                                <td><?php echo e($statdy->type_stage); ?></td>
+                                                                <td><?php echo e($statdy->niveau); ?></td>
+                                                                <td><?php echo e($statdy->diplome); ?></td>
+                                                                <td><?php echo e($statdy->etablissement); ?></td>
+                                                                <td><?php echo e($statdy->ville); ?></td>
+                                                                <td><?php echo e($statdy->service); ?></td>
+                                                                <td><?php echo e($statdy->nomenc); ?></td>
+                                                                <td><?php echo e(\Carbon\Carbon::parse($statdy->date_fin)->format('d/m/Y')); ?></td>
+                                                                <td><?php echo e(\Carbon\Carbon::parse($statdy->date_fin)->format('d/m/Y')); ?></td>
+                                                                <td> <a  href="/stagiaires/<?php echo e($statdy->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
+                                                            </tr>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-<?php else: ?>
-<p> Pas de stagiaires pour aujourd'hui</p>
-<?php endif; ?>
+                                            </tbody>
+                                        </table>
+
+                    <?php else: ?>
+                    <p> Pas de stagiaires pour aujourd'hui</p>
+                    <?php endif; ?>
     </div>
 </div>
 <?php $__env->stopSection(); ?>

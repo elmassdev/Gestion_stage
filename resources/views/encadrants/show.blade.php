@@ -23,14 +23,14 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td> <a href="{{ URL::to( 'encadrants/' . $previous ) }}" class="btn btn-success text-light"> Precedant </a></td>
-                                <td><a href="{{ URL::to( 'encadrants/' . $next ) }}" class="btn btn-success text-light"> Suivant</a></td>
-                                <td><a href="/encadrants/" class="btn btn-primary text-light"> Liste encadrants</a></td>
-                                <td><a href="/encadrants/{{$encadrant->id}}/modification"  class="btn btn-warning text-dark">Modifier</a></td>
+                                <td> <a href="{{ URL::to( 'encadrants/' . $previous ) }}" class="btn btn-success "> <i class="fa fa-chevron-left" aria-hidden="true"></i> </a></td>
+                                <td><a href="{{ URL::to( 'encadrants/' . $next ) }}" class="btn btn-success text-light"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+                                <td><a href="/encadrants/" class="btn btn-primary text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
+                                <td><a href="/encadrants/{{$encadrant->id}}/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                                 <td><form action="/encadrants/{{$encadrant->id}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger">Supprimer</button></form>
+                                    <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                                 </td>
                             </tr>
                         </tbody>
@@ -91,21 +91,19 @@
                 </div>
                 <div>
                     @if(count($results))
-                    <table>
-                        <th>titre</th>
-                        <th>nom</th>
-                        <th>prenom</th>
-                        <th>service</th>
+                    <table class="table table-striped col-md-12">
+                        <th>Civilité</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Service</th>
                         <tbody>
                             @foreach ($results as $result)
 
                             <tr>
-
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->titre}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->nom}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->prenom}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->service}}</a></td>
-
                             </tr>
 
                             @endforeach
