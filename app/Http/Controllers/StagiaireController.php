@@ -14,6 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 use File;
 
 Paginator::useBootstrap();
@@ -154,7 +156,7 @@ class StagiaireController extends Controller
 
         //$stagiaires =Stagiaire::create($request->all());
         //return redirect('/stagiaires')->with('msg','Enregistré avec succès');
-        return back()->with('success', 'Form updated successfully.');
+        return back()->with('success', 'Enregistré avec succès.');
 
     }
 

@@ -70,7 +70,7 @@
                                 <td><form action="/stagiaires/{{$stagiaire->id}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
+                                    <button class="btn btn-warning text-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                                 </td>
                             </tr>
                         </tbody>
