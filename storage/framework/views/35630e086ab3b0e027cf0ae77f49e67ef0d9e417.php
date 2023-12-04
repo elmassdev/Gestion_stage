@@ -55,6 +55,25 @@
         border-radius: 50%;
     }
 
+    #moon{
+        background-color: rgb(110, 135, 182);
+        border-radius: 50%;
+        padding: 2px;
+    }
+    #sun{
+        border-radius: 50%;
+        background-color: rgb(94, 94, 94);
+        padding: 2px;
+    }
+    #moon::after{
+        animation: ease-out:
+    }
+    #sun::after{
+        animation: ease-out:
+    }
+
+
+
 
         /* .toggleThemeBtn > div > i {
             margin-right: 5px;
@@ -98,9 +117,14 @@
         th{
             font:bold;
         }
+
+        /*----------------------*/
+
+
+
+/*--------------------*/
+
     </style>
-
-
 
 
     <div id="app">
@@ -120,8 +144,11 @@
                         <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
                         <li class="navbarli"><a href="/contact">Contact</a></li>
                         <li class="navbarli"><span class="toggleThemeBtn" id="toggleThemeBtn">
-                            <div id="lightThemeBtn" ><i class="fas fa-moon  text-warning"></i></div>
-                            <div id="darkThemeBtn"><i class="fas fa-sun"></i></div>
+                            <div id="lightThemeBtn"><img id="moon" src="/images/moon-svgrepo-com.svg" alt="" height="24px" width="24px"></div>
+                            <div id="darkThemeBtn"><img id="sun" src="/images/sun-bright-svgrepo-com.svg" alt="" height="24px" width="24px"></div>
+                                
+
+                                
                         </span></li>
                     </ul>
 
@@ -204,9 +231,8 @@
         }
     }
 
-
-
 </script>
+
 
 
 </body>

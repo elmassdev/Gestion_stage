@@ -169,7 +169,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <td><?php echo e($statdy->ville); ?></td>
                                                                 <td><?php echo e($statdy->service); ?></td>
                                                                 <td><?php echo e($statdy->nomenc); ?></td>
-                                                                <td><?php echo e(\Carbon\Carbon::parse($statdy->date_fin)->format('d/m/Y')); ?></td>
+                                                                <td><?php echo e(\Carbon\Carbon::parse($statdy->date_debut)->format('d/m/Y')); ?></td>
                                                                 <td><?php echo e(\Carbon\Carbon::parse($statdy->date_fin)->format('d/m/Y')); ?></td>
                                                                 <td> <a  href="/stagiaires/<?php echo e($statdy->id); ?>"><i class="fa fa-print text-primary"></i></a></td>
                                                             </tr>

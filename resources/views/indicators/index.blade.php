@@ -156,7 +156,7 @@
                                                                 <td>{{ $statdy->ville}}</td>
                                                                 <td>{{ $statdy->service}}</td>
                                                                 <td>{{ $statdy->nomenc}}</td>
-                                                                <td>{{\Carbon\Carbon::parse($statdy->date_fin)->format('d/m/Y')}}</td>
+                                                                <td>{{\Carbon\Carbon::parse($statdy->date_debut)->format('d/m/Y')}}</td>
                                                                 <td>{{\Carbon\Carbon::parse($statdy->date_fin)->format('d/m/Y')}}</td>
                                                                 <td> <a  href="/stagiaires/{{$statdy->id}}"><i class="fa fa-print text-primary"></i></a></td>
                                                             </tr>
