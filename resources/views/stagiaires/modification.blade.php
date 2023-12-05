@@ -157,6 +157,11 @@
                                 }
 
                         </script>
+                        <script>
+                            //change data values to json
+                            var FilSer = @json($services);
+                            var FilSerEnc = @json($encadrants);
+                        </script>
 
 
                         <div class="row mb-3">
@@ -432,6 +437,23 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
+                            <div class="col-md-8">
+                                <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
+                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
+                                @foreach($encadrants as $encadrant)
+                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
+                                @endforeach
+                            </select>
+                                @error('encadrant')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
                             <div class="col-md-8">
                                 <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
@@ -449,22 +471,7 @@
                         </div>
 
 
-                        <div class="row mb-3">
-                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
-                            <div class="col-md-8">
-                                <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
-                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
-                                @foreach($encadrants as $encadrant)
-                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
-                                @endforeach
-                            </select>
-                                @error('encadrant')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
@@ -524,15 +531,26 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3 display-inline">
+                            <div class="col-md-5">
+                                <label for="remunere" class="col-md-4 col-form-label text-md-left">{{ __('Stage remuneré') }}</label>
+                            <input type="checkbox" name="remunere" id="remunere" value="true" {{ old('remunere', $stagiaire->remunere) ? 'checked' : '' }}>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="EI" class="col-md-4 col-form-label text-md-left">{{ __('Elève Ingénieur') }}</label>
+                            <input type="checkbox" name="EI" id="EI" value="true" {{ old('EI', $stagiaire->EI) ? 'checked' : '' }}>
+                            </div>
 
-                        <div class="row mb-3">
+                        </div>
+
+                        {{-- <div class="row mb-3">
                             <label for="remunere" class="col-md-4 col-form-label text-md-left">{{ __('Stage remuneré') }}</label>
                             <input type="checkbox" name="remunere" id="remunere" value="1" {{ old('remunere', $stagiaire->remunere) ? 'checked' : '' }}>
                         </div>
                         <div class="row mb-3">
                             <label for="EI" class="col-md-4 col-form-label text-md-left">{{ __('EI') }}</label>
                             <input type="checkbox" name="EI" id="EI" value="1" {{ old('EI', $stagiaire->EI) ? 'checked' : '' }}>
-                        </div>
+                        </div> --}}
 
                         <script>
                             const checkbox = document.getElementById('editphoto');
@@ -545,6 +563,73 @@
                                 box.style.display = 'none';
                             }
                             });
+
+                            var EI = document.getElementById('EI');
+                            window.addEventListener('load', function() {
+                                var site =document.getElementById('site').value;
+                                var filtered_services = FilSer.filter(function(services) {
+                                    return services.site === site;
+                                });
+                                var service_select = document.getElementById('service');
+                                service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+                                filtered_services.forEach(function(services) {
+                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                });
+                            });
+
+                            document.getElementById('site').addEventListener('change', function() {
+                                site = this.value;
+                                var filtered_services = FilSer.filter(function(services) {
+                                    return services.site === site;
+                                });
+                                //alert(JSON.stringify(filtered_services));
+
+                                var service_select = document.getElementById('service');
+                                service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+                                filtered_services.forEach(function(services) {
+                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                });
+                            });
+
+                            document.getElementById('encadrant').addEventListener('change', function() {
+                                var selectedEncadrantId = this.value;
+                                var serviceDropdown = document.getElementById('service');
+                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+
+                                if (selectedEncadrantId) {
+                                    var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                                        return encadrant.id == selectedEncadrantId;
+                                    });
+
+                                    if (selectedEncadrant) {
+                                        var option = document.createElement('option');
+                                        option.value = selectedEncadrant.service;
+                                        option.text = selectedEncadrant.service;
+                                        serviceDropdown.appendChild(option);
+                                    }
+                                }
+                            });
+
+                            document.getElementById('diplome').addEventListener('change', function(){
+                                var diplome = this.value;
+                                var etab = document.getElementById('etablissement').value;
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','AUI','UM6P']
+                                var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+                                document.getElementById('EI').checked = isMasterOrCycle;
+                                var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
+                                document.getElementById('remunere').checked =isRemunere;
+                            });
+
+                            document.getElementById('etablissement').addEventListener('change', function(){
+                                var etab = this.value;
+                                var diplome = document.getElementById('diplome').value;
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','AUI','UM6P']
+                                var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+                                document.getElementById('EI').checked = isMoCI;
+                                var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
+                                document.getElementById('remunere').checked =isRem;
+                            });
+
 
                         </script>
 

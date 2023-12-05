@@ -155,6 +155,11 @@
                                 }
 
                         </script>
+                        <script>
+                            //change data values to json
+                            var FilSer = <?php echo json_encode($services, 15, 512) ?>;
+                            var FilSerEnc = <?php echo json_encode($encadrants, 15, 512) ?>;
+                        </script>
 
 
                         <div class="row mb-3">
@@ -638,6 +643,37 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
+                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
+                            <div class="col-md-8">
+                                <select id="encadrant" type="text" class="form-control <?php $__errorArgs = ['encadrant'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
+                                <option value="<?php echo e($encadr->id); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
+                                <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                                <?php $__errorArgs = ['encadrant'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
                             <div class="col-md-8">
                                 <select id="service" type="text" class="form-control <?php $__errorArgs = ['service'];
@@ -669,36 +705,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
 
-                        <div class="row mb-3">
-                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
-                            <div class="col-md-8">
-                                <select id="encadrant" type="text" class="form-control <?php $__errorArgs = ['encadrant'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
-                                <option value="<?php echo e($encadr->id); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
-                                <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                                <?php $__errorArgs = ['encadrant'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                        </div>
+
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
@@ -814,15 +821,19 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+                        <div class="row mb-3 display-inline">
+                            <div class="col-md-5">
+                                <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
+                            <input type="checkbox" name="remunere" id="remunere" value="true" <?php echo e(old('remunere', $stagiaire->remunere) ? 'checked' : ''); ?>>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
+                            <input type="checkbox" name="EI" id="EI" value="true" <?php echo e(old('EI', $stagiaire->EI) ? 'checked' : ''); ?>>
+                            </div>
 
-                        <div class="row mb-3">
-                            <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
-                            <input type="checkbox" name="remunere" id="remunere" value="1" <?php echo e(old('remunere', $stagiaire->remunere) ? 'checked' : ''); ?>>
                         </div>
-                        <div class="row mb-3">
-                            <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('EI')); ?></label>
-                            <input type="checkbox" name="EI" id="EI" value="1" <?php echo e(old('EI', $stagiaire->EI) ? 'checked' : ''); ?>>
-                        </div>
+
+                        
 
                         <script>
                             const checkbox = document.getElementById('editphoto');
@@ -835,6 +846,73 @@ unset($__errorArgs, $__bag); ?>
                                 box.style.display = 'none';
                             }
                             });
+
+                            var EI = document.getElementById('EI');
+                            window.addEventListener('load', function() {
+                                var site =document.getElementById('site').value;
+                                var filtered_services = FilSer.filter(function(services) {
+                                    return services.site === site;
+                                });
+                                var service_select = document.getElementById('service');
+                                service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+                                filtered_services.forEach(function(services) {
+                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                });
+                            });
+
+                            document.getElementById('site').addEventListener('change', function() {
+                                site = this.value;
+                                var filtered_services = FilSer.filter(function(services) {
+                                    return services.site === site;
+                                });
+                                //alert(JSON.stringify(filtered_services));
+
+                                var service_select = document.getElementById('service');
+                                service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+                                filtered_services.forEach(function(services) {
+                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                });
+                            });
+
+                            document.getElementById('encadrant').addEventListener('change', function() {
+                                var selectedEncadrantId = this.value;
+                                var serviceDropdown = document.getElementById('service');
+                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+
+                                if (selectedEncadrantId) {
+                                    var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                                        return encadrant.id == selectedEncadrantId;
+                                    });
+
+                                    if (selectedEncadrant) {
+                                        var option = document.createElement('option');
+                                        option.value = selectedEncadrant.service;
+                                        option.text = selectedEncadrant.service;
+                                        serviceDropdown.appendChild(option);
+                                    }
+                                }
+                            });
+
+                            document.getElementById('diplome').addEventListener('change', function(){
+                                var diplome = this.value;
+                                var etab = document.getElementById('etablissement').value;
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','AUI','UM6P']
+                                var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+                                document.getElementById('EI').checked = isMasterOrCycle;
+                                var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
+                                document.getElementById('remunere').checked =isRemunere;
+                            });
+
+                            document.getElementById('etablissement').addEventListener('change', function(){
+                                var etab = this.value;
+                                var diplome = document.getElementById('diplome').value;
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','AUI','UM6P']
+                                var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+                                document.getElementById('EI').checked = isMoCI;
+                                var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
+                                document.getElementById('remunere').checked =isRem;
+                            });
+
 
                         </script>
 
@@ -861,11 +939,11 @@ unset($__errorArgs, $__bag); ?>
             <div class="card-header bg-primary"><?php echo e(__('Autre informations à ajouter:')); ?></div>
             <table>
                 <tr>
-                    <a href="/filieres/create" target="/blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
-                    <a href="/etablissements/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
-                    <a href="/services/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
-                    <a href="/encadrants/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
-                    <a href="/villes/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
+                    <a href="/filieres/create" target="/_blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
+                    <a href="/etablissements/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
+                    <a href="/services/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
+                    <a href="/encadrants/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
+                    <a href="/villes/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
                 </tr>
             </table>
         </div>
