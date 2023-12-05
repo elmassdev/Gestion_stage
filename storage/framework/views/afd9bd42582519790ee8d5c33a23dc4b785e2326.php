@@ -508,7 +508,6 @@ unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                                     <option value="Master">Master</option>
                                     <option value="Master spécialisé">Master spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
-                                    <option value=" ">Master ENCG</option>
                             </select>
                                 <?php $__errorArgs = ['diplome'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -637,7 +636,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
                                     <option value="stage ouvrier" selected>stage ouvrier</option>
-                                    < value="stage d'application">stage d'application</option>
+                                    <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
                                     <option value="stage PFE">Stage PFE</option>
                             </select>
@@ -845,12 +844,12 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
+                        <div class="row mb-3 display-inline">
+                            <div class="col-md-5">
                                 <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
                             <input type="checkbox" name="remunere" id="remunere" value="true">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
                             <input type="checkbox" name="EI" id="EI" value="true">
                             </div>
@@ -860,6 +859,7 @@ unset($__errorArgs, $__bag); ?>
                         
 
                         <script>
+                            var EI = document.getElementById('EI');
                             window.addEventListener('load', function() {
                                 var site =document.getElementById('site').value;
                                 var filtered_services = FilSer.filter(function(services) {
@@ -888,19 +888,15 @@ unset($__errorArgs, $__bag); ?>
 
                             document.getElementById('encadrant').addEventListener('change', function() {
                                 var selectedEncadrantId = this.value;
-
-                                // Clear existing options
                                 var serviceDropdown = document.getElementById('service');
                                 serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
 
                                 if (selectedEncadrantId) {
-                                    // Find the selected encadrant in the encadrants array
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
                                         return encadrant.id == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {
-                                        // Populate the services dropdown with the services of the selected encadrant
                                         var option = document.createElement('option');
                                         option.value = selectedEncadrant.service;
                                         option.text = selectedEncadrant.service;
@@ -908,6 +904,27 @@ unset($__errorArgs, $__bag); ?>
                                     }
                                 }
                             });
+
+                            document.getElementById('diplome').addEventListener('change', function(){
+                                var diplome = this.value;
+                                var etab = document.getElementById('etablissement').value;
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
+                                var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+                                document.getElementById('EI').checked = isMasterOrCycle;
+                                var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
+                                document.getElementById('remunere').checked =isRemunere;
+                            });
+
+                            document.getElementById('etablissement').addEventListener('change', function(){
+                                var etab = this.value;
+                                var diplome = document.getElementById('diplome').value;
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
+                                var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+                                document.getElementById('EI').checked = isMoCI;
+                                var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
+                                document.getElementById('remunere').checked =isRem;
+                            });
+
                         </script>
 
 
