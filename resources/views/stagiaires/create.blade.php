@@ -175,7 +175,8 @@
                         </script>
                         <script>
                             //change data values to json
-                            var tab = @json($services);
+                            var FilSer = @json($services);
+                            var FilSerEnc = @json($encadrants);
                         </script>
 
                         <div class="row mb-3">
@@ -433,7 +434,7 @@
                             <div class="col-md-8">
                                 <select id="type_stage" type="text" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage"  autocomplete="type_stage">
                                     <option value="stage ouvrier" selected>stage ouvrier</option>
-                                    <option value="stage d'application">stage d'application</option>
+                                    < value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
                                     <option value="stage PFE">Stage PFE</option>
                             </select>
@@ -445,24 +446,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
-                            <div class="col-md-8">
-                                <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
-                                    {{-- <option selected disabled>Service</option>
-                                        @foreach($services as $service)
-                                        <option value="{{ $service->sigle_service}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
-                                        @endforeach    --}}
 
-                            </select>
-                                @error('service')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-                        </div>
 
 
                         <div class="row mb-3">
@@ -479,6 +463,27 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
+                            <div class="col-md-8">
+                                <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
+                                    <option selected disabled>Service</option>
+                                       {{-- @foreach($services as $service)
+                                        <option value="{{ $service->sigle_service}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
+                                        @endforeach --}}
+
+
+                            </select>
+                                @error('service')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                             </div>
                         </div>
 
@@ -563,22 +568,21 @@
                         {{-- filter services by site;  Made By ELHASSOUNI --}}
 
                         <script>
-                        window.onload = function(){
+                            window.addEventListener('load', function() {
                                 var site =document.getElementById('site').value;
-                                var filtered_services = tab.filter(function(services) {
+                                var filtered_services = FilSer.filter(function(services) {
                                     return services.site === site;
                                 });
-                                //alert(JSON.stringify(filtered_services));
-
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
                                     service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
-                            }
+                            });
+
                             document.getElementById('site').addEventListener('change', function() {
                                 site = this.value;
-                                var filtered_services = tab.filter(function(services) {
+                                var filtered_services = FilSer.filter(function(services) {
                                     return services.site === site;
                                 });
                                 //alert(JSON.stringify(filtered_services));
@@ -588,6 +592,29 @@
                                 filtered_services.forEach(function(services) {
                                     service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
+                            });
+
+                            document.getElementById('encadrant').addEventListener('change', function() {
+                                var selectedEncadrantId = this.value;
+
+                                // Clear existing options
+                                var serviceDropdown = document.getElementById('service');
+                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+
+                                if (selectedEncadrantId) {
+                                    // Find the selected encadrant in the encadrants array
+                                    var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                                        return encadrant.id == selectedEncadrantId;
+                                    });
+
+                                    if (selectedEncadrant) {
+                                        // Populate the services dropdown with the services of the selected encadrant
+                                        var option = document.createElement('option');
+                                        option.value = selectedEncadrant.service;
+                                        option.text = selectedEncadrant.service;
+                                        serviceDropdown.appendChild(option);
+                                    }
+                                }
                             });
                         </script>
 
@@ -613,11 +640,11 @@
                 <div class="card-header bg-primary">{{ __('Autre informations à ajouter:') }}</div>
                 <table>
                     <tr>
-                        <a href="/filieres/create" target="/blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
-                        <a href="/etablissements/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
-                        <a href="/services/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
-                        <a href="/encadrants/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
-                        <a href="/villes/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
+                        <a href="/filieres/create" target="/_blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
+                        <a href="/etablissements/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
+                        <a href="/services/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
+                        <a href="/encadrants/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
+                        <a href="/villes/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
                     </tr>
                 </table>
             </div>

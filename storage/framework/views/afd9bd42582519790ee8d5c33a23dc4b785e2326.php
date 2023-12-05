@@ -175,7 +175,8 @@
                         </script>
                         <script>
                             //change data values to json
-                            var tab = <?php echo json_encode($services, 15, 512) ?>;
+                            var FilSer = <?php echo json_encode($services, 15, 512) ?>;
+                            var FilSerEnc = <?php echo json_encode($encadrants, 15, 512) ?>;
                         </script>
 
                         <div class="row mb-3">
@@ -636,7 +637,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
                                     <option value="stage ouvrier" selected>stage ouvrier</option>
-                                    <option value="stage d'application">stage d'application</option>
+                                    < value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
                                     <option value="stage PFE">Stage PFE</option>
                             </select>
@@ -655,35 +656,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
-                            <div class="col-md-8">
-                                <select id="service" type="text" class="form-control <?php $__errorArgs = ['service'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
-                                    
 
-                            </select>
-                                <?php $__errorArgs = ['service'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-
-                            </div>
-                        </div>
 
 
                         <div class="row mb-3">
@@ -714,6 +687,39 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
+                            <div class="col-md-8">
+                                <select id="service" type="text" class="form-control <?php $__errorArgs = ['service'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
+                                    <option selected disabled>Service</option>
+                                       
+
+
+                            </select>
+                                <?php $__errorArgs = ['service'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
                             </div>
                         </div>
 
@@ -854,22 +860,21 @@ unset($__errorArgs, $__bag); ?>
                         
 
                         <script>
-                        window.onload = function(){
+                            window.addEventListener('load', function() {
                                 var site =document.getElementById('site').value;
-                                var filtered_services = tab.filter(function(services) {
+                                var filtered_services = FilSer.filter(function(services) {
                                     return services.site === site;
                                 });
-                                //alert(JSON.stringify(filtered_services));
-
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
                                     service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
-                            }
+                            });
+
                             document.getElementById('site').addEventListener('change', function() {
                                 site = this.value;
-                                var filtered_services = tab.filter(function(services) {
+                                var filtered_services = FilSer.filter(function(services) {
                                     return services.site === site;
                                 });
                                 //alert(JSON.stringify(filtered_services));
@@ -879,6 +884,29 @@ unset($__errorArgs, $__bag); ?>
                                 filtered_services.forEach(function(services) {
                                     service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
+                            });
+
+                            document.getElementById('encadrant').addEventListener('change', function() {
+                                var selectedEncadrantId = this.value;
+
+                                // Clear existing options
+                                var serviceDropdown = document.getElementById('service');
+                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+
+                                if (selectedEncadrantId) {
+                                    // Find the selected encadrant in the encadrants array
+                                    var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                                        return encadrant.id == selectedEncadrantId;
+                                    });
+
+                                    if (selectedEncadrant) {
+                                        // Populate the services dropdown with the services of the selected encadrant
+                                        var option = document.createElement('option');
+                                        option.value = selectedEncadrant.service;
+                                        option.text = selectedEncadrant.service;
+                                        serviceDropdown.appendChild(option);
+                                    }
+                                }
                             });
                         </script>
 
@@ -905,11 +933,11 @@ unset($__errorArgs, $__bag); ?>
                 <div class="card-header bg-primary"><?php echo e(__('Autre informations à ajouter:')); ?></div>
                 <table>
                     <tr>
-                        <a href="/filieres/create" target="/blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
-                        <a href="/etablissements/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
-                        <a href="/services/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
-                        <a href="/encadrants/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
-                        <a href="/villes/create" target="/blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
+                        <a href="/filieres/create" target="/_blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
+                        <a href="/etablissements/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
+                        <a href="/services/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
+                        <a href="/encadrants/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
+                        <a href="/villes/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
                     </tr>
                 </table>
             </div>
