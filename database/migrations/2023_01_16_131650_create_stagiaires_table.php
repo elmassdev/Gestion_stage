@@ -40,10 +40,12 @@ return new class extends Migration
             $table->boolean('EI')->nullable();
             $table->boolean('annule')->nullable();
             $table->boolean('prolongation')->nullable();
-            $table->date('date_fin_finale')->nullable();            
+            $table->date('date_fin_finale')->nullable();
             $table->date('Attestation_remise')->nullable();
             $table->string('Att_remise_a')->nullable();
             $table->string('observation')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('edited_by')->nullable();
             $table->timestamps();
         });
     }

@@ -15,22 +15,19 @@
                     @endif
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="card col-md-6">
                             <a href="/stagiaires/create"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un stagiaire</a>
-                            <a href="/filieres"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter une filière</a>
+                            <a href="/indicators/index"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter une filière</a>
                             <a href="/etablissements"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un établissement</a>
                             <a href="/services"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un service</a>
                             <a href="/encadrants/create"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un encadrant </a>
                             <a href="/villes"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter une ville</a>
                         </div>
-                        <div class="col-md-6">
-                            <a href="/indicators/index"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Indicateurs</a>
-                            <a href="/stagiaires"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Liste des stagiaires</a>
-                            <a href="/etablissements"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un établissement</a>
-                            <a href="/services"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un service</a>
-                            <a href="/encadrants/create"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter un encadrant </a>
-                            <a href="/villes"  class=" col-md-8 mx-auto my-2 btn btn-lg btn-outline-success rounded-pill " >Ajouter une ville</a>
+                        {{-- @if(auth()->check() && auth()->user()->hasRole('admin'))
+                        <div class="card col-md-6">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </div>
+                        @endif --}}
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Stagiaire;
 use App\Models\Ville;
 use App\Models\Etablissement;
@@ -17,6 +18,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use File;
+use Illuminate\Support\Facades\Auth;
 
 Paginator::useBootstrap();
 
@@ -152,6 +154,7 @@ class StagiaireController extends Controller
         $stagiaire->Attestation_remise = $request->input('Attestation_remise');
         $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
+        $stagiaire->created_by= Auth::user()->name;
         $stagiaire->save();
 
         //$stagiaires =Stagiaire::create($request->all());
@@ -278,6 +281,7 @@ class StagiaireController extends Controller
         $stagiaire->Attestation_remise = $request->input('Attestation_remise');
         $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
+        $stagiaire->edited_by= Auth::user()->name;
         //$remunere = ($request->input('remunere') == 'on') ? 1 : 0;
         // $stagiaire->remunere = $remunere;
         // $EI = ($request->input('EI') == 'on') ? 1 : 0;
@@ -306,7 +310,8 @@ class StagiaireController extends Controller
             $stagiaire->date_fin,
             $stagiaire->sujet,
             $stagiaire->remunere,
-            $stagiaire->EI
+            $stagiaire->EI,
+            $stagiaire->edited_by
         ]);
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
 
