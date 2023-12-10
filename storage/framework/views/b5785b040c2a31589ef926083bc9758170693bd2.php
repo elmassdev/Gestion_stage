@@ -251,13 +251,22 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="editphoto" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Modifier la photo?')); ?></label>
-                            <input type="checkbox" name="editphoto" id="editphoto" value="1">
-                        </div>
-                        <div class="row mb-3" id="photo">
                             <label for="photo" class="col-md-3 col-form-label text-md-left">Photo de profile</label>
-                            <div class="col-md-8">
-                                <input class="form-control" name="photo" type="file" id="photo"  accept="image/gif, image/jpeg, image/png" >
+                            <div class="col-md-8 row">
+                                <div class="col-md-7">
+                                    <input type="file" name="photo" accept="image/gif, image/jpeg, image/png" id="photo">
+                                    <?php if($stagiaire->photo): ?>
+                                    <img src="<?php echo e(asset('storage/images/profile/'.$stagiaire->photo)); ?>" alt="Profile Picture" style="max-width: 200px; max-height: 200px;">
+                                    <?php else: ?>
+                                    <p>No profile picture available.</p>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if(!($stagiaire->photo === 'default_m.jpg') && !($stagiaire->photo === 'default_f.png')): ?>
+                                    <div class="col-md-5">
+                                        <label for="deletePhoto" class="col-md-7 col-form-label text-md-left"><?php echo e(__('Supprimer la photo?')); ?></label>
+                                        <input type="checkbox" name="deletePhoto" id="deletePhoto" value="1">
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -822,43 +831,28 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         <div class="row mb-3 display-inline">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
                             <input type="checkbox" name="remunere" id="remunere" value="true" <?php echo e(old('remunere', $stagiaire->remunere) ? 'checked' : ''); ?>>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
                             <input type="checkbox" name="EI" id="EI" value="true" <?php echo e(old('EI', $stagiaire->EI) ? 'checked' : ''); ?>>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="annule" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Annulé')); ?></label>
+                            <input type="checkbox" name="annule" id="annule" value="true" <?php echo e(old('annule', $stagiaire->annule) ? 'checked' : ''); ?>>
                             </div>
 
                         </div>
 
                         
 
-                        <script>
-                            const checkbox = document.getElementById('editphoto');
-                            const box = document.getElementById('photo');
-                            window.onload = function() {box.style.display = 'none';};
-                            checkbox.addEventListener('click', function handleClick() {
-                            if (checkbox.checked) {
-                                box.style.display = 'flex';
-                            } else {
-                                box.style.display = 'none';
-                            }
-                            });
+                        
 
+
+                        <script>
                             var EI = document.getElementById('EI');
-                            window.addEventListener('load', function() {
-                                var site =document.getElementById('site').value;
-                                var filtered_services = FilSer.filter(function(services) {
-                                    return services.site === site;
-                                });
-                                var service_select = document.getElementById('service');
-                                service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
-                                filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
-                                });
-                            });
 
                             document.getElementById('site').addEventListener('change', function() {
                                 site = this.value;
@@ -891,12 +885,13 @@ unset($__errorArgs, $__bag); ?>
                                         serviceDropdown.appendChild(option);
                                     }
                                 }
+                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
 
                             document.getElementById('diplome').addEventListener('change', function(){
                                 var diplome = this.value;
                                 var etab = document.getElementById('etablissement').value;
-                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','AUI','UM6P']
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
                                 var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
                                 document.getElementById('EI').checked = isMasterOrCycle;
                                 var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
@@ -906,13 +901,12 @@ unset($__errorArgs, $__bag); ?>
                             document.getElementById('etablissement').addEventListener('change', function(){
                                 var etab = this.value;
                                 var diplome = document.getElementById('diplome').value;
-                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','AUI','UM6P']
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
                                 var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
                                 document.getElementById('EI').checked = isMoCI;
                                 var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
                                 document.getElementById('remunere').checked =isRem;
                             });
-
 
                         </script>
 

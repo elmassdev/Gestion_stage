@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="/css/style.css" rel="stylesheet">
 
-    
+
 
     <!-- Scripts -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
@@ -25,17 +25,18 @@
             font-family: Arial, Helvetica, sans-serif;
         }
     </style>
-    
+
     <div id="app">
         <div class="row">
             <div class="container">
                 <div>
                     <img src="<?php echo e(public_path("/images/logow.jpg")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
                  <b>SBU Industrial Facility Management <br>
+                    Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
                     Developpement RH <br></b> <div class="phones">
                     <small>Tel: +212 662 07 74 39</small> <br>
-                    <small>Fax: +212 524 64 60 86   </small>     </div>           
+                    <small>Fax: +212 524 64 60 86   </small>     </div>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
             font-family: 'Times New Roman', Times, serif;
         }
     </style>
-    
+
     <footer>
         OCP S.A <br>
 Société anonyme au capital de 8.287.500.000 DH - Registre de Commerce : 40327  Identification Fiscale : 02220794 - Patente n°36000670

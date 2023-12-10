@@ -564,7 +564,6 @@
 
                         </div>
 
-                        {{-- filter services by site;  Made By ELHASSOUNI --}}
 
                         <script>
                             var EI = document.getElementById('EI');
@@ -611,6 +610,7 @@
                                         serviceDropdown.appendChild(option);
                                     }
                                 }
+                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
 
                             document.getElementById('diplome').addEventListener('change', function(){

@@ -38,6 +38,7 @@ Route::get('/stagiaires/{id}', 'App\Http\Controllers\StagiaireController@show')-
 Route::delete('/stagiaires/{id}', 'App\Http\Controllers\StagiaireController@destroy')->name('stagiaire.destroy')->middleware('auth');
 Route::get('stagiaires/{id}/modification', 'App\Http\Controllers\StagiaireController@edit')->middleware('auth');
 Route::put('/stagiaires/{id}/modification', [App\Http\Controllers\StagiaireController::class, 'update'])->name('modification')->middleware('auth');
+Route::get('/stagiaires/{id}/op','App\Http\Controllers\StagiaireController@generer_op')->name('op')->middleware('auth');
 Route::get('/stagiaires/{id}/attestation','App\Http\Controllers\StagiaireController@generer_attestation')->name('attestation')->middleware('auth');
 Route::get('/stagiaires/{id}/attestation_n','App\Http\Controllers\StagiaireController@generer_attestation')->name('attestation_n')->middleware('auth');
 Route::get('/stagiaires/{id}/convocation','App\Http\Controllers\StagiaireController@generer_convocation')->name('convocation')->middleware('auth');

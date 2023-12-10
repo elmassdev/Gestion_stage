@@ -104,7 +104,7 @@ label{
                         <i class="far fa-envelope mx-2"></i> <a href="mailto:stageyfia@ocpgroup.ma">stageyfia@ocpgroup.ma</a>
                     </li>
                     <li>
-                        <i class="fas fa-map-marker-alt mx-2"></i> <a href="https://goo.gl/maps/HVV3rtx9KczENhNJ8" target="_blank">Centre de Formation, Youssoufia</a>
+                        <i class="fas fa-map-marker-alt mx-2"></i> <a href="https://maps.app.goo.gl/aoz5aQNNytU6MqUV6" target="_blank">CCI, Youssoufia</a>
                     </li>
                 </ul>
             </div>

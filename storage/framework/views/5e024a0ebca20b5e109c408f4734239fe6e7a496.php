@@ -6,19 +6,25 @@
             <div class="card p-1 py-2" >
                 <div class="row ">
                     <div class="row ">
-                            <div class="col-md-3  p-2">
-                                <div class="center mx-4">
-                                    <img src="<?php echo e(asset('storage/images/profile/'.$stagiaire->photo)); ?>"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
+                                <div class="col-md-3  p-2">
+                                    <div class="center mx-4">
+                                        <img src="<?php echo e(asset('storage/images/profile/'.$stagiaire->photo)); ?>"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-8  position my-auto top-0 end-0">
-                                <div class="allergy"><b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?></b></div>
-                                <div class="allergy text-secondary"><span><?php echo e($stagiaire->type_stage); ?></span></div>
-                                <div class="allergy text-secondary"><i class="fa fa-address-card"></i> - <?php echo e($stagiaire->cin); ?></div>
-                                <div class="allergy text-secondary"><i class="fa fa-phone" aria-hidden="true"></i> -  <a href="tel:<?php echo e($stagiaire->phone); ?>"><?php echo e($stagiaire->phone); ?></a> </div>
-                                <div class="allergy text-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> - <a href="mailto:<?php echo e($stagiaire->email); ?>"><?php echo e($stagiaire->email); ?></a></div>
+                                <div class="col-md-6  position my-auto top-0 end-0">
+                                    <div class="allergy"><b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?></b></div>
+                                    <div class="allergy text-secondary"><span><?php echo e($stagiaire->type_stage); ?></span></div>
+                                    <div class="allergy text-secondary"><i class="fa fa-address-card"></i> - <?php echo e($stagiaire->cin); ?></div>
+                                    <div class="allergy text-secondary"><i class="fa fa-phone" aria-hidden="true"></i> -  <a href="tel:<?php echo e($stagiaire->phone); ?>"><?php echo e($stagiaire->phone); ?></a> </div>
+                                    <div class="allergy text-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> - <a href="mailto:<?php echo e($stagiaire->email); ?>"><?php echo e($stagiaire->email); ?></a></div>
 
-                            </div>
+                                </div>
+
+                                <?php if($stagiaire->annule): ?>
+                                <div class="col-md-3 text-center"> <p class="bg-warning text-danger rounded-pill" style="font-size: larger"> Stage annulé <b>X</b> </p> </div>
+                                <?php endif; ?>
+
+
 
 
                             <div class="stats">
@@ -62,53 +68,53 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td> <a href="<?php echo e(URL::to( 'stagiaires/' . $previous )); ?>" class="btn btn-success text-light"> <i class="fa fa-chevron-left" aria-hidden="true"></i> </a></td>
-                                <td><a href="<?php echo e(URL::to( 'stagiaires/' . $next )); ?>" class="btn btn-success text-light"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
-                                <td><a href="/stagiaires/" class="btn btn-primary text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
-                                <td><a href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                <td> <a href="<?php echo e(URL::to( 'stagiaires/' . $previous )); ?>" class="btn"> <i class="fa fa-chevron-left" aria-hidden="true"></i> </a></td>
+                                <td><a href="<?php echo e(URL::to( 'stagiaires/' . $next )); ?>" class="btn"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+                                <td><a href="/stagiaires/" class="btn"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
+                                <td><a href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"  class="btn text-warning"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                                 <td><form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <?php echo method_field('DELETE'); ?>
-                                    <button class="btn btn-warning text-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
+                                    <button class="btn text-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
+                <?php if(!($stagiaire->annule)): ?>
                 <div class="card">
                     <table>
-                        <tr class="col-md-12  float-left">
+                        <tr>
                             <td>
-                                <?php if($stagiaire->date_fin<=now()): ?>
-                        <div class="card col-md-12 my-2">
-                            <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation" class="btn btn-warning text-dark"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
-
-                        </div>
-                    <?php endif; ?>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr class="col-md-12  float-left">
-                            <?php if($stagiaire->date_debut>=now()): ?>
-                            <td>
-                                <div class=" card col-md-11 bg-warning">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn btn-warning text-dark" ><i class="fa fa-print text-primary  mx-2"></i> Lettre d'offre de stage</a>
+                                <?php if(($stagiaire->date_fin<=now()) && !($stagiaire->annule)): ?>
+                                <div class="card col-md-12">
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation" class="btn"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
                                 </div>
+                                <?php endif; ?>
+                                <?php if(($stagiaire->date_debut>=now()) && !($stagiaire->annule)): ?>
+                                <div class=" card col-md-12">
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                </div>
+                                <?php endif; ?>
                             </td>
                             <td>
-                                <div>
-                                    <?php if($stagiaire->sujet!=''): ?>
-                                    <div class="card col-md-11 bg-warning">
-                                        <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet" class="btn btn-warning text-dark"><i class="fa fa-print text-primary mx-2"></i> Sujet de stage</a>
-                                    </div>
-                                 <?php endif; ?>
-                               </div>
+                                <?php if(($stagiaire->sujet!='') && !($stagiaire->annule)): ?>
+                                <div class="card col-md-12">
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet" class="btn"><i class="fa fa-print text-primary"></i> Sujet de stage</a>
+                                </div>
+                                <?php endif; ?>
                             </td>
-                            <?php endif; ?>
+                            <td>
+                                <?php if(($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule)): ?>
+                                <div class="card col-md-12">
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/op" class="btn"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
+                                </div>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
-                </div>
+                </div> <?php endif; ?>
         </div>
 
         

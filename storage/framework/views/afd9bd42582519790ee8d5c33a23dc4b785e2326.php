@@ -856,7 +856,6 @@ unset($__errorArgs, $__bag); ?>
 
                         </div>
 
-                        
 
                         <script>
                             var EI = document.getElementById('EI');
@@ -903,6 +902,7 @@ unset($__errorArgs, $__bag); ?>
                                         serviceDropdown.appendChild(option);
                                     }
                                 }
+                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
 
                             document.getElementById('diplome').addEventListener('change', function(){

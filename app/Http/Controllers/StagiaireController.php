@@ -223,7 +223,6 @@ class StagiaireController extends Controller
     public function update(Request $request, $id)
     {
         $stagiaire = Stagiaire::findOrFail($id);
-        $old_photo ='storage/images/profile/'.$stagiaire->photo;
         $request->validate([
             'nom'=>'required',
             'prenom'=>'required',
@@ -242,26 +241,6 @@ class StagiaireController extends Controller
         $stagiaire->cin = strtoupper($request->input('cin'));
         $stagiaire->phone = $request->input('phone');
         $stagiaire->email = $request->input('email');
-
-
-        if($request->input('editphoto')=="1"){
-            $old_photo ='storage/images/profile/'.$stagiaire->photo;
-                if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
-                    File::delete($old_photo);
-                }
-            if($request->hasFile('photo')){
-                $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
-                $path = $request->file('photo')->storeAs('images/profile', $fileName,'public');
-                $requestData["photo"] = $fileName;//'storage/images/profile/'.$path;
-                $stagiaire->photo = $requestData["photo"];
-            }else{
-                if($stagiaire->civilite=="M."){
-                    $stagiaire->photo ='default_m.jpg';
-                }else{
-                    $stagiaire->photo ='default_f.png';
-                }
-            }
-        }
         $stagiaire->niveau = $request->input('niveau');
         $stagiaire->diplome = $request->input('diplome');
         $stagiaire->filiere = $request->input('filiere');
@@ -297,7 +276,6 @@ class StagiaireController extends Controller
             $stagiaire->cin,
             $stagiaire->phone,
             $stagiaire->email,
-            $stagiaire->photo,
             $stagiaire->niveau,
             $stagiaire->diplome,
             $stagiaire->filiere,
@@ -313,9 +291,30 @@ class StagiaireController extends Controller
             $stagiaire->EI,
             $stagiaire->edited_by
         ]);
-        return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
 
-        //return back()->with('success', 'Form updated successfully.');
+        if($request->hasFile('photo')){
+            $old_photo ='storage/images/profile/'.$stagiaire->photo;
+            if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
+                File::delete($old_photo);
+            }
+            $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
+            $request->file('photo')->storeAs('images/profile', $fileName,'public');
+            $stagiaire->update(['photo' => $fileName]);
+        }
+        if(($request->input('deletePhoto')=="1")&&(!$request->hasFile('photo'))){
+            $old_photo ='storage/images/profile/'.$stagiaire->photo;
+                if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
+                    File::delete($old_photo);
+                }
+                if($stagiaire->civilite=="M."){
+                    $fileName ='default_m.jpg';
+                }else{
+                    $fileName ='default_f.png';
+                }
+                $stagiaire->update(['photo' => $fileName]);
+            }
+
+        return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
     }
 
     /**
@@ -425,10 +424,6 @@ class StagiaireController extends Controller
 
         $pdf =Pdf::loadView('/stagiaires/sujet',compact('stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
         return $pdf->stream();
-
-
-
-
     }
 
 
@@ -438,7 +433,7 @@ class StagiaireController extends Controller
         ->join('Services', 'stagiaires.service','=','services.sigle_service')
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc'])->first();
+               ->get(['stagiaires.civilite','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc'])->first();
 
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
@@ -480,7 +475,44 @@ class StagiaireController extends Controller
                 $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
             return $pdf->stream();
-
     }
+
+    public function generer_op($id){
+        $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
+        ->join('Services', 'stagiaires.service','=','services.sigle_service')
+        ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
+        ->where('stagiaires.id','=',$id)
+               ->get(['stagiaires.civilite','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service'])->first();
+
+         //ELMASSOUDI Abdelaadim
+         // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
+        $today = date('d/m/Y');
+        $year = date('Y');
+        $now = Carbon::now();
+
+
+
+        $ddem = Carbon::parse($stagiaire->date_demande)->format('d/m/Y');
+        $dd = $stagiaire->date_debut;
+        $dd = Carbon::parse($dd)->format('d F Y');
+        $fin=$stagiaire->date_fin;
+        $fin = Carbon::parse($fin)->format('d F Y');
+        $date_debut = Carbon::parse($dd)->format('d/m/Y');
+        $date_fin = Carbon::parse($fin)->format('d/m/Y');
+
+        $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+        dd($f->format(123.456));
+
+
+
+            if($stagiaire->EI){
+                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','ddem','today','year'));
+            }else{
+                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+            }
+            return $pdf->stream();
+    }
+
+
 
 }
