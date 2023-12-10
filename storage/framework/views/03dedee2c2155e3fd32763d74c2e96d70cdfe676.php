@@ -114,8 +114,7 @@
             <div class="intro">
                 <p>
                     <span>Le Secrétariat </span>comptable payera à : <?php echo e($stagiaire->civilite); ?>. <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, CIN N° <?php echo e($stagiaire->cin); ?>, élève
-                    stagiaire <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->sigle_etab); ?>, la somme de : mille
-                    quatre cent quarante dhs (1440 dh).
+                    stagiaire <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->sigle_etab); ?>, la somme de : <?php echo e($Le_net); ?> dhs (<?php echo e($net); ?> dh)
                 </p>
             </div>
             <div>
@@ -131,6 +130,7 @@
                     #indem th, #indem td {
                         border: 1px solid black;
                         padding: 10px;
+                        font-size: 14px;
 
                     }
                     #indem ul li{
@@ -163,24 +163,24 @@
 
                     <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->service); ?> (*) <br> (OIG/H/D -  <?php echo e($stagiaire->code); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($ddem); ?>) <br>
                 </div>
-                    <div>- Absentéisme</div>
+                    <div> <br> - Absentéisme</div>
 
             </td>
-            <td><?php echo e('1440 dhs'); ?></td>
-            <td> <br> <br> <br> <br> <?php echo e(0); ?> </td>
+            <td><?php echo e($somme); ?> dh</td>
+            <td> <br> <br> <br> <br> <?php echo e($retenue); ?> dh</td>
         </tr>
         <tr>
             <td>Total</td>
-            <td><?php echo e('1440 dhs'); ?></td>
-            <td><?php echo e(0); ?></td>
+            <td><?php echo e($somme); ?> dh</td>
+            <td><?php echo e($retenue); ?> dh</td>
         </tr>
         <tr>
             <td>Net à payer</td>
-            <td colspan="2"><?php echo e('somme'); ?></td>
+            <td colspan="2" style="text-align: center"> <b> <?php echo e($net); ?> dh </b> </td>
         </tr>
     </table>
     <p>(*) - Hébergement et Restauration : non pris en charge par l'OCP. <br>
-    <b> Arrêté à la somme de : <?php echo e('somme en lettres'); ?> dhs (<?php echo e('somme en chiffres'); ?>). </b> </p>
+    <b> Arrêté à la somme de : <?php echo e($Le_net); ?> dh (<?php echo e($net); ?> dh). </b> </p>
 
     <div class="LD"> <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> </div>
 <style>

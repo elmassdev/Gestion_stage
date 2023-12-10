@@ -44,6 +44,7 @@ return new class extends Migration
             $table->date('Attestation_remise')->nullable();
             $table->string('Att_remise_a')->nullable();
             $table->string('observation')->nullable();
+            $table->integer('absence')->nullable();
             $table->string('created_by')->nullable();
             $table->string('edited_by')->nullable();
             $table->timestamps();

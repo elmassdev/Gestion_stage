@@ -260,6 +260,7 @@ class StagiaireController extends Controller
         $stagiaire->Attestation_remise = $request->input('Attestation_remise');
         $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
+        $stagiaire->absence= $request->input('absence');
         $stagiaire->edited_by= Auth::user()->name;
         //$remunere = ($request->input('remunere') == 'on') ? 1 : 0;
         // $stagiaire->remunere = $remunere;
@@ -289,7 +290,10 @@ class StagiaireController extends Controller
             $stagiaire->sujet,
             $stagiaire->remunere,
             $stagiaire->EI,
-            $stagiaire->edited_by
+            $stagiaire->edited_by,
+            $stagiaire->annule,
+            $stagiaire->absence,
+            $stagiaire->observation
         ]);
 
         if($request->hasFile('photo')){
@@ -313,6 +317,15 @@ class StagiaireController extends Controller
                 }
                 $stagiaire->update(['photo' => $fileName]);
             }
+        if($stagiaire->photo==='default_f.png' || $stagiaire->photo ==='default_m.jpg'){
+            if($stagiaire->civilite=="M."){
+                $fileName ='default_m.jpg';
+            }else{
+                $fileName ='default_f.png';
+            }
+            $stagiaire->update(['photo' => $fileName]);
+
+        }
 
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
     }
@@ -479,18 +492,14 @@ class StagiaireController extends Controller
 
     public function generer_op($id){
         $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.sigle_service')
-        ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['stagiaires.civilite','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service'])->first();
+               ->get(['stagiaires.civilite','stagiaires.absence','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service'])->first();
 
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d/m/Y');
         $year = date('Y');
         $now = Carbon::now();
-
-
 
         $ddem = Carbon::parse($stagiaire->date_demande)->format('d/m/Y');
         $dd = $stagiaire->date_debut;
@@ -500,13 +509,65 @@ class StagiaireController extends Controller
         $date_debut = Carbon::parse($dd)->format('d/m/Y');
         $date_fin = Carbon::parse($fin)->format('d/m/Y');
 
-        $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
-        dd($f->format(123.456));
+        // Calcul de nombre des jours
+        $startDate = Carbon::parse($stagiaire->date_debut);
+        $endDate = Carbon::parse($stagiaire->date_fin);
+        $numberOfDays = ($startDate->diffInDays($endDate))+1;
+
+        //calcul de taux journalier
+
+        $niveau = $stagiaire->niveau;
+        $diplome = $stagiaire->diplome;
+        $etab = $stagiaire->etablissement;
+
+        // Set default daily fee
+        $dailyFee = 0;
+
+        // Check conditions and set daily fee accordingly
+        if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
+            $dailyFee = 50;
+        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
+            $dailyFee = 60;
+        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
+            $dailyFee = 100;
+        } elseif ($niveau == '1ère année' && $diplome == 'Master') {
+            $dailyFee = 60;
+        } elseif ($niveau == '2ème année' && $diplome == 'Master') {
+            $dailyFee = 100;
+        } elseif ($niveau == '4ème année' && $diplome == '') {
+            $dailyFee = 60;
+        } elseif ($niveau == '5ème année' && $diplome == '') {
+            $dailyFee = 100;
+        }elseif ($etab == 'IMM' || $etab == 'IMT') {
+            $dailyFee = 40;
+        }
+
+        $absence = $stagiaire->absence;
+        $somme = $numberOfDays * $dailyFee;
+        $retenue = $absence * $dailyFee;
+        $net = $somme - $retenue;
+
+        // $net_lettres = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+        // $net_lettres->format($net);
+        // $Le_net = htmlspecialchars((string)$net_lettres);
+        $net_lettres_formatter = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+
+        // Assuming $net is a numeric value
+        $net_lettres_string = $net_lettres_formatter->format($net);
+
+        // Use htmlspecialchars on the formatted string
+        $Le_net = htmlspecialchars($net_lettres_string);
 
 
 
-            if($stagiaire->EI){
-                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','ddem','today','year'));
+        // Chiffres en Lettres
+        //$f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+        // dd($f->format(123.456));
+
+
+
+            if($stagiaire->remunere){
+                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','ddem','today','year','somme','retenue','net','Le_net'));
             }else{
                 $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }

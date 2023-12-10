@@ -540,6 +540,19 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="absence" class="col-md-3 col-form-label text-md-left">{{ __('Absence') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="absence" class="form-control @error('absence') is-invalid @enderror" name="absence" value="{{$stagiaire->absence}}"    autocomplete="absence"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" autofocus />
+
+                                @error('absence')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row mb-3 display-inline">
                             <div class="col-md-4">
                                 <label for="remunere" class="col-md-4 col-form-label text-md-left">{{ __('Stage remuneré') }}</label>

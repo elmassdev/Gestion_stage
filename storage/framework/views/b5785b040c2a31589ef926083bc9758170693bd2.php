@@ -830,6 +830,33 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="absence" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Absence')); ?></label>
+
+                            <div class="col-md-8">
+                                <input id="absence" class="form-control <?php $__errorArgs = ['absence'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="absence" value="<?php echo e($stagiaire->absence); ?>"    autocomplete="absence"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" autofocus />
+
+                                <?php $__errorArgs = ['absence'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
                         <div class="row mb-3 display-inline">
                             <div class="col-md-4">
                                 <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>

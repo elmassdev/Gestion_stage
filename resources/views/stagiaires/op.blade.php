@@ -114,8 +114,7 @@
             <div class="intro">
                 <p>
                     <span>Le Secrétariat </span>comptable payera à : {{ $stagiaire->civilite }}. {{$stagiaire->prenom}} {{$stagiaire->nom}}, CIN N° {{$stagiaire->cin}}, élève
-                    stagiaire {{$stagiaire->article}} {{$stagiaire->sigle_etab}}, la somme de : mille
-                    quatre cent quarante dhs (1440 dh).
+                    stagiaire {{$stagiaire->article}} {{$stagiaire->sigle_etab}}, la somme de : {{$Le_net}} dhs ({{$net}} dh)
                 </p>
             </div>
             <div>
@@ -131,6 +130,7 @@
                     #indem th, #indem td {
                         border: 1px solid black;
                         padding: 10px;
+                        font-size: 14px;
 
                     }
                     #indem ul li{
@@ -163,24 +163,24 @@
 
                     <div>- Indemnité de stage pour la période allant du {{ $date_debut }} au {{ $date_fin }} à {{ $stagiaire->service }} (*) <br> (OIG/H/D -  {{$stagiaire->code}} /{{substr($stagiaire->site,0,1)}}/{{$year}} du {{$ddem}}) <br>
                 </div>
-                    <div>- Absentéisme</div>
+                    <div> <br> - Absentéisme</div>
 
             </td>
-            <td>{{'1440 dhs'}}</td>
-            <td> <br> <br> <br> <br> {{0}} </td>
+            <td>{{$somme}} dh</td>
+            <td> <br> <br> <br> <br> {{$retenue}} dh</td>
         </tr>
         <tr>
             <td>Total</td>
-            <td>{{'1440 dhs'}}</td>
-            <td>{{0}}</td>
+            <td>{{$somme}} dh</td>
+            <td>{{$retenue}} dh</td>
         </tr>
         <tr>
             <td>Net à payer</td>
-            <td colspan="2">{{'somme'}}</td>
+            <td colspan="2" style="text-align: center"> <b> {{$net}} dh </b> </td>
         </tr>
     </table>
     <p>(*) - Hébergement et Restauration : non pris en charge par l'OCP. <br>
-    <b> Arrêté à la somme de : {{'somme en lettres'}} dhs ({{ 'somme en chiffres'}}). </b> </p>
+    <b> Arrêté à la somme de : {{$Le_net}} dh ({{ $net}} dh). </b> </p>
 
     <div class="LD"> {{$stagiaire->site}}, le {{$today}} </div>
 <style>
