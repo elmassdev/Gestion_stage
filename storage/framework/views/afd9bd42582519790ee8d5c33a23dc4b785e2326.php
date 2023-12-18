@@ -41,7 +41,7 @@
     }
 </style>
 
-<div class="container col-md-12" id="container">
+<div class="container col-md-12 py-4" id="container">
 
     <div class="row col-md-12">
         <div class="col-md-9" style="overflow-y: scroll;" id="left">
@@ -81,44 +81,44 @@
                                 // 11 janvier
                                 holidays.push(`${year}-01-11`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-01-11`);
                                     }
                                 //1er Mai
                                 holidays.push(`${year}-05-01`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-05-01`);
                                     }
                                 //30 juillet
                                 holidays.push(`${year}-07-30`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-07-30`);
                                     }
                                 //14 Aout
                                 holidays.push(`${year}-08-14`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-14`);
                                     }
 
                                     //20 aout
                                 holidays.push(`${year}-08-20`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-20`);
                                     }
                                 //21 aout
                                 holidays.push(`${year}-08-21`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-21`);
                                     }
 
                                 //almassira
                                 holidays.push(`${year}-11-06`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-11-06`);
                                     }
                                 //independance
                                 holidays.push(`${year}-11-18`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-11-18`);
                                     }
 
 
@@ -671,7 +671,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
                                 <option selected disabled></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
+                                <option value="<?php echo e($encadrant->nom); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['encadrant'];
@@ -892,7 +892,7 @@ unset($__errorArgs, $__bag); ?>
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.id == selectedEncadrantId;
+                                        return encadrant.nom == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {

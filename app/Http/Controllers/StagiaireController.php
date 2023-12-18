@@ -34,8 +34,10 @@ class StagiaireController extends Controller
     public function index()
     {
         $stagiaires = DB::table('stagiaires')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-        ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))->paginate(10);
+        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
+        ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
+        ->orderBy('stagiaires.created_at', 'desc')
+        ->paginate(10);
         return view('stagiaires.index',compact('stagiaires'));
     }
 
@@ -49,16 +51,8 @@ class StagiaireController extends Controller
         $etablissements = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
         $villes = DB::table('villes')->orderBy('ville', 'asc')->get();
         $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();
-        //$servicesY = DB::table('services')->orderBy('sigle_service', 'asc')->where('site','=','Youssoufia')->get();
         $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();
         $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
-
-        //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
-        //$villes = Ville::orderBy('ville', 'asc')->get();
-        //$services = Service::orderBy('sigle_service', 'asc')->get();
-        //$filieres = filiere::orderBy('filiere', 'asc')->get();
-        //$encadrants =Encadrant::orderBy('nom', 'asc')->get();
-
         return view('stagiaires/create',compact('etablissements','villes','services','filieres','encadrants'));
     }
 
@@ -148,11 +142,11 @@ class StagiaireController extends Controller
         $stagiaire->sujet= $request->input('sujet');
         $stagiaire->remunere = $request->boolean('remunere');
         $stagiaire->EI = $request->boolean('EI');
-        $stagiaire->annule = $request->boolean('annule');
-        $stagiaire->prolongation = $request->input('prolongation');
-        $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
-        $stagiaire->Attestation_remise = $request->input('Attestation_remise');
-        $stagiaire->Att_remise_a = $request->input('Att_remise_a');
+        // $stagiaire->annule = $request->boolean('annule');
+        // $stagiaire->prolongation = $request->input('prolongation');
+        // $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
+        // $stagiaire->Attestation_remise = $request->input('Attestation_remise');
+        // $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
         $stagiaire->created_by= Auth::user()->name;
         $stagiaire->save();
@@ -185,7 +179,7 @@ class StagiaireController extends Controller
         $stagiaire = Stagiaire::findOrFail($id);
         $previous = Stagiaire::where('id', '<', $stagiaire->id)->max('id');
         $next = Stagiaire::where('id', '>', $stagiaire->id)->min('id');
-        $encadrant = Encadrant::where('id','=',$stagiaire->encadrant)->first();
+        $encadrant = Encadrant::where('nom','=',$stagiaire->encadrant)->first();
         return view('stagiaires.show', compact('stagiaire','encadrant','results'))->with('previous', $previous)->with('next', $next);
     }
 
@@ -203,7 +197,7 @@ class StagiaireController extends Controller
         $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();
         $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();
         $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
-        $encadr = Encadrant::where('id','=',$stagiaire->encadrant)->first();
+        $encadr = Encadrant::where('nom','=',$stagiaire->encadrant)->first();
 
         //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
         //$villes = Ville::orderBy('ville', 'asc')->get();
@@ -257,7 +251,7 @@ class StagiaireController extends Controller
         $stagiaire->annule = $request->boolean('annule');
         $stagiaire->prolongation = $request->input('prolongation');
         $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
-        $stagiaire->Attestation_remise = $request->input('Attestation_remise');
+        $stagiaire->Attestation_remise_le = $request->input('Attestation_remise');
         $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
         $stagiaire->absence= $request->input('absence');
@@ -398,7 +392,7 @@ class StagiaireController extends Controller
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('Services', 'stagiaires.service','=','services.sigle_service')
-        ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
+        ->join('encadrants','stagiaires.encadrant','=','encadrants.nom')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
@@ -444,21 +438,29 @@ class StagiaireController extends Controller
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('Services', 'stagiaires.service','=','services.sigle_service')
-        ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
+        ->join('encadrants','stagiaires.encadrant','=','encadrants.nom')
         ->where('stagiaires.id','=',$id)
-               ->get(['stagiaires.civilite','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc'])->first();
+               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
-         //ELMASSOUDI Abdelaadim
+        // $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
+        // ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
+        // ->join('Services', 'stagiaires.service','=','services.sigle_service')
+        // ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
+        // ->where('stagiaires.id','=',$id)
+        //        ->get(['civilite.civilite as civilite','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc'])->first();
+
+
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
         $year = date('Y');
         $now = Carbon::now();
 
 
-        $dd = $stagiaire->date_debut;
+
+        $ddd = $stagiaire->date_debut;
         $ddemande      = $stagiaire->date_demande;
         $ddemande = Carbon::parse($ddemande)->format('d F Y');
-        $dd = Carbon::parse($dd)->format('d F Y');
+        $dd = Carbon::parse($ddd)->format('d F Y');
         $fin=$stagiaire->date_fin;
 
         $fin = Carbon::parse($fin)->format('d F Y');
@@ -514,16 +516,13 @@ class StagiaireController extends Controller
         $endDate = Carbon::parse($stagiaire->date_fin);
         $numberOfDays = ($startDate->diffInDays($endDate))+1;
 
-        //calcul de taux journalier
 
         $niveau = $stagiaire->niveau;
         $diplome = $stagiaire->diplome;
         $etab = $stagiaire->etablissement;
 
-        // Set default daily fee
         $dailyFee = 0;
 
-        // Check conditions and set daily fee accordingly
         if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
             $dailyFee = 50;
         } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
@@ -547,29 +546,12 @@ class StagiaireController extends Controller
         $retenue = $absence * $dailyFee;
         $net = $somme - $retenue;
 
-        // $net_lettres = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
-        // $net_lettres->format($net);
-        // $Le_net = htmlspecialchars((string)$net_lettres);
         $net_lettres_formatter = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
-
-        // Assuming $net is a numeric value
         $net_lettres_string = $net_lettres_formatter->format($net);
-
-        // Use htmlspecialchars on the formatted string
         $Le_net = htmlspecialchars($net_lettres_string);
-
-
-
-        // Chiffres en Lettres
-        //$f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
-        // dd($f->format(123.456));
-
-
 
             if($stagiaire->remunere){
                 $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','ddem','today','year','somme','retenue','net','Le_net'));
-            }else{
-                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
             return $pdf->stream();
     }

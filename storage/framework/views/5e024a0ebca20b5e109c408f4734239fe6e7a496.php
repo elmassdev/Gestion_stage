@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
+<div class="container py-4">
     <div class="row">
         
         <div class="col-md-7">
@@ -94,7 +94,7 @@
                                 <?php endif; ?>
                                 <?php if(($stagiaire->date_debut>=now()) && !($stagiaire->annule)): ?>
                                 <div class=" card col-md-12">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
                                 <?php endif; ?>
                             </td>

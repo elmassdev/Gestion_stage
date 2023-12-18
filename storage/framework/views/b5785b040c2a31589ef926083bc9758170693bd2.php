@@ -41,7 +41,7 @@
     }
 </style>
 
-<div class="container col-md-12" id="container">
+<div class="container col-md-12 py-4" id="container">
     <div class="row col-md-12">
         <div class="col-md-9" style="overflow-y: scroll;" id="left">
             <div class="card">
@@ -492,7 +492,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                                     <option value="<?php echo e($stagiaire->diplome); ?>" selected><?php echo e($stagiaire->diplome); ?></option>
-                                    <option value="Qualification Professionnelle" >Qualification Professionnelle</option>
+                                    <option value="Qualification professionnelle" >Qualification professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
                                     <option value="DUT">DUT</option>
@@ -662,9 +662,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
-                                <option value="<?php echo e($encadr->id); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
+                                <option value="<?php echo e($encadr->nom); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
+                                <option value="<?php echo e($encadrant->nom); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['encadrant'];
@@ -902,7 +902,7 @@ unset($__errorArgs, $__bag); ?>
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.id == selectedEncadrantId;
+                                        return encadrant.nom == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {

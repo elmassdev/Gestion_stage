@@ -28,19 +28,19 @@ class IndicatorsController extends Controller
             ->groupBy('service')
             ->get();
         $stagenc = DB::table('stagiaires')
-            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->groupBy('nomenc')
             ->get();
             $query = $request->input('search');
         $results = DB::table('stagiaires')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
         ->where('date_debut', '=', $query)->paginate(6);
 
         $statoday = DB::table('stagiaires')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
         ->where('date_debut', '=', $tday)->paginate(6);
         return view('indicators.index',compact('stagiaires','stagenc','statoday','results'));
@@ -59,7 +59,7 @@ class IndicatorsController extends Controller
             DB::raw('YEAR(stagiaires.date_debut) as year'),
             DB::raw('COUNT(*) as count_stagiaires')
         )
-        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
+        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.nom')
         ->join('services', 'stagiaires.service', '=', 'services.libelle')
         ->groupBy('encadrants.id', 'encadrants.nom', 'encadrants.prenom', 'services.id', 'services.libelle', 'month', 'year')
         ->orderBy('year', 'desc')

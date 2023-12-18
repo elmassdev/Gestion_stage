@@ -92,7 +92,7 @@
                         Developpement RH <br></b>
                     </div>
                     <div>
-                        <p>OIG/H/D -  <?php echo e($stagiaire->code); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
+                        <p>OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
                     </div>
                 </td>
                 <td>
@@ -140,11 +140,12 @@
                     }
 
                     .LD{
-                        width: 30%;
+                        width: 40%;
                         height: 100vh;
                         float: right;
                         margin-top: 5%;
                         margin-bottom: 5%;
+                        /* margin-right: 10%; */
                     }
                 </style>
 

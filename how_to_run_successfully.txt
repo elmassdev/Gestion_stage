@@ -2,4 +2,8 @@
 1- create a database with the name that goes with .env file
 2- php artisan migrate
 3- if the images does not appear : delete the storage folder from public the run the command line : php artisan storage:link if the problem persist run: chmod -R 775 storage
-4- {{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}} pour afficher les dates 
+4- {{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}} pour afficher les dates
+
+
+INSERT INTO `stagiaires`( `code`, `date_demande`, `site`, `civilite`, `prenom`, `nom`, `cin`, `phone`, `email`, `photo`, `niveau`, `diplome`, `filiere`, `etablissement`, `ville`, `type_stage`, `service`, `encadrant`, `date_debut`, `date_fin`, `sujet`, `remunere`, `EI`, `type_formation`, `annule`, `observation`, `dateLO`, `absence`, `prolongation`, `date_fin_finale`, `date_reception_FFS`, `date_Att_etablie`, `Attestation_remise_le`, `Att_remise_a`, `OP_etabli`, `indemnite_remise_le`, `created_by`, `edited_by`)
+SELECT `code`, `date_demande`, `site`, `civilite`, `prenom`, `nom`, `cin`, `phone`, `Email`, `photo`, `niveau`, `diplome`, `filiere`, `etablissement`, `ville`, `type_stage`, `service`, `encardrant`, `date_debut`, `date_fin`, `sujet`, `remunere`, `EI`, `type_formation`, `annule`, `observation`, `dateLO`, `absence`, `Prolongation`, `date_fin_finale`, `date_reception_FFS`, `date_Att_etablie`, `attestation_remise_le`, `attestation_remise_a`, `OP_etabli`, `indemnite_remise_le`, `created_by`, `edited_by` from stagiairesx;

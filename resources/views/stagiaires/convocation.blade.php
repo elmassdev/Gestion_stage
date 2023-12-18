@@ -20,7 +20,7 @@
         margin-left: 350px;
     }
     .Att_title{
-        text-align: center; 
+        text-align: center;
         padding-bottom: 70px;
         margin-top: 80px;
     }
@@ -55,7 +55,7 @@
 <table>
     <tr>
         <td class="tdleft">
-            Année d'étude et spécialité 
+            Année d'étude et spécialité
         </td>
         <td class="tdright">
             : {{$stagiaire->niveau}} - {{$stagiaire->diplome}} - {{$stagiaire->filiere}}
@@ -63,10 +63,10 @@
     </tr>
     <tr>
         <td class="tdleft">
-            Période de stage  
+            Période de stage
         </td>
         <td class="tdright">
-            : Du {{$date_debut}} au {{$date_fin}} 
+            : Du {{$date_debut}} au {{$date_fin}}
         </td>
     </tr>
     <tr>
@@ -74,12 +74,12 @@
             Direction d' accueil :
         </td>
         <td class="tdright">
-            : {{$stagiaire->direction}} 
+            : {{$stagiaire->direction}}
         </td>
     </tr>
     <tr>
         <td class="tdleft">
-            Entité d'accueil  
+            Entité d'accueil
         </td>
         <td class="tdright">
             : {{$stagiaire->lib}}({{$stagiaire->service}})
@@ -106,14 +106,14 @@
 du Groupe OCP (accident de travail, de trajet, maladie,...)
     </li>
 </ul>
-<p><span>Veuillez agréer, {{$stagiaire->titre}}, l'expression de nos sentiments distingués.</span></p>
+<p><span>Veuillez agréer, {{$stagiaire->civilite}}, l'expression de nos sentiments distingués.</span></p>
 <p>NB : Le stage ne peut en aucun cas être prolongé au delà de la durée contractée</p>
 
 
 
 
 
-    
+
         <style>
             .sign{
                 text-align: left;
@@ -127,15 +127,15 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
         </style>
 
         <div class="sign">  <p> <b>
-            P. Le Président Directeur Général & p.o., <br>          
+            P. Le Président Directeur Général & p.o., <br>
             P. Le Responsable développement RH </b> </p>
 
-        </div>     
+        </div>
 
 
 
         @if ($stagiaire->sujet!=='')
-        <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>    
+        <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>
        @endif
 
 @endsection

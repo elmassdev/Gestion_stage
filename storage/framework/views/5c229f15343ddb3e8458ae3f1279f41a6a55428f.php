@@ -1,5 +1,6 @@
 <?php $__env->startSection('content'); ?>
-<a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+<div class="py-4">
+    <a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
 <?php if(count($stagiaires)): ?>
 <table class="table table-striped table-responsive">
     <thead>
@@ -53,6 +54,8 @@
 <?php else: ?>
 <p> Pas de stagiaires</p>
 <?php endif; ?>
+
+</div>
 
 
 <?php $__env->stopSection(); ?>

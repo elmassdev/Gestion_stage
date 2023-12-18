@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="container">
+<div class="container py-4">
     <div class="row">
         <div class="col-md-6 border">
             <h4> <u> Nombre des stagiaires en cours par services </u></h4>

@@ -12,6 +12,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-oGq1BrH7tx2LlO3S3z5gDvDHt5eRq3s7l5xFZbgYFBJIU8Z6enP00HRlL2LZ6ENg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <!-- Bootstrap CDN  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -28,8 +32,7 @@
 
 
     <style>
-
-#toggler {
+        #toggler {
             width:50px;
             height:25px;
             position: relative;
@@ -44,7 +47,7 @@
             content: "";
             width:24px;
             height: 25px;
-              position: absolute;
+            position: absolute;
             left:1px;
             background: linear-gradient(180deg,#ffcc89,#d8860b);
             border-radius: 24px;
@@ -68,9 +71,6 @@
             width: 26px;
         }
 
-        /* #darkmode-toggle:checked + #toggler + .background {
-            background:#242424;
-        } */
         #toggler svg {
             position: absolute;
             width: 12px;
@@ -94,53 +94,12 @@
             fill:#fff;
         }
 
-.toggleThemeBtn {
-        display: flex;
-        align-items: center;
-    }
+    .toggleThemeBtn {
+            display: flex;
+            align-items: center;
+        }
 
-    .toggleThemeBtn > div {
-        margin-right: 5px;
-    }
-
-    #darkThemeBtn {
-        display: none;
-    }
-
-    body[data-bs-theme='dark'] #lightThemeBtn {
-        display: none;
-    }
-
-    body[data-bs-theme='dark'] #darkThemeBtn {
-        display: block;
-    }
-
-    .toggleThemeBtn i {
-        font-size: 24px;
-        border-radius: 50%;
-    }
-
-    #moon{
-        background-color: rgb(110, 135, 182);
-        border-radius: 50%;
-        padding: 2px;
-    }
-    #sun{
-        border-radius: 50%;
-        background-color: rgb(94, 94, 94);
-        padding: 2px;
-    }
-    #moon::after{
-        animation: ease-out:
-    }
-    #sun::after{
-        animation: ease-out:
-    }
-
-
-
-
-        /* .toggleThemeBtn > div > i {
+        .toggleThemeBtn > div {
             margin-right: 5px;
         }
 
@@ -158,8 +117,26 @@
 
         .toggleThemeBtn i {
             font-size: 24px;
-            border-radius:100%;
-        } */
+            border-radius: 50%;
+        }
+
+        #moon{
+            background-color: rgb(110, 135, 182);
+            border-radius: 50%;
+            padding: 2px;
+        }
+        #sun{
+            border-radius: 50%;
+            background-color: rgb(94, 94, 94);
+            padding: 2px;
+        }
+        #moon::after{
+            animation: ease-out:
+        }
+        #sun::after{
+            animation: ease-out:
+        }
+
 
         .navbarli{
             margin-left: 10rem;
@@ -256,7 +233,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold" v-pre>
-                                   <i> {{ Auth::user()->name }} </i>
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -277,133 +254,71 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
 
- {{-- <script>
+    <script>
+        const bodyElement = document.getElementById('body-element');
+        const toggleThemeButton = document.getElementById('toggler');
+        const navbar = document.getElementById('navbar');
 
-    const bodyElement = document.getElementById('body-element');
-    const toggleThemeButton = document.getElementById('toggler');
-    const navbar = document.getElementById('navbar');
+        // Function to set the theme based on user preference
+        const setTheme = (theme) => {
+            bodyElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
 
-    const setTheme = (theme) => {
-        bodyElement.setAttribute('data-bs-theme', theme);
-        localStorage.setItem('theme', theme);
-    };
+        // Function to update the toggle button based on the dark mode state
+        const updateToggleButton = () => {
+            const darkModeToggle = document.getElementById('darkmode-toggle');
+            const toggler = document.getElementById('toggler');
 
+            if (darkModeToggle.checked) {
+                toggler.querySelector('svg.sun').style.fill = '#7e7e7e';
+                toggler.querySelector('svg.moon').style.fill = '#fff';
+                toggler.querySelector('svg.moon').style.left = '35px';
+            } else {
+                toggler.querySelector('svg.sun').style.fill = '#fff';
+                toggler.querySelector('svg.moon').style.fill = '#7e7e7e';
+                toggler.querySelector('svg.moon').style.left = '35px';
+            }
+        };
 
+        // Check for user's theme preference in local storage
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+            updateToggleButton();
+        }
 
-    const updateToggleButton = () => {
+        // Set the initial state of the dark mode toggle button
         const darkModeToggle = document.getElementById('darkmode-toggle');
-        const toggler = document.getElementById('toggler');
+        darkModeToggle.checked = storedTheme === 'dark';
 
-        if (darkModeToggle.checked) {
-            toggler.querySelector('svg.sun').style.fill = '#7e7e7e';
-            toggler.querySelector('svg.moon').style.fill = '#fff';
-            toggler.querySelector('svg.moon').style.left = '35px';
-        } else {
-            toggler.querySelector('svg.sun').style.fill = '#fff';
-            toggler.querySelector('svg.moon').style.fill = '#7e7e7e';
-            toggler.querySelector('svg.moon').style.left = '35px';
-        }
-    };
+        toggleThemeButton.addEventListener('click', () => {
+            const currentTheme = bodyElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            navbar.classList.remove('navbar-dark', 'bg-dark', 'navbar-light', 'bg-light');
+            navbar.classList.add(`navbar-${newTheme}`, `bg-${newTheme}`);
+            updateToggleButton();
+        });
 
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-        setTheme(storedTheme);
-        updateToggleButton();
-    }
-
-
-    toggleThemeButton.addEventListener('click', () => {
-        const currentTheme = bodyElement.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-        navbar.classList.remove('navbar-dark', 'bg-dark', 'navbar-light', 'bg-light');
-        navbar.classList.add(`navbar-${newTheme}`, `bg-${newTheme}`);
-        updateToggleButton();
-    });
-    window.onload = function() {
-        const currentTheme = bodyElement.getAttribute('data-bs-theme');
-
-        var navbar = document.getElementById('navbar');
-        if(currentTheme==='dark'){
-            navbar.classList.add(`navbar-dark`, `bg-dark`);
-            toggleThemeButton.style.backgroundColor = 'linear-gradient(180deg,#777,#3a3a3a)';
-        }else{
-            navbar.classList.add(`navbar-light`, `bg-light`);
+        window.onload = function() {
+            const currentTheme = bodyElement.getAttribute('data-bs-theme');
+            var navbar = document.getElementById('navbar');
+            if(currentTheme==='dark'){
+                navbar.classList.add(`navbar-dark`, `bg-dark`);
+                toggleThemeButton.style.backgroundColor = 'linear-gradient(180deg,#777,#3a3a3a)';
+            }else{
+                navbar.classList.add(`navbar-light`, `bg-light`);
+            }
+            updateToggleButton();
         }
 
-    }
-
-</script> --}}
-
-
-<script>
-    const bodyElement = document.getElementById('body-element');
-    const toggleThemeButton = document.getElementById('toggler');
-    const navbar = document.getElementById('navbar');
-
-    // Function to set the theme based on user preference
-    const setTheme = (theme) => {
-        bodyElement.setAttribute('data-bs-theme', theme);
-        localStorage.setItem('theme', theme);
-    };
-
-    // Function to update the toggle button based on the dark mode state
-    const updateToggleButton = () => {
-        const darkModeToggle = document.getElementById('darkmode-toggle');
-        const toggler = document.getElementById('toggler');
-
-        if (darkModeToggle.checked) {
-            toggler.querySelector('svg.sun').style.fill = '#7e7e7e';
-            toggler.querySelector('svg.moon').style.fill = '#fff';
-            toggler.querySelector('svg.moon').style.left = '35px';
-        } else {
-            toggler.querySelector('svg.sun').style.fill = '#fff';
-            toggler.querySelector('svg.moon').style.fill = '#7e7e7e';
-            toggler.querySelector('svg.moon').style.left = '35px';
-        }
-    };
-
-    // Check for user's theme preference in local storage
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-        setTheme(storedTheme);
-        updateToggleButton();
-    }
-
-    // Set the initial state of the dark mode toggle button
-    const darkModeToggle = document.getElementById('darkmode-toggle');
-    darkModeToggle.checked = storedTheme === 'dark';
-
-    toggleThemeButton.addEventListener('click', () => {
-        const currentTheme = bodyElement.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-        navbar.classList.remove('navbar-dark', 'bg-dark', 'navbar-light', 'bg-light');
-        navbar.classList.add(`navbar-${newTheme}`, `bg-${newTheme}`);
-        updateToggleButton();
-    });
-
-    window.onload = function() {
-        const currentTheme = bodyElement.getAttribute('data-bs-theme');
-        var navbar = document.getElementById('navbar');
-        if(currentTheme==='dark'){
-            navbar.classList.add(`navbar-dark`, `bg-dark`);
-            toggleThemeButton.style.backgroundColor = 'linear-gradient(180deg,#777,#3a3a3a)';
-        }else{
-            navbar.classList.add(`navbar-light`, `bg-light`);
-        }
-        updateToggleButton();
-    }
-
-
-</script>
-
-
+    </script>
 
 
 </body>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container py-4">
     <div class="row">
         {{-- the left part of the page --}}
         <div class="col-md-7">
@@ -95,7 +95,7 @@
                                 @endif
                                 @if(($stagiaire->date_debut>=now()) && !($stagiaire->annule))
                                 <div class=" card col-md-12">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
                                 @endif
                             </td>

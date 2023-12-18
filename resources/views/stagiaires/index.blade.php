@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+<div class="py-4">
+    <a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
 @if(count($stagiaires))
 <table class="table table-striped table-responsive">
     <thead>
@@ -53,6 +54,8 @@
 @else
 <p> Pas de stagiaires</p>
 @endif
+
+</div>
 
 
 @endsection

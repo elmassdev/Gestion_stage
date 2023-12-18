@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container py-4">
     <div class="card">
         <div class="card-header">{{ __('Ajouter un nouveau établissement') }}</div>
         <div class="card-body">
@@ -66,6 +66,7 @@
             </form>
         </div>
     </div>
+
 
 
 </div>

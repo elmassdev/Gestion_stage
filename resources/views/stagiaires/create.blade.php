@@ -43,7 +43,7 @@
     }
 </style>
 
-<div class="container col-md-12" id="container">
+<div class="container col-md-12 py-4" id="container">
 
     <div class="row col-md-12">
         <div class="col-md-9" style="overflow-y: scroll;" id="left">
@@ -81,44 +81,44 @@
                                 // 11 janvier
                                 holidays.push(`${year}-01-11`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-01-11`);
                                     }
                                 //1er Mai
                                 holidays.push(`${year}-05-01`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-05-01`);
                                     }
                                 //30 juillet
                                 holidays.push(`${year}-07-30`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-07-30`);
                                     }
                                 //14 Aout
                                 holidays.push(`${year}-08-14`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-14`);
                                     }
 
                                     //20 aout
                                 holidays.push(`${year}-08-20`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-20`);
                                     }
                                 //21 aout
                                 holidays.push(`${year}-08-21`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-21`);
                                     }
 
                                 //almassira
                                 holidays.push(`${year}-11-06`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-11-06`);
                                     }
                                 //independance
                                 holidays.push(`${year}-11-18`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-11-18`);
                                     }
 
 
@@ -454,7 +454,7 @@
                                 <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
                                 <option selected disabled></option>
                                 @foreach($encadrants as $encadrant)
-                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
+                                <option value="{{ $encadrant->nom}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
                                 @endforeach
                             </select>
                                 @error('encadrant')
@@ -600,7 +600,7 @@
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.id == selectedEncadrantId;
+                                        return encadrant.nom == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {

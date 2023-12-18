@@ -4,7 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
 
-<div class="container">
+<div class="container py-4">
     <div class="card">
         <div class="card-header"><?php echo e(__('Ajouter un nouveau établissement')); ?></div>
         <div class="card-body">
@@ -101,6 +101,7 @@ unset($__errorArgs, $__bag); ?>
             </form>
         </div>
     </div>
+
 
 
 </div>
