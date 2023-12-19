@@ -33,7 +33,7 @@
                         <td>{{ $stagiaire->diplome}}</td>
                         <td>{{ $stagiaire->etablissement}}</td>
                         <td>{{ $stagiaire->ville}}</td>
-                        <td>{{ $stagiaire->service}}</td>
+                        <td>{{ $stagiaire->sigle}}</td>
                         <td>{{ $stagiaire->nomenc}}</td>
                         <td>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</td>
                         <td>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</td>

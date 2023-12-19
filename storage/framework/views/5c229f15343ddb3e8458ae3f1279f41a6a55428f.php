@@ -32,7 +32,7 @@
                         <td><?php echo e($stagiaire->diplome); ?></td>
                         <td><?php echo e($stagiaire->etablissement); ?></td>
                         <td><?php echo e($stagiaire->ville); ?></td>
-                        <td><?php echo e($stagiaire->service); ?></td>
+                        <td><?php echo e($stagiaire->sigle); ?></td>
                         <td><?php echo e($stagiaire->nomenc); ?></td>
                         <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')); ?></td>
                         <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></td>

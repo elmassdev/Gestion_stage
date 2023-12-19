@@ -179,7 +179,7 @@
                             var FilSerEnc = @json($encadrants);
                         </script>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="code" class="col-md-3 col-form-label text-md-left" > Code Stagiaire</label>
 
                             <div class="col-md-8">
@@ -191,7 +191,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 

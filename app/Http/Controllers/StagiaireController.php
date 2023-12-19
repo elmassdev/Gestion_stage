@@ -33,9 +33,9 @@ class StagiaireController extends Controller
      */
     public function index()
     {
-        $stagiaires = DB::table('stagiaires')
+        $stagiaires = DB::table('stagiaires')->join('services',  'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-        ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
+        ->select('stagiaires.*','services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
         ->orderBy('stagiaires.created_at', 'desc')
         ->paginate(10);
         return view('stagiaires.index',compact('stagiaires'));
@@ -107,8 +107,21 @@ class StagiaireController extends Controller
             'date_debut'=>'required',
             'date_fin'=>'required',
         ]);
+
+        // incrementation du code.
+
+        $year = now()->year;
+        $count = Stagiaire::whereYear('created_at', $year)->count() + 1;
+        if($count>0){
+            $maxCode = Stagiaire::max('code');
+            $code =$maxCode + 1;
+        }else{
+            $formattedCount = sprintf('%04d', 1);
+            $code = $year.$formattedCount;
+        }
+
         $stagiaire = new Stagiaire();
-        $stagiaire->code = $request->input('code');
+        $stagiaire->code =$code;
         $stagiaire->Date_demande = $request->input('date_demande');
         $stagiaire->site = $request->input('site');
         $stagiaire->civilite = $request->input('civilite');
@@ -120,7 +133,7 @@ class StagiaireController extends Controller
         if($request->hasFile('photo')){
             $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
             $request->file('photo')->storeAs('images/profile', $fileName,'public');
-            $requestData["photo"] = $fileName;//'storage/images/profile/'.$path;
+            $requestData["photo"] = $fileName;
             $stagiaire->photo = $requestData["photo"];
         }else{
             if($stagiaire->civilite=="M."){
@@ -143,19 +156,10 @@ class StagiaireController extends Controller
         $stagiaire->sujet= $request->input('sujet');
         $stagiaire->remunere = $request->boolean('remunere');
         $stagiaire->EI = $request->boolean('EI');
-        // $stagiaire->annule = $request->boolean('annule');
-        // $stagiaire->prolongation = $request->input('prolongation');
-        // $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
-        // $stagiaire->Attestation_remise = $request->input('Attestation_remise');
-        // $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
         $stagiaire->created_by= Auth::user()->name;
         $stagiaire->save();
-
-        //$stagiaires =Stagiaire::create($request->all());
-        //return redirect('/stagiaires')->with('msg','Enregistré avec succès');
         return back()->with('success', 'Enregistré avec succès.');
-
     }
 
     /**

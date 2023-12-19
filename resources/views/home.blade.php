@@ -225,7 +225,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold" v-pre>
-                                    {{ Auth::user()->name }} 
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -252,13 +252,16 @@
 
 
 <style>
-    #home {
+    body{
+        background-image: url('{{ asset('/images/bg.jpg') }}');
+        background-size: cover;
+        background-position: center;
+    }
+    /* #home {
     height: 92vh;
     top: 0%;
-    background-image: url('{{ asset('/images/bg.jpg') }}');
-    background-size: cover;
-    background-position: center;
-}
+
+} */
 
     .dep {
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -388,7 +391,7 @@
             </table>
         </div>
 
-        <div class="row">
+        <div class="row col-md-10">
             <h2 class="motto">Guidons les étudiants vers l'excellence  à travers notre système de gestion</h2>
         </div>
         <div class="row bottom col-md-6 mx-auto">

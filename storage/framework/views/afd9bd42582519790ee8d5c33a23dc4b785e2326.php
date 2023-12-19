@@ -179,33 +179,7 @@
                             var FilSerEnc = <?php echo json_encode($encadrants, 15, 512) ?>;
                         </script>
 
-                        <div class="row mb-3">
-                            <label for="code" class="col-md-3 col-form-label text-md-left" > Code Stagiaire</label>
-
-                            <div class="col-md-8">
-                                <input id="code" type="number" class="form-control <?php $__errorArgs = ['code'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"   name="code" value="<?php echo e(old('code')); ?>"  required autocomplete="code" placeholder="code stagiare" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"   autofocus>
-
-                                <?php $__errorArgs = ['code'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                        </div>
+                        
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 
