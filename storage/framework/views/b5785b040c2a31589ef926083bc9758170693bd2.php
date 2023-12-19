@@ -67,44 +67,44 @@
                                 // 11 janvier
                                 holidays.push(`${year}-01-11`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-01-11`);
                                     }
                                 //1er Mai
                                 holidays.push(`${year}-05-01`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-05-01`);
                                     }
                                 //30 juillet
                                 holidays.push(`${year}-07-30`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-07-30`);
                                     }
                                 //14 Aout
                                 holidays.push(`${year}-08-14`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-14`);
                                     }
 
                                     //20 aout
                                 holidays.push(`${year}-08-20`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-20`);
                                     }
                                 //21 aout
                                 holidays.push(`${year}-08-21`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-08-21`);
                                     }
 
                                 //almassira
                                 holidays.push(`${year}-11-06`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-11-06`);
                                     }
                                 //independance
                                 holidays.push(`${year}-11-18`);
                                 for (let i = 1; i <= 10; i++) {
-                                    holidays.push(`${year+i}-01-01`);
+                                    holidays.push(`${year+i}-11-18`);
                                     }
 
 
@@ -650,6 +650,39 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
+
+                            <div class="col-md-8">
+                                <select id="type_formation" type="text" class="form-control <?php $__errorArgs = ['type_formation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_formation">
+                                    <option value="EI" selected>EI</option>
+                                    <option value="OFPPT">OFPPT</option>
+                                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                                    <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
+                                    <option value="IMM+IMT">IMM+IMT</option>
+                                    <option value="Autres">Autres</option>
+                            </select>
+                                <?php $__errorArgs = ['type_formation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
@@ -662,9 +695,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
-                                <option value="<?php echo e($encadr->nom); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
+                                <option value="<?php echo e($encadr->id); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($encadrant->nom); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
+                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['encadrant'];
@@ -693,9 +726,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
-                                <option  value="<?php echo e($stagiaire->service); ?>" selected ><?php echo e($stagiaire->service); ?></option>
+                                <option  value="<?php echo e($serv->id); ?>" selected ><?php echo e($serv->sigle_service); ?></option>
                                 <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($service->sigle_service); ?>"><?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?></option>
+                                <option value="<?php echo e($service->id); ?>"><?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['service'];
@@ -891,29 +924,35 @@ unset($__errorArgs, $__bag); ?>
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
                             });
 
                             document.getElementById('encadrant').addEventListener('change', function() {
                                 var selectedEncadrantId = this.value;
                                 var serviceDropdown = document.getElementById('service');
-                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+                                serviceDropdown.innerHTML = '';
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.nom == selectedEncadrantId;
+                                        return encadrant.id == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {
                                         var option = document.createElement('option');
-                                        option.value = selectedEncadrant.service;
-                                        option.text = selectedEncadrant.service;
-                                        serviceDropdown.appendChild(option);
+                                        var filteredService = FilSer.find(function(service) {
+                                            return service.id === selectedEncadrant.service;
+                                        });
+
+                                        if (filteredService) {
+                                            option.value = filteredService.id;
+                                            option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
+                                            serviceDropdown.appendChild(option);
+                                        }
                                     }
                                 }
-                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
+
 
                             document.getElementById('diplome').addEventListener('change', function(){
                                 var diplome = this.value;

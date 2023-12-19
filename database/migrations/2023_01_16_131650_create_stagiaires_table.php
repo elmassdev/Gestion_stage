@@ -31,8 +31,8 @@ return new class extends Migration
             $table->string('etablissement');
             $table->string('ville');
             $table->string('type_stage')->nullable();
-            $table->string('service');
-            $table->string('encadrant')->nullable();
+            $table->integer('service');
+            $table->integer('encadrant')->nullable();
             $table->date('date_debut');
             $table->date('date_fin');
             $table->string('sujet')->nullable();

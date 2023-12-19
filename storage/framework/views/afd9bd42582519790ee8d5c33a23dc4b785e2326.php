@@ -496,7 +496,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                                    <option value="" disabled>----Diplôme----</option>
+                                    <option selected value="" disabled>----Diplôme----</option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -535,7 +535,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere">
-                                <option selected disabled> ----- </option>
+                                <option selected disabled> -- Filières-- </option>
                                 <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($f->filiere); ?>"><?php echo e($f->filiere); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -570,7 +570,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement">
-                                <option selected disabled></option>
+                                <option selected disabled>--Etablissement--</option>
                                 <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -601,7 +601,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="ville"  autocomplete="ville">
-                                    <option selected hidden></option>
+                                    <option selected disabled> -- Ville -- </option>
                                        <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($ville->ville); ?>"><?php echo e($ville->ville); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -655,6 +655,40 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
+
+                            <div class="col-md-8">
+                                <select id="type_formation" type="text" class="form-control <?php $__errorArgs = ['type_formation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_formation">
+                                    <option value="EI" selected>EI</option>
+                                    <option value="OFPPT">OFPPT</option>
+                                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                                    <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
+                                    <option value="IMM+IMT">IMM+IMT</option>
+                                    <option value="Autres">Autres</option>
+                            </select>
+                                <?php $__errorArgs = ['type_formation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
 
 
 
@@ -671,7 +705,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
                                 <option selected disabled></option>
                                 <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($encadrant->nom); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
+                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                                 <?php $__errorArgs = ['encadrant'];
@@ -867,7 +901,7 @@ unset($__errorArgs, $__bag); ?>
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
                             });
 
@@ -881,29 +915,54 @@ unset($__errorArgs, $__bag); ?>
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
                             });
 
                             document.getElementById('encadrant').addEventListener('change', function() {
                                 var selectedEncadrantId = this.value;
                                 var serviceDropdown = document.getElementById('service');
-                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+                                serviceDropdown.innerHTML = '';
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.nom == selectedEncadrantId;
+                                        return encadrant.id == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {
                                         var option = document.createElement('option');
-                                        option.value = selectedEncadrant.service;
-                                        option.text = selectedEncadrant.service;
-                                        serviceDropdown.appendChild(option);
+                                        var filteredService = FilSer.find(function(service) {
+                                            return service.id === selectedEncadrant.service;
+                                        });
+
+                                        if (filteredService) {
+                                            option.value = filteredService.id;
+                                            option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
+                                            serviceDropdown.appendChild(option);
+                                        }
                                     }
                                 }
-                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
+
+                            // document.getElementById('encadrant').addEventListener('change', function() {
+                            //     var selectedEncadrantId = this.value;
+                            //     var serviceDropdown = document.getElementById('service');
+                            //     serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+
+                            //     if (selectedEncadrantId) {
+                            //         var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                            //             return encadrant.id == selectedEncadrantId;
+                            //         });
+
+                            //         if (selectedEncadrant) {
+                            //             var option = document.createElement('option');
+                            //             option.value = selectedEncadrant.service;
+                            //             option.text = selectedEncadrant.service;
+                            //             serviceDropdown.appendChild(option);
+                            //         }
+                            //     }
+                            //     serviceDropdown.innerHTML = '<option value="'+ services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                            // });
 
                             document.getElementById('diplome').addEventListener('change', function(){
                                 var diplome = this.value;

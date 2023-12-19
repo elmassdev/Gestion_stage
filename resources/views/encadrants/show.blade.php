@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container">
+    <a href="/encadrants/create" class="btn btn-warning text-primary my-4 mx-4"><i class="fa fa-plus" aria-hidden="true"></i></a>
     <div class="row">
         {{-- the left part of the page --}}
         <div class="col-md-6">

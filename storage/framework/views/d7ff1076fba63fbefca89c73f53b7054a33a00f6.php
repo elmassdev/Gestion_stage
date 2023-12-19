@@ -1,8 +1,8 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
+<div class="container py-4">
 
-    <div class="row ">
-        <div class="col-md-9" style="overflow-y: scroll;">
+    <div class="row py-4">
+        <div class="col-md-9" >
 
             <div class="card">
                 <div class="card-header"><?php echo e(__('Ajouter un encadrant')); ?></div>

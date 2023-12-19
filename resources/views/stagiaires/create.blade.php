@@ -349,7 +349,7 @@
 
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                                    <option value="" disabled>----Diplôme----</option>
+                                    <option selected value="" disabled>----Diplôme----</option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -374,7 +374,7 @@
                             <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
                             <div class="col-md-8">
                                 <select id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
-                                <option selected disabled> ----- </option>
+                                <option selected disabled> -- Filières-- </option>
                                 @foreach($filieres as $f)
                                 <option value="{{ $f->filiere}}">{{$f->filiere}}</option>
                                 @endforeach
@@ -395,7 +395,7 @@
                             <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
                             <div class="col-md-8">
                                 <select id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
-                                <option selected disabled></option>
+                                <option selected disabled>--Etablissement--</option>
                                 @foreach($etablissements as $etab)
                                 <option value="{{ $etab->sigle_etab}}">{{$etab->sigle_etab}} - {{ $etab->Etab}}</option>
                                 @endforeach
@@ -412,7 +412,7 @@
                             <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
                             <div class="col-md-8">
                                 <select id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville"  autocomplete="ville">
-                                    <option selected hidden></option>
+                                    <option selected disabled> -- Ville -- </option>
                                        @foreach($villes as $ville)
                                 <option value="{{ $ville->ville }}">{{$ville->ville}}</option>
                                 @endforeach
@@ -445,6 +445,26 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
+
+                            <div class="col-md-8">
+                                <select id="type_formation" type="text" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation"  autocomplete="type_formation">
+                                    <option value="EI" selected>EI</option>
+                                    <option value="OFPPT">OFPPT</option>
+                                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                                    <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
+                                    <option value="IMM+IMT">IMM+IMT</option>
+                                    <option value="Autres">Autres</option>
+                            </select>
+                                @error('type_formation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
 
 
@@ -454,7 +474,7 @@
                                 <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
                                 <option selected disabled></option>
                                 @foreach($encadrants as $encadrant)
-                                <option value="{{ $encadrant->nom}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
+                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
                                 @endforeach
                             </select>
                                 @error('encadrant')
@@ -575,7 +595,7 @@
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
                             });
 
@@ -589,29 +609,54 @@
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
                             });
 
                             document.getElementById('encadrant').addEventListener('change', function() {
                                 var selectedEncadrantId = this.value;
                                 var serviceDropdown = document.getElementById('service');
-                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+                                serviceDropdown.innerHTML = '';
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.nom == selectedEncadrantId;
+                                        return encadrant.id == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {
                                         var option = document.createElement('option');
-                                        option.value = selectedEncadrant.service;
-                                        option.text = selectedEncadrant.service;
-                                        serviceDropdown.appendChild(option);
+                                        var filteredService = FilSer.find(function(service) {
+                                            return service.id === selectedEncadrant.service;
+                                        });
+
+                                        if (filteredService) {
+                                            option.value = filteredService.id;
+                                            option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
+                                            serviceDropdown.appendChild(option);
+                                        }
                                     }
                                 }
-                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
+
+                            // document.getElementById('encadrant').addEventListener('change', function() {
+                            //     var selectedEncadrantId = this.value;
+                            //     var serviceDropdown = document.getElementById('service');
+                            //     serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+
+                            //     if (selectedEncadrantId) {
+                            //         var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                            //             return encadrant.id == selectedEncadrantId;
+                            //         });
+
+                            //         if (selectedEncadrant) {
+                            //             var option = document.createElement('option');
+                            //             option.value = selectedEncadrant.service;
+                            //             option.text = selectedEncadrant.service;
+                            //             serviceDropdown.appendChild(option);
+                            //         }
+                            //     }
+                            //     serviceDropdown.innerHTML = '<option value="'+ services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                            // });
 
                             document.getElementById('diplome').addEventListener('change', function(){
                                 var diplome = this.value;

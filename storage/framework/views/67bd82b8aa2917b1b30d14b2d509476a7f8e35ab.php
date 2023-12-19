@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
 
 <div class="container">
+    <a href="/encadrants/create" class="btn btn-warning text-primary my-4 mx-4"><i class="fa fa-plus" aria-hidden="true"></i></a>
     <div class="row">
         
         <div class="col-md-6">

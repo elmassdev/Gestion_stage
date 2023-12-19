@@ -23,26 +23,33 @@ class IndicatorsController extends Controller
     {
         $tday =Carbon::today();
         $stagiaires = DB::table('stagiaires')
-            ->select(DB::raw('count(*) as total, service'))
+            ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->select(DB::raw('count(*) as total, services.sigle_service'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
-            ->groupBy('service')
+            ->groupBy('services.sigle_service')
             ->get();
+
         $stagenc = DB::table('stagiaires')
-            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
+            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->groupBy('nomenc')
             ->get();
+
             $query = $request->input('search');
-        $results = DB::table('stagiaires')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
-        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
-        ->where('date_debut', '=', $query)->paginate(6);
+            $results = DB::table('stagiaires')
+            ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+            ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
+            ->where('date_debut', '=', $query)
+            ->orderBy('id', 'desc')
+            ->paginate(4);
+
 
         $statoday = DB::table('stagiaires')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
-        ->where('date_debut', '=', $tday)->paginate(6);
+        ->where('date_debut', '=', $tday)->paginate(5);
         return view('indicators.index',compact('stagiaires','stagenc','statoday','results'));
     }
 

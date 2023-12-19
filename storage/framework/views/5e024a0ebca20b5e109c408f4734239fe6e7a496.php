@@ -52,7 +52,7 @@
                                                 <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom"><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom"><?php echo e($stagiaire->service); ?></span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom"><?php echo e($service->sigle_service); ?></span> </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Encadrant</span> <span class="text-left bottom"><?php echo e($encadrant->titre); ?> <?php echo e($encadrant->prenom); ?> <?php echo e($encadrant->nom); ?></span> </div>

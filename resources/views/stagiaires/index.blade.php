@@ -2,6 +2,7 @@
 @section('content')
 <div class="py-4">
     <a href="/stagiaires/create" class="btn btn-warning text-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a href="/stagiaires/1" class="btn btn-primary text-warning"><i class="fa-solid fa-magnifying-glass"></i></a>
 @if(count($stagiaires))
 <table class="table table-striped table-responsive">
     <thead>
@@ -52,7 +53,7 @@
 {{ $stagiaires->links() }}
 
 @else
-<p> Pas de stagiaires</p>
+<p class="bg-warning text-danger"> Pas de stagiaires</p>
 @endif
 
 </div>

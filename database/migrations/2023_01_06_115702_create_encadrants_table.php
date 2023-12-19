@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('phone');
             $table->string('email');
-            $table->string('service')->references('sigle_service')->on('services');
+            $table->integer('service')->references('id')->on('services');
             $table->timestamps();
         });
     }

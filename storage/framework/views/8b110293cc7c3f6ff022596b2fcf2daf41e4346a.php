@@ -15,7 +15,7 @@
                 <tbody>
                     <?php $__currentLoopData = $stagiaires; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stagiaire): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class=" table table-row my-auto h-10 small">
-                        <td><?php echo e($stagiaire->service); ?></td>
+                        <td><?php echo e($stagiaire->sigle_service); ?></td>
                         <td><?php echo e($stagiaire->total); ?></td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -74,7 +74,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-primary">
-                                <?php echo e(__('Valider')); ?>
+                                <?php echo e(__('Rechercher')); ?>
 
                             </button>
                         </div>
@@ -83,7 +83,12 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
-    <div class="row card border" style="overflow-y: scroll;">
+    <script>
+
+
+    </script>
+
+    <div class="row card border" >
         <?php if(count($results)): ?>
         <table class="table table-striped table-responsive">
             <thead>
@@ -121,8 +126,10 @@ unset($__errorArgs, $__bag); ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
+                    <?php echo e($results->links()); ?>
+
                     <?php else: ?>
-                    <p> Pas de stagiaires pour cette date</p>
+                    <p class="bg-warning text-danger"> Pas de stagiaires pour cette date</p>
                     <?php endif; ?>
                         </div>
 

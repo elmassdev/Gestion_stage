@@ -444,14 +444,33 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
+
+                            <div class="col-md-8">
+                                <select id="type_formation" type="text" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation"  autocomplete="type_formation">
+                                    <option value="EI" selected>EI</option>
+                                    <option value="OFPPT">OFPPT</option>
+                                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                                    <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
+                                    <option value="IMM+IMT">IMM+IMT</option>
+                                    <option value="Autres">Autres</option>
+                            </select>
+                                @error('type_formation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
                             <div class="col-md-8">
                                 <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
-                                <option value="{{$encadr->nom}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
+                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
                                 @foreach($encadrants as $encadrant)
-                                <option value="{{ $encadrant->nom}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
+                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
                                 @endforeach
                             </select>
                                 @error('encadrant')
@@ -466,9 +485,9 @@
                             <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
                             <div class="col-md-8">
                                 <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
-                                <option  value="{{$stagiaire->service}}" selected >{{$stagiaire->service}}</option>
+                                <option  value="{{$serv->id}}" selected >{{$serv->sigle_service}}</option>
                                 @foreach($services as $service)
-                                <option value="{{ $service->sigle_service}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
+                                <option value="{{ $service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
                                 @endforeach
                             </select>
                                 @error('service')
@@ -673,29 +692,35 @@
                                 var service_select = document.getElementById('service');
                                 service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
                                 filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                                 });
                             });
 
                             document.getElementById('encadrant').addEventListener('change', function() {
                                 var selectedEncadrantId = this.value;
                                 var serviceDropdown = document.getElementById('service');
-                                serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
+                                serviceDropdown.innerHTML = '';
 
                                 if (selectedEncadrantId) {
                                     var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.nom == selectedEncadrantId;
+                                        return encadrant.id == selectedEncadrantId;
                                     });
 
                                     if (selectedEncadrant) {
                                         var option = document.createElement('option');
-                                        option.value = selectedEncadrant.service;
-                                        option.text = selectedEncadrant.service;
-                                        serviceDropdown.appendChild(option);
+                                        var filteredService = FilSer.find(function(service) {
+                                            return service.id === selectedEncadrant.service;
+                                        });
+
+                                        if (filteredService) {
+                                            option.value = filteredService.id;
+                                            option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
+                                            serviceDropdown.appendChild(option);
+                                        }
                                     }
                                 }
-                                serviceDropdown.innerHTML = '<option value="'+ services.sigle_service + '">' + services.sigle_service+' - '+services.libelle + '</option>';
                             });
+
 
                             document.getElementById('diplome').addEventListener('change', function(){
                                 var diplome = this.value;

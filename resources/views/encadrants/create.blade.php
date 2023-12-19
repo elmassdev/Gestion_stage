@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container py-4">
 
-    <div class="row ">
-        <div class="col-md-9" style="overflow-y: scroll;">
+    <div class="row py-4">
+        <div class="col-md-9" >
 
             <div class="card">
                 <div class="card-header">{{ __('Ajouter un encadrant') }}</div>

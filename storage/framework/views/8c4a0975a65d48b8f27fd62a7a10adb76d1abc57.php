@@ -84,7 +84,7 @@
             Entité d'accueil
         </td>
         <td class="tdright">
-            : <?php echo e($stagiaire->lib); ?>(<?php echo e($stagiaire->service); ?>)
+            : <?php echo e($stagiaire->lib); ?>(<?php echo e($stagiaire->sigle); ?>)
         </td>
     </tr>
     <tr>

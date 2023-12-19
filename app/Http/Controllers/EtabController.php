@@ -126,14 +126,14 @@ class EtabController extends Controller
     //  * @param  int  $id
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function show(Request $request)
-    // {
-    //     $msg ='';
-    //     $results=[];
-    //     $query = $request->input('search');
-    //     $results = DB::table('etablissements')->where('sigle_etab', 'like', "%$query%")->paginate(4);
-    //     return view('etablissement', compact('results','msg'));
-    // }
+    public function search(Request $request)
+    {
+        $msg ='';
+        $results=[];
+        $query = $request->input('search');
+        $results = DB::table('etablissements')->where('sigle_etab', 'like', "%$query%")->paginate(4);
+        return view('etablissement', compact('results','msg'));
+    }
 
     // /**
     //  * Show the form for editing the specified resource.

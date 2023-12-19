@@ -17,7 +17,7 @@
                 <tbody>
                     @foreach($stagiaires as $stagiaire)
                     <tr class=" table table-row my-auto h-10 small">
-                        <td>{{ $stagiaire->service}}</td>
+                        <td>{{ $stagiaire->sigle_service}}</td>
                         <td>{{ $stagiaire->total}}</td>
                     </tr>
                     @endforeach
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Valider') }}
+                                {{ __('Rechercher') }}
                             </button>
                         </div>
                     </div>
@@ -70,7 +70,12 @@
             </div>
         </div>
     </div>
-    <div class="row card border" style="overflow-y: scroll;">
+    <script>
+
+
+    </script>
+
+    <div class="row card border" >
         @if(count($results))
         <table class="table table-striped table-responsive">
             <thead>
@@ -108,8 +113,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $results->links() }}
                     @else
-                    <p> Pas de stagiaires pour cette date</p>
+                    <p class="bg-warning text-danger"> Pas de stagiaires pour cette date</p>
                     @endif
                         </div>
 

@@ -53,7 +53,7 @@
                                                 <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom">{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom">{{$stagiaire->service}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom">{{$service->sigle_service}}</span> </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Encadrant</span> <span class="text-left bottom">{{$encadrant->titre}} {{$encadrant->prenom}} {{$encadrant->nom}}</span> </div>

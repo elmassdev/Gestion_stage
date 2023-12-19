@@ -34,7 +34,7 @@ class StagiaireController extends Controller
     public function index()
     {
         $stagiaires = DB::table('stagiaires')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
+        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->select('stagiaires.*', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
         ->orderBy('stagiaires.created_at', 'desc')
         ->paginate(10);
@@ -135,6 +135,7 @@ class StagiaireController extends Controller
         $stagiaire->etablissement = $request->input('etablissement');
         $stagiaire->ville = $request->input('ville');
         $stagiaire->type_stage = $request->input('type_stage');
+        $stagiaire->type_formation = $request->input('type_formation');
         $stagiaire->service = $request->input('service');
         $stagiaire->encadrant = $request->input('encadrant');
         $stagiaire->date_debut = $request->input('date_debut');
@@ -179,8 +180,9 @@ class StagiaireController extends Controller
         $stagiaire = Stagiaire::findOrFail($id);
         $previous = Stagiaire::where('id', '<', $stagiaire->id)->max('id');
         $next = Stagiaire::where('id', '>', $stagiaire->id)->min('id');
-        $encadrant = Encadrant::where('nom','=',$stagiaire->encadrant)->first();
-        return view('stagiaires.show', compact('stagiaire','encadrant','results'))->with('previous', $previous)->with('next', $next);
+        $encadrant = Encadrant::where('id','=',$stagiaire->encadrant)->first();
+        $service = Service::where('id','=',$stagiaire->service)->first();
+        return view('stagiaires.show', compact('stagiaire','encadrant','results','service'))->with('previous', $previous)->with('next', $next);
     }
 
     /**
@@ -197,14 +199,16 @@ class StagiaireController extends Controller
         $services = DB::table('services')->orderBy('sigle_service', 'asc')->get();
         $filieres = DB::table('filieres')->orderBy('filiere', 'asc')->get();
         $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
-        $encadr = Encadrant::where('nom','=',$stagiaire->encadrant)->first();
+        $encadr = Encadrant::where('id','=',$stagiaire->encadrant)->first();
+        $serv = Service::where('id','=',$stagiaire->service)->first();
+        $serv_enc = Service::where('id','=',$stagiaire->service)->first();
 
         //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
         //$villes = Ville::orderBy('ville', 'asc')->get();
         //$services = Service::orderBy('sigle_service', 'asc')->get();
         //$filieres = filiere::orderBy('filiere', 'asc')->get();
         //$encadrants =Encadrant::orderBy('nom', 'asc')->get();
-        return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants','encadr'));
+        return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants','encadr','serv'));
     }
 
     /**
@@ -348,14 +352,16 @@ class StagiaireController extends Controller
     public function generer_attestation($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.sigle_service')
+        ->join('Services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.nom','stagiaires.prenom', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
         $today = date('d F Y');
         $now = Carbon::now();
+        // dd($id);
 
 
         $dd = $stagiaire->date_debut;
+
         $dd = Carbon::parse($dd)->format('d F Y');
         $fin=$stagiaire->date_fin;
         $fin = Carbon::parse($fin)->format('d F Y');
@@ -391,8 +397,8 @@ class StagiaireController extends Controller
     public function generer_sujet($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.sigle_service')
-        ->join('encadrants','stagiaires.encadrant','=','encadrants.nom')
+        ->join('Services', 'stagiaires.service','=','services.id')
+        ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
@@ -437,10 +443,10 @@ class StagiaireController extends Controller
     public function generer_convocation($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.sigle_service')
-        ->join('encadrants','stagiaires.encadrant','=','encadrants.nom')
+        ->join('Services', 'stagiaires.service','=','services.id')
+        ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
+               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','services.sigle_service as sigle','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
         // $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         // ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
