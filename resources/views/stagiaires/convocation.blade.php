@@ -134,8 +134,10 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
 
-        @if ($stagiaire->sujet!=='')
+        @if ($stagiaire->sujet!='')
         <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>
        @endif
+
+
 
 @endsection

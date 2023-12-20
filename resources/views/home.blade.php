@@ -256,6 +256,8 @@
         background-image: url('{{ asset('/images/bg.jpg') }}');
         background-size: cover;
         background-position: center;
+        margin:0;
+        height: 100%;
     }
     /* #home {
     height: 92vh;
@@ -270,6 +272,7 @@
         color: orangered;
         padding: 2%;
         height: 10vh;
+        padding-left: 15%;
 
     }
     .motto {
@@ -277,7 +280,6 @@
         font-size: 36px;
         font-weight: bolder;
         color: orangered;
-        width: 50%;
         padding-left: 15%;
         transition: font-size 2s ease;
         height: 20vh;
@@ -289,6 +291,10 @@
         transition-delay: 0.5ms;
     }
 
+    /* .bottom{
+        padding-left: 15%;
+    } */
+
 
 
     .middle{
@@ -296,6 +302,11 @@
         width: 100%;
 
     }
+    @media screen and (max-width: 600px) {
+            #gear1, #gear2, #gear3 {
+                font-size: 2rem;
+            }
+        }
 
     </style>
 
@@ -323,7 +334,7 @@
                     color: #797676;
                     display: block;
                     float: left;
-                    font-size: 6rem;
+                    font-size: 4rem;
                     transition: font-size 2s ease;
                 }
 
@@ -331,14 +342,14 @@
                     color: orangered;
                     /* display: block;
                     float: left; */
-                    font-size: 10rem;
+                    font-size: 8rem;
                     transition-delay: 0.5ms;
                 }
                 #gear2:hover{
                     color: orangered;
                     /* display: block;
                     float: left; */
-                    font-size: 9rem;
+                    font-size: 8rem;
                     transition-delay: 0.4ms;
 
                 }
@@ -392,9 +403,9 @@
         </div>
 
         <div class="row col-md-10">
-            <h2 class="motto">Guidons les étudiants vers l'excellence  à travers notre système de gestion</h2>
+            <h2 class="motto">Optimisation, Efficacité, Performance!</h2>
         </div>
-        <div class="row bottom col-md-6 mx-auto">
+        <div class="row bottom col-md-8" >
             <a class="btn btn-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
             <a class="btn btn-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/indicators/index"> Indicateurs</a>
             <a class="btn btn-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/stagiaires"> Liste des stagiaires</a>

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 
 
@@ -20,7 +19,7 @@
         margin-left: 350px;
     }
     .Att_title{
-        text-align: center; 
+        text-align: center;
         padding-bottom: 70px;
         margin-top: 80px;
     }
@@ -109,7 +108,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
 
-    
+
         <style>
             .sign{
                 text-align: left;
@@ -123,16 +122,17 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
         </style>
 
 <div class="sign">  <p> <b>
-    P. Le Président Directeur Général & p.o., <br>          
+    P. Le Président Directeur Général & p.o., <br>
     P. Le Responsable développement RH </b> </p>
 
-</div>     
+</div>
 
 
 
-        <?php if($stagiaire->sujet!==''): ?>
-        <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>    
+        <?php if($stagiaire->sujet!=''): ?>
+        <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>
        <?php endif; ?>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.doc', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views//stagiaires/convocation_n.blade.php ENDPATH**/ ?>

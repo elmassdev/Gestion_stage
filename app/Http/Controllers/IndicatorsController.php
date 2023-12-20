@@ -26,6 +26,7 @@ class IndicatorsController extends Controller
             ->join('services', 'stagiaires.service', '=', 'services.id')
             ->select(DB::raw('count(*) as total, services.sigle_service'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
+            ->where('stagiaires.annule', '=', false)
             ->groupBy('services.sigle_service')
             ->get();
 
@@ -33,6 +34,7 @@ class IndicatorsController extends Controller
             ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
+            ->where('stagiaires.annule', '=', false)
             ->groupBy('nomenc')
             ->get();
 
@@ -41,15 +43,17 @@ class IndicatorsController extends Controller
             ->join('services', 'stagiaires.service', '=', 'services.id')
             ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
             ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
-            ->where('date_debut', '=', $query)
+            ->where('date_debut', '=', $query)->where('stagiaires.annule', '=', false)
             ->orderBy('id', 'desc')
-            ->paginate(4);
+            ->paginate(20);
 
 
         $statoday = DB::table('stagiaires')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.nom')
-        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc'))
-        ->where('date_debut', '=', $tday)->paginate(5);
+        ->join('services', 'stagiaires.service', '=', 'services.id')
+        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
+        ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
+        ->where('stagiaires.annule', '=', false)->paginate(6);
         return view('indicators.index',compact('stagiaires','stagenc','statoday','results'));
     }
 

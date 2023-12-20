@@ -137,9 +137,11 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
 
-        <?php if($stagiaire->sujet!==''): ?>
+        <?php if($stagiaire->sujet!=''): ?>
         <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>
        <?php endif; ?>
+
+
 
 <?php $__env->stopSection(); ?>
 
