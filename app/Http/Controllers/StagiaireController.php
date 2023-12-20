@@ -33,12 +33,21 @@ class StagiaireController extends Controller
      */
     public function index()
     {
-        $stagiaires = DB::table('stagiaires')->join('services',  'stagiaires.service', '=', 'services.id')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-        ->select('stagiaires.*','services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
+        // $stagiaires = DB::table('stagiaires')->join('services',  'stagiaires.service', '=', 'services.id')
+        // ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        // ->select('stagiaires.*','services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
+        // ->orderBy('stagiaires.created_at', 'desc')
+        // ->paginate(10);
+        // return view('stagiaires.index',compact('stagiaires'));
+        $stagiaires = DB::table('stagiaires')
+        ->join('services', 'stagiaires.service', '=', 'services.id')
+        ->leftJoin('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
+        ->where('stagiaires.site', '=', Auth::user()->site)
+        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
         ->orderBy('stagiaires.created_at', 'desc')
         ->paginate(10);
-        return view('stagiaires.index',compact('stagiaires'));
+
+return view('stagiaires.index', compact('stagiaires'));
     }
 
     /**
@@ -404,7 +413,7 @@ class StagiaireController extends Controller
         ->join('Services', 'stagiaires.service','=','services.id')
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
+               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','services.sigle_service as sigle_service','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
@@ -504,8 +513,9 @@ class StagiaireController extends Controller
 
     public function generer_op($id){
         $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
+        ->join('Services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['stagiaires.civilite','stagiaires.absence','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service'])->first();
+               ->get(['stagiaires.civilite','stagiaires.absence','services.sigle_service as sigle','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service'])->first();
 
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)

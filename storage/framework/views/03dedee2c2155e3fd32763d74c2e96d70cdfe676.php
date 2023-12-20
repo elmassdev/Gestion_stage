@@ -162,7 +162,7 @@
         <tr>
             <td>
 
-                    <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->service); ?> (*) <br> (OIG/H/D -  <?php echo e($stagiaire->code); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($ddem); ?>) <br>
+                    <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->sigle); ?> (*) <br> (OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($ddem); ?>) <br>
                 </div>
                     <div> <br> - Absentéisme</div>
 

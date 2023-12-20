@@ -162,7 +162,7 @@
         <tr>
             <td>
 
-                    <div>- Indemnité de stage pour la période allant du {{ $date_debut }} au {{ $date_fin }} à {{ $stagiaire->service }} (*) <br> (OIG/H/D -  {{$stagiaire->code}} /{{substr($stagiaire->site,0,1)}}/{{$year}} du {{$ddem}}) <br>
+                    <div>- Indemnité de stage pour la période allant du {{ $date_debut }} au {{ $date_fin }} à {{ $stagiaire->sigle}} (*) <br> (OIG/H/D -  {{substr($stagiaire->code, -4)}} /{{substr($stagiaire->site,0,1)}}/{{$year}} du {{$ddem}}) <br>
                 </div>
                     <div> <br> - Absentéisme</div>
 

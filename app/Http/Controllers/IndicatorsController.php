@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 Paginator::useBootstrap();
 
@@ -24,6 +25,7 @@ class IndicatorsController extends Controller
         $tday =Carbon::today();
         $stagiaires = DB::table('stagiaires')
             ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->where('stagiaires.site', '=', Auth::user()->site)
             ->select(DB::raw('count(*) as total, services.sigle_service'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->where('stagiaires.annule', '=', false)
@@ -32,6 +34,7 @@ class IndicatorsController extends Controller
 
         $stagenc = DB::table('stagiaires')
             ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+            ->where('stagiaires.site', '=', Auth::user()->site)
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->where('stagiaires.annule', '=', false)
@@ -42,6 +45,7 @@ class IndicatorsController extends Controller
             $results = DB::table('stagiaires')
             ->join('services', 'stagiaires.service', '=', 'services.id')
             ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+            ->where('stagiaires.site', '=', Auth::user()->site)
             ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
             ->where('date_debut', '=', $query)->where('stagiaires.annule', '=', false)
             ->orderBy('id', 'desc')
@@ -51,6 +55,7 @@ class IndicatorsController extends Controller
         $statoday = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        ->where('stagiaires.site', '=', Auth::user()->site)
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
         ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
         ->where('stagiaires.annule', '=', false)->paginate(6);
