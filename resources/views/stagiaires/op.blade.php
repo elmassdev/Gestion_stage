@@ -113,7 +113,7 @@
             </div>
             <div class="intro">
                 <p>
-                    <span>Le Secrétariat </span>comptable payera à : {{ $stagiaire->civilite }}. {{$stagiaire->prenom}} {{$stagiaire->nom}}, CIN N° {{$stagiaire->cin}}, élève
+                    <span>Le Secrétariat </span>comptable payera à : {{ $stagiaire->civilite }} {{$stagiaire->prenom}} {{$stagiaire->nom}}, CIN N° {{$stagiaire->cin}}, élève
                     stagiaire {{$stagiaire->article}} {{$stagiaire->sigle_etab}}, la somme de : {{$Le_net}} dhs ({{$net}} dh)
                 </p>
             </div>

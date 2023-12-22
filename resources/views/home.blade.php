@@ -163,7 +163,7 @@
 
     @media (min-width: 768px) {
         body{
-            background-image: url('/images/bg.png');
+            background-image: url('/images/bg1.png');
             background-repeat: no-repeat;
             background-position: right;
             margin: 0;
@@ -203,7 +203,6 @@
 
     }
 
-    /* table{ width: 50%;} */
     table td{
         margin: 0%;
         padding: 0%;
@@ -255,31 +254,34 @@
         }
 
         #link1, #link2,#link3 {
+            font-weight: 400;
             display: none;
             position: absolute;
             transform: translateX(-50%);
         }
 
         #gear:hover .fa-gear {
-            animation: none; /* Stop the rotation animation on gear hover */
+            animation: none;
         }
 
         #gear1:hover #link1,
         #gear2:hover #link2,
         #gear3:hover #link3 {
+            color:rgb(91, 144, 241);
             display: inline-block;
-            padding: 5%;
-            left: 40%;
-            top: -3%;
-            animation: none; /* Stop the rotation animation on link hover */
+            padding: 14%;
+            left: 42%;
+            top: 18%;
+            animation: none;
         }
 
+
         .fa-gear {
-            transition: transform 0.3s ease-in-out; /* Add a transition for smoother animation */
+            transition: transform 0.3s ease-in-out;
         }
 
         .spin {
-            animation: spin 15s linear infinite; /* Apply the spin animation */
+            animation: spin 15s linear infinite;
         }
 
         @keyframes spin {
@@ -389,18 +391,18 @@
                     <td></td>
                     <td id="gear">
                         <div id="gear1" class="fa fa-5x fa-gear spin">
-                            <a id="link1" class="btn btn-outline-warning col-md-6 mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link1" class="btn btn-outline-warning col-md-5 mx-auto border border-warning rounded-pill fs-5"
                             href="/stagiaires/create"> Ajouter un stagiaire </a>
                         </div>
 
                         <div id="gear2" class="fa fa-5x fa-gear spin-back">
-                            <a id="link2" class="btn btn-outline-warning col-md-6 mx-auto border border-warning rounded-pill fs-5"
-                            href="/indicators/index"> Indicateurs</a>
+                            <a id="link2" class="btn btn-outline-warning col-md-5  mx-auto border border-warning rounded-pill fs-5"
+                            href="/indicators/index"> Indicateurs <span style="color: transparent"> <br>. <br> . </span></div></a>
                         </div>
 
                         <div id="gear3" class="fa fa-5x fa-gear spin">
-                            <a id="link3" class="btn btn-outline-warning col-md-6 mx-auto border border-warning rounded-pill fs-5"
-                            href="/stagiaires"> Liste des stagiaires</a>
+                            <a id="link3" class="btn btn-outline-warning col-md-5 mx-auto border border-warning rounded-pill fs-5"
+                            href="/stagiaires"> Liste des stagiaires<span style="color: transparent"> <br>. </span></a>
                         </div>
                     </td>
                     <td></td>
@@ -419,7 +421,7 @@
         </div>
 
         <div id="sign">
-            <p id="my-auto">  <b> Developed By <br> Benguerir Team </b></p>
+            <p id="my-auto">  <b> Developed By <br> Elmassoudi Dev </b></p>
         </div>
     </div>
 </body>

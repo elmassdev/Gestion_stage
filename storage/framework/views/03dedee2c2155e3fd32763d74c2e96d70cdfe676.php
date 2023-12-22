@@ -113,7 +113,7 @@
             </div>
             <div class="intro">
                 <p>
-                    <span>Le Secrétariat </span>comptable payera à : <?php echo e($stagiaire->civilite); ?>. <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, CIN N° <?php echo e($stagiaire->cin); ?>, élève
+                    <span>Le Secrétariat </span>comptable payera à : <?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, CIN N° <?php echo e($stagiaire->cin); ?>, élève
                     stagiaire <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->sigle_etab); ?>, la somme de : <?php echo e($Le_net); ?> dhs (<?php echo e($net); ?> dh)
                 </p>
             </div>

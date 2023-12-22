@@ -566,6 +566,40 @@ return view('stagiaires.index', compact('stagiaires'));
         $retenue = $absence * $dailyFee;
         $net = $somme - $retenue;
 
+        if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
+            if($net>1500){
+                $net=1500;
+            }
+        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
+            if($net>3600){
+                $net=3600;
+            }
+        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
+            if($net>12000){
+                $net=12000;
+            }
+        } elseif ($niveau == '1ère année' && $diplome == 'Master') {
+            if($net>3600){
+                $net=3600;
+            }
+        } elseif ($niveau == '2ème année' && $diplome == 'Master') {
+            if($net>12000){
+                $net=12000;
+            }
+        } elseif ($niveau == '4ème année' && $diplome == '') {
+            if($net>3600){
+                $net=3600;
+            }
+        } elseif ($niveau == '5ème année' && $diplome == '') {
+            if($net>12000){
+                $net=12000;
+            }
+        }elseif (($etab == 'IMM' || $etab == 'IMT') && $niveau == '1ère année') {
+            if($net>1200){
+                $net=1200;
+            }
+        }
+
         $net_lettres_formatter = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
         $net_lettres_string = $net_lettres_formatter->format($net);
         $Le_net = htmlspecialchars($net_lettres_string);

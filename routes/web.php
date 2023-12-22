@@ -54,8 +54,10 @@ Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::cla
 Route::resource('etablissements', EtabController::class)->middleware('auth');
 Route::resource('filieres', FiliereController::class)->middleware('auth');
 Route::resource('indicators/index', IndicatorsController::class)->middleware('auth');
-//Route::resource('indicators/parservice', IndicatorsController::class);
+
 
 Route::get('/indicators/parservice', [IndicatorsController::class, 'ParService'])->name('encadrants/create')->middleware('auth');
-//Route::get('/indicators', [App\Http\Controllers\IndicatorsController::class, 'index'])->name('indicators')->middleware('auth');
-//Route::get('/indicators', [App\Http\Controllers\IndicatorsController::class, 'show'])->name('indicators')->middleware('auth');
+Route::get('/indicators/ExcelStaSer', [IndicatorsController::class, 'ExcelStaSer']);
+Route::get('/indicators/ExcelStaEnc', [IndicatorsController::class, 'ExcelStaEnc']);
+Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);
+Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);

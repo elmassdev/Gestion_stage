@@ -145,21 +145,19 @@
                                 }
 
 
-                                // Check if either date is not a valid date
+
                                 if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
                                     alert("Merci d'entrer des dates valides.");
                                     return false;
                                 }
-
-
                                 if (startDate.getTime() >= endDate.getTime()) {
                                     alert("La date de début doit être antérieure à la date de fin.");
                                     return false;
                                 }
-                                if ( startDate.getTime() < today+1 ) {
-                                    alert("La date de début ne peut pas être antérieure à aujourd'hui.");
-                                    return false;
-                                }
+                                // if ( startDate.getTime() < today+1 ) {
+                                //     alert("La date de début ne peut pas être antérieure à aujourd'hui.");
+                                //     return false;
+                                // }
                                 if (startDate.getDay()===6 || startDate.getDay()===0) {
                                     alert("La date de début correspond à un weekend");
                                     return false;
@@ -918,30 +916,10 @@ unset($__errorArgs, $__bag); ?>
                                 }
                             });
 
-                            // document.getElementById('encadrant').addEventListener('change', function() {
-                            //     var selectedEncadrantId = this.value;
-                            //     var serviceDropdown = document.getElementById('service');
-                            //     serviceDropdown.innerHTML = '<option selected disabled>Service</option>';
-
-                            //     if (selectedEncadrantId) {
-                            //         var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                            //             return encadrant.id == selectedEncadrantId;
-                            //         });
-
-                            //         if (selectedEncadrant) {
-                            //             var option = document.createElement('option');
-                            //             option.value = selectedEncadrant.service;
-                            //             option.text = selectedEncadrant.service;
-                            //             serviceDropdown.appendChild(option);
-                            //         }
-                            //     }
-                            //     serviceDropdown.innerHTML = '<option value="'+ services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
-                            // });
-
                             document.getElementById('diplome').addEventListener('change', function(){
                                 var diplome = this.value;
                                 var etab = document.getElementById('etablissement').value;
-                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','ENSEM','FSS']
                                 var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
                                 document.getElementById('EI').checked = isMasterOrCycle;
                                 var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
@@ -951,20 +929,14 @@ unset($__errorArgs, $__bag); ?>
                             document.getElementById('etablissement').addEventListener('change', function(){
                                 var etab = this.value;
                                 var diplome = document.getElementById('diplome').value;
-                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
+                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC','ENSEM','FSS']
                                 var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
                                 document.getElementById('EI').checked = isMoCI;
-                                var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
+                                var isRem = ((isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
                                 document.getElementById('remunere').checked =isRem;
                             });
 
                         </script>
-
-
-
-
-
-
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
