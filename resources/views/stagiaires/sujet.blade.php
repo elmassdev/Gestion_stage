@@ -37,7 +37,7 @@
     </tr>
     <tr>
         <td class="tdleft">Lieu de stage</td>
-        <td class="tdright">: {{$stagiaire->lib}}({{$stagiaire->service}})</td>
+        <td class="tdright">: {{$stagiaire->lib}}({{$stagiaire->sigle_service}})</td>
     </tr>
     <tr>
         <td class="tdleft">Période de stage</td>

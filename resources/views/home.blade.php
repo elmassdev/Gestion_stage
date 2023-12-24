@@ -57,7 +57,7 @@
         box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
         transition: 0.3s;
     }
-        #darkmode-toggle {
+    #darkmode-toggle {
         width: 0;
         height: 0;
         visibility: hidden;
@@ -163,9 +163,7 @@
 
     @media (min-width: 768px) {
         body{
-            background-image: url('/images/bg1.png');
             background-repeat: no-repeat;
-            background-position: right;
             margin: 0;
             padding: 0;
         }
@@ -218,15 +216,12 @@
     }
 
     #gear1:hover, #gear3:hover, #gear2:hover {
+        color:#ffc107;
         font-size: 20rem;
         transition-delay: 0.5ms;
     }
 
-    @media screen and (max-width: 600px) {
-            #gear1, #gear2, #gear3 {
-                font-size: 2rem;
-            }
-        }
+
 
     .spin {
         -webkit-animation:spin 15s linear infinite;
@@ -264,13 +259,27 @@
             animation: none;
         }
 
-        #gear1:hover #link1,
-        #gear2:hover #link2,
-        #gear3:hover #link3 {
-            color:rgb(91, 144, 241);
+        #gear1:hover #link1 {
+            /* color:rgb(91, 144, 241); */
             display: inline-block;
             padding: 14%;
-            left: 42%;
+            left: 21%;
+            top: 18%;
+            animation: none;
+        }
+        #gear2:hover #link2 {
+            /* color:rgb(91, 144, 241); */
+            display: inline-block;
+            padding: 14%;
+            left: 41%;
+            top: 18%;
+            animation: none;
+        }
+        #gear3:hover #link3 {
+            /* color:rgb(91, 144, 241); */
+            display: inline-block;
+            padding: 14%;
+            left: 63%;
             top: 18%;
             animation: none;
         }
@@ -289,7 +298,6 @@
             100% { transform: rotate(360deg); }
         }
         #link1, #link2,#link3{
-            color:rgb(157, 157, 157);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 20%;
             font-weight: bolder;
@@ -391,17 +399,17 @@
                     <td></td>
                     <td id="gear">
                         <div id="gear1" class="fa fa-5x fa-gear spin">
-                            <a id="link1" class="btn btn-outline-warning col-md-5 mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link1" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5"
                             href="/stagiaires/create"> Ajouter un stagiaire </a>
                         </div>
 
                         <div id="gear2" class="fa fa-5x fa-gear spin-back">
-                            <a id="link2" class="btn btn-outline-warning col-md-5  mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link2" class="btn  col-md-5 text-primary  mx-auto border border-warning rounded-pill fs-5"
                             href="/indicators/index"> Indicateurs <span style="color: transparent"> <br>. <br> . </span></div></a>
                         </div>
 
                         <div id="gear3" class="fa fa-5x fa-gear spin">
-                            <a id="link3" class="btn btn-outline-warning col-md-5 mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link3" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5"
                             href="/stagiaires"> Liste des stagiaires<span style="color: transparent"> <br>. </span></a>
                         </div>
                     </td>
@@ -470,6 +478,13 @@
         setTheme(newTheme);
         navbar.classList.remove('navbar-dark', 'bg-dark', 'navbar-light', 'bg-light');
         navbar.classList.add(`navbar-${newTheme}`, `bg-${newTheme}`);
+        if(newTheme==='dark'){
+            bodyElement.style.background = 'black';
+        }else{
+            bodyElement.style.background = 'url("/images/bg.jpg")';
+            bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundPosition= "center";
+        }
         updateToggleButton();
     });
 
@@ -479,8 +494,12 @@
         if(currentTheme==='dark'){
             navbar.classList.add(`navbar-dark`, `bg-dark`);
             toggleThemeButton.style.backgroundColor = 'linear-gradient(180deg,#777,#3a3a3a)';
+            bodyElement.style.background = 'black';
         }else{
             navbar.classList.add(`navbar-light`, `bg-light`);
+            bodyElement.style.background = 'url("/images/bg.jpg")';
+            bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundPosition= "center";
         }
         updateToggleButton();
     }

@@ -194,12 +194,7 @@
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 
                             <div class="col-md-8">
-                                {{-- <input id="date_demande" type="text" class="form-control datepicker @error('date_demande') is-invalid @enderror" name="date_demande" value="{{ old('date_demande', date('d/m/Y')) }}" pattern="\d{2}/\d{2}/\d{4}" required autocomplete="date_demande" placeholder="dd/mm/yyyy" minlength="10" maxlength="10" oninput="formatDate(this)" onchange="validateDate(this)" title="Enter a date in the format dd/mm/yyyy" /> --}}
-
-                                {{-- <input id="date_demande" type="text" class="form-control datepicker @error('date_demande') is-invalid @enderror" name="date_demande" value="{{ old('date_demande') }}" pattern="\d{2}/\d{2}/\d{4}" required autocomplete="date_demande" placeholder="dd/mm/yyyy" minlength="10" maxlength="10" oninput="formatDate(this)" onchange="validateDate(this)" title="Enter a date in the format dd/mm/yyyy" /> --}}
-
                                 <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  @error('date_demande') is-invalid @enderror"   name="date_demande" value="{{ old('date_demande') }}" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
-
                                 @error('date_demande')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

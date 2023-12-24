@@ -16,6 +16,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+
 
 Paginator::useBootstrap();
 
@@ -299,4 +301,5 @@ class IndicatorsController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
     }
+
 }

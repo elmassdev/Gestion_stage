@@ -23,6 +23,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -255,7 +258,8 @@
 
         <style>
             .cards{
-          font-family: 'Poppins', sans-serif;
+          /* font-family: 'Poppins', sans-serif; */
+          font-family: 'Roboto', sans-serif;
           font-weight: 400;
           font-size: 20px;
           max-width: 100%;
@@ -273,9 +277,13 @@
 
         .B,.Y{
 
-            background-color: #e67700;
-            background-image: url(http://www.transparenttextures.com/patterns/escheresque-dark.png);
+            /* background-color: #e67700;*/
+            /* background-image: url('/images/wood.jpg');
+            background-size: cover;
+            background-position: center; */
             font-family: Nunito;
+            background-color: rgb(167, 113, 63);
+            background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
             font-display:auto;
             font-weight: 400;
             font-size: 16px;
@@ -285,11 +293,12 @@
             box-sizing: border-box;
             margin-bottom: 1rem;
             padding: 1rem;
+            color: #ffffff;
         }
 
         .B a , .Y a{
-          color:rgb(220, 220, 224) !important;
-          font-size: larger;
+          color: #ffffff !important;
+          font-size: 1.2rem;
 
         }
 

@@ -37,7 +37,7 @@
     </tr>
     <tr>
         <td class="tdleft">Lieu de stage</td>
-        <td class="tdright">: <?php echo e($stagiaire->lib); ?>(<?php echo e($stagiaire->service); ?>)</td>
+        <td class="tdright">: <?php echo e($stagiaire->lib); ?>(<?php echo e($stagiaire->sigle_service); ?>)</td>
     </tr>
     <tr>
         <td class="tdleft">Période de stage</td>
@@ -50,4 +50,5 @@
 </table>
 
 <h3> <b>Sujet:</b> </h3><br>
-<div class="sujet"><?php echo e($stagiaire->sujet); ?></div><?php /**PATH D:\Share\main\Gestion_stage\resources\views//stagiaires/sujet.blade.php ENDPATH**/ ?>
+<div class="sujet"><?php echo e($stagiaire->sujet); ?></div>
+<?php /**PATH D:\Share\main\Gestion_stage\resources\views//stagiaires/sujet.blade.php ENDPATH**/ ?>

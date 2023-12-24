@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\VilleController;
 use Illuminate\Support\Facades\Route;
@@ -61,3 +62,4 @@ Route::get('/indicators/ExcelStaSer', [IndicatorsController::class, 'ExcelStaSer
 Route::get('/indicators/ExcelStaEnc', [IndicatorsController::class, 'ExcelStaEnc']);
 Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);
 Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);
+Route::get('/indicators/charts', [ChartController::class, 'StagParEnc']);

@@ -11,11 +11,15 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     @php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
     @endphp
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 
 
 
@@ -28,7 +32,6 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            font-family: sans-serif;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -48,22 +51,6 @@
             font-size: 12px;
 
         }
-         .title_container{
-        justify-content: center;
-        padding-left: 20%;
-        padding-right: 20%;
-
-
-        }
-        .op_title{
-            border: solid 1px black;
-            width: 45%;
-            padding: 2%;
-            font-size: 20px;
-            margin-bottom: 0;
-
-        }
-
         .intro{
             margin-top: 3%;
         }
@@ -85,13 +72,13 @@
             <tr>
                 <td>
                     <div>
-                        <img src="{{ public_path("/images/logow.jpg") }}"> <br>
+                        <img class="my-2" src="{{ public_path("/images/logow.jpg") }}"> <br>
                         <b>SBU Industrial Facility Management <br>
                         Direction Industrielle Mines Gantour <br>
                         Direction Capital Humain Gantour <br>
                         Developpement RH <br></b>
                     </div>
-                    <div>
+                    <div class="py-2">
                         <p>OIG/H/D -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
                     </div>
                 </td>
@@ -107,9 +94,9 @@
 
 
         <div>
-            <div class="title_container">
-                <h4 class="op_title"> Ordre de paiement</h4>
-                <p class="imp">Imputation: ____________</p>
+            <div class="container">
+                <div class="row text-center mx-auto"><h4 class="mx-auto py-1 fs-5" style="font-family:sans-serif !important; border:1px solid black; width:38%"> Ordre de paiement</h4></div>
+                <p class="row text-center mx-auto fs-2">Imputation: ____________</p>
             </div>
             <div class="intro">
                 <p>
@@ -117,7 +104,8 @@
                     stagiaire {{$stagiaire->article}} {{$stagiaire->sigle_etab}}, la somme de : {{$Le_net}} dhs ({{$net}} dh)
                 </p>
             </div>
-            <div>
+        </div>
+        <div>
 
 
                 <style>

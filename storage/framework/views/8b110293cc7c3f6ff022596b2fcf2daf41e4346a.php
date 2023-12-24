@@ -60,7 +60,7 @@
                         <div class="row">
                             <h6 class="col-md-5">Liste des stagiaires pour une date:</h6>
                             <div class="col-md-3">
-                                <input id="search" type="date" class="form-control <?php $__errorArgs = ['search'];
+                                <input id="search" type="date" value="<?php echo date('Y-m-d');?>" class="form-control <?php $__errorArgs = ['search'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -186,17 +186,17 @@ unset($__errorArgs, $__bag); ?>
         </div>
 
     </div>
-    <div class="col-md-3 right">
+    <div class="col-md-3  mx-auto py-2 right">
         <div class="card">
             <div class="card-header bg-secondary"><?php echo e(__('Exportation des données vers un fichier Excel:')); ?></div>
             <form method="GET" action="/indicators/ExportSta" id="export-form" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
                 <div class="container">
-                    <p>Merci de choisir l'interval spuhaité: </p>
+                    <p>Merci de choisir l'interval souhaité: </p>
                     <div class="row mb-3">
                         <label for="firstdate" class="col-md-3 col-form-label text-md-left"> Début d'interval</label>
                         <div class="col-md-8">
-                            <input id="firstdate" type="date"  class="form-control datepicker  <?php $__errorArgs = ['firstdate'];
+                            <input id="firstdate" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  <?php $__errorArgs = ['firstdate'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -221,7 +221,7 @@ unset($__errorArgs, $__bag); ?>
                     <div class="row mb-3">
                         <label for="secdate" class="col-md-3 col-form-label text-md-left"> Fin d'interval</label>
                         <div class="col-md-8">
-                            <input id="secdate" type="date"  class="form-control datepicker  <?php $__errorArgs = ['secdate'];
+                            <input id="secdate" type="date" value="<?php echo date('Y-m-d');?>" class="form-control datepicker  <?php $__errorArgs = ['secdate'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -244,8 +244,8 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary rounded-pill" onclick="validateDate()"  >
+                    <div class="col-md-4 my-2 mx-auto">
+                        <button type="submit" id="export-button" class="btn btn-primary rounded-pill" onclick="validateDate()">
                             Exporter
                         </button>
                     </div>
@@ -253,30 +253,47 @@ unset($__errorArgs, $__bag); ?>
             </form>
         </div>
     </div>
-
-
-
     <script>
-         function validateDate() {
-        const startDateInput = document.getElementById("firstdate");
-        const endDateInput = document.getElementById("secdate");
-        const startDate = new Date(startDateInput.value);
-        const endDate = new Date(endDateInput.value);
+        document.addEventListener('DOMContentLoaded', function () {
+            const startDateInput = document.getElementById("firstdate");
+            const endDateInput = document.getElementById("secdate");
+            const exportButton = document.getElementById("export-button");
 
-        if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-            alert("Merci d'entrer des dates valides.");
-            return false;
-        }
+            function validateDate() {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
 
-        if (startDate.getTime() >= endDate.getTime()) {
-            alert("La date de début doit être antérieure à la date de fin.");
-            return false;
-        }else{
-            document.getElementById("export-form").submit();
-        }
+                if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+                    alert("Merci d'entrer des dates valides.");
+                    return false;
+                }
 
-    }
+                if (startDate.getTime() >= endDate.getTime()) {
+                    alert("La date de début doit être antérieure à la date de fin.");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function updateButtonStatus() {
+                exportButton.disabled = !validateDate();
+            }
+
+            function updateButtonOnEndDateChange() {
+                updateButtonStatus();
+            }
+
+            startDateInput.addEventListener('input', updateButtonStatus);
+            endDateInput.addEventListener('input', updateButtonOnEndDateChange);
+        });
     </script>
+
+
+
+
+
+
 
 
 </div>

@@ -44,7 +44,7 @@ class StagiaireController extends Controller
         ->leftJoin('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', Auth::user()->site)
         ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
-        ->orderBy('stagiaires.created_at', 'desc')
+        ->orderBy('stagiaires.code', 'desc')
         ->paginate(10);
 
 return view('stagiaires.index', compact('stagiaires'));

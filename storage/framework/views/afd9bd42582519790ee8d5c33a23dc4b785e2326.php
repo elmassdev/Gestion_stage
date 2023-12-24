@@ -182,10 +182,6 @@
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 
                             <div class="col-md-8">
-                                
-
-                                
-
                                 <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -194,7 +190,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"   name="date_demande" value="<?php echo e(old('date_demande')); ?>" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
-
                                 <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
