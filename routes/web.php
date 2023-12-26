@@ -57,9 +57,10 @@ Route::resource('filieres', FiliereController::class)->middleware('auth');
 Route::resource('indicators/index', IndicatorsController::class)->middleware('auth');
 
 
+
 Route::get('/indicators/parservice', [IndicatorsController::class, 'ParService'])->name('encadrants/create')->middleware('auth');
 Route::get('/indicators/ExcelStaSer', [IndicatorsController::class, 'ExcelStaSer']);
 Route::get('/indicators/ExcelStaEnc', [IndicatorsController::class, 'ExcelStaEnc']);
 Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);
 Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);
-Route::get('/indicators/charts', [ChartController::class, 'StagParEnc']);
+

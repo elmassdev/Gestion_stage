@@ -217,7 +217,6 @@
 
     #gear1:hover, #gear3:hover, #gear2:hover {
         color:#ffc107;
-        /* color:orangered; */
         font-size: 20rem;
         transition-delay: 0.5ms;
     }

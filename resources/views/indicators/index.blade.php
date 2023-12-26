@@ -12,10 +12,10 @@
     }
 </style>
 <div class="row py-4">
-    <div class="col-md-8 left">
+    <div class="col-md-9 left">
         <div class="row">
             <div class="col-md-6 border">
-                <h6>Bilan stagiaires en cours par services: <a class="btn text-success  rounded-pill" href="/indicators/ExcelStaSer"><i class="fa-solid fa-file-export" ></i></a> </h6>
+                <h6>Bilan stagiaires en cours par service: <a class="btn text-success  rounded-pill" href="/indicators/ExcelStaSer"><i class="fa-solid fa-file-export" ></i></a> </h6>
                 <table class="table table-striped table-responsive">
                     <thead>
                         <tr class="small">
@@ -33,9 +33,73 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="col-md-6 border">
-                <h6> Bilan stagiaires en cours par encadrants: <a class="btn text-success  rounded-pill" href="/indicators/ExcelStaEnc"><i class="fa-solid fa-file-export" ></i></a> </h6>
+                <canvas id="myPieChart" height="200px"></canvas>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    var data = @json($stagiaires);
+
+                    var labels = data.map(function(item) {
+                        return item.sigle_service;
+                    });
+
+                    var values = data.map(function(item) {
+                        return item.total;
+                    });
+
+                    var ctx = document.getElementById('myPieChart').getContext('2d');
+                    var myPieChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Nombre de stagiaires:',
+                                data: values,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)'
+                                    // Add more colors if needed
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                    // Add more colors if needed
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Bilan stagiaires en cours par service: '+new Date().toLocaleDateString('en-GB'),
+                                    padding: {
+                                        top: 10,
+                                        bottom: 30
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                    document.getElementById('myPieChart').style.height = document.querySelector('.left > div').style.height;
+                </script>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border">
+                <h6> Bilan stagiaires en cours par encadrant: <a class="btn text-success  rounded-pill" href="/indicators/ExcelStaEnc"><i class="fa-solid fa-file-export" ></i></a> </h6>
                 <table class="table table-striped table-responsive">
                     <thead>
                         <tr class="small">
@@ -52,6 +116,70 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="col-md-6 border">
+                <canvas id="stagenc" height="200px"></canvas>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    var data = @json($stagenc);
+
+                    var labels = data.map(function(item) {
+                        return item.nomenc;
+                    });
+
+                    var values = data.map(function(item) {
+                        return item.total;
+                    });
+
+                    var ctx = document.getElementById('stagenc').getContext('2d');
+                    var myPieChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label:'Nombre de stagiaires',
+                                data: values,
+                                label:'Nombre de stagiaires',
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)'
+                                    // Add more colors if needed
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                    // Add more colors if needed
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Bilan stagiaires en cours par encadrant: '+new Date().toLocaleDateString('en-GB'),
+                                    padding: {
+                                        top: 10,
+                                        bottom: 30
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                    document.getElementById('stagenc').style.height = document.querySelector('.left > div').style.height;
+                </script>
+
             </div>
         </div>
         <div class="row card my-2">
@@ -125,9 +253,9 @@
         </div>
         @endif
 
-        <div class="row card border" style="overflow-y: scroll;">
-            <h6 class="col-md-5">Liste des stagiaires en cours: <a class="btn text-success  rounded-pill" href="/indicators/ListeCurrentSta"> <i class="fa-solid fa-file-export" ></i></a></h6>
-            @if(count($statoday))
+        {{-- <div class="row card border">
+
+             @if(count($statoday))
             <table class="table table-striped table-responsive">
                 <thead>
                     <tr class="small">
@@ -168,12 +296,13 @@
             @else
             <p> Pas de stagiaires en ce moment!</p>
             @endif
-        </div>
+        </div> --}}
 
     </div>
-    <div class="col-md-3  mx-auto py-2 right">
+    <div class="col-md-2  mx-auto py-2 right">
+        <h6 class="col-md-9 border border-solid"> <span class="mx-2"> Exporter la liste des stagiaires en cours:  </span> <a class="btn text-success  rounded-pill" href="/indicators/ListeCurrentSta"> <i class="fa-solid fa-file-export" ></i></a></h6>
         <div class="card">
-            <div class="card-header bg-secondary">{{ __('Exportation des données vers un fichier Excel:') }}</div>
+            <div class="card-header">{{ __('Exportation des données vers un fichier Excel:') }}</div>
             <form method="GET" action="/indicators/ExportSta" id="export-form" enctype="multipart/form-data">
                 @csrf
                 <div class="container">
@@ -209,7 +338,97 @@
                 </div>
             </form>
         </div>
+        <div class="col-md-12">
+            <canvas id="monthlyStagiairesChart" width="400" height="300"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <script>
+                var data = @json($monthlysta);
+                var months = [];
+                var counts = [];
+
+                data.forEach(function(item) {
+                    months.push(item.mois + '/' + item.annee);
+                    counts.push(item.total);
+                });
+
+                var ctx = document.getElementById('monthlyStagiairesChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Stagiaires per Month',
+                            data: counts,
+                            fill: false, // Set to false to display a line without filling the area underneath
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            pointRadius: 5, // Set to adjust the size of data points
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Set to the color of data points
+                            tension: 0.4,
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Bilan des stagiaires par mois : ',
+                                    padding: {
+                                        top: 10,
+                                        bottom: 30
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+
+            {{-- <script>
+                var data = @json($monthlysta);
+                var months = [];
+                var counts = [];
+
+                data.forEach(function(item) {
+                    months.push(item.mois + '/' + item.annee);
+                    counts.push(item.total);
+                });
+
+                var ctx = document.getElementById('monthlyStagiairesChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Stagiaires per Month',
+                            data: counts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script> --}}
+
+        </div>
     </div>
+</div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const startDateInput = document.getElementById("firstdate");

@@ -56,7 +56,6 @@ class IndicatorsController extends Controller
             ->orderBy('code', 'desc')
             ->paginate(20);
 
-
         $statoday = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
@@ -64,30 +63,20 @@ class IndicatorsController extends Controller
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
         ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
         ->where('stagiaires.annule', '=', false)->paginate(4);
-        return view('indicators.index',compact('stagiaires','stagenc','statoday','results'));
+
+        $monthlysta = Stagiaire::select(DB::raw('COUNT(*) as total'), DB::raw('MONTH(date_debut) as mois'), DB::raw('YEAR(date_debut) as annee'))
+            ->whereRaw('date_debut >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)')
+            ->groupBy(DB::raw('YEAR(date_debut)'), DB::raw('MONTH(date_debut)'))
+            ->orderBy('annee', 'asc')
+            ->orderBy('mois', 'asc')
+            ->get();
+
+        return view('indicators.index',compact('stagiaires','stagenc','statoday','results','monthlysta'));
     }
 
-    public function ParService()
-    {
-        $result = DB::table('stagiaires')
-        ->select(
-            'encadrants.id as encadrant_id',
-            'encadrants.nom as encadrant_nom',
-            'encadrants.prenom as encadrant_prenom',
-            'services.id as service_id',
-            'services.libelle as service_libelle',
-            DB::raw('MONTH(stagiaires.date_debut) as month'),
-            DB::raw('YEAR(stagiaires.date_debut) as year'),
-            DB::raw('COUNT(*) as count_stagiaires')
-        )
-        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.nom')
-        ->join('services', 'stagiaires.service', '=', 'services.libelle')
-        ->groupBy('encadrants.id', 'encadrants.nom', 'encadrants.prenom', 'services.id', 'services.libelle', 'month', 'year')
-        ->orderBy('year', 'desc')
-        ->orderBy('month', 'desc')
-        ->get();
-        return view('indicators.parservice', ['result' => $result]);
-    }
+
+
+
 
     public function ExcelStaSer()
     {
@@ -131,12 +120,8 @@ class IndicatorsController extends Controller
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-
-
         $sheet->setCellValue('A1', "Encadrant");
         $sheet->setCellValue('B1', 'Nombre de stagiaires');
-
-
         $today = Carbon::today()->format('d-m-Y');
         $data = DB::table('stagiaires')->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
@@ -169,7 +154,6 @@ class IndicatorsController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-
         $sheet->setCellValue('A1', "Titre");
         $sheet->setCellValue('B1', 'nom');
         $sheet->setCellValue('C1', 'prénom');
@@ -185,9 +169,6 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('M1', 'Sujet');
         $sheet->setCellValue('N1', 'Type formation');
         $sheet->setCellValue('O1', 'rémunéré');
-
-
-
 
         $data = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
@@ -216,7 +197,6 @@ class IndicatorsController extends Controller
             $sheet->setCellValue('M' . ($row + 2), $rowData->sujet);
             $sheet->setCellValue('N' . ($row + 2), $rowData->type_formation);
             $sheet->setCellValue('O' . ($row + 2), $rowData->remunere);
-
         }
 
         // Set the response headers for Excel file download
@@ -238,8 +218,6 @@ class IndicatorsController extends Controller
         $begdate = $request->input('firstdate');
         $enddate = $request->input('secdate');
 
-
-
         $sheet->setCellValue('A1', "Titre");
         $sheet->setCellValue('B1', 'nom');
         $sheet->setCellValue('C1', 'prénom');
@@ -257,9 +235,6 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('O1', 'rémunéré');
         $sheet->setCellValue('P1', 'Annulé');
         $sheet->setCellValue('Q1', 'OP établi');
-
-
-
 
         $data = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
@@ -288,9 +263,7 @@ class IndicatorsController extends Controller
             $sheet->setCellValue('O' . ($row + 2), $rowData->remunere);
             $sheet->setCellValue('P' . ($row + 2), $rowData->annule);
             $sheet->setCellValue('Q' . ($row + 2), $rowData->OP_etabli);
-
         }
-
         // Set the response headers for Excel file download
         $filename = 'Extraction_stagiaires_'.$today.'.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

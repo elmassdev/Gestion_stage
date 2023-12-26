@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
 Paginator::useBootstrap();
@@ -33,12 +33,6 @@ class StagiaireController extends Controller
      */
     public function index()
     {
-        // $stagiaires = DB::table('stagiaires')->join('services',  'stagiaires.service', '=', 'services.id')
-        // ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-        // ->select('stagiaires.*','services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
-        // ->orderBy('stagiaires.created_at', 'desc')
-        // ->paginate(10);
-        // return view('stagiaires.index',compact('stagiaires'));
         $stagiaires = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
@@ -64,39 +58,6 @@ return view('stagiaires.index', compact('stagiaires'));
         $encadrants = DB::table('encadrants')->orderBy('nom','asc')->get();
         return view('stagiaires/create',compact('etablissements','villes','services','filieres','encadrants'));
     }
-
-    // public function search(Request $request)
-    // {
-    //     $results=[];
-    //     $search = $request->input('search');
-    //     $column = $request->input('column');
-    //     $results = DB::table('stagiaires')->where($column, '=', "$search")->get();
-    //     return view('stagiaires/{{$stagiaires->id}}', compact('results'));
-    // }
-
-//     public function search(Request $request)
-// {
-//     $request->validate([
-//         'column' => 'required',
-//         'term' => 'required'
-//     ]);
-
-//     $results = [];
-//     $columns = ['nom', 'cin', 'code'];
-
-//     $results = DB::table('stagiaires')
-//         ->where(function($query) use($request, $columns) {
-//             foreach ($columns as $column) {
-//                 if ($request->input('column') == $column) {
-//                     $query->orWhere($column, 'like', '%'.$request->input('term').'%');
-//                 }
-//             }
-//         })->get();
-
-//     return view('stagiaires.show', compact('results'));
-// }
-
-
 
 
     /**
@@ -215,12 +176,6 @@ return view('stagiaires.index', compact('stagiaires'));
         $encadr = Encadrant::where('id','=',$stagiaire->encadrant)->first();
         $serv = Service::where('id','=',$stagiaire->service)->first();
         $serv_enc = Service::where('id','=',$stagiaire->service)->first();
-
-        //$etablissements =Etablissement::orderBy('sigle_etab', 'asc')->get();
-        //$villes = Ville::orderBy('ville', 'asc')->get();
-        //$services = Service::orderBy('sigle_service', 'asc')->get();
-        //$filieres = filiere::orderBy('filiere', 'asc')->get();
-        //$encadrants =Encadrant::orderBy('nom', 'asc')->get();
         return view('stagiaires.modification',compact('stagiaire','etablissements','villes','services','filieres','encadrants','encadr','serv'));
     }
 
@@ -273,10 +228,6 @@ return view('stagiaires.index', compact('stagiaires'));
         $stagiaire->observation= $request->input('observation');
         $stagiaire->absence= $request->input('absence');
         $stagiaire->edited_by= Auth::user()->name;
-        //$remunere = ($request->input('remunere') == 'on') ? 1 : 0;
-        // $stagiaire->remunere = $remunere;
-        // $EI = ($request->input('EI') == 'on') ? 1 : 0;
-        // $stagiaire->EI = $EI;
 
         $stagiaire->update([
             $stagiaire->code,
@@ -461,14 +412,7 @@ return view('stagiaires.index', compact('stagiaires'));
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','services.sigle_service as sigle','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
-        // $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
-        // ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        // ->join('Services', 'stagiaires.service','=','services.sigle_service')
-        // ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
-        // ->where('stagiaires.id','=',$id)
-        //        ->get(['civilite.civilite as civilite','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc'])->first();
-
-
+        
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
         $year = date('Y');
@@ -532,14 +476,56 @@ return view('stagiaires.index', compact('stagiaires'));
         $date_fin = Carbon::parse($fin)->format('d/m/Y');
 
         // Calcul de nombre des jours
+        $niveau = $stagiaire->niveau;
+        $diplome = $stagiaire->diplome;
+        $absence = $stagiaire->absence;
+        $etab = $stagiaire->etablissement;
         $startDate = Carbon::parse($stagiaire->date_debut);
         $endDate = Carbon::parse($stagiaire->date_fin);
         $numberOfDays = ($startDate->diffInDays($endDate))+1;
 
+        if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
+            if($numberOfDays>30 && $absence == 0){
+                $numberOfDays=30;
+            }
+        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
+            if($numberOfDays>60 && $absence == 0){
+                $numberOfDays=60;
+            }
+        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
+            if($numberOfDays>120 && $absence == 0){
+                $numberOfDays=120;
+            }elseif($numberOfDays==121 && $absence <2){
+                $numberOfDays=120;
+            }
+        } elseif ($niveau == '1ère année' && $diplome == 'Master') {
+            if($numberOfDays>60 && $absence == 0){
+                $numberOfDays=60;
+            }
+        } elseif ($niveau == '2ème année' && $diplome == 'Master') {
+            if($numberOfDays>120 && $absence == 0){
+                $numberOfDays=120;
+            }
+        } elseif ($niveau == '4ème année' && $diplome == '') {
+            if($numberOfDays>60 && $absence == 0){
+                $numberOfDays=60;
+            }
+        } elseif ($niveau == '5ème année' && $diplome == '') {
+            if($numberOfDays>120 && $absence == 0){
+                $numberOfDays=120;
+            }
+        }elseif (($etab == 'IMM' || $etab == 'IMT') && $niveau == '1ère année') {
+            if($numberOfDays>30 && $absence == 0){
+                $numberOfDays=30;
+            }
+        }elseif (($etab == 'IMM' || $etab == 'IMT') && $niveau == '2ème année') {
+            if($numberOfDays>60 && $absence == 0){
+                $numberOfDays=60;
+            }
+        }
 
-        $niveau = $stagiaire->niveau;
-        $diplome = $stagiaire->diplome;
-        $etab = $stagiaire->etablissement;
+
+
 
         $dailyFee = 0;
 
@@ -561,44 +547,12 @@ return view('stagiaires.index', compact('stagiaires'));
             $dailyFee = 40;
         }
 
-        $absence = $stagiaire->absence;
+
         $somme = $numberOfDays * $dailyFee;
         $retenue = $absence * $dailyFee;
         $net = $somme - $retenue;
 
-        if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
-            if($net>1500){
-                $net=1500;
-            }
-        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
-            if($net>3600){
-                $net=3600;
-            }
-        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
-            if($net>12000){
-                $net=12000;
-            }
-        } elseif ($niveau == '1ère année' && $diplome == 'Master') {
-            if($net>3600){
-                $net=3600;
-            }
-        } elseif ($niveau == '2ème année' && $diplome == 'Master') {
-            if($net>12000){
-                $net=12000;
-            }
-        } elseif ($niveau == '4ème année' && $diplome == '') {
-            if($net>3600){
-                $net=3600;
-            }
-        } elseif ($niveau == '5ème année' && $diplome == '') {
-            if($net>12000){
-                $net=12000;
-            }
-        }elseif (($etab == 'IMM' || $etab == 'IMT') && $niveau == '1ère année') {
-            if($net>1200){
-                $net=1200;
-            }
-        }
+
 
         $net_lettres_formatter = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
         $net_lettres_string = $net_lettres_formatter->format($net);
@@ -609,7 +563,5 @@ return view('stagiaires.index', compact('stagiaires'));
             }
             return $pdf->stream();
     }
-
-
-
 }
+
