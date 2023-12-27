@@ -401,17 +401,17 @@
                     <td></td>
                     <td id="gear">
                         <div id="gear1" class="fa fa-5x fa-gear spin">
-                            <a id="link1" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link1" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);"
                             href="/stagiaires/create"> Ajouter un stagiaire </a>
                         </div>
 
                         <div id="gear2" class="fa fa-5x fa-gear spin-back">
-                            <a id="link2" class="btn  col-md-5 text-primary  mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link2" class="btn  col-md-5 text-primary  mx-auto border border-warning rounded-pill fs-5" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);"
                             href="/indicators/index"> Indicateurs <span style="color: transparent"> <br>. <br> . </span></div></a>
                         </div>
 
                         <div id="gear3" class="fa fa-5x fa-gear spin">
-                            <a id="link3" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5"
+                            <a id="link3" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);"
                             href="/stagiaires"> Liste des stagiaires<span style="color: transparent"> <br>. </span></a>
                         </div>
                     </td>

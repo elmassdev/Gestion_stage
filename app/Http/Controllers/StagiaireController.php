@@ -292,6 +292,40 @@ return view('stagiaires.index', compact('stagiaires'));
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
     }
 
+
+    public function updater(Request $request, $id)
+    {
+        // Find the Stagiaire model by ID
+        $stagiaire = Stagiaire::findOrFail($id);
+
+        // Get the original attributes
+        $originalAttributes = $stagiaire->getAttributes();
+
+        // Validate the form data
+        $validatedData = $request->validate([
+            'dateLO' => 'nullable|date',
+            'date_reception_FFS' => 'nullable|date',
+            'date_Att_etablie' => 'nullable|date',
+            'Attestation_remise_le' => 'nullable|date',
+            'Att_remise_a' => 'nullable|string',
+            'OP_etabli_le' => 'nullable|date',
+            'indemnite_remise_le' => 'nullable|date',
+        ]);
+
+
+
+        // Filter only the modified inputs
+        $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
+            return $originalAttributes[$key] != $value;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        // Update the model with the modified attributes
+        $stagiaire->update($modifiedAttributes);
+
+        // Redirect back or wherever you want after the update
+        return redirect()->back()->with('success', 'Stagiaire updated successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -412,11 +446,10 @@ return view('stagiaires.index', compact('stagiaires'));
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','services.sigle_service as sigle','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
-        
+
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
         $year = date('Y');
-        $now = Carbon::now();
 
 
 
@@ -459,15 +492,10 @@ return view('stagiaires.index', compact('stagiaires'));
         $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('Services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['stagiaires.civilite','stagiaires.absence','services.sigle_service as sigle','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service'])->first();
+               ->get(['stagiaires.civilite','stagiaires.absence','services.sigle_service as sigle','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service', 'stagiaires.dateLO'])->first();
 
-         //ELMASSOUDI Abdelaadim
-         // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
-        $today = date('d/m/Y');
-        $year = date('Y');
-        $now = Carbon::now();
 
-        $ddem = Carbon::parse($stagiaire->date_demande)->format('d/m/Y');
+        $dateLO = Carbon::parse($stagiaire->dateLO)->format('d/m/Y');
         $dd = $stagiaire->date_debut;
         $dd = Carbon::parse($dd)->format('d F Y');
         $fin=$stagiaire->date_fin;
@@ -547,6 +575,10 @@ return view('stagiaires.index', compact('stagiaires'));
             $dailyFee = 40;
         }
 
+        $today = date('d/m/Y');
+        $year = date('Y');
+        $now = Carbon::now();
+
 
         $somme = $numberOfDays * $dailyFee;
         $retenue = $absence * $dailyFee;
@@ -559,7 +591,7 @@ return view('stagiaires.index', compact('stagiaires'));
         $Le_net = htmlspecialchars($net_lettres_string);
 
             if($stagiaire->remunere){
-                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','ddem','today','year','somme','retenue','net','Le_net'));
+                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
             }
             return $pdf->stream();
     }

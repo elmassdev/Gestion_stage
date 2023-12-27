@@ -51,12 +51,12 @@
 
             <div class="form-group">
                 <label for="secretariat">Secretariat:</label>
-                <input type="text" name="secretariat" class="form-control" required>
+                <input type="text" name="secretariat" class="form-control" >
             </div>
 
             <div class="form-group">
                 <label for="EPI">EPI:</label>
-                <input type="checkbox" name="EPI" class="form-check-input" required>
+                <input type="checkbox" name="EPI" class="form-check-input" >
             </div>
 
             <button type="submit" class="btn btn-primary">Ajouter</button>

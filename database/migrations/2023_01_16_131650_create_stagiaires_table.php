@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('photo',300)->nullable();
-            $table->string('niveau');
+            $table->string('niveau')->nullable();
             $table->string('diplome')->nullable();
             $table->string('filiere');
             $table->string('etablissement');
@@ -50,6 +50,7 @@ return new class extends Migration
             $table->date('Attestation_remise_le')->nullable();
             $table->string('Att_remise_a')->nullable();
             $table->boolean('OP_etabli')->nullable();
+            $table->date('OP_etabli_le')->nullable();
             $table->date('indemnite_remise_le')->nullable();
             $table->string('created_by')->nullable();
             $table->string('edited_by')->nullable();

@@ -53,8 +53,14 @@
                                                 <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom">{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom">{{$service->sigle_service}}</span> </div>
+                                                <?php if(isset($service) && $service->sigle_service): ?>
+                                                    <div class="d-flex flex-column">
+                                                        <span class="text-left head">Service d'accueil</span>
+                                                        <span class="text-left bottom"><?php echo e($service->sigle_service); ?></span>
+                                                    </div>
+                                                <?php endif; ?>
                                             </td>
+
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Encadrant</span> <span class="text-left bottom">{{$encadrant->titre}} {{$encadrant->prenom}} {{$encadrant->nom}}</span> </div>
                                             </td>
@@ -116,7 +122,123 @@
                         </tr>
                     </table>
                 </div> @endif
+                <div class="card p-1 py-2">
+                    <form method="POST" action="/stagiaires/{{$stagiaire->id}}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="row mb-3">
+                            <label for="dateLO" class="col-md-3 mx-1 col-form-label text-md-left"> Lettre d'offre éditée le: </label>
+                            <div class="col-md-5">
+                                <input id="dateLO" type="date" value = "{{$stagiaire->dateLO}}" class="form-control datepicker  @error('dateLO') is-invalid @enderror"   name="dateLO" value="{{ old('dateLO') }}"    autocomplete="dateLO"  autofocus>
+                                @error('dateLO')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->dateLO)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->dateLO)->format('d/m/Y') }}</p></div>
+                            @endif
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="date_reception_FFS" class="col-md-3 mx-1 col-form-label text-md-left"> FA + FP reçues le: </label>
+                            <div class="col-md-5">
+                                <input id="date_reception_FFS" type="date" value = "{{$stagiaire->date_reception_FFS}}" class="form-control datepicker  @error('date_reception_FFS') is-invalid @enderror"   name="date_reception_FFS" value="{{ old('date_reception_FFS') }}"    autocomplete="date_reception_FFS" lang="fr-CA" autofocus>
+                                @error('date_reception_FFS')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->date_reception_FFS)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->date_reception_FFS)->format('d/m/Y') }}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label for="date_Att_etablie" class="col-md-3 mx-1 col-form-label text-md-left"> Attestation établie le: </label>
+                            <div class="col-md-5">
+                                <input id="date_Att_etablie" type="date" value = "{{$stagiaire->date_Att_etablie}}" class="form-control datepicker  @error('date_Att_etablie') is-invalid @enderror"   name="date_Att_etablie" value="{{ old('date_Att_etablie') }}"    autocomplete="date_Att_etablie" lang="fr-CA" autofocus>
+                                @error('date_Att_etablie')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->date_Att_etablie)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->date_Att_etablie)->format('d/m/Y') }}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Attestation_remise_le" class="col-md-3  mx-1 col-form-label text-md-left"> Attestation remise le:</label>
+                            <div class="col-md-5">
+                                <input id="Attestation_remise_le" type="date" value = "{{$stagiaire->Attestation_remise_le}}" class="form-control datepicker  @error('Attestation_remise_le') is-invalid @enderror"   name="Attestation_remise_le" value="{{ old('Attestation_remise_le') }}"    autocomplete="Attestation_remise_le" lang="fr-CA" autofocus>
+                                @error('Attestation_remise_le')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->Attestation_remise_le)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->Attestation_remise_le)->format('d/m/Y')}}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Att_remise_a" class="col-md-3 mx-1 col-form-label text-md-left">{{ __('Attestation remise à: ') }}</label>
+                            <div class="col-md-5">
+                                <input id="Att_remise_a" type="text" value="{{ $stagiaire->Att_remise_a }}" class="form-control @error('Att_remise_a') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="Att_remise_a"    autocomplete="Att_remise_a"  autofocus>
+                                @error('Att_remise_a')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->Att_remise_a)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{ $stagiaire->Att_remise_a }}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établie le: </label>
+                            <div class="col-md-5">
+                                <input id="OP_etabli_le" type="date" value = "{{$stagiaire->OP_etabli_le}}" class="form-control datepicker  @error('OP_etabli_le') is-invalid @enderror"   name="OP_etabli_le" value="{{ old('OP_etabli_le') }}"    autocomplete="OP_etabli_le" lang="fr-CA" autofocus>
+                                @error('OP_etabli_le')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->OP_etabli_le)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->OP_etabli_le)->format('d/m/Y') }}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label for="indemnite_remise_le" class="col-md-3 mx-1 col-form-label text-md-left"> Indemnité remise le:</label>
+                            <div class="col-md-5">
+                                <input id="indemnite_remise_le" type="date" value = "{{$stagiaire->indemnite_remise_le}}" class="form-control datepicker  @error('indemnite_remise_le') is-invalid @enderror"   name="indemnite_remise_le" value="{{ old('indemnite_remise_le') }}"    autocomplete="indemnite_remise_le" lang="fr-CA" autofocus>
+                                @error('indemnite_remise_le')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->indemnite_remise_le)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->indemnite_remise_le)->format('d/m/Y') }}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-0">
+                            <div >
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-regular fa-floppy-disk"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
         </div>
+
 
         {{-- the right part of the page --}}
         <div class="col-md-5">

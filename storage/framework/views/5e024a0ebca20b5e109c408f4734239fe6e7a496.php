@@ -52,8 +52,14 @@
                                                 <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom"><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Service d'accueil</span> <span class="text-left bottom"><?php echo e($service->sigle_service); ?></span> </div>
+                                                <?php if(isset($service) && $service->sigle_service): ?>
+                                                    <div class="d-flex flex-column">
+                                                        <span class="text-left head">Service d'accueil</span>
+                                                        <span class="text-left bottom"><?php echo e($service->sigle_service); ?></span>
+                                                    </div>
+                                                <?php endif; ?>
                                             </td>
+
                                             <td>
                                                 <div class="d-flex flex-column"> <span class="text-left head">Encadrant</span> <span class="text-left bottom"><?php echo e($encadrant->titre); ?> <?php echo e($encadrant->prenom); ?> <?php echo e($encadrant->nom); ?></span> </div>
                                             </td>
@@ -115,7 +121,221 @@
                         </tr>
                     </table>
                 </div> <?php endif; ?>
+                <div class="card p-1 py-2">
+                    <form method="POST" action="/stagiaires/<?php echo e($stagiaire->id); ?>" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
+
+                        <div class="row mb-3">
+                            <label for="dateLO" class="col-md-3 mx-1 col-form-label text-md-left"> Lettre d'offre éditée le: </label>
+                            <div class="col-md-5">
+                                <input id="dateLO" type="date" value = "<?php echo e($stagiaire->dateLO); ?>" class="form-control datepicker  <?php $__errorArgs = ['dateLO'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"   name="dateLO" value="<?php echo e(old('dateLO')); ?>"    autocomplete="dateLO"  autofocus>
+                                <?php $__errorArgs = ['dateLO'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->dateLO): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->dateLO)->format('d/m/Y')); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="date_reception_FFS" class="col-md-3 mx-1 col-form-label text-md-left"> FA + FP reçues le: </label>
+                            <div class="col-md-5">
+                                <input id="date_reception_FFS" type="date" value = "<?php echo e($stagiaire->date_reception_FFS); ?>" class="form-control datepicker  <?php $__errorArgs = ['date_reception_FFS'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"   name="date_reception_FFS" value="<?php echo e(old('date_reception_FFS')); ?>"    autocomplete="date_reception_FFS" lang="fr-CA" autofocus>
+                                <?php $__errorArgs = ['date_reception_FFS'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->date_reception_FFS): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->date_reception_FFS)->format('d/m/Y')); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="date_Att_etablie" class="col-md-3 mx-1 col-form-label text-md-left"> Attestation établie le: </label>
+                            <div class="col-md-5">
+                                <input id="date_Att_etablie" type="date" value = "<?php echo e($stagiaire->date_Att_etablie); ?>" class="form-control datepicker  <?php $__errorArgs = ['date_Att_etablie'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"   name="date_Att_etablie" value="<?php echo e(old('date_Att_etablie')); ?>"    autocomplete="date_Att_etablie" lang="fr-CA" autofocus>
+                                <?php $__errorArgs = ['date_Att_etablie'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->date_Att_etablie): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->date_Att_etablie)->format('d/m/Y')); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Attestation_remise_le" class="col-md-3  mx-1 col-form-label text-md-left"> Attestation remise le:</label>
+                            <div class="col-md-5">
+                                <input id="Attestation_remise_le" type="date" value = "<?php echo e($stagiaire->Attestation_remise_le); ?>" class="form-control datepicker  <?php $__errorArgs = ['Attestation_remise_le'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"   name="Attestation_remise_le" value="<?php echo e(old('Attestation_remise_le')); ?>"    autocomplete="Attestation_remise_le" lang="fr-CA" autofocus>
+                                <?php $__errorArgs = ['Attestation_remise_le'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->Attestation_remise_le): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->Attestation_remise_le)->format('d/m/Y')); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Att_remise_a" class="col-md-3 mx-1 col-form-label text-md-left"><?php echo e(__('Attestation remise à: ')); ?></label>
+                            <div class="col-md-5">
+                                <input id="Att_remise_a" type="text" value="<?php echo e($stagiaire->Att_remise_a); ?>" class="form-control <?php $__errorArgs = ['Att_remise_a'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="Att_remise_a"    autocomplete="Att_remise_a"  autofocus>
+                                <?php $__errorArgs = ['Att_remise_a'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->Att_remise_a): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e($stagiaire->Att_remise_a); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établie le: </label>
+                            <div class="col-md-5">
+                                <input id="OP_etabli_le" type="date" value = "<?php echo e($stagiaire->OP_etabli_le); ?>" class="form-control datepicker  <?php $__errorArgs = ['OP_etabli_le'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"   name="OP_etabli_le" value="<?php echo e(old('OP_etabli_le')); ?>"    autocomplete="OP_etabli_le" lang="fr-CA" autofocus>
+                                <?php $__errorArgs = ['OP_etabli_le'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->OP_etabli_le): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->OP_etabli_le)->format('d/m/Y')); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="indemnite_remise_le" class="col-md-3 mx-1 col-form-label text-md-left"> Indemnité remise le:</label>
+                            <div class="col-md-5">
+                                <input id="indemnite_remise_le" type="date" value = "<?php echo e($stagiaire->indemnite_remise_le); ?>" class="form-control datepicker  <?php $__errorArgs = ['indemnite_remise_le'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"   name="indemnite_remise_le" value="<?php echo e(old('indemnite_remise_le')); ?>"    autocomplete="indemnite_remise_le" lang="fr-CA" autofocus>
+                                <?php $__errorArgs = ['indemnite_remise_le'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->indemnite_remise_le): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->indemnite_remise_le)->format('d/m/Y')); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-0">
+                            <div >
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-regular fa-floppy-disk"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
         </div>
+
 
         
         <div class="col-md-5">

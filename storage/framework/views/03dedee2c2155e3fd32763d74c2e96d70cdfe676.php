@@ -35,11 +35,16 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-
+        #title {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            border: 1px solid black;
+            width: 38%;
+            background-color: #dddddd;
+        }
         table{
             width: 90%;
         }
-
         .topleft{
             padding-top: 0px;
             padding-left:10%;
@@ -95,7 +100,8 @@
 
         <div>
             <div class="container">
-                <div class="row text-center mx-auto"><h4 class="mx-auto py-1 fs-5" style="font-family:sans-serif !important; border:1px solid black; width:38%"> Ordre de paiement</h4></div>
+                <h3 class=" row text-center mx-auto py-1" id="title"> Ordre de paiement</h3>
+            </div>
                 <p class="row text-center mx-auto fs-2">Imputation: ____________</p>
             </div>
             <div class="intro">
@@ -106,36 +112,32 @@
             </div>
         </div>
         <div>
+            <style>
+            #indem {
+                border-collapse: collapse;
+                width: 90%;
+                margin: 10px;
+            }
 
+            #indem th, #indem td {
+                border: 1px solid black;
+                padding: 10px;
+                font-size: 14px;
 
-                <style>
-                    #indem {
-                        border-collapse: collapse;
-                        width: 90%;
-                        margin: 10px;
-                    }
-
-                    #indem th, #indem td {
-                        border: 1px solid black;
-                        padding: 10px;
-                        font-size: 14px;
-
-                    }
-                    #indem ul li{
-                        padding-left: 0;
-                        margin-left: 0;
-                        text-decoration: none;
-                    }
-
-                    .LD{
-                        width: 40%;
-                        height: 100vh;
-                        float: right;
-                        margin-top: 5%;
-                        margin-bottom: 5%;
-                        /* margin-right: 10%; */
-                    }
-                </style>
+            }
+            #indem ul li{
+                padding-left: 0;
+                margin-left: 0;
+                text-decoration: none;
+            }
+            .LD{
+                width: 40%;
+                height: 100vh;
+                float: right;
+                margin-top: 5%;
+                margin-bottom: 5%;
+            }
+            </style>
 
 
 
@@ -149,10 +151,9 @@
         </tr>
         <tr>
             <td>
-
-                    <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->sigle); ?> (*) <br> (OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($ddem); ?>) <br>
+                <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->sigle); ?> (*) <br> (OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($dateLO); ?>) <br>
                 </div>
-                    <div> <br> - Absentéisme</div>
+                <div> <br> - Absentéisme</div>
 
             </td>
             <td><?php echo e($somme); ?> dh</td>
@@ -177,7 +178,7 @@
         font-weight: bold;
         margin-top: 15%;
         font-size: 14px;
-        font-family: sans-serif;
+
     }
     #sign td{
         justify-content: center;
@@ -188,7 +189,7 @@
         padding-left: 15%;
     }
     .bottom{
-        font-family: sans-serif;
+
         position: fixed;
         bottom: 0;
         left: 0;

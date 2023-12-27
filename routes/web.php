@@ -45,6 +45,10 @@ Route::get('/stagiaires/{id}/attestation_n','App\Http\Controllers\StagiaireContr
 Route::get('/stagiaires/{id}/convocation','App\Http\Controllers\StagiaireController@generer_convocation')->name('convocation')->middleware('auth');
 Route::get('/stagiaires/{id}/convocation_n','App\Http\Controllers\StagiaireController@generer_convocation')->name('convocation_n')->middleware('auth');
 Route::get('/stagiaires/{id}/sujet','App\Http\Controllers\StagiaireController@generer_sujet')->name('sujet')->middleware('auth');
+// routes/web.php
+
+Route::put('/stagiaires/{id}', [App\Http\Controllers\StagiaireController::class, 'updater']);
+
 Route::view('/contact', 'contact');
 Route::resource('villes', VilleController::class)->middleware('auth');
 Route::resource('encadrants', EncadrantController::class)->middleware('auth');

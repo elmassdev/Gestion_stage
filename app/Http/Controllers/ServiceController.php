@@ -36,11 +36,20 @@ class ServiceController extends Controller
             'entite' => 'required',
             'site' => 'required',
             'direction' => 'required',
-            'secretariat' => 'required',
-            'EPI' => 'required|boolean',
+
         ]);
 
-        Service::create($request->all());
+        $service =new Service();
+        $service->sigle_service = $request->input('sigle_service');
+        $service->libelle = $request->input('libelle');
+        $service->entite = $request->input('entite');
+        $service->site = $request->input('site');
+        $service->direction = $request->input('direction');
+        $service->secretariat = $request->input('secretariat');
+        $service->EPI = $request->boolean('EPI');
+        $service->save();
+
+        // Service::create($request->all());
 
         return redirect()->route('services.index')->with('success', 'Service created successfully!');
     }
@@ -55,16 +64,24 @@ class ServiceController extends Controller
         return view('services.edit', compact('service'));
     }
 
-    public function update(Request $request, Service $service)
+    public function update(Request $request, $id)
     {
+        $service = Service::findOrFail($id);
         $request->validate([
             'libelle' => 'required',
             'entite' => 'required',
             'site' => 'required',
             'direction' => 'required',
         ]);
+        $service->sigle_service = $request->input('sigle_service');
+        $service->libelle = $request->input('libelle');
+        $service->entite = $request->input('entite');
+        $service->site = $request->input('site');
+        $service->direction = $request->input('direction');
+        $service->secretariat = $request->input('secretariat');
+        $service->EPI = $request->boolean('EPI');
 
-        $service->update($request->all());
+        $service->update();
 
         return redirect()->route('services.index')->with('success', 'Service updated successfully!');
     }

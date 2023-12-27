@@ -6,12 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Modifier les informations de {{$encadrant->titre}} {{$encadrant->nom}}</div>
-                
+
 
                 <div class="card-body">
                     <form method="POST" action="/encadrants/{{$encadrant->id}}/modification" enctype="multipart/form-data">
                         @csrf
-                        
+
                         <div class="row mb-3">
                             <label for="titre" class="col-md-3 col-form-label text-md-left"> Titre de civilité</label>
 
@@ -20,7 +20,7 @@
                                     <option value="{{$encadrant->titre}}" selected>{{$encadrant->titre}}</option>
                                     <option value="M." >Monsieur</option>
                                     <option value="Mlle">Mademoiselle</option>
-                                    <option value="Mme">Madame</option>                              
+                                    <option value="Mme">Madame</option>
                             </select>
                                 @error('titre')
                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>                     
+                        </div>
 
                         <div class="row mb-3">
                             <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
@@ -94,8 +94,8 @@
                                 <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
                                 <option  value="{{$encadrant->service}}" selected >{{$encadrant->service}}</option>
                                 @foreach($services as $service)
-                                <option value="{{ $service->sigle_service}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
-                                @endforeach                         
+                                <option value="{{ $service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
+                                @endforeach
                             </select>
                                 @error('service')
                                     <span class="invalid-feedback" role="alert">
@@ -106,8 +106,8 @@
                         </div>
 
 
-                       
-                        
+
+
 
 
 
