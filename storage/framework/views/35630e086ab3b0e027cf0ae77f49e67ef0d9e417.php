@@ -175,17 +175,18 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm sticky-top" id="navbar">
+            <a class="navbar-brand mx-auto" href="<?php echo e(url('/')); ?>">
+                <img src="/images/logo.svg" >
+            </a>
             <div class="container">
-                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <img src="/images/logo.svg" alt="">
-                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto" style="display:absolute" >
+                    <ul class="navbar-nav me-auto" style="display:absolute" >
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
                         <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
                         <li class="navbarli"><a href="/contact">Contact</a></li>
