@@ -355,7 +355,7 @@ return view('stagiaires.index', compact('stagiaires'));
                ->get(['civilite.civilite as titre','stagiaires.nom','stagiaires.prenom', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
         $today = date('d F Y');
         $now = Carbon::now();
-        // dd($id);
+        // dd($stagiaire);
 
 
         $dd = $stagiaire->date_debut;
