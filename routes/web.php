@@ -62,7 +62,9 @@ Route::resource('indicators/index', IndicatorsController::class)->middleware('au
 
 
 
-Route::get('/indicators/parservice', [IndicatorsController::class, 'ParService'])->name('encadrants/create')->middleware('auth');
+
+
+Route::get('/indicators/queries', [IndicatorsController::class, 'queries'])->name('indicators.queries')->middleware('auth');
 Route::get('/indicators/ExcelStaSer', [IndicatorsController::class, 'ExcelStaSer']);
 Route::get('/indicators/ExcelStaEnc', [IndicatorsController::class, 'ExcelStaEnc']);
 Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);

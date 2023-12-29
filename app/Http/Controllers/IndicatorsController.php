@@ -19,6 +19,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 
+
+
 Paginator::useBootstrap();
 
 class IndicatorsController extends Controller
@@ -274,5 +276,57 @@ class IndicatorsController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
     }
+
+
+    public function queries(Request $request){
+
+        \Illuminate\Support\Facades\Log::info('Request parameters:', $request->all());
+    // $query = Stagiaire::query();
+    $query = DB::table('stagiaires')
+        ->join('services', 'stagiaires.service', '=', 'services.id')
+        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
+        ->where('stagiaires.site', '=', Auth::user()->site)
+        ->where('stagiaires.annule', '=', false)
+        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"));
+
+    // Add conditions based on input values
+    if ($request->has('start_date') && $request->has('end_date')) {
+        $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
+    }
+    if ($request->filled('remunere')) {
+        $query->where('remunere', $request->input('remunere'));
+    }
+    if ($request->filled('service')) {
+        $query->where('stagiaires.service', $request->input('service'));
+    }
+    if ($request->filled('type_formation')) {
+        $query->where('type_formation', $request->input('type_formation'));
+    }
+    if ($request->filled('type-stage')) {
+        $query->where('type-stage', $request->input('type-stage'));
+    }
+    if ($request->filled('diplome')) {
+        $query->where('diplome', $request->input('diplome'));
+    }
+    if ($request->filled('encadrant')) {
+        $query->where('stagiaires.encadrant', $request->input('encadrant'));
+    }
+    if ($request->filled('etablissement')) {
+        $query->where('stagiaires.etablissement', $request->input('etablissement'));
+    }
+
+     \Illuminate\Support\Facades\Log::info('SQL query:', ['sql' => $query->toSql(), 'bindings' => $query->getBindings()]);
+
+    // Get the results
+    $results = $query->paginate(13);
+
+    $xx = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
+    $ss = DB::table('services')->orderBy('sigle_service', 'asc')->get();
+    $ee = DB::table('encadrants')->orderBy('nom','asc')->get();
+
+    // Return a view with the results
+    return view('indicators.queries', ['results' => $results, 'ss' => $ss, 'xx' => $xx, 'ee' => $ee]);
+}
+
 
 }

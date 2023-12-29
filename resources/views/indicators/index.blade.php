@@ -300,7 +300,7 @@
 
     </div>
     <div class="col-md-2  mx-auto py-2 right">
-        <h6 class="col-md-9 border border-solid"> <span class="mx-2"> Exporter la liste des stagiaires en cours:  </span> <a class="btn text-success  rounded-pill" href="/indicators/ListeCurrentSta"> <i class="fa-solid fa-file-export" ></i></a></h6>
+        <span class="col-md-7 btn-outline-warning text-success fs-5">Exporter la liste des stagiaires en cours:  <a class="btn text-success  rounded-pill" href="/indicators/ListeCurrentSta"> <i class="fa-solid fa-file-export" ></i></a></span> <span class="btn-outline-warning text-success"> Plus: <a class="btn text-success  rounded-pill" href="/indicators/queries"><i class="fa-solid fa-plus" ></i></a></span>
         <div class="card">
             <div class="card-header">{{ __('Exportation des données vers un fichier Excel:') }}</div>
             <form method="GET" action="/indicators/ExportSta" id="export-form" enctype="multipart/form-data">
