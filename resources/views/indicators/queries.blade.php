@@ -60,7 +60,7 @@
 
         <button type="submit" class="btn bg-warning text-primary"><i class="fa-solid fa-check"></i></button>
         @if (!$results->isEmpty())
-        <a href="{{ route('export.excel') }}" class="btn btn-success"><i class="fa-solid fa-file-export" ></i></a>
+        <a href="{{ route('export.excel', request()->all()) }}" class="btn btn-success"><i class="fa-solid fa-file-export"></i> Excel</a>
         @endif
 
     </form>

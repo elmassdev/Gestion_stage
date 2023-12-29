@@ -277,47 +277,53 @@ class IndicatorsController extends Controller
         $writer->save('php://output');
     }
 
-
-    public function queries(Request $request){
-        Log::info('Request parameters:', $request->all());
-        $query = DB::table('stagiaires')
+    public function buildQuery(Request $request){
+        return DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', Auth::user()->site)
         ->where('stagiaires.annule', '=', false)
-        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"));
-        if ($request->has('start_date') && $request->has('end_date')) {
-            $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
-        }
-        if ($request->filled('remunere')) {
-            $query->where('remunere', $request->input('remunere'));
-        }
-        if ($request->filled('service')) {
-            $query->where('stagiaires.service', $request->input('service'));
-        }
-        if ($request->filled('type_formation')) {
-            $query->where('type_formation', $request->input('type_formation'));
-        }
-        if ($request->filled('type-stage')) {
-            $query->where('type-stage', $request->input('type-stage'));
-        }
-        if ($request->filled('diplome')) {
-            $query->where('diplome', $request->input('diplome'));
-        }
-        if ($request->filled('encadrant')) {
-            $query->where('stagiaires.encadrant', $request->input('encadrant'));
-        }
-        if ($request->filled('etablissement')) {
-            $query->where('stagiaires.etablissement', $request->input('etablissement'));
-        }
+        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
+        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+            return $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
+        })
+        ->when($request->filled('remunere'), function ($query) use ($request) {
+            return $query->where('remunere', $request->input('remunere'));
+        })
+        ->when($request->filled('service'), function ($query) use ($request) {
+            return $query->where('stagiaires.service', $request->input('service'));
+        })
+        ->when($request->filled('type_formation'),  function ($query) use ($request) {
+            return $query->where('type_formation', $request->input('type_formation'));
+        })
+        ->when($request->filled('type_stage'),  function ($query) use ($request) {
+            return $query->where('type_stage', $request->input('type_stage'));
+        })
+        ->when($request->filled('diplome'),  function ($query) use ($request) {
+            return $query->where('diplome', $request->input('diplome'));
+        })
+        ->when($request->filled('encadrant'),  function ($query) use ($request) {
+            return $query->where('stagiaires.encadrant', $request->input('encadrant'));
+        })
+        ->when($request->filled('etablissement'),  function ($query) use ($request) {
+            return $query->where('stagiaires.etablissement', $request->input('etablissement'));
+        });
 
+}
+
+
+    public function queries(Request $request){
+        $query = $this->buildQuery($request);
         Log::info('SQL query:', ['sql' => $query->toSql(), 'bindings' => $query->getBindings()]);
         $results = $query->paginate(13);
         $xx = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
         $ss = DB::table('services')->orderBy('sigle_service', 'asc')->get();
         $ee = DB::table('encadrants')->orderBy('nom','asc')->get();
+
         return view('indicators.queries', ['results' => $results, 'ss' => $ss, 'xx' => $xx, 'ee' => $ee]);
     }
+
+
     public function exportqueries(Request $request)
     {
         $today = Carbon::today()->format('d-m-Y');
@@ -342,38 +348,10 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('P1', 'Annulé');
         $sheet->setCellValue('Q1', 'OP établi');
 
-        $query = DB::table('stagiaires')
-        ->join('services', 'stagiaires.service', '=', 'services.id')
-        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
-        ->where('stagiaires.site', '=', Auth::user()->site)
-        ->where('stagiaires.annule', '=', false)
-        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"));
 
-        if ($request->has('start_date') && $request->has('end_date')) {
-            $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
-        }
-        if ($request->filled('remunere')) {
-            $query->where('remunere', $request->input('remunere'));
-        }
-        if ($request->filled('service')) {
-            $query->where('stagiaires.service', $request->input('service'));
-        }
-        if ($request->filled('type_formation')) {
-            $query->where('type_formation', $request->input('type_formation'));
-        }
-        if ($request->filled('type-stage')) {
-            $query->where('type-stage', $request->input('type-stage'));
-        }
-        if ($request->filled('diplome')) {
-            $query->where('diplome', $request->input('diplome'));
-        }
-        if ($request->filled('encadrant')) {
-            $query->where('stagiaires.encadrant', $request->input('encadrant'));
-        }
-        if ($request->filled('etablissement')) {
-            $query->where('stagiaires.etablissement', $request->input('etablissement'));
-        }
+        $query = $this->buildQuery($request);
         $results = $query->get();
+
 
 
         // Add data to the sheet
