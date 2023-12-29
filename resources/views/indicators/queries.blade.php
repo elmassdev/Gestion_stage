@@ -59,6 +59,10 @@
         <!-- Add more input fields for other conditions -->
 
         <button type="submit" class="btn bg-warning text-primary"><i class="fa-solid fa-check"></i></button>
+        @if (!$results->isEmpty())
+        <a href="{{ route('export.excel') }}" class="btn btn-success"><i class="fa-solid fa-file-export" ></i></a>
+        @endif
+
     </form>
     </div>
     <div>

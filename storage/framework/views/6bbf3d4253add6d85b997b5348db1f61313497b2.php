@@ -61,6 +61,10 @@
         <!-- Add more input fields for other conditions -->
 
         <button type="submit" class="btn bg-warning text-primary"><i class="fa-solid fa-check"></i></button>
+        <?php if(!$results->isEmpty()): ?>
+        <a href="<?php echo e(route('export.excel')); ?>" class="btn btn-success"><i class="fa-solid fa-file-export" ></i></a>
+        <?php endif; ?>
+
     </form>
     </div>
     <div>

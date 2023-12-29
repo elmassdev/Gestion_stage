@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
-
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -279,54 +279,133 @@ class IndicatorsController extends Controller
 
 
     public function queries(Request $request){
+        Log::info('Request parameters:', $request->all());
+        $query = DB::table('stagiaires')
+        ->join('services', 'stagiaires.service', '=', 'services.id')
+        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
+        ->where('stagiaires.site', '=', Auth::user()->site)
+        ->where('stagiaires.annule', '=', false)
+        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"));
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
+        }
+        if ($request->filled('remunere')) {
+            $query->where('remunere', $request->input('remunere'));
+        }
+        if ($request->filled('service')) {
+            $query->where('stagiaires.service', $request->input('service'));
+        }
+        if ($request->filled('type_formation')) {
+            $query->where('type_formation', $request->input('type_formation'));
+        }
+        if ($request->filled('type-stage')) {
+            $query->where('type-stage', $request->input('type-stage'));
+        }
+        if ($request->filled('diplome')) {
+            $query->where('diplome', $request->input('diplome'));
+        }
+        if ($request->filled('encadrant')) {
+            $query->where('stagiaires.encadrant', $request->input('encadrant'));
+        }
+        if ($request->filled('etablissement')) {
+            $query->where('stagiaires.etablissement', $request->input('etablissement'));
+        }
 
-        \Illuminate\Support\Facades\Log::info('Request parameters:', $request->all());
-    // $query = Stagiaire::query();
-    $query = DB::table('stagiaires')
+        Log::info('SQL query:', ['sql' => $query->toSql(), 'bindings' => $query->getBindings()]);
+        $results = $query->paginate(13);
+        $xx = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
+        $ss = DB::table('services')->orderBy('sigle_service', 'asc')->get();
+        $ee = DB::table('encadrants')->orderBy('nom','asc')->get();
+        return view('indicators.queries', ['results' => $results, 'ss' => $ss, 'xx' => $xx, 'ee' => $ee]);
+    }
+    public function exportqueries(Request $request)
+    {
+        $today = Carbon::today()->format('d-m-Y');
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', "Titre");
+        $sheet->setCellValue('B1', 'nom');
+        $sheet->setCellValue('C1', 'prénom');
+        $sheet->setCellValue('D1', 'CIN');
+        $sheet->setCellValue('E1', 'niveau');
+        $sheet->setCellValue('F1', 'diplome');
+        $sheet->setCellValue('G1', 'Ecole');
+        $sheet->setCellValue('H1', 'Type de stage');
+        $sheet->setCellValue('I1', 'Encadrant');
+        $sheet->setCellValue('J1', 'Service');
+        $sheet->setCellValue('K1', 'Date début');
+        $sheet->setCellValue('L1', 'Date fin');
+        $sheet->setCellValue('M1', 'Sujet');
+        $sheet->setCellValue('N1', 'Type formation');
+        $sheet->setCellValue('O1', 'rémunéré');
+        $sheet->setCellValue('P1', 'Annulé');
+        $sheet->setCellValue('Q1', 'OP établi');
+
+        $query = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', Auth::user()->site)
         ->where('stagiaires.annule', '=', false)
         ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"));
 
-    // Add conditions based on input values
-    if ($request->has('start_date') && $request->has('end_date')) {
-        $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
-    }
-    if ($request->filled('remunere')) {
-        $query->where('remunere', $request->input('remunere'));
-    }
-    if ($request->filled('service')) {
-        $query->where('stagiaires.service', $request->input('service'));
-    }
-    if ($request->filled('type_formation')) {
-        $query->where('type_formation', $request->input('type_formation'));
-    }
-    if ($request->filled('type-stage')) {
-        $query->where('type-stage', $request->input('type-stage'));
-    }
-    if ($request->filled('diplome')) {
-        $query->where('diplome', $request->input('diplome'));
-    }
-    if ($request->filled('encadrant')) {
-        $query->where('stagiaires.encadrant', $request->input('encadrant'));
-    }
-    if ($request->filled('etablissement')) {
-        $query->where('stagiaires.etablissement', $request->input('etablissement'));
-    }
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
+        }
+        if ($request->filled('remunere')) {
+            $query->where('remunere', $request->input('remunere'));
+        }
+        if ($request->filled('service')) {
+            $query->where('stagiaires.service', $request->input('service'));
+        }
+        if ($request->filled('type_formation')) {
+            $query->where('type_formation', $request->input('type_formation'));
+        }
+        if ($request->filled('type-stage')) {
+            $query->where('type-stage', $request->input('type-stage'));
+        }
+        if ($request->filled('diplome')) {
+            $query->where('diplome', $request->input('diplome'));
+        }
+        if ($request->filled('encadrant')) {
+            $query->where('stagiaires.encadrant', $request->input('encadrant'));
+        }
+        if ($request->filled('etablissement')) {
+            $query->where('stagiaires.etablissement', $request->input('etablissement'));
+        }
+        $results = $query->get();
 
-     \Illuminate\Support\Facades\Log::info('SQL query:', ['sql' => $query->toSql(), 'bindings' => $query->getBindings()]);
 
-    // Get the results
-    $results = $query->paginate(13);
+        // Add data to the sheet
+        foreach ($results as $row => $rowData) {
+            $sheet->setCellValue('A' . ($row + 2), $rowData->civilite);
+            $sheet->setCellValue('B' . ($row + 2), $rowData->nom);
+            $sheet->setCellValue('C' . ($row + 2), $rowData->prenom);
+            $sheet->setCellValue('D' . ($row + 2), $rowData->cin);
+            $sheet->setCellValue('E' . ($row + 2), $rowData->niveau);
+            $sheet->setCellValue('F' . ($row + 2), $rowData->diplome);
+            $sheet->setCellValue('G' . ($row + 2), $rowData->etablissement);
+            $sheet->setCellValue('H' . ($row + 2), $rowData->type_stage);
+            $sheet->setCellValue('I' . ($row + 2), $rowData->nomenc);
+            $sheet->setCellValue('J' . ($row + 2), $rowData->sigle);
+            $sheet->setCellValue('K' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
+            $sheet->setCellValue('L' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
+            $sheet->setCellValue('M' . ($row + 2), $rowData->sujet);
+            $sheet->setCellValue('N' . ($row + 2), $rowData->type_formation);
+            $sheet->setCellValue('O' . ($row + 2), $rowData->remunere);
+            $sheet->setCellValue('P' . ($row + 2), $rowData->annule);
+            $sheet->setCellValue('Q' . ($row + 2), $rowData->OP_etabli);
+        }
+        // Set the response headers for Excel file download
+        $filename = 'Extraction_requête_'.$today.'.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
 
-    $xx = DB::table('etablissements')->orderBy('sigle_etab', 'asc')->get();
-    $ss = DB::table('services')->orderBy('sigle_service', 'asc')->get();
-    $ee = DB::table('encadrants')->orderBy('nom','asc')->get();
-
-    // Return a view with the results
-    return view('indicators.queries', ['results' => $results, 'ss' => $ss, 'xx' => $xx, 'ee' => $ee]);
-}
+        // Create a writer and save the file to the output
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+    }
 
 
 }
