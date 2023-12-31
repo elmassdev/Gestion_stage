@@ -526,80 +526,80 @@
 
 
 
-            <script>
-                var EI = document.getElementById('EI');
-                window.addEventListener('load', function() {
-                    var site =document.getElementById('site').value;
-                    var filtered_services = FilSer.filter(function(services) {
-                        return services.site === site;
-                    });
-                    var service_select = document.getElementById('service');
-                    service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
-                    filtered_services.forEach(function(services) {
-                        service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
-                    });
+<script>
+    var EI = document.getElementById('EI');
+    window.addEventListener('load', function() {
+        var site =document.getElementById('site').value;
+        var filtered_services = FilSer.filter(function(services) {
+            return services.site === site;
+        });
+        var service_select = document.getElementById('service');
+        service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+        filtered_services.forEach(function(services) {
+            service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+        });
+    });
+
+    document.getElementById('site').addEventListener('change', function() {
+        site = this.value;
+        var filtered_services = FilSer.filter(function(services) {
+            return services.site === site;
+        });
+        //alert(JSON.stringify(filtered_services));
+
+        var service_select = document.getElementById('service');
+        service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+        filtered_services.forEach(function(services) {
+            service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+        });
+    });
+
+    document.getElementById('encadrant').addEventListener('change', function() {
+        var selectedEncadrantId = this.value;
+        var serviceDropdown = document.getElementById('service');
+        serviceDropdown.innerHTML = '';
+
+        if (selectedEncadrantId) {
+            var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                return encadrant.id == selectedEncadrantId;
+            });
+
+            if (selectedEncadrant) {
+                var option = document.createElement('option');
+                var filteredService = FilSer.find(function(service) {
+                    return service.id === selectedEncadrant.service;
                 });
 
-                document.getElementById('site').addEventListener('change', function() {
-                    site = this.value;
-                    var filtered_services = FilSer.filter(function(services) {
-                        return services.site === site;
-                    });
-                    //alert(JSON.stringify(filtered_services));
+                if (filteredService) {
+                    option.value = filteredService.id;
+                    option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
+                    serviceDropdown.appendChild(option);
+                }
+            }
+        }
+    });
 
-                    var service_select = document.getElementById('service');
-                    service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
-                    filtered_services.forEach(function(services) {
-                        service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
-                    });
-                });
+    document.getElementById('diplome').addEventListener('change', function(){
+        var diplome = this.value;
+        var etab = document.getElementById('etablissement').value;
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
+        var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        document.getElementById('EI').checked = isMasterOrCycle;
+        var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
+        document.getElementById('remunere').checked =isRemunere;
+    });
 
-                document.getElementById('encadrant').addEventListener('change', function() {
-                    var selectedEncadrantId = this.value;
-                    var serviceDropdown = document.getElementById('service');
-                    serviceDropdown.innerHTML = '';
+    document.getElementById('etablissement').addEventListener('change', function(){
+        var etab = this.value;
+        var diplome = document.getElementById('diplome').value;
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
+        var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        document.getElementById('EI').checked = isMoCI;
+        var isRem = ((isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
+        document.getElementById('remunere').checked =isRem;
+    });
 
-                    if (selectedEncadrantId) {
-                        var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                            return encadrant.id == selectedEncadrantId;
-                        });
-
-                        if (selectedEncadrant) {
-                            var option = document.createElement('option');
-                            var filteredService = FilSer.find(function(service) {
-                                return service.id === selectedEncadrant.service;
-                            });
-
-                            if (filteredService) {
-                                option.value = filteredService.id;
-                                option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
-                                serviceDropdown.appendChild(option);
-                            }
-                        }
-                    }
-                });
-
-                document.getElementById('diplome').addEventListener('change', function(){
-                    var diplome = this.value;
-                    var etab = document.getElementById('etablissement').value;
-                    var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
-                    var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
-                    document.getElementById('EI').checked = isMasterOrCycle;
-                    var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
-                    document.getElementById('remunere').checked =isRemunere;
-                });
-
-                document.getElementById('etablissement').addEventListener('change', function(){
-                    var etab = this.value;
-                    var diplome = document.getElementById('diplome').value;
-                    var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
-                    var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
-                    document.getElementById('EI').checked = isMoCI;
-                    var isRem = ((isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
-                    document.getElementById('remunere').checked =isRem;
-                });
-
-            </script>
+</script>
 
 
 
