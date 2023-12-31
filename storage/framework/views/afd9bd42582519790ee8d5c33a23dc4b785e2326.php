@@ -25,7 +25,7 @@
 <div class="container card">
     <h2 class="card-header">Ajouter un stagiaire</h2>
     <div class="row  card-body">
-      <div class="col border border-solid rounded">
+      <div class="col border border-solid rounded pt-2">
         <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
             <?php echo csrf_field(); ?>
             
@@ -516,8 +516,7 @@ unset($__errorArgs, $__bag); ?>
         </div>
 
 
-      <div class="col border border-solid rounded ">
-
+      <div class="col border border-solid rounded pt-2">
         <div class="row mb-3">
             <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
             <div class="col-md-8">

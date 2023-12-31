@@ -1,58 +1,31 @@
 <?php $__env->startSection('content'); ?>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
 
-    #container {
-        display: flex;
-        height: 100vh;
-    }
+<div class="row">
+    <?php if(Session::has('success')): ?>
+    <div class="alert alert-success">
+        <?php echo e(Session::get('success')); ?>
 
-    #left {
-        flex: 1;
-        overflow-y: auto;
-        padding: 15px;
-    }
+    </div>
+    <?php endif; ?>
+    <?php if(Session::has('error')): ?>
+        <div class="alert alert-danger">
+            <?php echo e(Session::get('error')); ?>
 
-    #right {
-        flex-shrink: 0;
-        width: 300px;
-        height: 100%;
-        position: fixed;
-        top: 5;
-        right: 0;
-        overflow-y: auto;
-    }
+        </div>
+    <?php endif; ?>
+</div>
 
-    @media (max-width: 767px) {
-        #container {
-            flex-direction: column;
-        }
-
-        #right {
-            position: relative;
-            width: 100%;
-            top: auto;
-            bottom: 0;
-        }
-    }
-</style>
-
-<div class="container col-md-12 py-4" id="container">
-    <div class="row col-md-12">
-        <div class="col-md-9" style="overflow-y: scroll;" id="left">
-            <div class="card">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container card pt-2">
                 <div class="card-header">Modifier les informations de <b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->nom); ?></b> </div>
-
-
-                <div class="card-body">
+                <div class="row  card-body">
+                  <div class="col border border-solid rounded mx-1 py-2">
                     <form method="POST" action="/stagiaires/<?php echo e($stagiaire->id); ?>/modification" enctype="multipart/form-data" onsubmit="return validateDates()">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PUT'); ?>
-
                         <script>
                             function validateDates() {
                                 const holidays = [];
@@ -160,8 +133,6 @@
                             var FilSer = <?php echo json_encode($services, 15, 512) ?>;
                             var FilSerEnc = <?php echo json_encode($encadrants, 15, 512) ?>;
                         </script>
-
-
                         <div class="row mb-3">
                             <label for="code" class="col-md-3 col-form-label text-md-left" > Code Stagiaire</label>
 
@@ -519,7 +490,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col border border-solid rounded  mx-1 py-2">
                         <div class="row mb-3">
                             <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
                             <div class="col-md-8">
@@ -550,10 +522,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
-
-
-
                         <div class="row mb-3">
                             <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
                             <div class="col-md-8">
@@ -584,7 +552,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
                             <div class="col-md-8">
@@ -892,95 +859,18 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="row mb-3 display-inline">
                             <div class="col-md-4">
-                                <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
+                                <label for="remunere" class="col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
                             <input type="checkbox" name="remunere" id="remunere" value="true" <?php echo e(old('remunere', $stagiaire->remunere) ? 'checked' : ''); ?>>
                             </div>
                             <div class="col-md-4">
-                                <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
+                                <label for="EI" class=" col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
                             <input type="checkbox" name="EI" id="EI" value="true" <?php echo e(old('EI', $stagiaire->EI) ? 'checked' : ''); ?>>
                             </div>
                             <div class="col-md-4">
-                                <label for="annule" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Annulé')); ?></label>
+                                <label for="annule" class="col-form-label text-md-left"><?php echo e(__('Annulé')); ?></label>
                             <input type="checkbox" name="annule" id="annule" value="true" <?php echo e(old('annule', $stagiaire->annule) ? 'checked' : ''); ?>>
                             </div>
-
                         </div>
-
-                        
-
-                        
-
-
-                        <script>
-                            var EI = document.getElementById('EI');
-
-                            document.getElementById('site').addEventListener('change', function() {
-                                site = this.value;
-                                var filtered_services = FilSer.filter(function(services) {
-                                    return services.site === site;
-                                });
-                                //alert(JSON.stringify(filtered_services));
-
-                                var service_select = document.getElementById('service');
-                                service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
-                                filtered_services.forEach(function(services) {
-                                    service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
-                                });
-                            });
-
-                            document.getElementById('encadrant').addEventListener('change', function() {
-                                var selectedEncadrantId = this.value;
-                                var serviceDropdown = document.getElementById('service');
-                                serviceDropdown.innerHTML = '';
-
-                                if (selectedEncadrantId) {
-                                    var selectedEncadrant = FilSerEnc.find(function(encadrant) {
-                                        return encadrant.id == selectedEncadrantId;
-                                    });
-
-                                    if (selectedEncadrant) {
-                                        var option = document.createElement('option');
-                                        var filteredService = FilSer.find(function(service) {
-                                            return service.id === selectedEncadrant.service;
-                                        });
-
-                                        if (filteredService) {
-                                            option.value = filteredService.id;
-                                            option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
-                                            serviceDropdown.appendChild(option);
-                                        }
-                                    }
-                                }
-                            });
-
-
-                            document.getElementById('diplome').addEventListener('change', function(){
-                                var diplome = this.value;
-                                var etab = document.getElementById('etablissement').value;
-                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
-                                var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
-                                document.getElementById('EI').checked = isMasterOrCycle;
-                                var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
-                                document.getElementById('remunere').checked =isRemunere;
-                            });
-
-                            document.getElementById('etablissement').addEventListener('change', function(){
-                                var etab = this.value;
-                                var diplome = document.getElementById('diplome').value;
-                                var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
-                                var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
-                                document.getElementById('EI').checked = isMoCI;
-                                var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
-                                document.getElementById('remunere').checked =isRem;
-                            });
-
-                        </script>
-
-
-
-
-
-
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" oninput="validateDates()">
@@ -993,22 +883,84 @@ unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 float-right" style="overflow-y: fixed;" id="right">
-        <div class="card col-md-12">
-            <div class="card-header bg-primary"><?php echo e(__('Autre informations à ajouter:')); ?></div>
-            <table>
-                <tr>
-                    <a href="/filieres/create" target="/_blank"  class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une filière</a>
-                    <a href="/etablissements/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un établissement</a>
-                    <a href="/services/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un service</a>
-                    <a href="/encadrants/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter un encadrant </a>
-                    <a href="/villes/create" target="/_blank" class=" col-md-10 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
-                </tr>
-            </table>
+        <div class="col">
+            <div class="row pt-1 ">
+                <a href="/filieres/create" target="/_blank"  class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter une filière</a>
+                <a href="/etablissements/create" target="/_blank" class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter un établissement</a>
+                <a href="/services/create" target="/_blank" class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter un service</a>
+                <a href="/encadrants/create" target="/_blank" class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter un encadrant </a>
+                <a href="/villes/create" target="/_blank" class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter une ville</a>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+<script>
+    var EI = document.getElementById('EI');
+
+    document.getElementById('site').addEventListener('change', function() {
+        site = this.value;
+        var filtered_services = FilSer.filter(function(services) {
+            return services.site === site;
+        });
+        //alert(JSON.stringify(filtered_services));
+
+        var service_select = document.getElementById('service');
+        service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+        filtered_services.forEach(function(services) {
+            service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+        });
+    });
+
+    document.getElementById('encadrant').addEventListener('change', function() {
+        var selectedEncadrantId = this.value;
+        var serviceDropdown = document.getElementById('service');
+        serviceDropdown.innerHTML = '';
+
+        if (selectedEncadrantId) {
+            var selectedEncadrant = FilSerEnc.find(function(encadrant) {
+                return encadrant.id == selectedEncadrantId;
+            });
+
+            if (selectedEncadrant) {
+                var option = document.createElement('option');
+                var filteredService = FilSer.find(function(service) {
+                    return service.id === selectedEncadrant.service;
+                });
+
+                if (filteredService) {
+                    option.value = filteredService.id;
+                    option.text = filteredService.sigle_service + ' - ' + filteredService.libelle;
+                    serviceDropdown.appendChild(option);
+                }
+            }
+        }
+    });
+
+
+    document.getElementById('diplome').addEventListener('change', function(){
+        var diplome = this.value;
+        var etab = document.getElementById('etablissement').value;
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
+        var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        document.getElementById('EI').checked = isMasterOrCycle;
+        var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
+        document.getElementById('remunere').checked =isRemunere;
+    });
+
+    document.getElementById('etablissement').addEventListener('change', function(){
+        var etab = this.value;
+        var diplome = document.getElementById('diplome').value;
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
+        var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        document.getElementById('EI').checked = isMoCI;
+        var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
+        document.getElementById('remunere').checked =isRem;
+    });
+
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views/stagiaires/modification.blade.php ENDPATH**/ ?>
