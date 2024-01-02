@@ -31,10 +31,10 @@ use App\Http\Controllers\Auth\RegisterController;
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('auth.register', [RegisterController::class, 'showRegistrationForm'])->middleware('auth');
-// Route::middleware(['auth', 'role:superadmin'])->group(function (){
-//     Route::get('auth.register', [RegisterController::class, 'showRegistrationForm']);
-// });
+//Route::get('auth.register', [RegisterController::class, 'showRegistrationForm'])->middleware('auth');
+Route::middleware(['auth', 'role:superadmin'])->group(function (){
+    Route::get('auth.register', [RegisterController::class, 'showRegistrationForm']);
+});
 
 Route::get('/stagiaires', [App\Http\Controllers\StagiaireController::class, 'index'])->name('stagiaires/index')->middleware('auth');
 Route::get('/stagiaires/create', [App\Http\Controllers\StagiaireController::class, 'create'])->name('stagiaires/create')->middleware('auth');
