@@ -19,6 +19,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\UniqueStagiaireInAcademicYear;
 
 Paginator::useBootstrap();
 
@@ -68,68 +69,76 @@ return view('stagiaires.index', compact('stagiaires'));
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nom'=>'required',
-            'prenom'=>'required',
-            'cin'=>'required',
-            'filiere'=>'required',
-            'service'=>'required',
-            'date_debut'=>'required',
-            'date_fin'=>'required',
-        ]);
+        try{
+            $request->validate([
+                'nom'=>'required',
+                'prenom'=>'required',
+                'cin' => ['required', new UniqueStagiaireInAcademicYear],
+                'cin'=>'required',
+                'filiere'=>'required',
+                'service'=>'required',
+                'date_debut' => 'required',
+                'date_fin'=>'required',
+            ]);
 
-        // incrementation du code.
 
-        $year = now()->year;
-        $count = Stagiaire::whereYear('created_at', $year)->count() + 1;
-        if($count>0){
-            $maxCode = Stagiaire::max('code');
-            $code =$maxCode + 1;
-        }else{
-            $formattedCount = sprintf('%04d', 1);
-            $code = $year.$formattedCount;
-        }
+            // incrementation du code.
 
-        $stagiaire = new Stagiaire();
-        $stagiaire->code =$code;
-        $stagiaire->Date_demande = $request->input('date_demande');
-        $stagiaire->site = $request->input('site');
-        $stagiaire->civilite = $request->input('civilite');
-        $stagiaire->prenom =ucwords($request->input('prenom'));
-        $stagiaire->nom = ucwords($request->input('nom'));
-        $stagiaire->cin = strtoupper($request->input('cin'));
-        $stagiaire->phone = $request->input('phone');
-        $stagiaire->email = $request->input('email');
-        if($request->hasFile('photo')){
-            $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
-            $request->file('photo')->storeAs('images/profile', $fileName,'public');
-            $requestData["photo"] = $fileName;
-            $stagiaire->photo = $requestData["photo"];
-        }else{
-            if($stagiaire->civilite=="M."){
-                $stagiaire->photo ='default_m.jpg';
+            $year = now()->year;
+            $count = Stagiaire::whereYear('created_at', $year)->count() + 1;
+            if($count>0){
+                $maxCode = Stagiaire::max('code');
+                $code =$maxCode + 1;
             }else{
-                $stagiaire->photo ='default_f.png';
+                $formattedCount = sprintf('%04d', 1);
+                $code = $year.$formattedCount;
             }
+
+            $stagiaire = new Stagiaire();
+            $stagiaire->code =$code;
+            $stagiaire->Date_demande = $request->input('date_demande');
+            $stagiaire->site = $request->input('site');
+            $stagiaire->civilite = $request->input('civilite');
+            $stagiaire->prenom =ucwords($request->input('prenom'));
+            $stagiaire->nom = ucwords($request->input('nom'));
+            $stagiaire->cin = strtoupper($request->input('cin'));
+            $stagiaire->phone = $request->input('phone');
+            $stagiaire->email = $request->input('email');
+            if($request->hasFile('photo')){
+                $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
+                $request->file('photo')->storeAs('images/profile', $fileName,'public');
+                $requestData["photo"] = $fileName;
+                $stagiaire->photo = $requestData["photo"];
+            }else{
+                if($stagiaire->civilite=="M."){
+                    $stagiaire->photo ='default_m.jpg';
+                }else{
+                    $stagiaire->photo ='default_f.png';
+                }
+            }
+            $stagiaire->niveau = $request->input('niveau');
+            $stagiaire->diplome = $request->input('diplome');
+            $stagiaire->filiere = $request->input('filiere');
+            $stagiaire->etablissement = $request->input('etablissement');
+            $stagiaire->ville = $request->input('ville');
+            $stagiaire->type_stage = $request->input('type_stage');
+            $stagiaire->type_formation = $request->input('type_formation');
+            $stagiaire->service = $request->input('service');
+            $stagiaire->encadrant = $request->input('encadrant');
+            $stagiaire->date_debut = $request->input('date_debut');
+            $stagiaire->date_fin = $request->input('date_fin');
+            $stagiaire->sujet= $request->input('sujet');
+            $stagiaire->remunere = $request->boolean('remunere');
+            $stagiaire->EI = $request->boolean('EI');
+            $stagiaire->observation= $request->input('observation');
+            $stagiaire->created_by= Auth::user()->name;
+            $stagiaire->save();
+            return back()->with('success', 'Enregistré avec succès.');
+
+        }catch (\Exception $e) {
+            // Catch the exception and add it to the validation errors
+            return redirect()->back()->withErrors(['cin' => $e->getMessage()]);
         }
-        $stagiaire->niveau = $request->input('niveau');
-        $stagiaire->diplome = $request->input('diplome');
-        $stagiaire->filiere = $request->input('filiere');
-        $stagiaire->etablissement = $request->input('etablissement');
-        $stagiaire->ville = $request->input('ville');
-        $stagiaire->type_stage = $request->input('type_stage');
-        $stagiaire->type_formation = $request->input('type_formation');
-        $stagiaire->service = $request->input('service');
-        $stagiaire->encadrant = $request->input('encadrant');
-        $stagiaire->date_debut = $request->input('date_debut');
-        $stagiaire->date_fin = $request->input('date_fin');
-        $stagiaire->sujet= $request->input('sujet');
-        $stagiaire->remunere = $request->boolean('remunere');
-        $stagiaire->EI = $request->boolean('EI');
-        $stagiaire->observation= $request->input('observation');
-        $stagiaire->created_by= Auth::user()->name;
-        $stagiaire->save();
-        return back()->with('success', 'Enregistré avec succès.');
     }
 
     /**
@@ -195,7 +204,7 @@ return view('stagiaires.index', compact('stagiaires'));
             'cin'=>'required',
             'filiere'=>'required',
             'service'=>'required',
-            'date_debut'=>'required',
+            'date_debut' => ['required', new UniqueStagiaireInAcademicYear($stagiaire->cin)],
             'date_fin'=>'required',
         ]);
         $stagiaire->code = $request->input('code');

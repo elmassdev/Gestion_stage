@@ -18,61 +18,48 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // Create admin user and assign 'admin' role
-        $admin = User::create([
-            'name' => 'Abdelaadim EL MASSOUDI ',
+        $SuperAdmin = User::create([
+            'nom'=>'EL MASSOUDI',
+            'prenom' => 'Abdelaadim',
             'email' => 'abdelaadim.elmassoudi@ocpgroup.ma',
             'site'=>'Benguerir',
+            'service'=>55,
             'password' => Hash::make('testtest'),
         ]);
-        $adminRole = Role::where('name', 'admin')->first();
-        $admin->assignRole($adminRole);
+        $SuperAdminRole = Role::where('name', 'superadmin')->first();
+        $SuperAdmin->assignRole($SuperAdminRole);
 
         $admin = User::create([
-            'name' => 'Younes ED-DHHAK',
-            'email' => 'EDDHHAK@gmail.com',
+            'nom' => 'ED-DHHAK',
+            'prenom'=>'Younes',
+            'email' => 'EDDHHAK@ocpgroup.ma',
             'site'=>'Benguerir',
+            'service'=>55,
             'password' => Hash::make('testtest'),
         ]);
         $adminRole = Role::where('name', 'admin')->first();
         $admin->assignRole($adminRole);
 
         $admin = User::create([
-            'name' => 'Youness Kourimi ',
+            'nom' => 'Kourimi',
+            'prenom'=>'Younes',
             'email' => 'kourimi@ocpgroup.ma',
             'site'=>'Youssoufia',
+            'service'=>56,
             'password' => Hash::make('testtest'),
         ]);
         $adminRole = Role::where('name', 'admin')->first();
         $admin->assignRole($adminRole);
 
-        // Create editor user and assign 'editor' role
-        $editor = User::create([
-            'name' => 'Editor User',
-            'email' => 'editor@example.com',
+        $admin = User::create([
+            'nom' => 'KHOMRI',
+            'prenom'=>'Es-saadia',
+            'email' => 'KHOMRI@ocpgroup.ma',
             'site'=>'Benguerir',
-            'password' => Hash::make('editortest'),
+            'service'=> 55,
+            'password' => Hash::make('testtest'),
         ]);
-        $editorRole = Role::where('name', 'editor')->first();
-        $editor->assignRole($editorRole);
-
-        // Create student user and assign 'student' role
-        $student = User::create([
-            'name' => 'Student User',
-            'email' => 'student@example.com',
-            'site'=>'Benguerir',
-            'password' => Hash::make('studenttest'),
-        ]);
-        $studentRole = Role::where('name', 'student')->first();
-        $student->assignRole($studentRole);
-
-        // Create regular user and assign 'user' role
-        $regularUser = User::create([
-            'name' => 'Regular User',
-            'email' => 'user@example.com',
-            'site'=>'Benguerir',
-            'password' => Hash::make('usertest'),
-        ]);
-        $userRole = Role::where('name', 'user')->first();
-        $regularUser->assignRole($userRole);
+        $adminRole = Role::where('name', 'admin')->first();
+        $admin->assignRole($adminRole);
     }
 }

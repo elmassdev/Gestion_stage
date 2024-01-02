@@ -5,19 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Ajouter un nouveau utilisateur') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
+                            <label for="prenom" class="col-md-4 col-form-label text-md-end">{{ __('Prénom') }}</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus>
 
-                                @error('name')
+                                @error('prenom')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,7 +25,20 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="nom" class="col-md-4 col-form-label text-md-end">{{ __('Nom') }}</label>
+                            <div class="col-md-6">
+                                <input id="nom" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" required autocomplete="nom" autofocus>
+
+                                @error('nom')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -40,12 +52,31 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="site" class="col-md-4 col-form-label text-md-end">{{ __('site utilisateur') }}</label>
+                            <label for="site" class="col-md-4 col-form-label text-md-end"> Site</label>
 
                             <div class="col-md-6">
-                                <input id="site" type="site" class="form-control @error('site') is-invalid @enderror" name="site" value="{{ old('site') }}" required autocomplete="site">
-
+                                <select id="site" type="text"   class="form-control  @error('site') is-invalid @enderror" name="site"  autocomplete="site">
+                                    <option value="Benguerir">Benguerir</option>
+                                    <option value="Youssoufia"> Youssoufia</option>
+                                </select>
                                 @error('site')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="service" class="col-md-4 col-form-label text-md-end"> Service</label>
+                            <div class="col-md-6">
+                                <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
+                                    <option value="" selected></option>
+                                    @foreach($services as $s)
+                                        <option value="{{ $s->id }}">{{ $s->sigle_service }} - {{ $s->libelle }}</option>
+                                    @endforeach
+                                </select>
+                                @error('service')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -88,4 +119,21 @@
         </div>
     </div>
 </div>
+<script>
+    var FilSer = @json($services);
+    document.getElementById('site').addEventListener('change', function() {
+        site = this.value;
+        var filtered_services = FilSer.filter(function(services) {
+            return services.site === site;
+        });
+        //alert(JSON.stringify(filtered_services));
+
+        var service_select = document.getElementById('service');
+        service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
+        filtered_services.forEach(function(services) {
+            service_select.innerHTML += '<option value="' + services.id + '">' + services.sigle_service+' - '+services.libelle + '</option>';
+        });
+    });
+
+</script>
 @endsection

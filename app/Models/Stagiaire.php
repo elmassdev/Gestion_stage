@@ -4,9 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Stagiaire extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($stagiaire) {
+            $currentDateDebut = $stagiaire->date_debut;
+
+            $currentYear = date('Y', strtotime($currentDateDebut));
+            $currentMonth = date('n', strtotime($currentDateDebut));
+
+            $currentAcademicYear = ($currentMonth >= 9) ? $currentYear + 1 : $currentYear;
+
+            $existingStagiaire = self::where('cin', $stagiaire->cin)
+                ->whereYear('date_debut', $currentAcademicYear)
+                ->where('id', '!=', $stagiaire->id)
+                ->first();
+
+            if ($existingStagiaire) {
+                throw new \Exception('Le stagiaire a droit à un seul stage dans pendant une année académique!');
+            }
+        });
+    }
+
     use HasFactory;
     protected $table = 'stagiaires';
     protected $primaryKey = 'id';

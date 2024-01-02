@@ -22,7 +22,7 @@
 </div>
 
 <div class="container card">
-    <h2 class="card-header">Ajouter un stagiaire</h2>
+    <h2 class="text-center pt-2">Ajouter un stagiaire</h2>
     <div class="row  card-body">
       <div class="col border border-solid rounded pt-2">
         <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">

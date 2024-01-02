@@ -369,7 +369,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->nom }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -426,6 +426,9 @@
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
             <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/indicators/index"> Indicateurs</a>
             <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/stagiaires"> Liste des stagiaires</a>
+            @if(auth()->check() && auth()->user()->hasRole('superadmin'))
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un nouveau utilisateur</a>
+            @endif
         </div>
 
         <div id="sign">

@@ -10,6 +10,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EtabController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\IndicatorsController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 
@@ -30,7 +31,10 @@ use App\Http\Controllers\IndicatorsController;
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('auth.register', [RegisterController::class, 'showRegistrationForm'])->middleware('auth');
+// Route::middleware(['auth', 'role:superadmin'])->group(function (){
+//     Route::get('auth.register', [RegisterController::class, 'showRegistrationForm']);
+// });
 
 Route::get('/stagiaires', [App\Http\Controllers\StagiaireController::class, 'index'])->name('stagiaires/index')->middleware('auth');
 Route::get('/stagiaires/create', [App\Http\Controllers\StagiaireController::class, 'create'])->name('stagiaires/create')->middleware('auth');
@@ -62,4 +66,13 @@ Route::get('/indicators/ExcelStaEnc', [IndicatorsController::class, 'ExcelStaEnc
 Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);
 Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);
 Route::get('/export/queries', [IndicatorsController::class, 'exportqueries'])->name('export.excel');
+// web.php
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+//     Route::get('/admin/assign-roles', 'UserRoleController@showAssignRolesForm')->name('assign-roles.form');
+//     Route::post('/admin/assign-roles', 'UserRoleController@assignRoles')->name('assign-roles.submit');
+// });
+// Route::get('/admin/assign-roles', 'UserRoleController@showAssignRolesForm')->name('assign-roles.form');
+// Route::post('/admin/assign-roles', 'UserRoleController@assignRoles')->name('assign-roles.submit');
+
+
 

@@ -237,7 +237,7 @@
                         <?php else: ?>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold" v-pre>
-                                    <?php echo e(Auth::user()->name); ?>
+                                    <?php echo e(Auth::user()->nom); ?>
 
                                 </a>
 
