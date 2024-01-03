@@ -11,6 +11,10 @@ use App\Http\Controllers\EtabController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\IndicatorsController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\PermissionController;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\UserController;
+
 
 
 
@@ -66,13 +70,20 @@ Route::get('/indicators/ExcelStaEnc', [IndicatorsController::class, 'ExcelStaEnc
 Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);
 Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);
 Route::get('/export/queries', [IndicatorsController::class, 'exportqueries'])->name('export.excel');
-// web.php
-// Route::middleware(['auth', 'role:admin'])->group(function () {
-//     Route::get('/admin/assign-roles', 'UserRoleController@showAssignRolesForm')->name('assign-roles.form');
-//     Route::post('/admin/assign-roles', 'UserRoleController@assignRoles')->name('assign-roles.submit');
-// });
-// Route::get('/admin/assign-roles', 'UserRoleController@showAssignRolesForm')->name('assign-roles.form');
-// Route::post('/admin/assign-roles', 'UserRoleController@assignRoles')->name('assign-roles.submit');
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
+    Route::get('/admin/permissions', [PermissionController::class, 'index']);
+    Route::post('/admin/permissions/assign-roles/{userId}', [PermissionController::class, 'assignRoles']);
+    Route::post('/admin/permissions/assign-permissions/{roleId}', [PermissionController::class, 'assignPermissions']);
+    Route::get('/user/assign-roles', [UserController::class, 'show'])->name('user.assignRoles');
+    Route::post('/user/assign-roles', [UserController::class, 'assignRoles'])->name('user.assignRoles');
+    Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
+    Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
+});
+
+
+// Route::get('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
+
+
 
 
 

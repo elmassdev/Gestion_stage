@@ -19,6 +19,12 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
+    
+    public function service()
+    {
+        return $this->hasOne(Service::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.

@@ -1,9 +1,9 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container py-4">
+    <div class="row justify-content-center py-4">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><?php echo e(__('Ajouter un nouveau utilisateur')); ?></div>
+                <div class="card-header"> <b> <?php echo e(__('Ajouter un nouveau utilisateur')); ?>  </b> </div>
 
                 <div class="card-body">
                     <form method="POST" action="<?php echo e(route('register')); ?>">
@@ -201,6 +201,17 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+    <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
+    <div class="container mx-4 py-4">
+        <div class="row justify-content-center py-4">
+            <div class="col-md-9">
+                <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un utilisateur</a>
+                <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Gérer les roles</a>
+                <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-permissions"> Gérer les Permissions</a>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>
 <script>
     var FilSer = <?php echo json_encode($services, 15, 512) ?>;
@@ -209,8 +220,6 @@ unset($__errorArgs, $__bag); ?>
         var filtered_services = FilSer.filter(function(services) {
             return services.site === site;
         });
-        //alert(JSON.stringify(filtered_services));
-
         var service_select = document.getElementById('service');
         service_select.innerHTML = '<option value="" disabled>Service de stage</option>';
         filtered_services.forEach(function(services) {
