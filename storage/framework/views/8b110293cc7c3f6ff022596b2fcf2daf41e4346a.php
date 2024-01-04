@@ -45,6 +45,19 @@
                         return item.total;
                     });
 
+                    // Function to calculate the gradient color based on the value
+                    function calculateColor(value) {
+                        // Adjust the gradient based on your requirements
+                        var normalizedValue = (value - 7) / (8 - 7); // Normalize the value between 0 and 1
+                        var green = Math.round(255 - normalizedValue * 255);
+                        var red = Math.round(normalizedValue * 255);
+                        return `rgba(${red}, ${green}, 0, 0.7)`;
+                    }
+
+                    var backgroundColors = values.map(function(value) {
+                        return calculateColor(value);
+                    });
+
                     var ctx = document.getElementById('myPieChart').getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'bar',
@@ -53,24 +66,8 @@
                             datasets: [{
                                 label: 'Nombre de stagiaires:',
                                 data: values,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.7)',
-                                    'rgba(54, 162, 235, 0.7)',
-                                    'rgba(255, 206, 86, 0.7)',
-                                    'rgba(75, 192, 192, 0.7)',
-                                    'rgba(153, 102, 255, 0.7)',
-                                    'rgba(255, 159, 64, 0.7)'
-                                    // Add more colors if needed
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                    // Add more colors if needed
-                                ],
+                                backgroundColor: backgroundColors,
+                                borderColor: 'rgba(0, 0, 0, 1)',
                                 borderWidth: 1
                             }]
                         },
@@ -78,7 +75,7 @@
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Bilan stagiaires en cours par service: '+new Date().toLocaleDateString('en-GB'),
+                                    text: 'Bilan stagiaires en cours par service: ' + new Date().toLocaleDateString('en-GB'),
                                     padding: {
                                         top: 10,
                                         bottom: 30
@@ -92,8 +89,8 @@
                     });
                     document.getElementById('myPieChart').style.height = document.querySelector('.left > div').style.height;
                 </script>
-
             </div>
+
         </div>
         <div class="row">
             <div class="col-md-6 border">
@@ -129,33 +126,29 @@
                         return item.total;
                     });
 
+                    // Function to calculate the gradient color based on the value
+                    function calculateColor(value) {
+                        // Adjust the gradient based on your requirements
+                        var normalizedValue = (value - 7) / (8 - 7); // Normalize the value between 0 and 1
+                        var green = Math.round(255 - normalizedValue * 255);
+                        var red = Math.round(normalizedValue * 255);
+                        return `rgba(${red}, ${green}, 0, 0.7)`;
+                    }
+
+                    var backgroundColors = values.map(function(value) {
+                        return calculateColor(value);
+                    });
+
                     var ctx = document.getElementById('stagenc').getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [{
-                                label:'Nombre de stagiaires',
+                                label: 'Nombre de stagiaires',
                                 data: values,
-                                label:'Nombre de stagiaires',
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.7)',
-                                    'rgba(54, 162, 235, 0.7)',
-                                    'rgba(255, 206, 86, 0.7)',
-                                    'rgba(75, 192, 192, 0.7)',
-                                    'rgba(153, 102, 255, 0.7)',
-                                    'rgba(255, 159, 64, 0.7)'
-                                    // Add more colors if needed
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                    // Add more colors if needed
-                                ],
+                                backgroundColor: backgroundColors,
+                                borderColor: 'rgba(0, 0, 0, 1)',
                                 borderWidth: 1
                             }]
                         },
@@ -163,7 +156,7 @@
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Bilan stagiaires en cours par encadrant: '+new Date().toLocaleDateString('en-GB'),
+                                    text: 'Bilan stagiaires en cours par encadrant: ' + new Date().toLocaleDateString('en-GB'),
                                     padding: {
                                         top: 10,
                                         bottom: 30
@@ -177,9 +170,9 @@
                     });
                     document.getElementById('stagenc').style.height = document.querySelector('.left > div').style.height;
                 </script>
-
             </div>
         </div>
+
         <div class="row card my-2">
             <div class="card-header">
                 <div class="card">

@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\UniqueStagiaireInAcademicYear;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 Paginator::useBootstrap();
 
@@ -41,9 +43,9 @@ class StagiaireController extends Controller
         ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
         ->orderBy('stagiaires.code', 'desc')
         ->paginate(10);
-
-return view('stagiaires.index', compact('stagiaires'));
+        return view('stagiaires.index', compact('stagiaires'));
     }
+
 
     /**
      * Show the form for creating a new resource.

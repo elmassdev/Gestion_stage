@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/styles.css')); ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-oGq1BrH7tx2LlO3S3z5gDvDHt5eRq3s7l5xFZbgYFBJIU8Z6enP00HRlL2LZ6ENg" crossorigin="anonymous">
@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
 </head>
 
 <body  id="body-element" data-bs-theme="dark">
@@ -169,28 +169,17 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm sticky-top" id="navbar">
-            <a class="navbar-brand mx-auto" href="{{ url('/') }}">
+            <a class="navbar-brand mx-auto">
                 <img src="/images/logo.svg" alt="">
             </a>
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto" style="display:absolute" >
-                        @auth
-                        @if(auth()->check() && auth()->user()->hasRole('admin'))
-                        <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
-                        @endif
-                        @if(auth()->check() && auth()->user()->hasRole('manager'))
-                        <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
-                        @endif
-                        <li class="navbarli"><a href="/contact">Contact</a></li>
-                        @endauth
-
-
                         <li class="navbarli" style="display: inline" >
                             <input type="checkbox" id="darkmode-toggle"/>
                             <label for="darkmode-toggle" id="toggler" >
@@ -217,41 +206,37 @@
                                     <path d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268 c-1.479,5.459-0.899,11.25,1.633,16.306c2.75,5.493,7.476,9.587,13.305,11.526c5.831,1.939,12.065,1.492,17.559-1.258v0 c0.25-0.125,0.492-0.258,0.734-0.391l2.061-1.13l-0.585,2.252c-1.863,6.873-6.577,12.639-12.933,15.822 C32.639,48.039,28.825,48.888,25.068,48.889z M12.002,4.936c-9.413,6.428-12.756,18.837-7.54,29.253 c5.678,11.34,19.522,15.945,30.864,10.268c5.154-2.582,9.136-7.012,11.181-12.357c-5.632,2.427-11.882,2.702-17.752,0.748 c-6.337-2.108-11.473-6.557-14.463-12.528C11.899,15.541,11.11,10.16,12.002,4.936z"/></svg>
                                 </label>
                             </li>
-                        {{-- <li class="navbarli"><span class="toggleThemeBtn" id="toggleThemeBtn">
-                            <div id="lightThemeBtn"><img id="moon" src="/images/moon-svgrepo-com.svg" alt="" height="24px" width="24px"></div>
-                            <div id="darkThemeBtn"><img id="sun" src="/images/sun-bright-svgrepo-com.svg" alt="" height="24px" width="24px"></div>
-                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="#363532" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>         </div>
-
-                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="#e9b82f" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>                            </div>
-                        </span></li> --}}
+                        
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
+                        <?php if(auth()->guard()->guest()): ?>
+                            <?php if(Route::has('login')): ?>
                                 <li class="nav-item">
-                                    <b> <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> </b>
+                                    <b> <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a> </b>
                                 </li>
-                            @endif
-                        @else
+                            <?php endif; ?>
+                        <?php else: ?>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold" v-pre>
-                                    {{ Auth::user()->nom }}
+                                    <?php echo e(Auth::user()->nom); ?>
+
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <?php echo e(__('Logout')); ?>
+
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
+                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                        <?php echo csrf_field(); ?>
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        <?php endif; ?>
                     </ul>
 
 
@@ -259,128 +244,66 @@
                 </div>
             </div>
         </nav>
-
-        <style>
-            .cards{
-          /* font-family: 'Poppins', sans-serif; */
-          font-family: 'Roboto', sans-serif;
-          font-weight: 400;
-          font-size: 20px;
-          max-width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          flex-flow: wrap;
-        }
-
-        .B:hover,.Y:hover, .B a:hover, .Y a:hover{
-          transform: scale(1.05);
-          transition: all 0.6s ease;
-          color:#ffa500 !important;
-        }
-
-        .B,.Y{
-
-            /* background-color: #e67700;*/
-            /* background-image: url('/images/wood.jpg');
-            background-size: cover;
-            background-position: center; */
-            font-family: Nunito;
-            background-color: rgb(167, 113, 63);
-            background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
-            font-display:auto;
-            font-weight: 400;
-            font-size: 16px;
-            width: 25rem;
-            max-width: 80%;
-            min-width: 45%;
-            box-sizing: border-box;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            color: #ffffff;
-        }
-
-        .B a , .Y a{
-          color: #ffffff !important;
-          font-size: 1.2rem;
-
-        }
-
-        ul{
-          list-style-type: none;
-        }
-
-        .B, .Y{
-          box-shadow: 10px 10px 5px grey;
-
-        }
-
-
-        .title{
-          text-align: center;
-          font-size: 25px;
-          color: olivedrab;
-          padding: 5px 0px;
-        }
-
-        .sitename{
-          background: #81858a;
-          color: #fff;
-          padding: 4px 10px;
-          margin-bottom: 40px;
-          font-size: 18px;
-        }
-        label{
-          text-align: left;
-        }
-
-        </style>
-
-        <div class="py-4">
-            <p class="title"> Pour plus d'information:</p>
-                <div class="cards col-md-6 mx-auto">
-
-                    <div class=" card B">
-                        <span class="sitename">Section des stages: Benguerir</span>
-                        <ul>
-                            <li>
-                                <i class="fas fa-mobile-alt mx-2"></i>
-                                <a href="tel:+212662077439">+212662077439</a>
-                            </li>
-                            <li>
-                                <i class="far fa-envelope mx-2"></i>
-                                <a href="mailto:stagebg@ocpgroup.ma">stagebg@ocpgroup.ma</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt mx-2"></i>
-                                <a href="https://goo.gl/maps/Nmb8g6nUSnhb9BUVA" target="_blank">CCI, Benguerir</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div class=" card Y">
-                        <span class="sitename">Section des stages: Youssoufia</span>
-                        <ul>
-                            <li>
-                                <i class="fas fa-mobile-alt mx-2"></i> <a href="tel:+212666050185">+212666050185</a>
-                            </li>
-                            <li>
-                                <i class="far fa-envelope mx-2"></i> <a href="mailto:stageyfia@ocpgroup.ma">stageyfia@ocpgroup.ma</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt mx-2"></i> <a href="https://maps.app.goo.gl/aoz5aQNNytU6MqUV6" target="_blank">CCI, Youssoufia</a>
-                            </li>
-                        </ul>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Sauvegarder la liste des stagiaires en cours: <a class="btn text-success  rounded-pill" href="/surete/save"> <i class="fa-solid fa-file-export" ></i></a>
                 </div>
+                <div class="col">
+
+
+                </div>
+            </div>
         </div>
+        <div class="py-4 mx-2">
+            <?php if(count($stagiaires)): ?>
+            <table class="table table-striped table-responsive mx-2">
+                <thead>
+                    <tr class="small">
+                        <th>Photo</th>
+                        <th>Titre</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Type de stage</th>
+                        <th>Niveau</th>
+                        <th>Diplôme</th>
+                        <th>Etablissement</th>
+                        <th>Ville</th>
+                        <th>Service</th>
+                        <th>Encadrant</th>
+                        <th>Date debut</th>
+                        <th>Date fin</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $__currentLoopData = $stagiaires; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stagiaire): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr class=" table table-row my-auto h-10 small">
+                        <td> <img src="<?php echo e(asset('storage/images/profile/'.$stagiaire->photo)); ?>"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" ></td>
+                        <td><?php echo e($stagiaire->civilite); ?></td>
+                        <td><?php echo e($stagiaire->prenom); ?></td>
+                        <td><?php echo e($stagiaire->nom); ?></td>
+                        <td><?php echo e($stagiaire->type_stage); ?></td>
+                        <td><?php echo e($stagiaire->niveau); ?></td>
+                        <td><?php echo e($stagiaire->diplome); ?></td>
+                        <td><?php echo e($stagiaire->etablissement); ?></td>
+                        <td><?php echo e($stagiaire->ville); ?></td>
+                        <td><?php echo e($stagiaire->sigle); ?></td>
+                        <td><?php echo e($stagiaire->nomenc); ?></td>
+                        <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')); ?></td>
+                        <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></td>
+                    </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tbody>
+            </table>
+            <?php echo e($stagiaires->links()); ?>
 
 
+            <?php else: ?>
+            <p class="bg-warning text-danger"> Pas de stagiaires</p>
+            <?php endif; ?>
 
-    </div>
-
-
+            </div>
 
 <script>
     const bodyElement = document.getElementById('body-element');
@@ -443,7 +366,10 @@
 
 </script>
 
-
 </body>
 </html>
 
+
+
+
+<?php /**PATH D:\Share\main\Gestion_stage\resources\views/surete/index.blade.php ENDPATH**/ ?>

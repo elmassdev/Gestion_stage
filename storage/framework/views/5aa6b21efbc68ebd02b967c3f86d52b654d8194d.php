@@ -326,8 +326,12 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto" style="display:absolute" >
+                    <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
                     <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
+                    <?php endif; ?>
+                    <?php if(auth()->check() && auth()->user()->hasRole('manager')): ?>
                     <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
+                    <?php endif; ?>
                     <li class="navbarli"><a href="/contact">Contact</a></li>
                     <li class="navbarli" style="display: inline" >
                         <input type="checkbox" id="darkmode-toggle"/>
@@ -395,6 +399,7 @@
         <div class="row">
             <h1 class="dep"> Département Développement RH  </h1>
         </div>
+        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
         <div class="row middle">
             <table>
                 <tr>
@@ -419,19 +424,26 @@
                 </tr>
             </table>
         </div>
+        <?php endif; ?>
 
 
+        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
         <div class="row col-md-10">
             <h2 class="motto">Optimisation, Efficacité, Performance!</h2>
         </div>
+        <?php endif; ?>
+        
         <div class="row bottom col-md-8" >
+            <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
             <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/indicators/index"> Indicateurs</a>
             <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/stagiaires"> Liste des stagiaires</a>
+            <?php endif; ?>
             <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un nouveau utilisateur</a>
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Gérer les roles</a>
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-permissions"> Gérer les Permissions</a>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Menu admin</a>
+            <?php endif; ?>
+            <?php if(auth()->check() && auth()->user()->hasRole('surete')): ?>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/surete"> Canevas stagiaires</a>
             <?php endif; ?>
         </div>
 

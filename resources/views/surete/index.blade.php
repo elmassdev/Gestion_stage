@@ -169,7 +169,7 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm sticky-top" id="navbar">
-            <a class="navbar-brand mx-auto" href="{{ url('/') }}">
+            <a class="navbar-brand mx-auto">
                 <img src="/images/logo.svg" alt="">
             </a>
             <div class="container">
@@ -180,17 +180,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto" style="display:absolute" >
-                        @auth
-                        @if(auth()->check() && auth()->user()->hasRole('admin'))
-                        <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
-                        @endif
-                        @if(auth()->check() && auth()->user()->hasRole('manager'))
-                        <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
-                        @endif
-                        <li class="navbarli"><a href="/contact">Contact</a></li>
-                        @endauth
-
-
                         <li class="navbarli" style="display: inline" >
                             <input type="checkbox" id="darkmode-toggle"/>
                             <label for="darkmode-toggle" id="toggler" >
@@ -259,128 +248,65 @@
                 </div>
             </div>
         </nav>
-
-        <style>
-            .cards{
-          /* font-family: 'Poppins', sans-serif; */
-          font-family: 'Roboto', sans-serif;
-          font-weight: 400;
-          font-size: 20px;
-          max-width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          flex-flow: wrap;
-        }
-
-        .B:hover,.Y:hover, .B a:hover, .Y a:hover{
-          transform: scale(1.05);
-          transition: all 0.6s ease;
-          color:#ffa500 !important;
-        }
-
-        .B,.Y{
-
-            /* background-color: #e67700;*/
-            /* background-image: url('/images/wood.jpg');
-            background-size: cover;
-            background-position: center; */
-            font-family: Nunito;
-            background-color: rgb(167, 113, 63);
-            background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
-            font-display:auto;
-            font-weight: 400;
-            font-size: 16px;
-            width: 25rem;
-            max-width: 80%;
-            min-width: 45%;
-            box-sizing: border-box;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            color: #ffffff;
-        }
-
-        .B a , .Y a{
-          color: #ffffff !important;
-          font-size: 1.2rem;
-
-        }
-
-        ul{
-          list-style-type: none;
-        }
-
-        .B, .Y{
-          box-shadow: 10px 10px 5px grey;
-
-        }
-
-
-        .title{
-          text-align: center;
-          font-size: 25px;
-          color: olivedrab;
-          padding: 5px 0px;
-        }
-
-        .sitename{
-          background: #81858a;
-          color: #fff;
-          padding: 4px 10px;
-          margin-bottom: 40px;
-          font-size: 18px;
-        }
-        label{
-          text-align: left;
-        }
-
-        </style>
-
-        <div class="py-4">
-            <p class="title"> Pour plus d'information:</p>
-                <div class="cards col-md-6 mx-auto">
-
-                    <div class=" card B">
-                        <span class="sitename">Section des stages: Benguerir</span>
-                        <ul>
-                            <li>
-                                <i class="fas fa-mobile-alt mx-2"></i>
-                                <a href="tel:+212662077439">+212662077439</a>
-                            </li>
-                            <li>
-                                <i class="far fa-envelope mx-2"></i>
-                                <a href="mailto:stagebg@ocpgroup.ma">stagebg@ocpgroup.ma</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt mx-2"></i>
-                                <a href="https://goo.gl/maps/Nmb8g6nUSnhb9BUVA" target="_blank">CCI, Benguerir</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div class=" card Y">
-                        <span class="sitename">Section des stages: Youssoufia</span>
-                        <ul>
-                            <li>
-                                <i class="fas fa-mobile-alt mx-2"></i> <a href="tel:+212666050185">+212666050185</a>
-                            </li>
-                            <li>
-                                <i class="far fa-envelope mx-2"></i> <a href="mailto:stageyfia@ocpgroup.ma">stageyfia@ocpgroup.ma</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt mx-2"></i> <a href="https://maps.app.goo.gl/aoz5aQNNytU6MqUV6" target="_blank">CCI, Youssoufia</a>
-                            </li>
-                        </ul>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Sauvegarder la liste des stagiaires en cours: <a class="btn text-success  rounded-pill" href="/surete/save"> <i class="fa-solid fa-file-export" ></i></a>
                 </div>
+                <div class="col">
+
+
+                </div>
+            </div>
         </div>
+        <div class="py-4 mx-2">
+            @if(count($stagiaires))
+            <table class="table table-striped table-responsive mx-2">
+                <thead>
+                    <tr class="small">
+                        <th>Photo</th>
+                        <th>Titre</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Type de stage</th>
+                        <th>Niveau</th>
+                        <th>Diplôme</th>
+                        <th>Etablissement</th>
+                        <th>Ville</th>
+                        <th>Service</th>
+                        <th>Encadrant</th>
+                        <th>Date debut</th>
+                        <th>Date fin</th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($stagiaires as $stagiaire)
+                    <tr class=" table table-row my-auto h-10 small">
+                        <td> <img src="{{ asset('storage/images/profile/'.$stagiaire->photo)}}"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" ></td>
+                        <td>{{ $stagiaire->civilite}}</td>
+                        <td>{{ $stagiaire->prenom}}</td>
+                        <td>{{ $stagiaire->nom}}</td>
+                        <td>{{ $stagiaire->type_stage}}</td>
+                        <td>{{ $stagiaire->niveau}}</td>
+                        <td>{{ $stagiaire->diplome}}</td>
+                        <td>{{ $stagiaire->etablissement}}</td>
+                        <td>{{ $stagiaire->ville}}</td>
+                        <td>{{ $stagiaire->sigle}}</td>
+                        <td>{{ $stagiaire->nomenc}}</td>
+                        <td>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</td>
+                        <td>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $stagiaires->links() }}
 
+            @else
+            <p class="bg-warning text-danger"> Pas de stagiaires</p>
+            @endif
 
-    </div>
-
-
+            </div>
 
 <script>
     const bodyElement = document.getElementById('body-element');
@@ -443,7 +369,9 @@
 
 </script>
 
-
 </body>
 </html>
+
+
+
 
