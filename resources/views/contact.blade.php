@@ -184,9 +184,9 @@
                         @if(auth()->check() && auth()->user()->hasRole('admin'))
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
                         @endif
-                        @if(auth()->check() && auth()->user()->hasRole('manager'))
+                        @can('view_indicators')
                         <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
-                        @endif
+                        @endcan
                         <li class="navbarli"><a href="/contact">Contact</a></li>
                         @endauth
 

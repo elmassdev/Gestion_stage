@@ -37,7 +37,7 @@ Route::view('/contact', 'contact');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::middleware(['auth', 'role:manager'])->group(function (){
+Route::middleware(['auth', 'can:view_indicators'])->group(function (){
     Route::resource('indicators/index', IndicatorsController::class)->middleware('auth');
     Route::get('/indicators/queries', [IndicatorsController::class, 'queries'])->name('indicators.queries')->middleware('auth');
     Route::get('/indicators/ExcelStaSer', [IndicatorsController::class, 'ExcelStaSer']);
@@ -83,7 +83,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
 });
 
-Route::middleware(['auth', 'surete'])->group(function () {
+Route::middleware(['auth', 'can:view_surete_page'])->group(function () {
     Route::get('/surete', [App\Http\Controllers\SureteController::class, 'index'])->name('surete/index');
     Route::get('/surete/save', [App\Http\Controllers\SureteController::class, 'canvasStage']);
 });

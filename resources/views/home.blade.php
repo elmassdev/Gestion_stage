@@ -166,6 +166,7 @@
             background-repeat: no-repeat;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
     }
 
@@ -311,6 +312,15 @@
             font-size: 24px;
             font-family: 'Pinyon Script', cursive;
         }
+        body{
+            box-sizing: border-box;
+            height: 95vh;
+            margin:0;
+            padding:0;
+        }
+        body, html {
+            overflow: hidden;
+        }
 
 </style>
 
@@ -329,9 +339,9 @@
                     @if(auth()->check() && auth()->user()->hasRole('admin'))
                     <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
                     @endif
-                    @if(auth()->check() && auth()->user()->hasRole('manager'))
+                    @can('view_indicators')
                     <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
-                    @endif
+                    @endcan
                     <li class="navbarli"><a href="/contact">Contact</a></li>
                     <li class="navbarli" style="display: inline" >
                         <input type="checkbox" id="darkmode-toggle"/>
@@ -425,12 +435,12 @@
         @endif
 
 
-        @if(auth()->check() && auth()->user()->hasRole('admin'))
+        @can('view_indicators')
         <div class="row col-md-10">
             <h2 class="motto">Optimisation, Efficacité, Performance!</h2>
         </div>
-        @endif
-        
+        @endcan
+
         <div class="row bottom col-md-8" >
             @if(auth()->check() && auth()->user()->hasRole('admin'))
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
@@ -440,9 +450,9 @@
             @if(auth()->check() && auth()->user()->hasRole('superadmin'))
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Menu admin</a>
             @endif
-            @if(auth()->check() && auth()->user()->hasRole('surete'))
+            @can('view_surete_page')
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/surete"> Canevas stagiaires</a>
-            @endif
+            @endcan
         </div>
 
         <div id="sign">
@@ -500,7 +510,12 @@
         }else{
             bodyElement.style.background = 'url("/images/bg.jpg")';
             bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundRepeat = 'no-repeat';
             bodyElement.style.backgroundPosition= "center";
+            bodyElement.style.margin = '0';
+            bodyElement.style.padding = '0';
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
         }
         updateToggleButton();
     });
@@ -516,7 +531,12 @@
             navbar.classList.add(`navbar-light`, `bg-light`);
             bodyElement.style.background = 'url("/images/bg.jpg")';
             bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundRepeat = 'no-repeat';
             bodyElement.style.backgroundPosition= "center";
+            bodyElement.style.margin = '0';
+            bodyElement.style.padding = '0';
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
         }
         updateToggleButton();
     }

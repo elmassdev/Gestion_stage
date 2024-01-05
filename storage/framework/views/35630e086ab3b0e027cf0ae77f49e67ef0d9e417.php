@@ -187,8 +187,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" style="display:absolute" >
+                        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_indicators')): ?>
                         <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
+                        <?php endif; ?>
                         <li class="navbarli"><a href="/contact">Contact</a></li>
                         <li class="navbarli" style="display: inline" >
                             <input type="checkbox" id="darkmode-toggle"/>

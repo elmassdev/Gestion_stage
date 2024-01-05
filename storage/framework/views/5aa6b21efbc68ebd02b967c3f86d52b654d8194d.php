@@ -166,6 +166,7 @@
             background-repeat: no-repeat;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
     }
 
@@ -311,6 +312,15 @@
             font-size: 24px;
             font-family: 'Pinyon Script', cursive;
         }
+        body{
+            box-sizing: border-box;
+            height: 95vh;
+            margin:0;
+            padding:0;
+        }
+        body, html {
+            overflow: hidden;
+        }
 
 </style>
 
@@ -329,7 +339,7 @@
                     <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
                     <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
                     <?php endif; ?>
-                    <?php if(auth()->check() && auth()->user()->hasRole('manager')): ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_indicators')): ?>
                     <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
                     <?php endif; ?>
                     <li class="navbarli"><a href="/contact">Contact</a></li>
@@ -427,12 +437,12 @@
         <?php endif; ?>
 
 
-        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_indicators')): ?>
         <div class="row col-md-10">
             <h2 class="motto">Optimisation, Efficacité, Performance!</h2>
         </div>
         <?php endif; ?>
-        
+
         <div class="row bottom col-md-8" >
             <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
@@ -442,7 +452,7 @@
             <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Menu admin</a>
             <?php endif; ?>
-            <?php if(auth()->check() && auth()->user()->hasRole('surete')): ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_surete_page')): ?>
             <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/surete"> Canevas stagiaires</a>
             <?php endif; ?>
         </div>
@@ -502,7 +512,12 @@
         }else{
             bodyElement.style.background = 'url("/images/bg.jpg")';
             bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundRepeat = 'no-repeat';
             bodyElement.style.backgroundPosition= "center";
+            bodyElement.style.margin = '0';
+            bodyElement.style.padding = '0';
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
         }
         updateToggleButton();
     });
@@ -518,7 +533,12 @@
             navbar.classList.add(`navbar-light`, `bg-light`);
             bodyElement.style.background = 'url("/images/bg.jpg")';
             bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundRepeat = 'no-repeat';
             bodyElement.style.backgroundPosition= "center";
+            bodyElement.style.margin = '0';
+            bodyElement.style.padding = '0';
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
         }
         updateToggleButton();
     }

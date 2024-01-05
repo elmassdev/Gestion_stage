@@ -68,6 +68,7 @@ class IndicatorsController extends Controller
 
         $monthlysta = Stagiaire::select(DB::raw('COUNT(*) as total'), DB::raw('MONTH(date_debut) as mois'), DB::raw('YEAR(date_debut) as annee'))
             ->whereRaw('date_debut >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)')
+            ->where('stagiaires.site', '=', Auth::user()->site)
             ->groupBy(DB::raw('YEAR(date_debut)'), DB::raw('MONTH(date_debut)'))
             ->orderBy('annee', 'asc')
             ->orderBy('mois', 'asc')
@@ -129,6 +130,7 @@ class IndicatorsController extends Controller
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->where('stagiaires.annule', '=', false)
+            ->where('stagiaires.site', '=', Auth::user()->site)
             ->groupBy('nomenc')
             ->orderBy('total','desc')
             ->get();
@@ -238,7 +240,7 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('P1', 'Annulé');
         $sheet->setCellValue('Q1', 'OP établi');
 
-        $data = DB::table('stagiaires')
+        $data = DB::table('stagiaires')->where('stagiaires.site', '=', Auth::user()->site)
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
         ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))

@@ -154,7 +154,7 @@ class StagiaireController extends Controller
 
         $columns = ['nom', 'cin', 'code'];
 
-        $results = DB::table('stagiaires')
+        $results = DB::table('stagiaires')->where('stagiaires.site', '=', Auth::user()->site)
             ->where(function($query) use($request, $columns) {
                 foreach ($columns as $column) {
                     if ($request->input('column') == $column) {
