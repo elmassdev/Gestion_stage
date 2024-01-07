@@ -34,7 +34,6 @@ use App\Http\Controllers\UserController;
 
 Auth::routes();
 Route::view('/contact', 'contact');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::middleware(['auth', 'can:view_indicators'])->group(function (){

@@ -58,6 +58,47 @@
     <p class="bg-warning text-danger"> Pas de stagiaires</p>
     @endif
 </div>
+<style>
+     li{
+        list-style: none;
+    }
+    table td{
+        border: 1px solid;
+        border-radius: 5px;
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+<table>
+    <tr>
+        <td>
+            <img src="{{ asset('storage/images/profile/'.$stagiaire->photo)}}"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
+        </td>
+        <td>
+            <ul>
+                <li>{{ $stagiaire->civilite}}</li>
+                <li>{{ $stagiaire->prenom}}</li>
+                <li>{{ $stagiaire->nom}}</li>
+                <li>{{ $stagiaire->cin}}</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>{{ $stagiaire->niveau}}</li>
+                <li>{{ $stagiaire->diplome}}</li>
+                <li>{{ $stagiaire->etablissement}}</li>
+                <li>{{ $stagiaire->ville}}</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>{{ $stagiaire->nomenc}}</li>
+                <li>{{ $stagiaire->sigle}}</li>
+                <li>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</li>
+                <li>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 
 @endsection
 
