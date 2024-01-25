@@ -3,13 +3,13 @@
 
 <div class="py-4">
     <div class="border border-success py-1"> <div class="card-header"> <b>Recherche stagiaires</b></div>
-    <form action="{{ url()->current()  }}" method="GET">
+    <form action="{{ url()->current()  }}" method="GET" onsubmit="return validateForm()">
         <!-- Add input fields for the conditions -->
         <label for="start_date">Début:</label>
-        <input type="date" name="start_date" class="datepicker" value="{{ request('start_date') }}">
+        <input type="date" name="start_date" class="datepicker" value="{{ request('start_date') }}" id="start_date">
 
         <label for="end_date">Fin:</label>
-        <input type="date" name="end_date" class="col-md-1" value="{{ request('end_date') }}">
+        <input type="date" name="end_date" class="col-md-1" value="{{ request('end_date') }}" id="end_date">
 
         <label for="remunere">Remunere:</label>
         <select name="remunere">
@@ -60,7 +60,7 @@
 
         <button type="submit" class="btn bg-warning text-primary"><i class="fa-solid fa-check"></i></button>
         @if (!$results->isEmpty())
-        <a href="{{ route('export.excel', request()->all()) }}" class="btn btn-success"><i class="fa-solid fa-file-export"></i> Excel</a>
+        <a href="{{ route('export.excel', request()->all()) }}" class="btn btn-success" onclick="validateForm()"><i class="fa-solid fa-file-export"></i> Excel</a>
         @endif
 
     </form>
@@ -115,5 +115,18 @@
         @endif
     </div>
 </div>
+
+<script>
+    function validateForm() {
+        var startDate = document.getElementById('start_date').value;
+        var endDate = document.getElementById('end_date').value;
+
+        if (startDate === '' || endDate === '') {
+            alert('Merci de replmir les champs de dates.');
+            return false;
+        }
+        // return true;
+    }
+</script>
 @endsection
 

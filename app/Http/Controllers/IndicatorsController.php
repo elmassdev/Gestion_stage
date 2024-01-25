@@ -178,7 +178,7 @@ class IndicatorsController extends Controller
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', $site)
-        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))
+        ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))
         ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
         ->where('stagiaires.annule', '=', false)
         ->orderBy('date_debut','desc')
@@ -243,7 +243,7 @@ class IndicatorsController extends Controller
         $data = DB::table('stagiaires')->where('stagiaires.site', '=', Auth::user()->site)
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
-        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))
+        ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))
         ->whereBetween('date_debut', [$begdate, $enddate])
         ->orderBy('date_debut', 'desc')
         ->get();
