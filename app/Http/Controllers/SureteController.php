@@ -60,7 +60,7 @@ class SureteController extends Controller
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', $site)
-        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))
+        ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as sigle'))
         ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
         ->where('stagiaires.annule', '=', false)
         ->orderBy('date_debut','desc')
@@ -88,10 +88,7 @@ class SureteController extends Controller
                 $drawing->setCoordinates('M' . ($row + 2));
                 $drawing->setWorksheet($sheet);
                 $sheet->getRowDimension($row + 2)->setRowHeight($drawing->getHeight());
-
             }
-
-
         }
         $filename = 'Canevas_Stagiaires_'.$site.'_'.$today.'.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

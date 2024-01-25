@@ -53,7 +53,7 @@ class IndicatorsController extends Controller
             ->join('services', 'stagiaires.service', '=', 'services.id')
             ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
             ->where('stagiaires.site', '=', Auth::user()->site)
-            ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
+            ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
             ->where('date_debut', '=', $query)->where('stagiaires.annule', '=', false)
             ->orderBy('code', 'desc')
             ->paginate(20);
@@ -62,7 +62,7 @@ class IndicatorsController extends Controller
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', Auth::user()->site)
-        ->select(DB::raw('Stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
+        ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
         ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
         ->where('stagiaires.annule', '=', false)->paginate(4);
 

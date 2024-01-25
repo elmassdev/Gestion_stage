@@ -501,7 +501,7 @@ class StagiaireController extends Controller
 
     public function generer_op($id){
         $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.id')
+        ->join('services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
                ->get(['stagiaires.civilite','stagiaires.absence','services.sigle_service as sigle','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service', 'stagiaires.dateLO'])->first();
 

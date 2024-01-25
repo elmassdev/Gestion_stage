@@ -57,11 +57,19 @@
         </select>
 
         <!-- Add more input fields for other conditions -->
-
+        @php
+        $showExportButton = !$results->isEmpty() && (!empty(request('start_date')) || !empty(request('end_date')) || !empty(request('remunere')) || !empty(request('service')) || !empty(request('etablissement')) || !empty(request('encadrant')) || !empty(request('type_formation')));
+        @endphp
         <button type="submit" class="btn bg-warning text-primary"><i class="fa-solid fa-check"></i></button>
+        @if ($showExportButton)
+        <a href="{{ route('export.excel', request()->all()) }}" class="btn btn-success" onclick="return validateForm()"><i class="fa-solid fa-file-export"></i> Excel</a>
+        @endif
+
+
+        {{-- <button type="submit" class="btn bg-warning text-primary"><i class="fa-solid fa-check"></i></button>
         @if (!$results->isEmpty())
         <a href="{{ route('export.excel', request()->all()) }}" class="btn btn-success" onclick="validateForm()"><i class="fa-solid fa-file-export"></i> Excel</a>
-        @endif
+        @endif --}}
 
     </form>
     </div>
@@ -122,7 +130,7 @@
         var endDate = document.getElementById('end_date').value;
 
         if (startDate === '' || endDate === '') {
-            alert('Merci de replmir les champs de dates.');
+            alert('Merci de remplir les champs de dates.');
             return false;
         }
         // return true;
