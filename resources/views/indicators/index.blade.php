@@ -246,7 +246,8 @@
         </div>
         @endif
 
-        {{-- <div class="row card border">
+        <div class="row card border">
+            <h6 class="bg-warning text-primary"><u> <b>stagiaires en cours</b></u></h6>
 
              @if(count($statoday))
             <table class="table table-striped table-responsive">
@@ -255,7 +256,6 @@
                         <th>Titre</th>
                         <th>Prenom</th>
                         <th>Nom</th>
-                        <th>Type de stage</th>
                         <th>Niveau</th>
                         <th>Diplôme</th>
                         <th>Etablissement</th>
@@ -271,7 +271,6 @@
                         <td>{{ $statdy->civilite}}</td>
                         <td>{{ $statdy->prenom}}</td>
                         <td>{{ $statdy->nom}}</td>
-                        <td>{{ $statdy->type_stage}}</td>
                         <td>{{ $statdy->niveau}}</td>
                         <td>{{ $statdy->diplome}}</td>
                         <td>{{ $statdy->etablissement}}</td>
@@ -289,7 +288,7 @@
             @else
             <p> Pas de stagiaires en ce moment!</p>
             @endif
-        </div> --}}
+        </div>
 
     </div>
     <div class="col-md-2  mx-auto py-2 right">
