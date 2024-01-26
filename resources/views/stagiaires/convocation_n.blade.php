@@ -83,7 +83,7 @@
             Entité d'accueil
         </td>
         <td class="tdright">
-            : {{$stagiaire->lib}}({{$stagiaire->service}})
+            : {{$stagiaire->lib}}({{$stagiaire->sigle}})
         </td>
     </tr>
 </table>

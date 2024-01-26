@@ -24,7 +24,7 @@
                     <td>{{ $encadrant->nom}}</td>
                     <td>{{ $encadrant->phone}}</td>
                     <td>{{ $encadrant->email}}</td>
-                    <td>{{ $encadrant->service}}</td>
+                    <td>{{ $service->sigle}}</td>
                     <td>
                         <a  href="/encadrants/{{$encadrant->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
                         <form action="/encadrants/{{$encadrant->id}}" method="POST" style="display:inline">

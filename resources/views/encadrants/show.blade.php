@@ -11,7 +11,7 @@
                     <div class="row ">
                             <div class="col-md-8  position my-auto top-0 end-0">
                                 <div class="allergy"><b>{{$encadrant->titre}} {{$encadrant->prenom}} {{$encadrant->nom}}</b></div>
-                                <div class="allergy"><b>{{$encadrant->service}}</b></div>
+                                <div class="allergy"><b>{{$encadrant->sigle}}</b></div>
                                 <div class="allergy text-secondary"><i class="fa fa-phone" aria-hidden="true"></i> -  <a href="tel:{{$encadrant->phone}}">{{$encadrant->phone}}</a> </div>
                                 <div class="allergy text-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> - <a href="mailto:{{$encadrant->email}}">{{$encadrant->email}}</a></div>
 
@@ -104,7 +104,7 @@
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->titre}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->nom}}</a></td>
                                 <td><a href="/encadrants/{{$result->id}}">{{$result->prenom}}</a></td>
-                                <td><a href="/encadrants/{{$result->id}}">{{$result->service}}</a></td>
+                                <td><a href="/encadrants/{{$result->id}}">{{$result->sigle}}</a></td>
                             </tr>
 
                             @endforeach

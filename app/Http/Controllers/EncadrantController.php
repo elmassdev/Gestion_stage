@@ -18,7 +18,8 @@ class EncadrantController extends Controller
      */
     public function index()
     {
-        $encadrants = DB::table('encadrants')->paginate(8);
+        $encadrants = DB::table('encadrants')
+        ->join('services', 'encadrants.service', '=', 'services.id')->select('encadrants.*', 'services.sigle_service as sigle')->paginate(8);
         return view('encadrants.index',compact('encadrants'));
     }
 
@@ -72,7 +73,8 @@ class EncadrantController extends Controller
     {
         $columns = ['nom', 'prenom', 'service'];
 
-        $results = DB::table('encadrants')
+        $results = DB::table('encadrants')->join('services', 'encadrants.service', '=', 'services.id')
+        ->select('encadrants.*','services.sigle_service as sigle')
             ->where(function($query) use($request, $columns) {
                 foreach ($columns as $column) {
                     if ($request->input('column') == $column) {
@@ -80,7 +82,12 @@ class EncadrantController extends Controller
                     }
                 }
             })->paginate(10);
-        $encadrant = Encadrant::findOrFail($id);
+        $encadrant = DB::table('encadrants')
+        ->join('services', 'encadrants.service', '=', 'services.id')
+        ->select('encadrants.*', 'services.sigle_service as sigle')
+        ->where('encadrants.id', '=', $id)
+        ->first(); 
+
         $previous = Encadrant::where('id', '<', $encadrant->id)->max('id');
         $next = Encadrant::where('id', '>', $encadrant->id)->min('id');
         return view('encadrants.show', compact('encadrant','results'))->with('previous', $previous)->with('next', $next);
