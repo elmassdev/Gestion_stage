@@ -18,6 +18,9 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
+
 
 
 
@@ -86,10 +89,8 @@ class IndicatorsController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-
         $sheet->setCellValue('A1', "Service d'accueil");
         $sheet->setCellValue('B1', 'total');
-
 
         $tday = Carbon::today()->format('d-m-Y');
         $data = DB::table('stagiaires')
@@ -386,6 +387,7 @@ class IndicatorsController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
     }
+
 
 
 }

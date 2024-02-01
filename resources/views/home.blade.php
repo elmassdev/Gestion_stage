@@ -443,20 +443,21 @@
 
         <div class="row bottom col-md-8" >
             @if(auth()->check() && auth()->user()->hasRole('admin'))
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
-            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/indicators/index"> Indicateurs</a>
-            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5" href="/stagiaires"> Liste des stagiaires</a>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5 my-2 mx-2  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
+            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/indicators/index"> Indicateurs</a>
+            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/stagiaires"> Liste des stagiaires</a>
+            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/export"> Sauvegarder tables</a>
             @endif
             @if(auth()->check() && auth()->user()->hasRole('superadmin'))
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Menu admin</a>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/user/assign-roles"> Menu admin</a>
             @endif
             @can('view_surete_page')
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/surete"> Canevas stagiaires</a>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/surete"> Canevas stagiaires</a>
             @endcan
         </div>
 
         <div id="sign">
-            <p id="my-auto">  <b> Developed By <br> Elmassoudi Dev </b></p>
+            {{-- <p id="my-auto">  <b> Developed By <br> Elmassoudi Dev </b></p> --}}
         </div>
     </div>
 </body>

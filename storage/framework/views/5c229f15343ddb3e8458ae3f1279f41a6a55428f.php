@@ -4,6 +4,7 @@
         <a href="/stagiaires/create" class="btn btn-warning text-light"><i class="fa fa-plus" aria-hidden="true"></i></a>
         <a href="/stagiaires/1" class="btn btn-primary text-light"><i class="fa-solid fa-magnifying-glass"></i></a>
     </div>
+
 <?php if(count($stagiaires)): ?>
 <table class="table table-striped table-responsive mx-2">
     <thead>

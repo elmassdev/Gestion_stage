@@ -140,6 +140,25 @@
                 var FilSer = <?php echo json_encode($services, 15, 512) ?>;
                 var FilSerEnc = <?php echo json_encode($encadrants, 15, 512) ?>;
             </script>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#nom, #prenom').on('input', function () {
+                        updateEmail();
+                    });
+
+                    function updateEmail() {
+                        var nomValue = $('#nom').val().toLowerCase();
+                        var prenomValue = $('#prenom').val().toLowerCase();
+                        var emailValue = prenomValue + '.' + nomValue + '@gmail.com';
+                        $('#email').val(emailValue);
+                    }
+                });
+            </script>
+
+
+
             <div class="row mb-3">
                 <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 
@@ -333,7 +352,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="phone" value="<?php echo e(old('phone')); ?>"  autocomplete="phone" placeholder="ex: +212662077439" autofocus>
+unset($__errorArgs, $__bag); ?>" name="phone" value="<?php echo e(old('phone', '+212')); ?>"  autocomplete="phone"  placeholder="ex: +212662077439" autofocus>
 
                     <?php $__errorArgs = ['phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -793,12 +812,12 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
         <div class="row mb-3 display-inline">
-            <div class="col-md-5">
-                <label for="remunere" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
+            <div class="col-md-6">
+                <label for="remunere" class="col-md-6 col-form-label text-md-left"><?php echo e(__('Stage remuneré')); ?></label>
                 <input type="checkbox" name="remunere" id="remunere" value="true">
             </div>
-            <div class="col-md-5">
-                <label for="EI" class="col-md-4 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
+            <div class="col-md-6">
+                <label for="EI" class="col-md-6 col-form-label text-md-left"><?php echo e(__('Elève Ingénieur')); ?></label>
                 <input type="checkbox" name="EI" id="EI" value="true">
             </div>
         </div>
@@ -894,6 +913,9 @@ unset($__errorArgs, $__bag); ?>
     });
 
 </script>
+
+
+
 
 
 

@@ -139,6 +139,25 @@
                 var FilSer = @json($services);
                 var FilSerEnc = @json($encadrants);
             </script>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#nom, #prenom').on('input', function () {
+                        updateEmail();
+                    });
+
+                    function updateEmail() {
+                        var nomValue = $('#nom').val().toLowerCase();
+                        var prenomValue = $('#prenom').val().toLowerCase();
+                        var emailValue = prenomValue + '.' + nomValue + '@gmail.com';
+                        $('#email').val(emailValue);
+                    }
+                });
+            </script>
+
+
+
             <div class="row mb-3">
                 <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
 
@@ -241,7 +260,7 @@
                 <label for="phone" class="col-md-3 col-form-label text-md-left">{{ __('Phone') }}</label>
 
                 <div class="col-md-8">
-                    <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  autocomplete="phone" placeholder="ex: +212662077439" autofocus>
+                    <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', '+212') }}"  autocomplete="phone"  placeholder="ex: +212662077439" autofocus>
 
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
@@ -500,12 +519,12 @@
             </div>
         </div>
         <div class="row mb-3 display-inline">
-            <div class="col-md-5">
-                <label for="remunere" class="col-md-4 col-form-label text-md-left">{{ __('Stage remuneré') }}</label>
+            <div class="col-md-6">
+                <label for="remunere" class="col-md-6 col-form-label text-md-left">{{ __('Stage remuneré') }}</label>
                 <input type="checkbox" name="remunere" id="remunere" value="true">
             </div>
-            <div class="col-md-5">
-                <label for="EI" class="col-md-4 col-form-label text-md-left">{{ __('Elève Ingénieur') }}</label>
+            <div class="col-md-6">
+                <label for="EI" class="col-md-6 col-form-label text-md-left">{{ __('Elève Ingénieur') }}</label>
                 <input type="checkbox" name="EI" id="EI" value="true">
             </div>
         </div>
@@ -600,6 +619,9 @@
     });
 
 </script>
+
+
+
 
 
 

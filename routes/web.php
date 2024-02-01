@@ -14,7 +14,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\PermissionController;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\UserController;
-
+use App\Exports\StagiairesExport;
+use App\Exports\FilieresExport;
+use App\Exports\UsersExport;
+use App\Exports\ServicesExport;
+use App\Exports\EtablissementsExport;
+use App\Exports\EncadrantsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Files\FileType;
+// use Maatwebsite\Excel\Files\FileType as ExcelFileType;
+use Maatwebsite\Excel\Excel as ExcelFileType;
+use Illuminate\Support\Facades\Response;
 
 
 
@@ -47,6 +57,7 @@ Route::middleware(['auth', 'can:view_indicators'])->group(function (){
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function (){
+    Route::view('/export', 'export');
     Route::get('/stagiaires', [App\Http\Controllers\StagiaireController::class, 'index'])->name('stagiaires/index')->middleware('auth');
     Route::get('/stagiaires/create', [App\Http\Controllers\StagiaireController::class, 'create'])->name('stagiaires/create')->middleware('auth');
     Route::post('/stagiaires/create', [App\Http\Controllers\StagiaireController::class, 'store'])->name('stagiaires/create')->middleware('auth');
@@ -69,6 +80,24 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
     Route::resource('etablissements', EtabController::class)->middleware('auth');
     Route::resource('filieres', FiliereController::class)->middleware('auth');
+
+    //export DB to Excel
+
+    Route::get('/export-stagiaires', function () {
+        return Excel::download(new StagiairesExport, 'stagiaires.xlsx');
+    });
+    Route::get('/export-filieres', function () {
+        return Excel::download(new FilieresExport, 'filieres.xlsx');
+    });
+    Route::get('/export-etablissements', function () {
+        return Excel::download(new EtablissementsExport, 'etablissements.xlsx');
+    });
+    Route::get('/export-encadrants', function () {
+        return Excel::download(new EncadrantsExport, 'encadrants.xlsx');
+    });
+    Route::get('/export-services', function () {
+        return Excel::download(new ServicesExport, 'services.xlsx');
+    });
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
@@ -80,6 +109,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/user/assign-roles', [UserController::class, 'assignRoles'])->name('user.assignRoles');
     Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
+    Route::get('/export-users', function () {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    });
 });
 
 Route::middleware(['auth', 'can:view_surete_page'])->group(function () {
