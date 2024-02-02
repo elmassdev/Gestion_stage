@@ -388,6 +388,44 @@ class IndicatorsController extends Controller
         $writer->save('php://output');
     }
 
+    public function countStagiairesByTypeFormation(Request $request)
+    {
+        $year = $request->input('year');
+
+        $results = Stagiaire::select('type_formation', DB::raw('COUNT(*) as count'))
+            ->whereYear('date_debut', $year)
+            ->groupBy('type_formation')
+            ->get();
+
+        return response()->json($results);
+    }
+
+    public function countStagiairesByServiceAndYear(Request $request)
+    {
+        $year = $request->input('year');
+
+        $results = Stagiaire::select('services.sigle_service', DB::raw('COUNT(*) as count'))
+            ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->whereYear('stagiaires.date_debut', $year)
+            ->groupBy('services.sigle_service')
+            ->get();
+        return response()->json($results);
+    }
+
+    public function countStagiairesByEntiteAndYear(Request $request)
+    {
+        $year = $request->input('year');
+
+        $results = Stagiaire::select('services.entite', DB::raw('COUNT(*) as count'))
+            ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->whereYear('stagiaires.date_debut', $year)
+            ->groupBy('services.entite')
+            ->get();
+        return response()->json($results);
+    }
+
+
+
 
 
 }
