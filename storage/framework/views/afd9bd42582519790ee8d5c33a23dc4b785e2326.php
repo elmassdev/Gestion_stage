@@ -296,7 +296,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="nom" value="<?php echo e(old('nom')); ?>" oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" required autocomplete="nom"  autofocus>
+unset($__errorArgs, $__bag); ?>" name="nom" value="<?php echo e(old('nom')); ?>" oninput="this.value = this.value.toUpperCase()" required autocomplete="nom"  autofocus>
 
                     <?php $__errorArgs = ['nom'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

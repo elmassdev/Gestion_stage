@@ -9,28 +9,28 @@ use Illuminate\Support\Facades\DB;
 
 class Stagiaire extends Model
 {
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::saving(function ($stagiaire) {
-            $currentDateDebut = $stagiaire->date_debut;
+    //     static::saving(function ($stagiaire) {
+    //         $currentDateDebut = $stagiaire->date_debut;
 
-            $currentYear = date('Y', strtotime($currentDateDebut));
-            $currentMonth = date('n', strtotime($currentDateDebut));
+    //         $currentYear = date('Y', strtotime($currentDateDebut));
+    //         $currentMonth = date('n', strtotime($currentDateDebut));
 
-            $currentAcademicYear = ($currentMonth >= 9) ? $currentYear + 1 : $currentYear;
+    //         $currentAcademicYear = ($currentMonth >= 9) ? $currentYear + 1 : $currentYear;
 
-            $existingStagiaire = self::where('cin', $stagiaire->cin)
-                ->whereYear('date_debut', $currentAcademicYear)
-                ->where('id', '!=', $stagiaire->id)
-                ->first();
+    //         $existingStagiaire = self::where('cin', $stagiaire->cin)
+    //             ->whereYear('date_debut', $currentAcademicYear)
+    //             ->where('id', '!=', $stagiaire->id)
+    //             ->first();
 
-            if ($existingStagiaire) {
-                throw new \Exception('Le stagiaire a droit à un seul stage dans pendant une année académique!');
-            }
-        });
-    }
+    //         if ($existingStagiaire) {
+    //             throw new \Exception('Le stagiaire a droit à un seul stage dans pendant une année académique!');
+    //         }
+    //     });
+    // }
 
     use HasFactory;
     protected $table = 'stagiaires';

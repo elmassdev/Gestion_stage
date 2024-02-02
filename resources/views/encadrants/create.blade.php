@@ -96,7 +96,7 @@
                                 <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
                                 <option selected hidden></option>
                                 @foreach($services as $service)
-                                <option value="{{ $service->sigle_service}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
+                                <option value="{{ $service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
                                 @endforeach
                             </select>
                                 @error('service')

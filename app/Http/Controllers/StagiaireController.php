@@ -206,9 +206,17 @@ class StagiaireController extends Controller
             'cin'=>'required',
             'filiere'=>'required',
             'service'=>'required',
-            'date_debut' => ['required', new UniqueStagiaireInAcademicYear($stagiaire->cin)],
+            'date_debut' => ['required'],
             'date_fin'=>'required',
         ]);
+        $originalAttributes = $stagiaire->getAttributes();
+
+    // Update only the changed attributes
+    foreach ($originalAttributes as $key => $value) {
+        if ($request->has($key) && $request->input($key) != $value) {
+            $stagiaire->$key = $request->input($key);
+        }
+    }
         $stagiaire->code = $request->input('code');
         $stagiaire->Date_demande = $request->input('date_demande');
         $stagiaire->site = $request->input('site');
@@ -297,9 +305,7 @@ class StagiaireController extends Controller
                 $fileName ='default_f.png';
             }
             $stagiaire->update(['photo' => $fileName]);
-
         }
-
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
     }
 

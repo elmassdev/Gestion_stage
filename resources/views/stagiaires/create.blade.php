@@ -232,7 +232,7 @@
                 <label for="nom" class="col-md-3 col-form-label text-md-left">{{ __('Nom') }}</label>
 
                 <div class="col-md-8">
-                    <input id="nom" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" required autocomplete="nom"  autofocus>
+                    <input id="nom" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" oninput="this.value = this.value.toUpperCase()" required autocomplete="nom"  autofocus>
 
                     @error('nom')
                         <span class="invalid-feedback" role="alert">
