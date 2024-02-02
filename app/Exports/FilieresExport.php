@@ -13,7 +13,6 @@ class FilieresExport implements FromQuery
 
     public function query()
     {
-        // Select all columns from the 'filieres' table
         return DB::table('filieres')->orderBy('id');
     }
 }

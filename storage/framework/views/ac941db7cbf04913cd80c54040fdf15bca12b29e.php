@@ -167,7 +167,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
-                                <option  value="<?php echo e($encadrant->service); ?>" selected ><?php echo e($encadrant->service); ?></option>
+                                <option  value="<?php echo e($encadrant->service); ?>" selected ><?php echo e($encadrant->sigle); ?></option>
                                 <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($service->id); ?>"><?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

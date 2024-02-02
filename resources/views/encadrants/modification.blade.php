@@ -92,7 +92,7 @@
                             <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
                             <div class="col-md-8">
                                 <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
-                                <option  value="{{$encadrant->service}}" selected >{{$encadrant->service}}</option>
+                                <option  value="{{$encadrant->service}}" selected >{{$encadrant->sigle}}</option>
                                 @foreach($services as $service)
                                 <option value="{{$service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
                                 @endforeach

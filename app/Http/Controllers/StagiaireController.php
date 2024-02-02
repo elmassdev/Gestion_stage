@@ -197,117 +197,176 @@ class StagiaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function update(Request $request, $id)
+    // {
+    //     $stagiaire = Stagiaire::findOrFail($id);
+    //     $request->validate([
+    //         'nom'=>'required',
+    //         'prenom'=>'required',
+    //         'cin'=>'required',
+    //         'filiere'=>'required',
+    //         'service'=>'required',
+    //         'date_debut' => ['required'],
+    //         'date_fin'=>'required',
+    //     ]);
+    //     $originalAttributes = $stagiaire->getAttributes();
+
+    // // Update only the changed attributes
+    // foreach ($originalAttributes as $key => $value) {
+    //     if ($request->has($key) && $request->input($key) != $value) {
+    //         $stagiaire->$key = $request->input($key);
+    //     }
+    // }
+    //     $stagiaire->code = $request->input('code');
+    //     $stagiaire->Date_demande = $request->input('date_demande');
+    //     $stagiaire->site = $request->input('site');
+    //     $stagiaire->civilite = $request->input('civilite');
+    //     $stagiaire->prenom =ucwords($request->input('prenom'));
+    //     $stagiaire->nom = ucwords($request->input('nom'));
+    //     $stagiaire->cin = strtoupper($request->input('cin'));
+    //     $stagiaire->phone = $request->input('phone');
+    //     $stagiaire->email = $request->input('email');
+    //     $stagiaire->niveau = $request->input('niveau');
+    //     $stagiaire->diplome = $request->input('diplome');
+    //     $stagiaire->filiere = $request->input('filiere');
+    //     $stagiaire->etablissement = $request->input('etablissement');
+    //     $stagiaire->ville = $request->input('ville');
+    //     $stagiaire->type_stage = $request->input('type_stage');
+    //     $stagiaire->service = $request->input('service');
+    //     $stagiaire->encadrant = $request->input('encadrant');
+    //     $stagiaire->date_debut = $request->input('date_debut');
+    //     $stagiaire->date_fin = $request->input('date_fin');
+    //     $stagiaire->sujet= $request->input('sujet');
+    //     $stagiaire->remunere = $request->boolean('remunere');
+    //     $stagiaire->EI = $request->boolean('EI');
+    //     $stagiaire->annule = $request->boolean('annule');
+    //     $stagiaire->prolongation = $request->input('prolongation');
+    //     $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
+    //     $stagiaire->Attestation_remise_le = $request->input('Attestation_remise');
+    //     $stagiaire->Att_remise_a = $request->input('Att_remise_a');
+    //     $stagiaire->observation= $request->input('observation');
+    //     $stagiaire->absence= $request->input('absence');
+    //     $stagiaire->edited_by= Auth::user()->name;
+
+    //     $stagiaire->update([
+    //         $stagiaire->code,
+    //         $stagiaire->date_demande,
+    //         $stagiaire->site,
+    //         $stagiaire->civilite,
+    //         $stagiaire->prenom,
+    //         $stagiaire->nom,
+    //         $stagiaire->cin,
+    //         $stagiaire->phone,
+    //         $stagiaire->email,
+    //         $stagiaire->niveau,
+    //         $stagiaire->diplome,
+    //         $stagiaire->filiere,
+    //         $stagiaire->etablissement,
+    //         $stagiaire->ville,
+    //         $stagiaire->type_stage,
+    //         $stagiaire->service,
+    //         $stagiaire->encadrant,
+    //         $stagiaire->date_debut,
+    //         $stagiaire->date_fin,
+    //         $stagiaire->sujet,
+    //         $stagiaire->remunere,
+    //         $stagiaire->EI,
+    //         $stagiaire->edited_by,
+    //         $stagiaire->annule,
+    //         $stagiaire->absence,
+    //         $stagiaire->observation
+    //     ]);
+
+    //     if($request->hasFile('photo')){
+    //         $old_photo ='storage/images/profile/'.$stagiaire->photo;
+    //         if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
+    //             File::delete($old_photo);
+    //         }
+    //         $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
+    //         $request->file('photo')->storeAs('images/profile', $fileName,'public');
+    //         $stagiaire->update(['photo' => $fileName]);
+    //     }
+    //     if(($request->input('deletePhoto')=="1")&&(!$request->hasFile('photo'))){
+    //         $old_photo ='storage/images/profile/'.$stagiaire->photo;
+    //             if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
+    //                 File::delete($old_photo);
+    //             }
+    //             if($stagiaire->civilite=="M."){
+    //                 $fileName ='default_m.jpg';
+    //             }else{
+    //                 $fileName ='default_f.png';
+    //             }
+    //             $stagiaire->update(['photo' => $fileName]);
+    //         }
+    //     if($stagiaire->photo==='default_f.png' || $stagiaire->photo ==='default_m.jpg'){
+    //         if($stagiaire->civilite=="M."){
+    //             $fileName ='default_m.jpg';
+    //         }else{
+    //             $fileName ='default_f.png';
+    //         }
+    //         $stagiaire->update(['photo' => $fileName]);
+    //     }
+    //     return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
+    // }
+
     public function update(Request $request, $id)
-    {
-        $stagiaire = Stagiaire::findOrFail($id);
-        $request->validate([
-            'nom'=>'required',
-            'prenom'=>'required',
-            'cin'=>'required',
-            'filiere'=>'required',
-            'service'=>'required',
-            'date_debut' => ['required'],
-            'date_fin'=>'required',
-        ]);
-        $originalAttributes = $stagiaire->getAttributes();
+{
+    $stagiaire = Stagiaire::findOrFail($id);
 
-    // Update only the changed attributes
-    foreach ($originalAttributes as $key => $value) {
-        if ($request->has($key) && $request->input($key) != $value) {
-            $stagiaire->$key = $request->input($key);
+    $originalAttributes = $stagiaire->getAttributes();
+    $updatedAttributes = array_filter($request->all(), function ($value, $key) use ($originalAttributes) {
+        return isset($originalAttributes[$key]) && $originalAttributes[$key] !== $value;
+    }, ARRAY_FILTER_USE_BOTH);
+    $booleanAttributes = ['remunere', 'EI', 'annule'];
+    foreach ($booleanAttributes as $attribute) {
+        if ($request->has($attribute)) {
+            $updatedAttributes[$attribute] = $request->input($attribute) ? true : false;
+        } else {
+            $updatedAttributes[$attribute] = false;
         }
     }
-        $stagiaire->code = $request->input('code');
-        $stagiaire->Date_demande = $request->input('date_demande');
-        $stagiaire->site = $request->input('site');
-        $stagiaire->civilite = $request->input('civilite');
-        $stagiaire->prenom =ucwords($request->input('prenom'));
-        $stagiaire->nom = ucwords($request->input('nom'));
-        $stagiaire->cin = strtoupper($request->input('cin'));
-        $stagiaire->phone = $request->input('phone');
-        $stagiaire->email = $request->input('email');
-        $stagiaire->niveau = $request->input('niveau');
-        $stagiaire->diplome = $request->input('diplome');
-        $stagiaire->filiere = $request->input('filiere');
-        $stagiaire->etablissement = $request->input('etablissement');
-        $stagiaire->ville = $request->input('ville');
-        $stagiaire->type_stage = $request->input('type_stage');
-        $stagiaire->service = $request->input('service');
-        $stagiaire->encadrant = $request->input('encadrant');
-        $stagiaire->date_debut = $request->input('date_debut');
-        $stagiaire->date_fin = $request->input('date_fin');
-        $stagiaire->sujet= $request->input('sujet');
-        $stagiaire->remunere = $request->boolean('remunere');
-        $stagiaire->EI = $request->boolean('EI');
-        $stagiaire->annule = $request->boolean('annule');
-        $stagiaire->prolongation = $request->input('prolongation');
-        $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
-        $stagiaire->Attestation_remise_le = $request->input('Attestation_remise');
-        $stagiaire->Att_remise_a = $request->input('Att_remise_a');
-        $stagiaire->observation= $request->input('observation');
-        $stagiaire->absence= $request->input('absence');
-        $stagiaire->edited_by= Auth::user()->name;
 
-        $stagiaire->update([
-            $stagiaire->code,
-            $stagiaire->date_demande,
-            $stagiaire->site,
-            $stagiaire->civilite,
-            $stagiaire->prenom,
-            $stagiaire->nom,
-            $stagiaire->cin,
-            $stagiaire->phone,
-            $stagiaire->email,
-            $stagiaire->niveau,
-            $stagiaire->diplome,
-            $stagiaire->filiere,
-            $stagiaire->etablissement,
-            $stagiaire->ville,
-            $stagiaire->type_stage,
-            $stagiaire->service,
-            $stagiaire->encadrant,
-            $stagiaire->date_debut,
-            $stagiaire->date_fin,
-            $stagiaire->sujet,
-            $stagiaire->remunere,
-            $stagiaire->EI,
-            $stagiaire->edited_by,
-            $stagiaire->annule,
-            $stagiaire->absence,
-            $stagiaire->observation
-        ]);
+    // $booleanAttributes = ['remunere', 'EI', 'annule'];
+    // foreach ($booleanAttributes as $attribute) {
+    //     if ($request->filled($attribute)) {
+    //         $updatedAttributes[$attribute] = $request->input($attribute) ? true : false;
+    //     }
+    // }
 
-        if($request->hasFile('photo')){
-            $old_photo ='storage/images/profile/'.$stagiaire->photo;
-            if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
-                File::delete($old_photo);
-            }
-            $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
-            $request->file('photo')->storeAs('images/profile', $fileName,'public');
-            $stagiaire->update(['photo' => $fileName]);
+    // Update the model with the changed attributes
+    $stagiaire->update($updatedAttributes);
+
+
+    if ($request->hasFile('photo')) {
+        $oldPhotoPath = 'storage/images/profile/' . $stagiaire->photo;
+        if (File::exists($oldPhotoPath) && ($stagiaire->photo !== 'default_f.png' && $stagiaire->photo !== 'default_m.jpg')) {
+            File::delete($oldPhotoPath);
         }
-        if(($request->input('deletePhoto')=="1")&&(!$request->hasFile('photo'))){
-            $old_photo ='storage/images/profile/'.$stagiaire->photo;
-                if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
-                    File::delete($old_photo);
-                }
-                if($stagiaire->civilite=="M."){
-                    $fileName ='default_m.jpg';
-                }else{
-                    $fileName ='default_f.png';
-                }
-                $stagiaire->update(['photo' => $fileName]);
-            }
-        if($stagiaire->photo==='default_f.png' || $stagiaire->photo ==='default_m.jpg'){
-            if($stagiaire->civilite=="M."){
-                $fileName ='default_m.jpg';
-            }else{
-                $fileName ='default_f.png';
-            }
-            $stagiaire->update(['photo' => $fileName]);
-        }
-        return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
+
+        // Store the new photo
+        $fileName = ucwords($request->input('nom')) . '-' . ucwords($request->input('prenom')) . '-' . time() . '.' . $request->photo->extension();
+        $request->file('photo')->storeAs('images/profile', $fileName, 'public');
+        $stagiaire->photo = $fileName;
     }
+
+    // Handle the case where the photo is deleted
+    if (($request->input('deletePhoto') == "1") && (!$request->hasFile('photo'))) {
+        $oldPhotoPath = 'storage/images/profile/' . $stagiaire->photo;
+        if (File::exists($oldPhotoPath) && ($stagiaire->photo !== 'default_f.png' && $stagiaire->photo !== 'default_m.jpg')) {
+            File::delete($oldPhotoPath);
+        }
+        $fileName = ($stagiaire->civilite == "M.") ? 'default_m.jpg' : 'default_f.png';
+        $stagiaire->photo = $fileName;
+    }
+
+
+
+    // Save the updated model
+    $stagiaire->save();
+
+    return redirect('/stagiaires/' . $id)->with('msg', 'Enregistrement modifié avec succès');
+}
+
 
 
     public function updater(Request $request, $id)
@@ -336,10 +395,7 @@ class StagiaireController extends Controller
             return $originalAttributes[$key] != $value;
         }, ARRAY_FILTER_USE_BOTH);
 
-        // Update the model with the modified attributes
         $stagiaire->update($modifiedAttributes);
-
-        // Redirect back or wherever you want after the update
         return redirect()->back()->with('success', 'Stagiaire updated successfully');
     }
 
@@ -396,17 +452,14 @@ class StagiaireController extends Controller
         $fin_long = str_replace($dayNumber, $dayNumberText, $fin_long1);
         $today = str_replace($englishMonths, $frenchMonths,$today);
 
-
             if($stagiaire->EI){
                 $pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
             }else{
                 $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
             }
 
-        //final touch :)
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
         return $pdf->stream();
-        //return $pdf->download();
     }
 
     public function generer_sujet($id){

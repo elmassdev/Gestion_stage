@@ -86,7 +86,7 @@ class EncadrantController extends Controller
         ->join('services', 'encadrants.service', '=', 'services.id')
         ->select('encadrants.*', 'services.sigle_service as sigle')
         ->where('encadrants.id', '=', $id)
-        ->first(); 
+        ->first();
 
         $previous = Encadrant::where('id', '<', $encadrant->id)->max('id');
         $next = Encadrant::where('id', '>', $encadrant->id)->min('id');
@@ -101,7 +101,11 @@ class EncadrantController extends Controller
      */
     public function edit($id)
     {
-        $encadrant = Encadrant::findOrFail($id);
+        $encadrant = DB::table('encadrants')
+        ->join('services', 'encadrants.service', '=', 'services.id')
+        ->select('encadrants.*', 'services.sigle_service as sigle')
+        ->where('encadrants.id', '=', $id)
+        ->first();
         $services = Service::orderBy('sigle_service', 'asc')->get();
         return view('encadrants.modification',compact('encadrant','services'));
     }

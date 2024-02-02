@@ -13,7 +13,6 @@ class ServicesExport implements FromQuery
 
     public function query()
     {
-        // Select all columns from the 'services' table
         return DB::table('services')->orderBy('id');
     }
 }

@@ -13,7 +13,6 @@ class UsersExport implements FromQuery
 
     public function query()
     {
-        // Select all columns from the 'users' table
         return DB::table('users')->orderBy('id');
     }
 }

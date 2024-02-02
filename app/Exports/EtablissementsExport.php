@@ -13,7 +13,6 @@ class EtablissementsExport implements FromQuery
 
     public function query()
     {
-        // Select all columns from the 'etablissements' table
         return DB::table('etablissements')->orderBy('id');
     }
 }

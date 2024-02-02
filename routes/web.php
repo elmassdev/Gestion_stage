@@ -82,21 +82,27 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::resource('filieres', FiliereController::class)->middleware('auth');
 
     //export DB to Excel
+    $today = date('d F Y');
 
     Route::get('/export-stagiaires', function () {
-        return Excel::download(new StagiairesExport, 'stagiaires.xlsx');
+        $today = date('d F Y');
+        return Excel::download(new StagiairesExport, 'stagiaires - '.$today.'.xlsx');
     });
     Route::get('/export-filieres', function () {
-        return Excel::download(new FilieresExport, 'filieres.xlsx');
+        $today = date('d F Y');
+        return Excel::download(new FilieresExport, 'filieres - '.$today.'.xlsx');
     });
     Route::get('/export-etablissements', function () {
-        return Excel::download(new EtablissementsExport, 'etablissements.xlsx');
+        $today = date('d F Y');
+        return Excel::download(new EtablissementsExport, 'etablissements - '.$today.'.xlsx');
     });
     Route::get('/export-encadrants', function () {
-        return Excel::download(new EncadrantsExport, 'encadrants.xlsx');
+        $today = date('d F Y');
+        return Excel::download(new EncadrantsExport, 'encadrants - '.$today.'.xlsx');
     });
     Route::get('/export-services', function () {
-        return Excel::download(new ServicesExport, 'services.xlsx');
+        $today = date('d F Y');
+        return Excel::download(new ServicesExport, 'services - '.$today.'.xlsx');
     });
 });
 

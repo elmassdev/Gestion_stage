@@ -313,7 +313,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="nom" value="<?php echo e($stagiaire->nom); ?>" oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" required autocomplete="nom"  autofocus>
+unset($__errorArgs, $__bag); ?>" name="nom" value="<?php echo e($stagiaire->nom); ?>" oninput="this.value = this.value.toUpperCase()" required autocomplete="nom"  autofocus>
 
                                 <?php $__errorArgs = ['nom'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -618,9 +618,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
-
-                            <div class="col-md-8">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>                            <div class="col-md-8">
                                 <select id="type_formation" type="text" class="form-control <?php $__errorArgs = ['type_formation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -629,7 +627,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_formation">
-                                    <option value="EI" selected>EI</option>
+                                    <option value="<?php echo e($stagiaire->type_formation); ?>"><?php echo e($stagiaire->type_formation); ?></option>
+                                    <option value="EI">EI</option>
                                     <option value="OFPPT">OFPPT</option>
                                     <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
                                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>

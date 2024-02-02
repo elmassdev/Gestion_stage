@@ -409,11 +409,10 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
-
-                            <div class="col-md-8">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>                            <div class="col-md-8">
                                 <select id="type_formation" type="text" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation"  autocomplete="type_formation">
-                                    <option value="EI" selected>EI</option>
+                                    <option value="{{$stagiaire->type_formation}}">{{$stagiaire->type_formation}}</option>
+                                    <option value="EI">EI</option>
                                     <option value="OFPPT">OFPPT</option>
                                     <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
                                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
