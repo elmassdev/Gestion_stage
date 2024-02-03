@@ -423,7 +423,7 @@ class StagiaireController extends Controller
     public function generer_attestation($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.id')
+        ->join('services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.nom','stagiaires.prenom', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
         $today = date('d F Y');
@@ -465,7 +465,7 @@ class StagiaireController extends Controller
     public function generer_sujet($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.id')
+        ->join('services', 'stagiaires.service','=','services.id')
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','services.sigle_service as sigle_service','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
@@ -511,7 +511,7 @@ class StagiaireController extends Controller
     public function generer_convocation($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
-        ->join('Services', 'stagiaires.service','=','services.id')
+        ->join('services', 'stagiaires.service','=','services.id')
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
                ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','services.sigle_service as sigle','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
