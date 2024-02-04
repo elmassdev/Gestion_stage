@@ -113,8 +113,6 @@ class IndicatorsController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
-
-        // Create a writer and save the file to the output
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
     }
@@ -388,44 +386,44 @@ class IndicatorsController extends Controller
         $writer->save('php://output');
     }
 
-    public function countStagiairesByTypeFormation(Request $request)
+    public function graph(Request $request)
     {
         $year = $request->input('year');
 
-        $results = Stagiaire::select('type_formation', DB::raw('COUNT(*) as count'))
+        $sta_type_f = Stagiaire::select('type_formation', DB::raw('COUNT(*) as count'))
+        ->whereYear('date_debut', $year)
+        ->groupBy('type_formation')->get();
+
+        $sta_ser = Stagiaire::select('services.sigle_service', DB::raw('COUNT(*) as count'))
+        ->join('services', 'stagiaires.service', '=', 'services.id')
+        ->whereYear('stagiaires.date_debut', $year)
+        ->groupBy('services.sigle_service')
+        ->get();
+
+        $sta_ent = Stagiaire::select('services.entite', DB::raw('COUNT(*) as count'))
+        ->join('services', 'stagiaires.service', '=', 'services.id')
+        ->whereYear('stagiaires.date_debut', $year)
+        ->groupBy('services.entite')
+        ->get();
+        $remunereCount = Stagiaire::where('remunere', true)
+        ->whereYear('date_debut', $year)
+        ->count();
+        $notRemunereCount = Stagiaire::where('remunere', false)
             ->whereYear('date_debut', $year)
-            ->groupBy('type_formation')
-            ->get();
+            ->count();
 
-        return response()->json($results);
+        $opEtabliCount = Stagiaire::where('OP_etabli', true)
+        ->whereYear('date_debut', $year)
+        ->count();
+        $notOpEtabliCount = Stagiaire::where('OP_etabli', false)
+            ->whereYear('date_debut', $year)
+            ->count();
+
+
+
+
+        return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount'));
     }
-
-    public function countStagiairesByServiceAndYear(Request $request)
-    {
-        $year = $request->input('year');
-
-        $results = Stagiaire::select('services.sigle_service', DB::raw('COUNT(*) as count'))
-            ->join('services', 'stagiaires.service', '=', 'services.id')
-            ->whereYear('stagiaires.date_debut', $year)
-            ->groupBy('services.sigle_service')
-            ->get();
-        return response()->json($results);
-    }
-
-    public function countStagiairesByEntiteAndYear(Request $request)
-    {
-        $year = $request->input('year');
-
-        $results = Stagiaire::select('services.entite', DB::raw('COUNT(*) as count'))
-            ->join('services', 'stagiaires.service', '=', 'services.id')
-            ->whereYear('stagiaires.date_debut', $year)
-            ->groupBy('services.entite')
-            ->get();
-        return response()->json($results);
-    }
-
-
-
 
 
 }

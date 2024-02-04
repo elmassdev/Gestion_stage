@@ -292,7 +292,7 @@
 
     </div>
     <div class="col-md-2  mx-auto py-2 right">
-        <span class="col-md-7 btn-outline-warning text-success fs-6"> <b>Exporter la liste des stagiaires en cours:</b>  <a class="btn text-success  rounded-pill" href="/indicators/ListeCurrentSta"> <i class="fa-solid fa-file-export" ></i></a></span> <span class="btn-outline-warning mx-4 fs-6 text-success"> <b>Exportation détaillée:</b> <a class="btn text-success  rounded-pill" href="/indicators/queries"> <b><i class="fa-solid fa-plus" ></i></b> </a></span>
+        <span class="col-md-7 btn-outline-warning text-success fs-6"> <b>Exporter la liste des stagiaires en cours:</b>  <a class="btn text-success  rounded-pill" href="/indicators/ListeCurrentSta"> <i class="fa-solid fa-file-export" ></i></a></span> <span class="btn-outline-warning mx-4 fs-6 text-success"> <b>Exportation détaillée:</b> <a class="btn text-success  rounded-pill" href="/indicators/queries"> <b><i class="fa-solid fa-plus" ></i></b> </a> <a href="/indicators/graph"><i class="fa-solid fa-chart-line fa-2xl" style="color: #FFD43B;"></i></a> </span>
         <div class="card">
             <div class="card-header">{{ __('Exportation des données vers un fichier Excel:') }}</div>
             <form method="GET" action="/indicators/ExportSta" id="export-form" enctype="multipart/form-data">

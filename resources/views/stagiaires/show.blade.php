@@ -24,6 +24,9 @@
                                 @if($stagiaire->annule)
                                 <div class="col-md-3 text-center"> <p class="bg-warning text-danger rounded-pill" style="font-size: larger"> Stage annulé <b>X</b> </p> </div>
                                 @endif
+                                @if($stagiaire->phone)
+                                <div class="col-md-3 text-center"> <a href="https://wa.me/{{$stagiaire->phone}}?text=Bonjour,%20{{$stagiaire->civilite}}%20{{$stagiaire->prenom}}%20{{$stagiaire->nom}}:%0Avotre%20stage%20est%20approuvé,%20du%20{{$stagiaire->date_debut}}%20au%20{{$stagiaire->date_fin}} @if($stagiaire->sujet) ,%20et%20votre%20sujet%20est%20:%20{{$stagiaire->sujet}}, @endif Merci de se présenter le premier jour de votre stage au CCI/UM6P : https://maps.app.goo.gl/J8ZP8REoFHxYqVUs9" target="_blank"><i class="fa-brands fa-whatsapp fa-2xl" style="color: #1d9f78;"></i></a> </div>
+                                @endif
 
 
 

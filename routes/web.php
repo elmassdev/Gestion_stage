@@ -54,6 +54,7 @@ Route::middleware(['auth', 'can:view_indicators'])->group(function (){
     Route::get('/indicators/ListeCurrentSta', [IndicatorsController::class, 'ListeCurrentSta']);
     Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);
     Route::get('/export/queries', [IndicatorsController::class, 'exportqueries'])->name('export.excel');
+    Route::get('/indicators/graph', [IndicatorsController::class, 'graph'])->name('graph');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function (){
