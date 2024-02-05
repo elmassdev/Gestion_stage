@@ -222,4 +222,4 @@ div{
   </defs>
 </svg>
 
-<h2> <a href="/home">Retour à la page d'accueil</a> </h2>
+<h2> <a href="/">Retour à la page d'accueil</a> </h2>

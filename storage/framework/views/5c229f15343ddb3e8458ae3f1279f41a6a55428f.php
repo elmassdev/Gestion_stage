@@ -40,11 +40,13 @@
                         <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')); ?></td>
                         <td><?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?></td>
                         <td><a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"> <i class="fa fa-edit text-warning"></i></a>
+                            <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
                             <form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST"  style="display:inline">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('DELETE'); ?>
                                 <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
                             </form>
+                            <?php endif; ?>
                             <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>"><i class="fa fa-print text-primary"></i></a>
                         </td>
                     </tr>

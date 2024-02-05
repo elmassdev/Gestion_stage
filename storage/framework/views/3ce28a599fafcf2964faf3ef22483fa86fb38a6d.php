@@ -17,6 +17,8 @@
     .nomsta{
         margin-top: 05px;
         margin-left: 350px;
+        font-family: sans-serif;
+        font-size: 1rem;
     }
     .Att_title{
         text-align: center;

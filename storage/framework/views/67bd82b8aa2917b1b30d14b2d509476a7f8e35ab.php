@@ -27,11 +27,13 @@
                                 <td><a href="<?php echo e(URL::to( 'encadrants/' . $next )); ?>" class="btn btn-success text-light"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
                                 <td><a href="/encadrants/" class="btn btn-primary text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
                                 <td><a href="/encadrants/<?php echo e($encadrant->id); ?>/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
                                 <td><form action="/encadrants/<?php echo e($encadrant->id); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <?php echo method_field('DELETE'); ?>
                                     <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                                 </td>
+                                <?php endif; ?>
                             </tr>
                         </tbody>
                     </table>

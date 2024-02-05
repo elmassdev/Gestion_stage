@@ -25,7 +25,7 @@
                                 <div class="col-md-3 text-center"> <p class="bg-warning text-danger rounded-pill" style="font-size: larger"> Stage annulé <b>X</b> </p> </div>
                                 @endif
                                 @if($stagiaire->phone)
-                                <div class="col-md-3 text-center"> <a href="https://wa.me/{{$stagiaire->phone}}?text=Bonjour,%20{{$stagiaire->civilite}}%20{{$stagiaire->prenom}}%20{{$stagiaire->nom}}:%0Avotre%20stage%20est%20approuvé,%20du%20{{$stagiaire->date_debut}}%20au%20{{$stagiaire->date_fin}} @if($stagiaire->sujet) ,%20et%20votre%20sujet%20est%20:%20{{$stagiaire->sujet}}, @endif Merci de se présenter le premier jour de votre stage au CCI/UM6P : https://maps.app.goo.gl/J8ZP8REoFHxYqVUs9" target="_blank"><i class="fa-brands fa-whatsapp fa-2xl" style="color: #1d9f78;"></i></a> </div>
+                                <div class="col-md-3 text-center"> <a href="https://wa.me/{{$stagiaire->phone}}?text=Bonjour,%20{{$stagiaire->civilite}}%20{{$stagiaire->prenom}}%20{{$stagiaire->nom}}: %0Avotre%20stage%20est%20approuvé,%20du%20{{ \Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y') }}%20au%20{{ \Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y') }} , @if($stagiaire->sujet) %20et%20votre%20sujet%20est%20:%20{{$stagiaire->sujet}}, @endif  Merci de se présenter le premier jour de votre stage au CCI/UM6P : https://maps.app.goo.gl/J8ZP8REoFHxYqVUs9" target="_blank"><i class="fa-brands fa-whatsapp fa-2xl" style="color: #1d9f78;"></i></a> </div>
                                 @endif
 
 
@@ -78,15 +78,18 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td> <a href="{{ URL::to( 'stagiaires/' . $previous ) }}" class="btn"> <i class="fa fa-chevron-left" aria-hidden="true"></i> </a></td>
-                                <td><a href="{{ URL::to( 'stagiaires/' . $next ) }}" class="btn"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
-                                <td><a href="/stagiaires/" class="btn"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
-                                <td><a href="/stagiaires/{{$stagiaire->id}}/modification"  class="btn text-warning"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                <td> <a href="{{ URL::to( 'stagiaires/' . $previous ) }}" class="btn btn-success text-light "> <i class="fa fa-chevron-left" aria-hidden="true"></i> </a></td>
+                                <td><a href="{{ URL::to( 'stagiaires/' . $next ) }}" class="btn btn-success text-light"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+                                <td><a href="/stagiaires/" class="btn btn-primary text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
+                                <td><a href="/stagiaires/{{$stagiaire->id}}/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+
+                                @if(auth()->check() && auth()->user()->hasRole('superadmin'))
                                 <td><form action="/stagiaires/{{$stagiaire->id}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn text-danger" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                                 </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>

@@ -41,11 +41,13 @@
                         <td>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</td>
                         <td>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</td>
                         <td><a  href="/stagiaires/{{$stagiaire->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
+                            @if(auth()->check() && auth()->user()->hasRole('superadmin'))
                             <form action="/stagiaires/{{$stagiaire->id}}" method="POST"  style="display:inline">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
                             </form>
+                            @endif
                             <a  href="/stagiaires/{{$stagiaire->id}}"><i class="fa fa-print text-primary"></i></a>
                         </td>
                     </tr>
