@@ -274,7 +274,7 @@ unset($__errorArgs, $__bag); ?>
                             <?php endif; ?>
                         </div>
                         <div class="row mb-3">
-                            <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établie le: </label>
+                            <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établi le: </label>
                             <div class="col-md-5">
                                 <input id="OP_etabli_le" type="date" value = "<?php echo e($stagiaire->OP_etabli_le); ?>" class="form-control datepicker  <?php $__errorArgs = ['OP_etabli_le'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

@@ -205,7 +205,7 @@
                             @endif
                         </div>
                         <div class="row mb-3">
-                            <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établie le: </label>
+                            <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établi le: </label>
                             <div class="col-md-5">
                                 <input id="OP_etabli_le" type="date" value = "{{$stagiaire->OP_etabli_le}}" class="form-control datepicker  @error('OP_etabli_le') is-invalid @enderror"   name="OP_etabli_le" value="{{ old('OP_etabli_le') }}"    autocomplete="OP_etabli_le" lang="fr-CA" autofocus>
                                 @error('OP_etabli_le')

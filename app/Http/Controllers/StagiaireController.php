@@ -241,6 +241,7 @@ class StagiaireController extends Controller
         $stagiaire->remunere = $request->boolean('remunere');
         $stagiaire->EI = $request->boolean('EI');
         $stagiaire->annule = $request->boolean('annule');
+        $stagiaire->OP_etabli = $request->boolean('OP_etabli');
         $stagiaire->prolongation = $request->input('prolongation');
         $stagiaire->date_fin_finale	 = $request->input('date_fin_finale');
         $stagiaire->Attestation_remise_le = $request->input('Attestation_remise');
@@ -389,12 +390,19 @@ class StagiaireController extends Controller
             'indemnite_remise_le' => 'nullable|date',
         ]);
 
+        $modifiedAttributes = [];
+        foreach ($validatedData as $key => $value) {
+            if ($originalAttributes[$key] != $value) {
+                $modifiedAttributes[$key] = $value;
+            }
+        }
+
 
 
         // Filter only the modified inputs
-        $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
-            return $originalAttributes[$key] != $value;
-        }, ARRAY_FILTER_USE_BOTH);
+        // $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
+        //     return $originalAttributes[$key] != $value;
+        // }, ARRAY_FILTER_USE_BOTH);
 
         $stagiaire->update($modifiedAttributes);
         return redirect()->back()->with('success', 'Stagiaire updated successfully');
