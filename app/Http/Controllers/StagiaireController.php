@@ -507,7 +507,6 @@ class StagiaireController extends Controller
         ->where('stagiaires.id','=',$id)
                ->get(['stagiaires.civilite','stagiaires.absence','services.sigle_service as sigle','stagiaires.etablissement','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.cin', 'etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.niveau','stagiaires.diplome','stagiaires.date_debut','stagiaires.date_fin','stagiaires.EI', 'stagiaires.remunere','stagiaires.service', 'stagiaires.dateLO'])->first();
 
-
         $dateLO = Carbon::parse($stagiaire->dateLO)->format('d/m/Y');
         $dd = $stagiaire->date_debut;
         $dd = Carbon::parse($dd)->format('d F Y');
@@ -565,9 +564,6 @@ class StagiaireController extends Controller
             }
         }
 
-
-
-
         $dailyFee = 0;
 
         if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
@@ -603,10 +599,10 @@ class StagiaireController extends Controller
         $net_lettres_string = $net_lettres_formatter->format($net);
         $Le_net = htmlspecialchars($net_lettres_string);
 
-            if($stagiaire->remunere){
-                $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
-            }
-            return $pdf->stream();
+        if($stagiaire->remunere){
+            $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
+        }
+        return $pdf->stream();
     }
 }
 
