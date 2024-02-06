@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col">
             <div class="container card pt-2">
-                <div class="card-header">Modifier les informations de <b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->nom); ?></b> </div>
+                <div class="card-header"> Modifier les informations de <b><?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->nom); ?></b> </div>
                 <div class="row  card-body">
                   <div class="col border border-solid rounded mx-1 py-2">
                     <form method="POST" action="/stagiaires/<?php echo e($stagiaire->id); ?>/modification" enctype="multipart/form-data" onsubmit="return validateDates()">
@@ -30,13 +30,11 @@
                             function validateDates() {
                                 const holidays = [];
                                 const year = new Date().getFullYear();
-
                                 // New Year
                                 holidays.push(`${year}-01-01`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-
                                 // 11 janvier
                                 holidays.push(`${year}-01-11`);
                                 for (let i = 1; i <= 10; i++) {
@@ -80,15 +78,12 @@
                                     holidays.push(`${year+i}-11-18`);
                                     }
 
-
                                 const startDateInput = document.getElementById("date_debut");
                                 const endDateInput = document.getElementById("date_fin");
 
                                 // Get the selected dates
                                 const startDate = new Date(startDateInput.value);
                                 const endDate = new Date(endDateInput.value);
-
-
 
                                 const formattedBeginningDate = startDate.toISOString().slice(0, 10);
                                 const formattedEndDate = endDate.toISOString().slice(0, 10);
@@ -103,13 +98,11 @@
                                     return false;
                                 }
 
-
                                 // Check if either date is not a valid date
                                 if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
                                     alert("Merci d'entrer des dates valides.");
                                     return false;
                                 }
-
 
                                 if (startDate.getTime() >= endDate.getTime()) {
                                     alert("La date de début doit être antérieure à la date de fin.");
@@ -126,7 +119,6 @@
                                 // All validation checks passed
                                 return true;
                                 }
-
                         </script>
                         <script>
                             //change data values to json
@@ -134,8 +126,7 @@
                             var FilSerEnc = <?php echo json_encode($encadrants, 15, 512) ?>;
                         </script>
                         <div class="row mb-3">
-                            <label for="code" class="col-md-3 col-form-label text-md-left" > Code Stagiaire</label>
-
+                            <label for="code" class="col-md-3 col-form-label text-md-left"> Code Stagiaire </label>
                             <div class="col-md-8">
                                 <input id="code" type="number" class="form-control <?php $__errorArgs = ['code'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -145,7 +136,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"   name="code" value="<?php echo e($stagiaire->code); ?>"  required autocomplete="code"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"   autofocus>
-
                                 <?php $__errorArgs = ['code'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -162,7 +152,6 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-
                             <div class="col-md-8">
                                 <input id="date_demande" type="date" value = "<?php echo e($stagiaire->date_demande); ?>" class="form-control datepicker  <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -172,7 +161,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"   name="date_demande" value="<?php echo e(old('date_demande')); ?>" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
-
                                 <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -205,8 +193,7 @@ unset($__errorArgs, $__bag); ?>" name="site"  autocomplete="site">
                                     <option value="<?php echo e($stagiaire->site); ?>" selected><?php echo e($stagiaire->site); ?></option>
                                     <option value="Benguerir">Benguerir</option>
                                     <option value="Youssoufia"> Youssoufia</option>
-                                    
-                            </select>
+                                </select>
                                 <?php $__errorArgs = ['site'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -433,7 +420,7 @@ unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau">
                                     <option value="3ème année">3ème année</option>
                                     <option value="4ème année">4ème année</option>
                                     <option value="5ème année">5ème année</option>
-                            </select>
+                                </select>
                                 <?php $__errorArgs = ['niveau'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -452,7 +439,6 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="row mb-3">
                             <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
-
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control <?php $__errorArgs = ['diplome'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -567,9 +553,7 @@ unset($__errorArgs, $__bag); ?>" name="ville"  autocomplete="ville">
                                        <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($ville->ville); ?>"><?php echo e($ville->ville); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
                                 </select>
-
                                 <?php $__errorArgs = ['ville'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -712,12 +696,8 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
-
-
-
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
-
                             <div class="col-md-8">
                                 <input id="date_debut" type="date"  class="form-control datepicker  <?php $__errorArgs = ['date_debut'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -727,7 +707,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"   name="date_debut" value="<?php echo e($stagiaire->date_debut); ?>" pattern="dd/mm/yyyy"  required autocomplete="date_debut" placeholder="dd/mm/yyyy" value="" min="1997-01-01" max="2045-12-31" autofocus>
-
                                 <?php $__errorArgs = ['date_debut'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -741,13 +720,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-
                         </div>
-
 
                         <div class="row mb-3">
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
-
                             <div class="col-md-8">
                                 <input id="date_fin" type="date"  class="form-control datepicker  <?php $__errorArgs = ['date_fin'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -757,7 +733,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"   name="date_fin" value="<?php echo e($stagiaire->date_fin); ?>" pattern="dd/mm/yyyy"  required autocomplete="date_fin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
-
                                 <?php $__errorArgs = ['date_fin'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -771,12 +746,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-
                         </div>
 
                         <div class="row mb-3">
                             <label for="sujet" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Sujet')); ?></label>
-
                             <div class="col-md-8">
                                 <textarea id="sujet" class="form-control <?php $__errorArgs = ['sujet'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -786,7 +759,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="sujet" value="<?php echo e($stagiaire->sujet); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="sujet"  autofocus oninput="validateDates()" ><?php echo e($stagiaire->sujet); ?></textarea>
-
                                 <?php $__errorArgs = ['sujet'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -804,7 +776,6 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="row mb-3">
                             <label for="observation" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Observation')); ?></label>
-
                             <div class="col-md-8">
                                 <textarea id="observation" class="form-control <?php $__errorArgs = ['observation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -814,7 +785,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="observation" value="<?php echo e($stagiaire->observation); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="observation"  autofocus ><?php echo e($stagiaire->observation); ?></textarea>
-
                                 <?php $__errorArgs = ['observation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -831,7 +801,6 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="row mb-3">
                             <label for="absence" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Absence')); ?></label>
-
                             <div class="col-md-8">
                                 <input id="absence" class="form-control <?php $__errorArgs = ['absence'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -841,7 +810,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="absence" value="<?php echo e($stagiaire->absence); ?>"    autocomplete="absence"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" autofocus />
-
                                 <?php $__errorArgs = ['absence'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

@@ -3,7 +3,10 @@
 <div class="py-4 mx-2">
     <div class="mx-2">
         <a href="/stagiaires/create" class="btn btn-warning text-light"><i class="fa fa-plus" aria-hidden="true"></i></a>
-        <a href="/stagiaires/1" class="btn btn-primary text-light"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="/stagiaires/1" class="btn btn-primary text-light">
+            {{-- <i class="fa fa-magnifying-glass" aria-hidden="true"></i> --}}
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#fff" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+        </a>
     </div>
 
 @if(count($stagiaires))
@@ -26,31 +29,33 @@
 
         </tr>
     </thead>
-    <tbody>@foreach($stagiaires as $stagiaire)
-    <tr class=" table table-row my-auto h-10 small">
-                        <td>{{ $stagiaire->civilite}}</td>
-                        <td>{{ $stagiaire->prenom}}</td>
-                        <td>{{ $stagiaire->nom}}</td>
-                        <td>{{ $stagiaire->type_stage}}</td>
-                        <td>{{ $stagiaire->niveau}}</td>
-                        <td>{{ $stagiaire->diplome}}</td>
-                        <td>{{ $stagiaire->etablissement}}</td>
-                        <td>{{ $stagiaire->ville}}</td>
-                        <td>{{ $stagiaire->sigle}}</td>
-                        <td>{{ $stagiaire->nomenc}}</td>
-                        <td>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</td>
-                        <td>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</td>
-                        <td><a  href="/stagiaires/{{$stagiaire->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
-                            <form action="/stagiaires/{{$stagiaire->id}}" method="POST"  style="display:inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
-                            </form>
-                            <a  href="/stagiaires/{{$stagiaire->id}}"><i class="fa fa-print text-primary"></i></a>
-                        </td>
-                    </tr>
-@endforeach
-
+    <tbody>
+        @foreach($stagiaires as $stagiaire)
+        <tr class=" table table-row my-auto h-10 small">
+            <td>{{ $stagiaire->civilite}}</td>
+            <td>{{ $stagiaire->prenom}}</td>
+            <td>{{ $stagiaire->nom}}</td>
+            <td>{{ $stagiaire->type_stage}}</td>
+            <td>{{ $stagiaire->niveau}}</td>
+            <td>{{ $stagiaire->diplome}}</td>
+            <td>{{ $stagiaire->etablissement}}</td>
+            <td>{{ $stagiaire->ville}}</td>
+            <td>{{ $stagiaire->sigle}}</td>
+            <td>{{ $stagiaire->nomenc}}</td>
+            <td>{{\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')}}</td>
+            <td>{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</td>
+            <td><a  href="/stagiaires/{{$stagiaire->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
+                @if(auth()->check() && auth()->user()->hasRole('superadmin'))
+                <form action="/stagiaires/{{$stagiaire->id}}" method="POST"  style="display:inline">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
+                </form>
+                @endif
+                <a  href="/stagiaires/{{$stagiaire->id}}"><i class="fa fa-print text-primary"></i></a>
+            </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
 {{ $stagiaires->links() }}

@@ -81,6 +81,8 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
     Route::resource('etablissements', EtabController::class)->middleware('auth');
     Route::resource('filieres', FiliereController::class)->middleware('auth');
+    // Route::get('/stagiaires/{id}', 'App\Http\Controllers\StagiaireController@duplicate')->name('duplicate');
+
 
     //export DB to Excel
     $today = date('d F Y');

@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col">
             <div class="container card pt-2">
-                <div class="card-header">Modifier les informations de <b>{{$stagiaire->civilite}} {{$stagiaire->nom}}</b> </div>
+                <div class="card-header"> Modifier les informations de <b>{{$stagiaire->civilite}} {{$stagiaire->nom}}</b> </div>
                 <div class="row  card-body">
                   <div class="col border border-solid rounded mx-1 py-2">
                     <form method="POST" action="/stagiaires/{{$stagiaire->id}}/modification" enctype="multipart/form-data" onsubmit="return validateDates()">
@@ -29,13 +29,11 @@
                             function validateDates() {
                                 const holidays = [];
                                 const year = new Date().getFullYear();
-
                                 // New Year
                                 holidays.push(`${year}-01-01`);
                                 for (let i = 1; i <= 10; i++) {
                                     holidays.push(`${year+i}-01-01`);
                                     }
-
                                 // 11 janvier
                                 holidays.push(`${year}-01-11`);
                                 for (let i = 1; i <= 10; i++) {
@@ -79,15 +77,12 @@
                                     holidays.push(`${year+i}-11-18`);
                                     }
 
-
                                 const startDateInput = document.getElementById("date_debut");
                                 const endDateInput = document.getElementById("date_fin");
 
                                 // Get the selected dates
                                 const startDate = new Date(startDateInput.value);
                                 const endDate = new Date(endDateInput.value);
-
-
 
                                 const formattedBeginningDate = startDate.toISOString().slice(0, 10);
                                 const formattedEndDate = endDate.toISOString().slice(0, 10);
@@ -102,13 +97,11 @@
                                     return false;
                                 }
 
-
                                 // Check if either date is not a valid date
                                 if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
                                     alert("Merci d'entrer des dates valides.");
                                     return false;
                                 }
-
 
                                 if (startDate.getTime() >= endDate.getTime()) {
                                     alert("La date de début doit être antérieure à la date de fin.");
@@ -125,7 +118,6 @@
                                 // All validation checks passed
                                 return true;
                                 }
-
                         </script>
                         <script>
                             //change data values to json
@@ -133,11 +125,9 @@
                             var FilSerEnc = @json($encadrants);
                         </script>
                         <div class="row mb-3">
-                            <label for="code" class="col-md-3 col-form-label text-md-left" > Code Stagiaire</label>
-
+                            <label for="code" class="col-md-3 col-form-label text-md-left"> Code Stagiaire </label>
                             <div class="col-md-8">
                                 <input id="code" type="number" class="form-control @error('code') is-invalid @enderror"   name="code" value="{{ $stagiaire->code }}"  required autocomplete="code"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"   autofocus>
-
                                 @error('code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -147,10 +137,8 @@
                         </div>
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-
                             <div class="col-md-8">
                                 <input id="date_demande" type="date" value = "{{$stagiaire->date_demande}}" class="form-control datepicker  @error('date_demande') is-invalid @enderror"   name="date_demande" value="{{ old('date_demande') }}" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
-
                                 @error('date_demande')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -169,10 +157,7 @@
                                     <option value="{{$stagiaire->site}}" selected>{{$stagiaire->site}}</option>
                                     <option value="Benguerir">Benguerir</option>
                                     <option value="Youssoufia"> Youssoufia</option>
-                                    {{-- <option value="Youssoufia" @if ( Auth::user()->name =='kourimi')selected
-
-                                        @endif  >Youssoufia</option>                                --}}
-                            </select>
+                                </select>
                                 @error('site')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -301,7 +286,7 @@
                                     <option value="3ème année">3ème année</option>
                                     <option value="4ème année">4ème année</option>
                                     <option value="5ème année">5ème année</option>
-                            </select>
+                                </select>
                                 @error('niveau')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -313,7 +298,6 @@
 
                         <div class="row mb-3">
                             <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
-
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
                                     <option value="{{$stagiaire->diplome}}" selected>{{$stagiaire->diplome}}</option>
@@ -379,9 +363,7 @@
                                        @foreach($villes as $ville)
                                 <option value="{{ $ville->ville }}">{{$ville->ville}}</option>
                                 @endforeach
-
                                 </select>
-
                                 @error('ville')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -461,46 +443,34 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
-
                             <div class="col-md-8">
                                 <input id="date_debut" type="date"  class="form-control datepicker  @error('date_debut') is-invalid @enderror"   name="date_debut" value="{{$stagiaire->date_debut}}" pattern="dd/mm/yyyy"  required autocomplete="date_debut" placeholder="dd/mm/yyyy" value="" min="1997-01-01" max="2045-12-31" autofocus>
-
                                 @error('date_debut')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-
                         </div>
-
 
                         <div class="row mb-3">
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
-
                             <div class="col-md-8">
                                 <input id="date_fin" type="date"  class="form-control datepicker  @error('date_fin') is-invalid @enderror"   name="date_fin" value="{{$stagiaire->date_fin}}" pattern="dd/mm/yyyy"  required autocomplete="date_fin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
-
                                 @error('date_fin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-
                         </div>
 
                         <div class="row mb-3">
                             <label for="sujet" class="col-md-3 col-form-label text-md-left">{{ __('Sujet') }}</label>
-
                             <div class="col-md-8">
                                 <textarea id="sujet" class="form-control @error('sujet') is-invalid @enderror" name="sujet" value="{{ $stagiaire->sujet}}"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="sujet"  autofocus oninput="validateDates()" >{{ $stagiaire->sujet}}</textarea>
-
                                 @error('sujet')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -511,10 +481,8 @@
 
                         <div class="row mb-3">
                             <label for="observation" class="col-md-3 col-form-label text-md-left">{{ __('Observation') }}</label>
-
                             <div class="col-md-8">
                                 <textarea id="observation" class="form-control @error('observation') is-invalid @enderror" name="observation" value="{{ $stagiaire->observation}}"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)"  autocomplete="observation"  autofocus >{{ $stagiaire->observation}}</textarea>
-
                                 @error('observation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -524,10 +492,8 @@
                         </div>
                         <div class="row mb-3">
                             <label for="absence" class="col-md-3 col-form-label text-md-left">{{ __('Absence') }}</label>
-
                             <div class="col-md-8">
                                 <input id="absence" class="form-control @error('absence') is-invalid @enderror" name="absence" value="{{$stagiaire->absence}}"    autocomplete="absence"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" autofocus />
-
                                 @error('absence')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

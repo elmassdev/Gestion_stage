@@ -309,75 +309,21 @@ class StagiaireController extends Controller
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
     }
 
-//     public function update(Request $request, $id)
-// {
-//     $stagiaire = Stagiaire::findOrFail($id);
 
-//     $originalAttributes = $stagiaire->getAttributes();
-//     $updatedAttributes = array_filter($request->all(), function ($value, $key) use ($originalAttributes) {
-//         return isset($originalAttributes[$key]) && $originalAttributes[$key] !== $value;
-//     }, ARRAY_FILTER_USE_BOTH);
-//     $booleanAttributes = ['remunere', 'EI', 'annule'];
-//     foreach ($booleanAttributes as $attribute) {
-//         if ($request->has($attribute)) {
-//             $updatedAttributes[$attribute] = $request->input($attribute) ? true : false;
-//         } else {
-//             $updatedAttributes[$attribute] = false;
-//         }
-//     }
+    // public function duplicate($id){
+    //     $stagiaire = Stagiaire::findOrFail($id);
+    //     $duplicateStagiaire = $stagiaire->replicate();
+    //     $duplicateStagiaire->save();
+    //     return redirect()->route('stagiaires.show')->with('success', 'Stagiaire dupliqué avec succès.');
+    // }
 
-//     // $booleanAttributes = ['remunere', 'EI', 'annule'];
-//     // foreach ($booleanAttributes as $attribute) {
-//     //     if ($request->filled($attribute)) {
-//     //         $updatedAttributes[$attribute] = $request->input($attribute) ? true : false;
-//     //     }
-//     // }
-
-//     // Update the model with the changed attributes
-//     $stagiaire->update($updatedAttributes);
-
-
-//     if ($request->hasFile('photo')) {
-//         $oldPhotoPath = 'storage/images/profile/' . $stagiaire->photo;
-//         if (File::exists($oldPhotoPath) && ($stagiaire->photo !== 'default_f.png' && $stagiaire->photo !== 'default_m.jpg')) {
-//             File::delete($oldPhotoPath);
-//         }
-
-//         // Store the new photo
-//         $fileName = ucwords($request->input('nom')) . '-' . ucwords($request->input('prenom')) . '-' . time() . '.' . $request->photo->extension();
-//         $request->file('photo')->storeAs('images/profile', $fileName, 'public');
-//         $stagiaire->photo = $fileName;
-//     }
-
-//     // Handle the case where the photo is deleted
-//     if (($request->input('deletePhoto') == "1") && (!$request->hasFile('photo'))) {
-//         $oldPhotoPath = 'storage/images/profile/' . $stagiaire->photo;
-//         if (File::exists($oldPhotoPath) && ($stagiaire->photo !== 'default_f.png' && $stagiaire->photo !== 'default_m.jpg')) {
-//             File::delete($oldPhotoPath);
-//         }
-//         $fileName = ($stagiaire->civilite == "M.") ? 'default_m.jpg' : 'default_f.png';
-//         $stagiaire->photo = $fileName;
-//     }
-
-
-
-//     // Save the updated model
-//     $stagiaire->save();
-
-//     return redirect('/stagiaires/' . $id)->with('msg', 'Enregistrement modifié avec succès');
-// }
 
 
 
     public function updater(Request $request, $id)
     {
-        // Find the Stagiaire model by ID
         $stagiaire = Stagiaire::findOrFail($id);
-
-        // Get the original attributes
         $originalAttributes = $stagiaire->getAttributes();
-
-        // Validate the form data
         $validatedData = $request->validate([
             'dateLO' => 'nullable|date',
             'date_reception_FFS' => 'nullable|date',
@@ -388,9 +334,6 @@ class StagiaireController extends Controller
             'indemnite_remise_le' => 'nullable|date',
         ]);
 
-
-
-        // Filter only the modified inputs
         $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
             return $originalAttributes[$key] != $value;
         }, ARRAY_FILTER_USE_BOTH);
