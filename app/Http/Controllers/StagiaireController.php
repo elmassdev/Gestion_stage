@@ -525,41 +525,39 @@ class StagiaireController extends Controller
         $numberOfDays = ($startDate->diffInDays($endDate))+1;
 
         if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
-            if($numberOfDays>30 && $absence == 0){
+            if($numberOfDays>30 ){
                 $numberOfDays=30;
             }
         } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
-            if($numberOfDays>60 && $absence == 0){
+            if($numberOfDays>60 ){
                 $numberOfDays=60;
             }
         } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
-            if($numberOfDays>120 && $absence == 0){
-                $numberOfDays=120;
-            }elseif($numberOfDays==121 && $absence <2){
+            if($numberOfDays>120 ){
                 $numberOfDays=120;
             }
         } elseif ($niveau == '1ère année' && $diplome == 'Master') {
-            if($numberOfDays>60 && $absence == 0){
+            if($numberOfDays>60){
                 $numberOfDays=60;
             }
         } elseif ($niveau == '2ème année' && $diplome == 'Master') {
-            if($numberOfDays>120 && $absence == 0){
+            if($numberOfDays>120){
                 $numberOfDays=120;
             }
         } elseif ($niveau == '4ème année' && $diplome == '') {
-            if($numberOfDays>60 && $absence == 0){
+            if($numberOfDays>60){
                 $numberOfDays=60;
             }
         } elseif ($niveau == '5ème année' && $diplome == '') {
-            if($numberOfDays>120 && $absence == 0){
+            if($numberOfDays>120){
                 $numberOfDays=120;
             }
         }elseif (($etab == 'IMM' || $etab == 'IMT') && $niveau == '1ère année') {
-            if($numberOfDays>30 && $absence == 0){
+            if($numberOfDays>30){
                 $numberOfDays=30;
             }
         }elseif (($etab == 'IMM' || $etab == 'IMT') && $niveau == '2ème année') {
-            if($numberOfDays>60 && $absence == 0){
+            if($numberOfDays>60){
                 $numberOfDays=60;
             }
         }
@@ -585,10 +583,9 @@ class StagiaireController extends Controller
         }
 
         $today = date('d/m/Y');
-        $year = date('Y');
+        $carbonDate = Carbon::parse($stagiaire->date_debut, 'Africa/Casablanca');
+        $year = $carbonDate->year;
         $now = Carbon::now();
-
-
         $somme = $numberOfDays * $dailyFee;
         $retenue = $absence * $dailyFee;
         $net = $somme - $retenue;

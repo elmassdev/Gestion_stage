@@ -121,7 +121,7 @@
                                     <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation" class="btn"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
                                 </div>
                                 <?php endif; ?>
-                                <?php if(($stagiaire->date_debut>=now()) && !($stagiaire->annule)): ?>
+                                <?php if(($stagiaire->date_fin > now()) && !($stagiaire->annule)): ?>
                                 <div class=" card col-md-12">
                                     <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
