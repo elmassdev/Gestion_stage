@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/styles.css')); ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-oGq1BrH7tx2LlO3S3z5gDvDHt5eRq3s7l5xFZbgYFBJIU8Z6enP00HRlL2LZ6ENg" crossorigin="anonymous">
@@ -31,7 +31,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Parisienne&family=Petit+Formal+Script&family=Pinyon+Script&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
 </head>
 
 <style>
@@ -325,22 +325,22 @@
 
 <body  id="body-element" data-bs-theme="dark">
     <nav class="navbar navbar-expand-md shadow-sm sticky-top" id="navbar">
-        <a class="navbar-brand mx-auto" href="{{ url('/') }}">
+        <a class="navbar-brand mx-auto" href="<?php echo e(url('/')); ?>">
             <img src="/images/logo.svg" alt="">
         </a>
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto" style="display:absolute" >
-                    @if(auth()->check() && auth()->user()->hasRole('admin'))
+                    <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
                     <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
-                    @endif
-                    @can('view_indicators')
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_indicators')): ?>
                     <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
-                    @endcan
+                    <?php endif; ?>
                     <li class="navbarli"><a href="/contact">Contact</a></li>
                     <li class="navbarli" style="display: inline" >
                         <input type="checkbox" id="darkmode-toggle"/>
@@ -373,31 +373,33 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
-                    @guest
-                        @if (Route::has('login'))
+                    <?php if(auth()->guard()->guest()): ?>
+                        <?php if(Route::has('login')): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
                             </li>
-                        @endif
-                    @else
+                        <?php endif; ?>
+                    <?php else: ?>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold" v-pre>
-                                {{ Auth::user()->nom }}
+                                <?php echo e(Auth::user()->nom); ?>
+
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    <?php echo e(__('Logout')); ?>
+
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                    <?php echo csrf_field(); ?>
                                 </form>
                             </div>
                         </li>
-                    @endguest
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -407,18 +409,18 @@
             <h1 class="dep"> Département Développement RH  </h1>
         </div>
         <div class="wrapper">
-            @if(auth()->check() && auth()->user()->hasRole('admin'))
+            <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
             <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
             <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/indicators/index"> Indicateurs</a>
             <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/stagiaires"> Liste des stagiaires</a>
             <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/export"> Sauvegarder tables</a>
-            @if(auth()->check() && auth()->user()->hasRole('superadmin'))
+            <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
             <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/user/assign-roles"> Menu admin</a>
-            @endif
-            @can('view_surete_page')
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_surete_page')): ?>
             <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/surete"> Canevas stagiaires</a>
-            @endcan
-            @endif
+            <?php endif; ?>
+            <?php endif; ?>
           </div>
 
 
@@ -521,57 +523,10 @@ p {
 
 
 
-        {{-- @if(auth()->check() && auth()->user()->hasRole('admin'))
-        <div class="row middle">
-            <table>
-                <tr>
-                    <td></td>
-                    <td id="gear">
-                        <div id="gear1" class="fa fa-5x fa-gear spin">
-                            <a id="link1" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);"
-                            href="/stagiaires/create"> Ajouter un stagiaire </a>
-                        </div>
-
-                        <div id="gear2" class="fa fa-5x fa-gear spin-back">
-                            <a id="link2" class="btn  col-md-5 text-primary  mx-auto border border-warning rounded-pill fs-5" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);"
-                            href="/indicators/index"> Indicateurs <span style="color: transparent"> <br>. <br> . </span></div></a>
-                        </div>
-
-                        <div id="gear3" class="fa fa-5x fa-gear spin">
-                            <a id="link3" class="btn  col-md-5 text-primary mx-auto border border-warning rounded-pill fs-5" style="box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);"
-                            href="/stagiaires"> Liste des stagiaires<span style="color: transparent"> <br>. </span></a>
-                        </div>
-                    </td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-        @endif
-
-
-        @can('view_indicators')
-        <div class="row col-md-10">
-            <h2 class="motto">Optimisation, Efficacité, Performance!</h2>
-        </div>
-        @endcan
-
-        <div class="row bottom col-md-8" >
-            @if(auth()->check() && auth()->user()->hasRole('admin'))
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5 my-2 mx-2  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
-            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/indicators/index"> Indicateurs</a>
-            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/stagiaires"> Liste des stagiaires</a>
-            <a class="btn btn-outline-warning col-md-3 mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/export"> Sauvegarder tables</a>
-            @endif
-            @if(auth()->check() && auth()->user()->hasRole('superadmin'))
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/user/assign-roles"> Menu admin</a>
-            @endif
-            @can('view_surete_page')
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5 my-2 mx-2" href="/surete"> Canevas stagiaires</a>
-            @endcan
-        </div> --}}
+        
 
         <div id="sign">
-            {{-- <p id="my-auto">  <b> Developed By <br> Elmassoudi Dev </b></p> --}}
+            
         </div>
     </div>
 </body>
@@ -666,3 +621,4 @@ p {
 
 
 
+<?php /**PATH D:\Share\main\Gestion_stage\resources\views/home.blade.php ENDPATH**/ ?>

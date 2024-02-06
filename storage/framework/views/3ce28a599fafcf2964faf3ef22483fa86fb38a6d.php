@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 
 
@@ -18,6 +17,8 @@
     .nomsta{
         margin-top: 05px;
         margin-left: 350px;
+        font-family: sans-serif;
+        font-size: 1rem;
     }
     .Att_title{
         text-align: center;
@@ -47,7 +48,7 @@
 <div class="top"> <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?></div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
-<div class="nomsta"> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> <?php echo e($stagiaire->ville); ?> </div>
+<div class="nomsta"> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> - </div>
 <p><b>Objet        :</b> <?php echo e($stagiaire->type_stage); ?>     </p>
 <p><b>Réf       :</b> Votre demande du <?php echo e($ddemande); ?>     </p>
 <p><?php echo e($stagiaire->titre); ?>, <br>

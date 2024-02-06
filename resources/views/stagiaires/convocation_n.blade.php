@@ -18,6 +18,8 @@
     .nomsta{
         margin-top: 05px;
         margin-left: 350px;
+        font-family: sans-serif;
+        font-size: 1rem;
     }
     .Att_title{
         text-align: center;
@@ -47,7 +49,7 @@
 <div class="top"> {{$stagiaire->site}}, le {{$today}}</div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
-<div class="nomsta"> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> {{$stagiaire->ville}} </div>
+<div class="nomsta"> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </div>
 <p><b>Objet        :</b> {{$stagiaire->type_stage}}     </p>
 <p><b>Réf       :</b> Votre demande du {{$ddemande}}     </p>
 <p>{{$stagiaire->titre}}, <br>

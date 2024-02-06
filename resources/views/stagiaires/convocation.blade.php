@@ -18,6 +18,8 @@
     .nomsta{
         margin-top: 05px;
         margin-left: 350px;
+        font-family: sans-serif;
+        font-size: 1rem;
     }
     .Att_title{
         text-align: center;
@@ -47,7 +49,7 @@
 <div class="top"> {{$stagiaire->site}}, le {{$today}}</div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
-<div class="nomsta"> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> {{$stagiaire->ville}} </div>
+<div class="nomsta"> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </div>
 
 <p>{{$stagiaire->titre}}, <br>
 <p><span>Suite à votre demande, </span>nous avons l’honneur de vous faire part de notre accord pour l'organisation d'un {{$stagiaire->type_stage}} au sein du Groupe OCP.</p>

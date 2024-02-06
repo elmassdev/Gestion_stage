@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    @php
+    <?php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
-    @endphp
+    ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
@@ -24,7 +24,7 @@
 
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
 </head>
 <body>
     <style>
@@ -77,14 +77,14 @@
             <tr>
                 <td>
                     <div>
-                        <img class="my-2" src="{{ public_path("/images/logow.jpg") }}"> <br>
+                        <img class="my-2" src="<?php echo e(public_path("/images/logow.jpg")); ?>"> <br>
                         <b>SBU Industrial Facility Management <br>
                         Direction Industrielle Mines Gantour <br>
                         Direction Capital Humain Gantour <br>
                         Developpement RH <br></b>
                     </div>
                     <div class="py-2">
-                        <p>OIG/H/D -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
+                        <p>OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
                     </div>
                 </td>
                 <td>
@@ -106,8 +106,8 @@
             </div>
             <div class="intro">
                 <p>
-                    <span>Le Secrétariat </span>comptable payera à : {{ $stagiaire->civilite }} {{$stagiaire->prenom}} {{$stagiaire->nom}}, CIN N° {{$stagiaire->cin}}, élève
-                    stagiaire {{$stagiaire->article}} {{$stagiaire->sigle_etab}}, la somme de : {{$Le_net}} dhs ({{$net}} dh)
+                    <span>Le Secrétariat </span>comptable payera à : <?php echo e($stagiaire->civilite); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, CIN N° <?php echo e($stagiaire->cin); ?>, élève
+                    stagiaire <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->sigle_etab); ?>, la somme de : <?php echo e($Le_net); ?> dhs (<?php echo e($net); ?> dh)
                 </p>
             </div>
         </div>
@@ -151,28 +151,28 @@
         </tr>
         <tr>
             <td>
-                <div>- Indemnité de stage pour la période allant du {{ $date_debut }} au {{ $date_fin }} à {{ $stagiaire->sigle}} (*) <br> (OIG/H/D -  {{substr($stagiaire->code, -4)}} /{{substr($stagiaire->site,0,1)}}/{{$year}} du {{$dateLO}}) <br>
+                <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->sigle); ?> (*) <br> (OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($dateLO); ?>) <br>
                 </div>
                 <div> <br> - Absentéisme</div>
 
             </td>
-            <td>{{$somme}} dh</td>
-            <td> <br> <br> <br> <br> {{$retenue}} dh</td>
+            <td><?php echo e($somme); ?> dh</td>
+            <td> <br> <br> <br> <br> <?php echo e($retenue); ?> dh</td>
         </tr>
         <tr>
             <td>Total</td>
-            <td>{{$somme}} dh</td>
-            <td>{{$retenue}} dh</td>
+            <td><?php echo e($somme); ?> dh</td>
+            <td><?php echo e($retenue); ?> dh</td>
         </tr>
         <tr>
             <td>Net à payer</td>
-            <td colspan="2" style="text-align: center"> <b> {{$net}} dh </b> </td>
+            <td colspan="2" style="text-align: center"> <b> <?php echo e($net); ?> dh </b> </td>
         </tr>
     </table>
     <p>(*) - Hébergement et Restauration : non pris en charge par l'OCP. <br>
-    <b> Arrêté à la somme de : {{$Le_net}} dh ({{ $net}} dh). </b> </p>
+    <b> Arrêté à la somme de : <?php echo e($Le_net); ?> dh (<?php echo e($net); ?> dh). </b> </p>
 
-    <div class="LD"> {{$stagiaire->site}}, le {{$today}} </div>
+    <div class="LD"> <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> </div>
 <style>
     #sign{
         font-weight: bold;
@@ -250,3 +250,4 @@
 
 
 
+<?php /**PATH D:\Share\main\Gestion_stage\resources\views//stagiaires/op.blade.php ENDPATH**/ ?>

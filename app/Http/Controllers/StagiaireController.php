@@ -135,7 +135,7 @@ class StagiaireController extends Controller
             $stagiaire->observation= $request->input('observation');
             $stagiaire->created_by= Auth::user()->name;
             $stagiaire->save();
-            return back()->with('success', 'Enregistré avec succès.');
+            return back()->with('success', 'le stagiaire  '. $code.'   est enregistré avec succès.');
 
         }catch (\Exception $e) {
             // Catch the exception and add it to the validation errors
@@ -339,7 +339,7 @@ class StagiaireController extends Controller
         }, ARRAY_FILTER_USE_BOTH);
 
         $stagiaire->update($modifiedAttributes);
-        return redirect()->back()->with('success', 'Stagiaire updated successfully');
+        return redirect()->back()->with('success', 'Information modifiée avec succès');
     }
 
     /**
