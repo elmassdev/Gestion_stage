@@ -115,6 +115,8 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         $today = date('d F Y');
         return Excel::download(new ServicesExport, 'services - '.$today.'.xlsx');
     });
+    Route::get('/export/stagiaire-type-formation', [IndicatorsController::class, 'exportStagiaireTypeFormation']);
+
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {

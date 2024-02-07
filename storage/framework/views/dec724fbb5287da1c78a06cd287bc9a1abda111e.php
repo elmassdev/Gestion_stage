@@ -28,6 +28,7 @@
 
     <div class="container">
         <!-- Chart for Stagiaire Type Formation -->
+        <a href="/export/stagiaire-type-formation" class="btn text-success  rounded-pill"><i class="fa-solid fa-file-export" ></i></a>
         <canvas id="typeFormationChart" width="400" height="200"></canvas>
 
         <!-- Chart for Stagiaire Services -->

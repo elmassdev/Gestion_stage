@@ -20,6 +20,8 @@ use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
+use App\Exports\StagiaireTypeFormationExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
@@ -349,11 +351,8 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('P1', 'Annulé');
         $sheet->setCellValue('Q1', 'OP établi');
 
-
         $query = $this->buildQuery($request);
         $results = $query->get();
-
-
 
         // Add data to the sheet
         foreach ($results as $row => $rowData) {
@@ -385,6 +384,14 @@ class IndicatorsController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
     }
+
+    public function exportStagiaireTypeFormation()
+    {
+        $today = Carbon::today()->format('d-m-Y');
+        return Excel::download(new StagiaireTypeFormationExport, 'stagiaire_type_formation_'.$today.'.xlsx');
+    }
+
+
 
     public function graph(Request $request)
     {
@@ -418,12 +425,7 @@ class IndicatorsController extends Controller
         $notOpEtabliCount = Stagiaire::where('OP_etabli', false)
             ->whereYear('date_debut', $year)
             ->count();
-
-
-
-
         return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount'));
     }
-
 
 }
