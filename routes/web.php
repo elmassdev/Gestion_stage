@@ -82,6 +82,14 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::resource('etablissements', EtabController::class)->middleware('auth');
     Route::resource('filieres', FiliereController::class)->middleware('auth');
     // Route::get('/stagiaires/{id}', 'App\Http\Controllers\StagiaireController@duplicate')->name('duplicate');
+    Route::get('/stagiaires/{id}/duplicate', 'App\Http\Controllers\StagiaireController@duplicate')->name('stagiaires.duplicate');
+
+    // Route::get('/stagiaires/{id}', 'StagiaireController@show')->name('stagiaires.show');
+
+
+
+
+
 
 
     //export DB to Excel

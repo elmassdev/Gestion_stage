@@ -98,7 +98,12 @@
                                 <td><a href="<?php echo e(URL::to( 'stagiaires/' . $next )); ?>" class="btn btn-success text-light"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
                                 <td><a href="/stagiaires/" class="btn btn-success text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
                                 <td><a href="/stagiaires/<?php echo e($stagiaire->id); ?>/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-                                
+                                <td>
+                                    <form action="<?php echo e(route('stagiaires.duplicate', ['id' => $stagiaire->id])); ?>" method="GET">
+                                        <?php echo csrf_field(); ?>
+                                        <button type="submit" class="btn btn-warning text-primary"><i class="fa-regular fa-copy"></i></button>
+                                    </form>
+                                </td>
                                 <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
                                 <td><form action="/stagiaires/<?php echo e($stagiaire->id); ?>" method="POST">
                                     <?php echo csrf_field(); ?>

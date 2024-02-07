@@ -313,9 +313,85 @@ class StagiaireController extends Controller
     // public function duplicate($id){
     //     $stagiaire = Stagiaire::findOrFail($id);
     //     $duplicateStagiaire = $stagiaire->replicate();
+    //     $duplicateStagiaire->cin = '0000';
+    //     // Save the duplicated stagiaire
     //     $duplicateStagiaire->save();
-    //     return redirect()->route('stagiaires.show')->with('success', 'Stagiaire dupliqué avec succès.');
+    //     return redirect()->route('stagiaires.show', $duplicateStagiaire->id)->with('success', 'Stagiaire dupliqué avec succès.');
     // }
+
+    // public function duplicate($id){
+    //     $originalStagiaire = Stagiaire::findOrFail($id);
+    //     $currentAcademicYear = date('Y');
+    //     $originalStageStartDate = strtotime($originalStagiaire->date_debut);
+    //     $originalStageYear = date('Y', $originalStageStartDate);
+    //     $originalStageMonth = date('n', $originalStageStartDate);
+    //     $originalAcademicYear = ($originalStageMonth >= 9) ? $originalStageYear + 1 : $originalStageYear;
+
+    //     if ($originalAcademicYear == $currentAcademicYear) {
+    //         $uniqueCin = $this->generateUniqueCin();
+    //     } else {
+    //         $uniqueCin = '0000';
+    //     }
+    //     $duplicateStagiaire = $originalStagiaire->replicate();
+    //     $duplicateStagiaire->cin = $uniqueCin;
+    //     $duplicateStagiaire->save();
+    //     return redirect()->route('stagiaires.show', $duplicateStagiaire->id)
+    //              ->with('success', 'Enregistrement dupliqué avec succès. vous pouvez le modifier maintenant.');
+    // }
+    // private function generateUniqueCin() {
+    //     $randomCin = mt_rand(1000, 9999);
+    //     $existingStagiaire = Stagiaire::where('cin', $randomCin)->exists();
+    //     if ($existingStagiaire) {
+    //         return $this->generateUniqueCin();
+    //     }
+    //     return $randomCin;
+    // }
+
+    public function duplicate($id)
+{
+    $originalStagiaire = Stagiaire::findOrFail($id);
+    $currentAcademicYear = date('Y');
+    $originalStageStartDate = strtotime($originalStagiaire->date_debut);
+    $originalStageYear = date('Y', $originalStageStartDate);
+    $originalStageMonth = date('n', $originalStageStartDate);
+    $originalAcademicYear = ($originalStageMonth >= 9) ? $originalStageYear + 1 : $originalStageYear;
+    $latestStagiaireCode = Stagiaire::orderBy('code', 'desc')->value('code');
+    $newStagiaireCode = $latestStagiaireCode + 1;
+
+    // Check if the original academic year is the same as the current academic year
+    if ($originalAcademicYear == $currentAcademicYear) {
+        $uniqueCin = $this->generateUniqueCin();
+        $duplicateStagiaire = $originalStagiaire->replicate();
+        $duplicateStagiaire->code = $newStagiaireCode;
+        $duplicateStagiaire->cin = $uniqueCin;
+    }
+    if ($originalAcademicYear != $currentAcademicYear) {
+        $duplicateStagiaire = $originalStagiaire->replicate();
+        $duplicateStagiaire->code = $newStagiaireCode;
+        $duplicateStagiaire->date_debut = date('Y-m-d');
+    }
+
+    $duplicateStagiaire->save();
+
+    return redirect()->route('stagiaires.show', $duplicateStagiaire->id)
+                     ->with('success', 'Enregistrement dupliqué avec succès. Vous pouvez le modifier maintenant.');
+}
+
+private function generateUniqueCin()
+{
+    $randomCin = mt_rand(1000, 9999);
+    $existingStagiaire = Stagiaire::where('cin', $randomCin)->exists();
+
+    if ($existingStagiaire) {
+        return $this->generateUniqueCin();
+    }
+
+    return $randomCin;
+}
+
+
+
+
 
 
 

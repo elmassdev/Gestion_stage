@@ -408,99 +408,77 @@
         <div class="row">
             <h1 class="dep"> Département Développement RH  </h1>
         </div>
-        <div class="wrapper">
-            <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
-            <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
-            <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/indicators/index"> Indicateurs</a>
-            <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/stagiaires"> Liste des stagiaires</a>
-            <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/export"> Sauvegarder tables</a>
-            <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
-            <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/user/assign-roles"> Menu admin</a>
-            <?php endif; ?>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_surete_page')): ?>
-            <a class="btn btn-outline-warning panel col-md-12   mx-auto border border-warning rounded fs-5 my-2 mx-2" href="/surete"> Canevas stagiaires</a>
-            <?php endif; ?>
-            <?php endif; ?>
-          </div>
 
 
 
+  <style>
+    .menu{
+        margin-right: 25%;
+        margin-top: 10%;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 60%; /* Adjust as needed */
+      margin: 0 auto;
+    }
 
-         <style>
-            *,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
+    .square {
+      width: calc(33.33% - 2px); /* Adjust for border width */
+      height: 200px; /* Adjust as needed */
+      box-sizing: border-box;
+      transition: background-color 0.3s;
+      transition: font-size 2s ease;
+      justify-content: center;
+    }
+    .btn{
+        font-size: 3rem;
+        transition: font-size 2s ease;
+
+    }
+
+    .square:hover {
+      background-color: #FFCC00;
+    }
+
+    @media (max-width: 600px) {
+      .square {
+        width: calc(50% - 2px); /* Adjust for border width */
+        height: 150px; /* Adjust as needed */
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .square {
+        width: calc(100% - 2px); /* Adjust for border width */
+        height: 100px; /* Adjust as needed */
+      }
+    }
+  </style>
+
+  <div class="menu">
+    <div class="container">
+        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
+        <a class="btn square col-md-12 fs-3  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
+        <a class="btn square col-md-12 fs-3" href="/indicators/index"> Indicateurs</a>
+        <a class="btn square col-md-12 fs-3" href="/stagiaires"> Liste des stagiaires</a>
+        <a class="btn square col-md-12 fs-3" href="/export"> Sauvegarder tables</a>
+        <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
+        <a class="btn square col-md-12 fs-3" href="/user/assign-roles"> Menu admin</a>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_surete_page')): ?>
+        <a class="btn square col-md-12 fs-3" href="/surete"> Canevas stagiaires</a>
+        <?php endif; ?>
+        <?php endif; ?>
+        <div class="btn square col-md-12 fs-3"></div>
+        <div class="btn square col-md-12 fs-3"></div>
+        <div class="btn square col-md-12 fs-3"></div>
+      </div>
+  </div>
 
 
-
-h1,
-p {
-  margin: 0 0 1em 0;
-}
-
-.wrapper {
-    font-size: 32px;
-    font-weight: bolder;
-    padding: 1%;
-    padding-top: 10%;
-    padding-right: 35%;
-    padding-left: 10%;
-    display: grid;
-    grid-gap: 1%;
-}
-
-
-/* no grid support? */
-
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.wrapper {
-  display: grid;
-  margin: 0 auto;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-  grid-auto-rows: minmax(45%, 1fr);
-}
-.wrapper a{
-    font-size:2rem;
-}
-
-.panel {
-  /* needed for the flex layout*/
-  margin-left: 5px;
-  margin-right: 5px;
-  flex: 1 1 100px;
-  margin-bottom: 1%;
-}
-
-.header,
-.footer {
-  margin-left: 5px;
-  margin-right: 5px;
-  flex: 0 1 100%;
-  grid-column: 1 / -1;
-}
-
-.wrapper > * {
-  border-radius: 5px;
-  padding: 40px;
-  font-size: 200%;
-  margin-bottom: 2%;
-}
-
-
-/* We need to set the margin used on flex items to 0 as we have gaps in grid.  */
-
-@supports (display: grid) {
-  .wrapper > * {
-    margin: 0;
-  }
-}
-         </style>
 
 
 

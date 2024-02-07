@@ -99,12 +99,12 @@
                                 <td><a href="{{ URL::to( 'stagiaires/' . $next ) }}" class="btn btn-success text-light"> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
                                 <td><a href="/stagiaires/" class="btn btn-success text-light"> <i class="fa fa-list" aria-hidden="true"></i></a></td>
                                 <td><a href="/stagiaires/{{$stagiaire->id}}/modification"  class="btn btn-warning text-light"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-                                {{-- <td>
+                                <td>
                                     <form action="{{ route('stagiaires.duplicate', ['id' => $stagiaire->id]) }}" method="GET">
                                         @csrf
                                         <button type="submit" class="btn btn-warning text-primary"><i class="fa-regular fa-copy"></i></button>
                                     </form>
-                                </td> --}}
+                                </td>
                                 @if(auth()->check() && auth()->user()->hasRole('superadmin'))
                                 <td><form action="/stagiaires/{{$stagiaire->id}}" method="POST">
                                     @csrf
