@@ -412,7 +412,7 @@
   <style>
     .menu{
         margin-right: 25%;
-        margin-top: 10%;
+        margin-top: 5%;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
     .container {
@@ -429,13 +429,11 @@
       transition: background-color 0.3s;
       transition: font-size 2s ease;
       justify-content: center;
+      font-size: 2rem;
+      font-weight: 600;
+      transition: font-size 2s ease;
+      color: rgb(157, 157, 157);
     }
-    .btn{
-        font-size: 3rem;
-        transition: font-size 2s ease;
-
-    }
-
     .square:hover {
       background-color: #FFCC00;
     }
@@ -459,20 +457,20 @@
   <div class="menu">
     <div class="container">
         @if(auth()->check() && auth()->user()->hasRole('admin'))
-        <a class="btn square col-md-12 fs-3  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
-        <a class="btn square col-md-12 fs-3" href="/indicators/index"> Indicateurs</a>
-        <a class="btn square col-md-12 fs-3" href="/stagiaires"> Liste des stagiaires</a>
-        <a class="btn square col-md-12 fs-3" href="/export"> Sauvegarder tables</a>
+        <a class="btn square col-md-12  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
+        <a class="btn square col-md-12" href="/indicators/index"> Indicateurs</a>
+        <a class="btn square col-md-12" href="/stagiaires"> Liste des stagiaires</a>
+        <a class="btn square col-md-12" href="/export"> Sauvegarder tables</a>
         @if(auth()->check() && auth()->user()->hasRole('superadmin'))
-        <a class="btn square col-md-12 fs-3" href="/user/assign-roles"> Menu admin</a>
+        <a class="btn square col-md-12" href="/user/assign-roles"> Menu admin</a>
         @endif
         @can('view_surete_page')
-        <a class="btn square col-md-12 fs-3" href="/surete"> Canevas stagiaires</a>
+        <a class="btn square col-md-12" href="/surete"> Canevas stagiaires</a>
         @endcan
         @endif
-        <div class="btn square col-md-12 fs-3"></div>
-        <div class="btn square col-md-12 fs-3"></div>
-        <div class="btn square col-md-12 fs-3"></div>
+        <div class="btn square col-md-12"></div>
+        <div class="btn square col-md-12"></div>
+        <div class="btn square col-md-12"></div>
       </div>
   </div>
 
