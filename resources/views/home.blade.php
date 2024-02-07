@@ -408,35 +408,189 @@
         </div>
 
 
-
-  <style>
+   <style>
     .menu{
-        margin-right: 25%;
+        margin-right: 35%;
         margin-top: 5%;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
     .container {
       display: flex;
       flex-wrap: wrap;
-      max-width: 60%; /* Adjust as needed */
+      max-width: 80%; /* Adjust as needed */
       margin: 0 auto;
     }
 
     .square {
-      width: calc(33.33% - 2px); /* Adjust for border width */
-      height: 200px; /* Adjust as needed */
+      width: calc(31% - 2px);
+      height: 150px;
       box-sizing: border-box;
       transition: background-color 0.3s;
       transition: font-size 2s ease;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 600;
       transition: font-size 2s ease;
-      color: rgb(157, 157, 157);
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      border-radius: 5%;
+      position: relative;
+      z-index: 1;
+      box-shadow: 6px 28px 46px -6px #bebbbb;
+       margin:1%;
     }
-    .square:hover {
-      background-color: #FFCC00;
+    .square:hover{
+        transform: scale(1.1);
+        background-color: rgb(221, 164, 49);
     }
+    .square::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #f27121, #000000 40%);
+    z-index: -2;
+  }
+  .square::after {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #171721, #060609);
+    transition: box-shadow 0.3s ease;
+    z-index: -1;
+  }
+
+  .square .info {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .square .info .sub {
+    color: #ff7a00;
+    line-height: 28px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .square .info .title {
+    max-width: 260px;
+    line-height: 28px;
+    font-size: 17px;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .square .info .btn {
+    margin-top: 28px;
+    color: #fff;
+    background: transparent;
+    border: unset;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    transition: background 0.3s ease;
+  }
+
+  .square .info .btn::before,
+  .square .info .btn::after {
+    content: '';
+    position: absolute;
+  }
+
+  .square .info .btn::before {
+    left: 50%;
+    top: 50%;
+    background: linear-gradient(90deg, #ff7a00 0%, transparent 45%, transparent 55%, #ff7a00 100%);
+    transform: translate(-50%, -50%) rotate(55deg);
+    width: 100%;
+    height: 240%;
+    border-radius: 16px;
+    z-index: -2;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    animation: 5s move infinite linear paused;
+  }
+
+  .square .info .btn::after {
+    left: 2px;
+    top: 2px;
+    background: #171721;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 16px;
+    z-index: -1;
+  }
+
+  .square .info .btn:hover::before {
+    animation-play-state: running;
+    opacity: 1;
+  }
+
+  .square .image {
+    min-width: 86px;
+    min-height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 8px 12px 16px #000;
+    position: relative;
+    z-index: 0;
+  }
+
+  .square .image::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(110deg, #ff7a00 10%, #000000);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: -2;
+  }
+
+  .square .image::after {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    border-radius: 50%;
+    background: linear-gradient(90deg, #12121a, #030303);
+    box-shadow: 6px 6px 14px -6px #f2712150 inset;
+    z-index: -1;
+  }
+
+  .square .image > i {
+    font-size: 30px;
+    color: #ff7a00;
+  }
+
+  @keyframes move {
+    0% {transform: translate(-50%, -50%)  rotate(55deg);}
+    100% {transform: translate(-50%, -50%)  rotate(415deg);}
+  }
+
+
+
+
+
 
     @media (max-width: 600px) {
       .square {
@@ -457,37 +611,86 @@
   <div class="menu">
     <div class="container">
         @if(auth()->check() && auth()->user()->hasRole('admin'))
-        <a class="btn square col-md-12  " href="/stagiaires/create"> Ajouter un nouveau stagiaire</a>
-        <a class="btn square col-md-12" href="/indicators/index"> Indicateurs</a>
-        <a class="btn square col-md-12" href="/stagiaires"> Liste des stagiaires</a>
-        <a class="btn square col-md-12" href="/export"> Sauvegarder tables</a>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/stagiaires/create"> Nouveau</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+        </div>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/indicators/index"> Indicateurs</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+        </div>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/stagiaires"> Stagiaires</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-list"></i>
+              </div>
+        </div>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/export"> Sauvegarde</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-database"></i>
+              </div>
+        </div>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12  " href="/stagiaires/1"> Rechercher</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+         </div><div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/encadrants/1"> Encadrants</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-sitemap"></i>
+              </div>
+        </div>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/indicators/graph"> Diagrammes</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+        </div>
+        @endif
+
         @if(auth()->check() && auth()->user()->hasRole('superadmin'))
-        <a class="btn square col-md-12" href="/user/assign-roles"> Menu admin</a>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/user/assign-roles"> Menu Admin</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-pen-nib"></i>
+              </div>
+        </div>
         @endif
+
         @can('view_surete_page')
-        <a class="btn square col-md-12" href="/surete"> Canevas stagiaires</a>
+        <div class="square">
+            <div class="info">
+                <a class="btn col-md-12" href="/surete"> Canevas</a>
+              </div>
+              <div class="image">
+                <i class="fa-solid fa-pen-nib"></i>
+              </div>
+        </div>
         @endcan
-        @endif
-        <div class="btn square col-md-12"></div>
-        <div class="btn square col-md-12"></div>
-        <div class="btn square col-md-12"></div>
       </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
