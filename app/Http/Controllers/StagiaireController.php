@@ -309,44 +309,6 @@ class StagiaireController extends Controller
         return redirect('/stagiaires/'.$id)->with('msg','Enregistrement modifié avec succès');
     }
 
-
-    // public function duplicate($id){
-    //     $stagiaire = Stagiaire::findOrFail($id);
-    //     $duplicateStagiaire = $stagiaire->replicate();
-    //     $duplicateStagiaire->cin = '0000';
-    //     // Save the duplicated stagiaire
-    //     $duplicateStagiaire->save();
-    //     return redirect()->route('stagiaires.show', $duplicateStagiaire->id)->with('success', 'Stagiaire dupliqué avec succès.');
-    // }
-
-    // public function duplicate($id){
-    //     $originalStagiaire = Stagiaire::findOrFail($id);
-    //     $currentAcademicYear = date('Y');
-    //     $originalStageStartDate = strtotime($originalStagiaire->date_debut);
-    //     $originalStageYear = date('Y', $originalStageStartDate);
-    //     $originalStageMonth = date('n', $originalStageStartDate);
-    //     $originalAcademicYear = ($originalStageMonth >= 9) ? $originalStageYear + 1 : $originalStageYear;
-
-    //     if ($originalAcademicYear == $currentAcademicYear) {
-    //         $uniqueCin = $this->generateUniqueCin();
-    //     } else {
-    //         $uniqueCin = '0000';
-    //     }
-    //     $duplicateStagiaire = $originalStagiaire->replicate();
-    //     $duplicateStagiaire->cin = $uniqueCin;
-    //     $duplicateStagiaire->save();
-    //     return redirect()->route('stagiaires.show', $duplicateStagiaire->id)
-    //              ->with('success', 'Enregistrement dupliqué avec succès. vous pouvez le modifier maintenant.');
-    // }
-    // private function generateUniqueCin() {
-    //     $randomCin = mt_rand(1000, 9999);
-    //     $existingStagiaire = Stagiaire::where('cin', $randomCin)->exists();
-    //     if ($existingStagiaire) {
-    //         return $this->generateUniqueCin();
-    //     }
-    //     return $randomCin;
-    // }
-
     public function duplicate($id){
         $originalStagiaire = Stagiaire::findOrFail($id);
         $currentAcademicYear = date('Y');
@@ -388,12 +350,6 @@ class StagiaireController extends Controller
     }
 
 
-
-
-
-
-
-
     public function updater(Request $request, $id)
     {
         $stagiaire = Stagiaire::findOrFail($id);
@@ -411,6 +367,10 @@ class StagiaireController extends Controller
         $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
             return $originalAttributes[$key] != $value;
         }, ARRAY_FILTER_USE_BOTH);
+        //Pour modifier OP_etabli
+        if (isset($modifiedAttributes['OP_etabli_le']) && $modifiedAttributes['OP_etabli_le'] !== null) {
+            $modifiedAttributes['OP_etabli'] = true;
+        }
 
         $stagiaire->update($modifiedAttributes);
         return redirect()->back()->with('success', 'Information modifiée avec succès');
