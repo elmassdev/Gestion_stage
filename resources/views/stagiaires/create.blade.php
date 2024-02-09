@@ -29,6 +29,9 @@
             @csrf
             {{-- Verification date debut date fin  --}}
             <script>
+                  $(document).ready(function() {
+                    $('#filiere').select2();
+                });
                 function validateDates() {
                     // Get the input elements
                     let today = new Date();
@@ -155,12 +158,8 @@
                     }
                 });
             </script>
-
-
-
             <div class="row mb-3">
                 <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-
                 <div class="col-md-8">
                     <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  @error('date_demande') is-invalid @enderror"   name="date_demande" value="{{ old('date_demande') }}" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
                     @error('date_demande')
@@ -169,7 +168,6 @@
                         </span>
                     @enderror
                 </div>
-
             </div>
 
             <div class="row mb-3">
@@ -351,7 +349,7 @@
                 <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
                 <div class="col-md-8">
                     <select id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
-                    <option selected disabled>--Etablissement--</option>
+                    <option selected disabled>----------</option>
                     @foreach($etablissements as $etab)
                     <option value="{{ $etab->sigle_etab}}">{{$etab->sigle_etab}} - {{ $etab->Etab}}</option>
                     @endforeach
@@ -371,7 +369,7 @@
             <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
             <div class="col-md-8">
                 <select id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville"  autocomplete="ville">
-                    <option selected disabled> -- Ville -- </option>
+                    <option selected disabled> -- ----- -- </option>
                        @foreach($villes as $ville)
                 <option value="{{ $ville->ville }}">{{$ville->ville}}</option>
                 @endforeach
@@ -389,7 +387,8 @@
             <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type Stage</label>
             <div class="col-md-8">
                 <select id="type_stage" type="text" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage"  autocomplete="type_stage">
-                    <option value="stage ouvrier" selected>stage ouvrier</option>
+                    <option value="" selected disabled>------------</option>
+                    <option value="stage ouvrier">stage ouvrier</option>
                     <option value="stage d'application">stage d'application</option>
                     <option value="stage d'observation">stage d'observation</option>
                     <option value="stage PFE">Stage PFE</option>
@@ -407,9 +406,10 @@
 
             <div class="col-md-8">
                 <select id="type_formation" type="text" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation"  autocomplete="type_formation">
-                    <option value="EI" selected>EI</option>
+                    <option value="" disabled> ---- </option>
+                    <option value="EI">EI</option>
                     <option value="OFPPT">OFPPT</option>
-                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                    <option value="EST+FAC+BTS">EST+FAC+BTS</option>
                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                     <option value="IMM+IMT">IMM+IMT</option>
                     <option value="Autres">Autres</option>
@@ -601,7 +601,7 @@
     document.getElementById('diplome').addEventListener('change', function(){
         var diplome = this.value;
         var etab = document.getElementById('etablissement').value;
-        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENSET','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
         var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMasterOrCycle;
         var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
@@ -618,9 +618,63 @@
         document.getElementById('remunere').checked =isRem;
     });
 
+    function updateTypeStage() {
+       var diplomeInput = document.getElementById('diplome').value;
+       var niveauInput = document.getElementById('niveau').value;
+       var typeF = document.getElementById('type_formation');
+       var typeStageSelect = document.getElementById('type_stage');
+       var Etab = document.getElementById('etablissement');
+
+       if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'ingénieur' &&  niveauInput === '3ème année')) {
+           typeStageSelect.value = 'stage PFE';
+           typeF.value="EI";
+       } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '2ème année')) {
+           typeStageSelect.value = 'stage d\'application';
+           typeF.value="EI";
+       } else {
+           typeStageSelect.value = 'stage d\'observation';
+       }
+       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'ingénieur' || diplomeInput==='Master spécialisé' || diplomeInput==='Doctorat' ){
+        typeF.value="EI";
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
+        typeF.value="EST+FAC+BTS";
+       }
+       if(Etab.value === 'IMM' || Etab.value === 'IMT'){
+        typeF.value="IMM+IMT";
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+        typeF.value="OFPPT";
+       }
+   }
+
+   document.getElementById('diplome').addEventListener('change', updateTypeStage);
+   document.getElementById('niveau').addEventListener('change', updateTypeStage);
+   updateTypeStage(); // Call the function on page load
 </script>
 
+<script>
+    function updateTypeF() {
+       var diplomeInput = document.getElementById('diplome').value;
+       var typeF = document.getElementById('type_formation');
+       var Etab = document.getElementById('etablissement');
 
+       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'ingénieur' || diplomeInput==='Master spécialisé' || diplomeInput==='Doctorat' ){
+        typeF.value="EI";
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
+        typeF.value="EST+FAC+BTS";
+       }
+       if(Etab.value === 'IMM' || Etab.value === 'IMT'){
+        typeF.value="IMM+IMT";
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'ISTA IE' || Etab.value === 'ISTA GM' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+        typeF.value="OFPPT";
+       }
+   }
+
+   document.getElementById('diplome').addEventListener('change', updateTypeF);
+   document.getElementById('etablissement').addEventListener('change', updateTypeF);
+   updateTypeF();
+</script>
+
+</script>
 
 
 

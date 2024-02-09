@@ -30,6 +30,9 @@
             <?php echo csrf_field(); ?>
             
             <script>
+                  $(document).ready(function() {
+                    $('#filiere').select2();
+                });
                 function validateDates() {
                     // Get the input elements
                     let today = new Date();
@@ -156,12 +159,8 @@
                     }
                 });
             </script>
-
-
-
             <div class="row mb-3">
                 <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-
                 <div class="col-md-8">
                     <input id="date_demande" type="date" value="<?php echo date('Y-m-d');?>"  class="form-control datepicker  <?php $__errorArgs = ['date_demande'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -184,7 +183,6 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
-
             </div>
 
             <div class="row mb-3">
@@ -513,7 +511,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement">
-                    <option selected disabled>--Etablissement--</option>
+                    <option selected disabled>----------</option>
                     <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -547,7 +545,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="ville"  autocomplete="ville">
-                    <option selected disabled> -- Ville -- </option>
+                    <option selected disabled> -- ----- -- </option>
                        <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($ville->ville); ?>"><?php echo e($ville->ville); ?></option>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -579,7 +577,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
-                    <option value="stage ouvrier" selected>stage ouvrier</option>
+                    <option value="" selected disabled>------------</option>
+                    <option value="stage ouvrier">stage ouvrier</option>
                     <option value="stage d'application">stage d'application</option>
                     <option value="stage d'observation">stage d'observation</option>
                     <option value="stage PFE">Stage PFE</option>
@@ -611,9 +610,10 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_formation">
-                    <option value="EI" selected>EI</option>
+                    <option value="" disabled> ---- </option>
+                    <option value="EI">EI</option>
                     <option value="OFPPT">OFPPT</option>
-                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                    <option value="EST+FAC+BTS">EST+FAC+BTS</option>
                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                     <option value="IMM+IMT">IMM+IMT</option>
                     <option value="Autres">Autres</option>
@@ -895,7 +895,7 @@ unset($__errorArgs, $__bag); ?>
     document.getElementById('diplome').addEventListener('change', function(){
         var diplome = this.value;
         var etab = document.getElementById('etablissement').value;
-        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENSET','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
         var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMasterOrCycle;
         var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
@@ -912,9 +912,63 @@ unset($__errorArgs, $__bag); ?>
         document.getElementById('remunere').checked =isRem;
     });
 
+    function updateTypeStage() {
+       var diplomeInput = document.getElementById('diplome').value;
+       var niveauInput = document.getElementById('niveau').value;
+       var typeF = document.getElementById('type_formation');
+       var typeStageSelect = document.getElementById('type_stage');
+       var Etab = document.getElementById('etablissement');
+
+       if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'ingénieur' &&  niveauInput === '3ème année')) {
+           typeStageSelect.value = 'stage PFE';
+           typeF.value="EI";
+       } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '2ème année')) {
+           typeStageSelect.value = 'stage d\'application';
+           typeF.value="EI";
+       } else {
+           typeStageSelect.value = 'stage d\'observation';
+       }
+       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'ingénieur' || diplomeInput==='Master spécialisé' || diplomeInput==='Doctorat' ){
+        typeF.value="EI";
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
+        typeF.value="EST+FAC+BTS";
+       }
+       if(Etab.value === 'IMM' || Etab.value === 'IMT'){
+        typeF.value="IMM+IMT";
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+        typeF.value="OFPPT";
+       }
+   }
+
+   document.getElementById('diplome').addEventListener('change', updateTypeStage);
+   document.getElementById('niveau').addEventListener('change', updateTypeStage);
+   updateTypeStage(); // Call the function on page load
 </script>
 
+<script>
+    function updateTypeF() {
+       var diplomeInput = document.getElementById('diplome').value;
+       var typeF = document.getElementById('type_formation');
+       var Etab = document.getElementById('etablissement');
 
+       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'ingénieur' || diplomeInput==='Master spécialisé' || diplomeInput==='Doctorat' ){
+        typeF.value="EI";
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
+        typeF.value="EST+FAC+BTS";
+       }
+       if(Etab.value === 'IMM' || Etab.value === 'IMT'){
+        typeF.value="IMM+IMT";
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'ISTA IE' || Etab.value === 'ISTA GM' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+        typeF.value="OFPPT";
+       }
+   }
+
+   document.getElementById('diplome').addEventListener('change', updateTypeF);
+   document.getElementById('etablissement').addEventListener('change', updateTypeF);
+   updateTypeF();
+</script>
+
+</script>
 
 
 
