@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Stagiaire;
+use App\Models\Holiday;
 use App\Models\Ville;
 use App\Models\Etablissement;
 use App\Models\Encadrant;
@@ -385,11 +386,13 @@ class IndicatorsController extends Controller
         $writer->save('php://output');
     }
 
-    public function exportStagiaireTypeFormation()
+    public function exportStagiaireTypeFormation(Request $request)
     {
+        $year = $request->input('year'); // Default to current year if not provided
         $today = Carbon::today()->format('d-m-Y');
-        return Excel::download(new StagiaireTypeFormationExport, 'stagiaire_type_formation_'.$today.'.xlsx');
+        return Excel::download(new StagiaireTypeFormationExport($year), 'stagiaire_type_formation_année_' . $year . '_Extrait_le_' . $today . '.xlsx');
     }
+
 
 
 
@@ -400,6 +403,7 @@ class IndicatorsController extends Controller
         $sta_type_f = Stagiaire::select('type_formation', DB::raw('COUNT(*) as count'))
         ->whereYear('date_debut', $year)
         ->groupBy('type_formation')->get();
+
 
         $sta_ser = Stagiaire::select('services.sigle_service', DB::raw('COUNT(*) as count'))
         ->join('services', 'stagiaires.service', '=', 'services.id')
@@ -427,5 +431,7 @@ class IndicatorsController extends Controller
             ->count();
         return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount'));
     }
+
+
 
 }

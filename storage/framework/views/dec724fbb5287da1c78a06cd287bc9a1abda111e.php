@@ -20,7 +20,11 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </div>
+            <input type="hidden" name="selectedYear" value="<?php echo e($selectedYear); ?>">
         </form>
+
+        
+
     </div>
 
 
@@ -28,7 +32,10 @@
 
     <div class="container">
         <!-- Chart for Stagiaire Type Formation -->
-        <a href="/export/stagiaire-type-formation" class="btn text-success  rounded-pill"><i class="fa-solid fa-file-export" ></i></a>
+        <a href="<?php echo e(route('export', request()->all())); ?>" class="btn text-success rounded-pill"><i class="fa-solid fa-file-export"></i></a>
+
+
+        
         <canvas id="typeFormationChart" width="400" height="200"></canvas>
 
         <!-- Chart for Stagiaire Services -->

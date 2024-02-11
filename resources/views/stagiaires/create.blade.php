@@ -666,6 +666,8 @@
         typeF.value="IMM+IMT";
        }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'ISTA IE' || Etab.value === 'ISTA GM' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
         typeF.value="OFPPT";
+       }else if(Etab.value === 'IIPM' || Etab.value === 'SAGI'){
+        typeF.value="Autres";
        }
    }
 

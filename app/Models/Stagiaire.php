@@ -36,13 +36,17 @@ class Stagiaire extends Model
                 $existYear = date('Y', strtotime($existDateDebut));
                 $existMonth = date('n', strtotime($existDateDebut));
                 $existAcademicYear = ($existMonth >= 9) ? $existYear + 1 : $existYear;
-
                 if ($existAcademicYear == $currentAcademicYear) {
                     throw new \Exception('Le stagiaire a droit à un seul stage pendant une année académique!');
                 }
             }
         });
     }
+
+    public function holidays(){
+        return $this->hasMany('App\Holiday', 'dayH', 'date_debut');
+    }
+
 
     use HasFactory;
     protected $table = 'stagiaires';

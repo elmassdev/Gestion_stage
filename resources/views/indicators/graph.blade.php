@@ -22,7 +22,29 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </div>
+            <input type="hidden" name="selectedYear" value="{{ $selectedYear }}">
         </form>
+
+        {{-- <form action="{{ route('graph') }}" method="get" class="mb-4 mt-2">
+            <div class="form-group row align-items-center">
+                <label for="year" class="col-md-2 col-form-label text-md-right">Choisir année:</label>
+                <div class="col-md-3">
+                    <select id="year" name="year" class="form-control">
+                        @php
+                        $currentYear = date('Y');
+                        $selectedYear = request()->input('year', $currentYear);
+                        @endphp
+                        @for ($y = $currentYear; $y >= $currentYear - 10; $y--)
+                        <option value="{{ $y }}" {{ $selectedYear == $y ? 'selected' : '' }}>{{ $y }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </div>
+        </form> --}}
+
     </div>
 
 
@@ -30,7 +52,10 @@
 
     <div class="container">
         <!-- Chart for Stagiaire Type Formation -->
-        <a href="/export/stagiaire-type-formation" class="btn text-success  rounded-pill"><i class="fa-solid fa-file-export" ></i></a>
+        <a href="{{ route('export', request()->all()) }}" class="btn text-success rounded-pill"><i class="fa-solid fa-file-export"></i></a>
+
+
+        {{-- <a href="/export/stagiaire-type-formation" class="btn text-success  rounded-pill"><i class="fa-solid fa-file-export" ></i></a> --}}
         <canvas id="typeFormationChart" width="400" height="200"></canvas>
 
         <!-- Chart for Stagiaire Services -->

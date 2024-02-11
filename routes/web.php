@@ -55,6 +55,7 @@ Route::middleware(['auth', 'can:view_indicators'])->group(function (){
     Route::get('/indicators/ExportSta', [IndicatorsController::class, 'ExportSta']);
     Route::get('/export/queries', [IndicatorsController::class, 'exportqueries'])->name('export.excel');
     Route::get('/indicators/graph', [IndicatorsController::class, 'graph'])->name('graph');
+    Route::get('/indicators/export', [IndicatorsController::class, 'exportStagiaireTypeFormation'])->name('export');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function (){
@@ -115,8 +116,7 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         $today = date('d F Y');
         return Excel::download(new ServicesExport, 'services - '.$today.'.xlsx');
     });
-    Route::get('/export/stagiaire-type-formation', [IndicatorsController::class, 'exportStagiaireTypeFormation']);
-
+    
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
@@ -128,9 +128,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/user/assign-roles', [UserController::class, 'assignRoles'])->name('user.assignRoles');
     Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
-    Route::get('/export-users', function () {
-        return Excel::download(new UsersExport, 'users.xlsx');
-    });
+    Route::get('/export-users', function () { return Excel::download(new UsersExport, 'users.xlsx');});
 });
 
 Route::middleware(['auth', 'can:view_surete_page'])->group(function () {
