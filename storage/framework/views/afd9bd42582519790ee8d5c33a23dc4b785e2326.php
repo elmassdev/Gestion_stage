@@ -450,9 +450,9 @@ unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                         <option value="DUT">BTS</option>
                         <option value="Licence fondamentale">Licence fondamentale</option>
                         <option value="Licence professionnelle">Licence professionnelle</option>
-                        <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>
+                        <option value="Cycle d'Ingénieur">Cycle d'Ingénieur</option>
                         <option value="Master">Master</option>
-                        <option value="Master spécialisé">Master spécialisé</option>
+                        <option value="Mastère spécialisé">Mastère spécialisé</option>
                         <option value="Doctorat">Doctorat</option>
                 </select>
                     <?php $__errorArgs = ['diplome'];
@@ -896,7 +896,7 @@ unset($__errorArgs, $__bag); ?>
         var diplome = this.value;
         var etab = document.getElementById('etablissement').value;
         var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENSET','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
-        var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        var isMasterOrCycle = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMasterOrCycle;
         var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
         document.getElementById('remunere').checked =isRemunere;
@@ -906,7 +906,7 @@ unset($__errorArgs, $__bag); ?>
         var etab = this.value;
         var diplome = document.getElementById('diplome').value;
         var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
-        var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        var isMoCI = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMoCI;
         var isRem = ((isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
         document.getElementById('remunere').checked =isRem;
@@ -919,16 +919,16 @@ unset($__errorArgs, $__bag); ?>
        var typeStageSelect = document.getElementById('type_stage');
        var Etab = document.getElementById('etablissement');
 
-       if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'ingénieur' &&  niveauInput === '3ème année')) {
+       if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Mastère spécialisé' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'Ingénieur' &&  niveauInput === '3ème année')) {
            typeStageSelect.value = 'stage PFE';
            typeF.value="EI";
-       } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '2ème année')) {
+       } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'Ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'Ingénieur' && niveauInput === '2ème année') || (diplomeInput==='Mastère spécialisé' && niveauInput === '1ère année')) {
            typeStageSelect.value = 'stage d\'application';
            typeF.value="EI";
        } else {
            typeStageSelect.value = 'stage d\'observation';
        }
-       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'ingénieur' || diplomeInput==='Master spécialisé' || diplomeInput==='Doctorat' ){
+       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";
        }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
         typeF.value="EST+FAC+BTS";
@@ -951,7 +951,7 @@ unset($__errorArgs, $__bag); ?>
        var typeF = document.getElementById('type_formation');
        var Etab = document.getElementById('etablissement');
 
-       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'ingénieur' || diplomeInput==='Master spécialisé' || diplomeInput==='Doctorat' ){
+       if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";
        }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
         typeF.value="EST+FAC+BTS";

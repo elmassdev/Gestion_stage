@@ -308,9 +308,9 @@
                                     <option value="DUT">BTS</option>
                                     <option value="Licence fondamentale">Licence fondamentale</option>
                                     <option value="Licence professionnelle">Licence professionnelle</option>
-                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>
+                                    <option value="Cycle d'Ingénieur">Cycle d'Ingénieur</option>
                                     <option value="Master">Master</option>
-                                    <option value="Master spécialisé">Master spécialisé</option>
+                                    <option value="Mastère spécialisé">Mastère spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
                                     <option value=" ">Master ENCG</option>
                             </select>
@@ -587,7 +587,7 @@
         var diplome = this.value;
         var etab = document.getElementById('etablissement').value;
         var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
-        var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        var isMasterOrCycle = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMasterOrCycle;
         var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
         document.getElementById('remunere').checked =isRemunere;
@@ -597,7 +597,7 @@
         var etab = this.value;
         var diplome = document.getElementById('diplome').value;
         var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
-        var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        var isMoCI = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMoCI;
         var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
         document.getElementById('remunere').checked =isRem;

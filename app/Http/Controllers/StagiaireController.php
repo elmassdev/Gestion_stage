@@ -558,15 +558,15 @@ class StagiaireController extends Controller
         $endDate = Carbon::parse($stagiaire->date_fin);
         $numberOfDays = ($startDate->diffInDays($endDate))+1;
 
-        if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
+        if ($niveau == '1ère année' && $diplome == 'Cycle d\'Ingénieur') {
             if($numberOfDays>30 ){
                 $numberOfDays=30;
             }
-        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
+        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'Ingénieur') {
             if($numberOfDays>60 ){
                 $numberOfDays=60;
             }
-        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
+        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'Ingénieur') {
             if($numberOfDays>120 ){
                 $numberOfDays=120;
             }
@@ -578,11 +578,11 @@ class StagiaireController extends Controller
             if($numberOfDays>120){
                 $numberOfDays=120;
             }
-        }elseif ($niveau == '1ère année' && $diplome == 'Master spécialisé') {
+        }elseif ($niveau == '1ère année' && $diplome == 'Mastère spécialisé') {
             if($numberOfDays>60){
                 $numberOfDays=60;
             }
-        } elseif ($niveau == '2ème année' && $diplome == 'Master spécialisé') {
+        } elseif ($niveau == '2ème année' && $diplome == 'Mastère spécialisé') {
             if($numberOfDays>120){
                 $numberOfDays=120;
             }
@@ -606,19 +606,19 @@ class StagiaireController extends Controller
 
         $dailyFee = 0;
 
-        if ($niveau == '1ère année' && $diplome == 'Cycle d\'ingénieur') {
+        if ($niveau == '1ère année' && $diplome == 'Cycle d\'Ingénieur') {
             $dailyFee = 50;
-        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'ingénieur') {
+        } elseif ($niveau == '2ème année' && $diplome == 'Cycle d\'Ingénieur') {
             $dailyFee = 60;
-        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'ingénieur') {
+        } elseif ($niveau == '3ème année' && $diplome == 'Cycle d\'Ingénieur') {
             $dailyFee = 100;
         } elseif ($niveau == '1ère année' && $diplome == 'Master') {
             $dailyFee = 60;
         } elseif ($niveau == '2ème année' && $diplome == 'Master') {
             $dailyFee = 100;
-        }elseif ($niveau == '1ère année' && $diplome == 'Master spécialisé') {
+        }elseif ($niveau == '1ère année' && $diplome == 'Mastère spécialisé') {
             $dailyFee = 60;
-        } elseif ($niveau == '2ème année' && $diplome == 'Master spécialisé') {
+        } elseif ($niveau == '2ème année' && $diplome == 'Mastère spécialisé') {
             $dailyFee = 100;
         }elseif ($niveau == '1ère année' && $diplome == 'Doctorat') {
             $dailyFee = 100;
