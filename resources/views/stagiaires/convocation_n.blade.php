@@ -19,16 +19,15 @@
         margin-top: 05px;
         margin-left: 350px;
         font-family: sans-serif;
-        font-size: 1rem;
     }
     .Att_title{
         text-align: center;
         padding-bottom: 70px;
-        margin-top: 80px;
+        margin-top: 75px;
     }
     span{
         padding-left: 60px;
-        padding-top: 100px;
+        padding-top: 40px;
     }
     p{
         margin-left: 30px;
@@ -36,22 +35,20 @@
         line-height: 15pt;
     }
     table{
-        margin-left: 30px;
+        margin-left: 20px;
     }
     .tdleft{
         font-style: bold;
     }
-    li{
-        margin-left: 35px;
-    }
+
 </style>
 
 <div class="top"> {{$stagiaire->site}}, le {{$today}}</div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 <div class="nomsta"> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </div>
-<p><b>Objet        :</b> {{$stagiaire->type_stage}}     </p>
-<p><b>Réf       :</b> Votre demande du {{$ddemande}}     </p>
+<div><b>Objet        :</b> {{$stagiaire->type_stage}}     </div>
+<div><b>Réf       :</b> Votre demande du {{$ddemande}}     </div>
 <p>{{$stagiaire->titre}}, <br>
 <p><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un {{$stagiaire->type_stage}} au sein du Groupe OCP.</p>
 <span>Nous vous donnons ci-après les indications relatives à l'organisation du stage :</span>
@@ -74,7 +71,7 @@
     </tr>
     <tr>
         <td class="tdleft">
-            Direction d' accueil
+            Direction d'accueil
         </td>
         <td class="tdright">
             : {{$stagiaire->direction}}
@@ -91,6 +88,18 @@
 </table>
 
 <p>Conditions générales        :  </p>
+{{-- <table>
+    <tr>
+        <td>Hébergement  </td>
+        <td> et restauration: à la charge des stagiaires</td>
+    </tr>
+    <tr>
+        <td>Assurance </td>
+        <td>: Les stagiaires doivent être assurés par leurs soins ou leur
+            école contre les risques encourus durant leur séjour au sein
+            du Groupe OCP (accident de travail, de trajet, maladie,...)</td>
+    </tr>
+</table> --}}
 <ul>
     <li>
         Hébergement et restauration : à la charge des stagiaires
@@ -112,7 +121,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
         <style>
             .sign{
                 text-align: left;
-                margin-top: 40px;
+                margin-top: 15;
                 margin-left: 320px;
                 line-height: 22pt;
             }

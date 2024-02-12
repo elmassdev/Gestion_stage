@@ -387,7 +387,7 @@
             <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type Stage</label>
             <div class="col-md-8">
                 <select id="type_stage" type="text" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage"  autocomplete="type_stage">
-                    <option value="" selected disabled>------------</option>
+                    <option  selected disabled></option>
                     <option value="stage ouvrier">stage ouvrier</option>
                     <option value="stage d'application">stage d'application</option>
                     <option value="stage d'observation">stage d'observation</option>
@@ -406,7 +406,7 @@
 
             <div class="col-md-8">
                 <select id="type_formation" type="text" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation"  autocomplete="type_formation">
-                    <option value="" disabled> ---- </option>
+                    <option  selected disabled>  </option>
                     <option value="EI">EI</option>
                     <option value="OFPPT">OFPPT</option>
                     <option value="EST+FAC+BTS">EST+FAC+BTS</option>
@@ -625,10 +625,10 @@
        var typeStageSelect = document.getElementById('type_stage');
        var Etab = document.getElementById('etablissement');
 
-       if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'ingénieur' &&  niveauInput === '3ème année')) {
+       if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Master spécialisé' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'ingénieur' &&  niveauInput === '3ème année')) {
            typeStageSelect.value = 'stage PFE';
            typeF.value="EI";
-       } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '2ème année')) {
+       } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'ingénieur' && niveauInput === '2ème année') || (diplomeInput==='Master spécialisé' && niveauInput === '1ère année')) {
            typeStageSelect.value = 'stage d\'application';
            typeF.value="EI";
        } else {

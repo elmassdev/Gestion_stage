@@ -40,7 +40,8 @@
             font-size: 22px;
             border: 1px solid black;
             width: 38%;
-            background-color: #8d8888;
+            font-weight: bold;
+            background-color: #8bb6e8;
         }
         table{
             width: 90%;

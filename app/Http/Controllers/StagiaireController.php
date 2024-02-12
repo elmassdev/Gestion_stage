@@ -578,6 +578,14 @@ class StagiaireController extends Controller
             if($numberOfDays>120){
                 $numberOfDays=120;
             }
+        }elseif ($niveau == '1ère année' && $diplome == 'Master spécialisé') {
+            if($numberOfDays>60){
+                $numberOfDays=60;
+            }
+        } elseif ($niveau == '2ème année' && $diplome == 'Master spécialisé') {
+            if($numberOfDays>120){
+                $numberOfDays=120;
+            }
         } elseif ($niveau == '4ème année' && $diplome == '') {
             if($numberOfDays>60){
                 $numberOfDays=60;
@@ -608,7 +616,15 @@ class StagiaireController extends Controller
             $dailyFee = 60;
         } elseif ($niveau == '2ème année' && $diplome == 'Master') {
             $dailyFee = 100;
-        } elseif ($niveau == '4ème année' && $diplome == '') {
+        }elseif ($niveau == '1ère année' && $diplome == 'Master spécialisé') {
+            $dailyFee = 60;
+        } elseif ($niveau == '2ème année' && $diplome == 'Master spécialisé') {
+            $dailyFee = 100;
+        }elseif ($niveau == '1ère année' && $diplome == 'Doctorat') {
+            $dailyFee = 100;
+        } elseif ($niveau == '2ème année' && $diplome == 'Doctorat') {
+            $dailyFee = 100;
+        }elseif ($niveau == '4ème année' && $diplome == '') {
             $dailyFee = 60;
         } elseif ($niveau == '5ème année' && $diplome == '') {
             $dailyFee = 100;

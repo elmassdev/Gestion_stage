@@ -577,7 +577,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
-                    <option value="" selected disabled>------------</option>
+                    <option  selected disabled></option>
                     <option value="stage ouvrier">stage ouvrier</option>
                     <option value="stage d'application">stage d'application</option>
                     <option value="stage d'observation">stage d'observation</option>
@@ -610,7 +610,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_formation">
-                    <option value="" disabled> ---- </option>
+                    <option  selected disabled>  </option>
                     <option value="EI">EI</option>
                     <option value="OFPPT">OFPPT</option>
                     <option value="EST+FAC+BTS">EST+FAC+BTS</option>
@@ -960,6 +960,8 @@ unset($__errorArgs, $__bag); ?>
         typeF.value="IMM+IMT";
        }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'ISTA IE' || Etab.value === 'ISTA GM' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
         typeF.value="OFPPT";
+       }else if(Etab.value === 'IIPM' || Etab.value === 'SAGI'){
+        typeF.value="Autres";
        }
    }
 

@@ -18,16 +18,15 @@
         margin-top: 05px;
         margin-left: 350px;
         font-family: sans-serif;
-        font-size: 1rem;
     }
     .Att_title{
         text-align: center;
         padding-bottom: 70px;
-        margin-top: 80px;
+        margin-top: 75px;
     }
     span{
         padding-left: 60px;
-        padding-top: 100px;
+        padding-top: 40px;
     }
     p{
         margin-left: 30px;
@@ -35,22 +34,20 @@
         line-height: 15pt;
     }
     table{
-        margin-left: 30px;
+        margin-left: 20px;
     }
     .tdleft{
         font-style: bold;
     }
-    li{
-        margin-left: 35px;
-    }
+
 </style>
 
 <div class="top"> <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?></div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 <div class="nomsta"> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> - </div>
-<p><b>Objet        :</b> <?php echo e($stagiaire->type_stage); ?>     </p>
-<p><b>Réf       :</b> Votre demande du <?php echo e($ddemande); ?>     </p>
+<div><b>Objet        :</b> <?php echo e($stagiaire->type_stage); ?>     </div>
+<div><b>Réf       :</b> Votre demande du <?php echo e($ddemande); ?>     </div>
 <p><?php echo e($stagiaire->titre); ?>, <br>
 <p><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un <?php echo e($stagiaire->type_stage); ?> au sein du Groupe OCP.</p>
 <span>Nous vous donnons ci-après les indications relatives à l'organisation du stage :</span>
@@ -75,7 +72,7 @@
     </tr>
     <tr>
         <td class="tdleft">
-            Direction d' accueil
+            Direction d'accueil
         </td>
         <td class="tdright">
             : <?php echo e($stagiaire->direction); ?>
@@ -93,6 +90,7 @@
 </table>
 
 <p>Conditions générales        :  </p>
+
 <ul>
     <li>
         Hébergement et restauration : à la charge des stagiaires
@@ -114,7 +112,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
         <style>
             .sign{
                 text-align: left;
-                margin-top: 40px;
+                margin-top: 15;
                 margin-left: 320px;
                 line-height: 22pt;
             }

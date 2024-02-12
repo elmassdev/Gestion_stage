@@ -37,7 +37,7 @@
                                 <?php if($stagiaire->annule): ?>
                                 <div class="col-md-3 text-center"> <p class="bg-warning text-danger rounded-pill" style="font-size: larger"> Stage annulé <b>X</b> </p> </div>
                                 <?php endif; ?>
-                                <?php if(($stagiaire->phone) &&($stagiaire->date_debut>now())): ?>
+                                <?php if(($stagiaire->phone) &&(!$stagiaire->annule)): ?>
                                 <div class="col-md-3 text-center"> <a href="https://wa.me/<?php echo e($stagiaire->phone); ?>?text=Bonjour,%20<?php echo e($stagiaire->civilite); ?>%20<?php echo e($stagiaire->prenom); ?>%20<?php echo e($stagiaire->nom); ?>: %0Avotre%20stage%20est%20approuvé,%20du%20<?php echo e(\Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y')); ?>%20au%20<?php echo e(\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')); ?> , <?php if($stagiaire->sujet): ?> %20et%20votre%20sujet%20est%20:%20<?php echo e($stagiaire->sujet); ?>, <?php endif; ?>  Merci de se présenter le premier jour de votre stage au CCI/UM6P : https://maps.app.goo.gl/J8ZP8REoFHxYqVUs9" target="_blank"> <p class=" btn text-warning btn-secondary"> <b>Notifier!</b>  </p> </a> </div>
 
                                 
@@ -101,7 +101,7 @@
                                 <td>
                                     <form action="<?php echo e(route('stagiaires.duplicate', ['id' => $stagiaire->id])); ?>" method="GET">
                                         <?php echo csrf_field(); ?>
-                                        <button type="submit" class="btn btn-warning text-primary"><i class="fa-regular fa-copy"></i></button>
+                                        <button type="submit" class="btn btn-warning text-primary"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="17.5" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#008efa" d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z"/></svg></button>
                                     </form>
                                 </td>
                                 <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
