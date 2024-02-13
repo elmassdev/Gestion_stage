@@ -416,17 +416,17 @@ class IndicatorsController extends Controller
         ->whereYear('stagiaires.date_debut', $year)
         ->groupBy('services.entite')
         ->get();
-        $remunereCount = Stagiaire::where('remunere', true)
+        $remunereCount = Stagiaire::where('remunere', true)->where('annule',false)
         ->whereYear('date_debut', $year)
         ->count();
-        $notRemunereCount = Stagiaire::where('remunere', false)
+        $notRemunereCount = Stagiaire::where('remunere', false)->where('annule',false)
             ->whereYear('date_debut', $year)
             ->count();
 
-        $opEtabliCount = Stagiaire::where('OP_etabli', true)
+        $opEtabliCount = Stagiaire::where('OP_etabli', true)->where('remunere',true)->where('annule',false)
         ->whereYear('date_debut', $year)
         ->count();
-        $notOpEtabliCount = Stagiaire::where('OP_etabli', false)
+        $notOpEtabliCount = Stagiaire::where('OP_etabli', false)->where('remunere',true)->where('annule',false)
             ->whereYear('date_debut', $year)
             ->count();
         return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount'));
