@@ -35,25 +35,42 @@ class IndicatorsController extends Controller
     public function index(Request $request)
     {
         $tday =Carbon::today();
-        $stagiaires = DB::table('stagiaires')
+        $paginatedstagiaires = DB::table('stagiaires')
             ->join('services', 'stagiaires.service', '=', 'services.id')
             ->where('stagiaires.site', '=', Auth::user()->site)
             ->select(DB::raw('count(*) as total, services.sigle_service'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->where('stagiaires.annule', '=', false)
             ->groupBy('services.sigle_service')
-            ->orderBy('total','desc')
-            ->get();
+            ->orderBy('total','desc')->paginate(5);
+            $stagiaires = DB::table('stagiaires')
+            ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->where('stagiaires.site', '=', Auth::user()->site)
+            ->select(DB::raw('count(*) as total, services.sigle_service'))
+            ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
+            ->where('stagiaires.annule', '=', false)
+            ->groupBy('services.sigle_service')
+            ->orderBy('total','desc')->get();
 
-        $stagenc = DB::table('stagiaires')
+
+        $paginatedstagenc = DB::table('stagiaires')
             ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
             ->where('stagiaires.site', '=', Auth::user()->site)
             ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
             ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
             ->where('stagiaires.annule', '=', false)
             ->groupBy('nomenc')
-            ->orderBy('total','desc')
-            ->get();
+            ->orderBy('total','desc')->paginate(6);
+            $stagenc = DB::table('stagiaires')
+            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+            ->where('stagiaires.site', '=', Auth::user()->site)
+            ->select(DB::raw('count(*) as total, encadrants.nom as nomenc'))
+            ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
+            ->where('stagiaires.annule', '=', false)
+            ->groupBy('nomenc')
+            ->orderBy('total','desc')->get();
+
+
         $query = $request->input('search');
         $results = DB::table('stagiaires')
             ->join('services', 'stagiaires.service', '=', 'services.id')
@@ -69,7 +86,7 @@ class IndicatorsController extends Controller
         ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
         ->where('stagiaires.site', '=', Auth::user()->site)
         ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
-        ->whereRaw('date_debut <= NOW() and date_fin >= NOW()')
+        ->whereRaw('date_debut >= NOW()')
         ->where('stagiaires.annule', '=', false)->paginate(4);
 
         $monthlysta = Stagiaire::select(DB::raw('COUNT(*) as total'), DB::raw('MONTH(date_debut) as mois'), DB::raw('YEAR(date_debut) as annee'))
@@ -80,11 +97,8 @@ class IndicatorsController extends Controller
             ->orderBy('mois', 'asc')
             ->get();
 
-        return view('indicators.index',compact('stagiaires','stagenc','statoday','results','monthlysta'));
+        return view('indicators.index',compact('stagiaires','stagenc','paginatedstagiaires','paginatedstagenc','statoday','results','monthlysta'));
     }
-
-
-
 
 
     public function ExcelStaSer()
