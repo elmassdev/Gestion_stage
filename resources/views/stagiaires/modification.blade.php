@@ -378,7 +378,7 @@
                             <div class="col-md-8">
                                 <select id="type_stage" type="text" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage"  autocomplete="type_stage">
                                     <option value="{{$stagiaire->type_stage}}" selected>{{$stagiaire->type_stage}}</option>
-                                    <option value="stage ouvrier" selected>stage ouvrier</option>
+                                    <option value="stage ouvrier">stage ouvrier</option>
                                     <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
                                     <option value="stage PFE">Stage PFE</option>
@@ -391,7 +391,8 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>                            <div class="col-md-8">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
+                            <div class="col-md-8">
                                 <select id="type_formation" type="text" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation"  autocomplete="type_formation">
                                     <option value="{{$stagiaire->type_formation}}">{{$stagiaire->type_formation}}</option>
                                     <option value="EI">EI</option>
@@ -400,7 +401,7 @@
                                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                                     <option value="IMM+IMT">IMM+IMT</option>
                                     <option value="Autres">Autres</option>
-                            </select>
+                                </select>
                                 @error('type_formation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

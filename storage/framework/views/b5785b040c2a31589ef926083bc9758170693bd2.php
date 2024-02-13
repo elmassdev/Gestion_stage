@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 
 
@@ -457,9 +456,9 @@ unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                                     <option value="DUT">BTS</option>
                                     <option value="Licence fondamentale">Licence fondamentale</option>
                                     <option value="Licence professionnelle">Licence professionnelle</option>
-                                    <option value="Cycle d'ingénieur">Cycle d'ingénieur</option>
+                                    <option value="Cycle d'Ingénieur">Cycle d'Ingénieur</option>
                                     <option value="Master">Master</option>
-                                    <option value="Master spécialisé">Master spécialisé</option>
+                                    <option value="Mastère spécialisé">Mastère spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
                                     <option value=" ">Master ENCG</option>
                             </select>
@@ -583,7 +582,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage">
                                     <option value="<?php echo e($stagiaire->type_stage); ?>" selected><?php echo e($stagiaire->type_stage); ?></option>
-                                    <option value="stage ouvrier" selected>stage ouvrier</option>
+                                    <option value="stage ouvrier">stage ouvrier</option>
                                     <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
                                     <option value="stage PFE">Stage PFE</option>
@@ -603,7 +602,8 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>                            <div class="col-md-8">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left"> Type Formation</label>
+                            <div class="col-md-8">
                                 <select id="type_formation" type="text" class="form-control <?php $__errorArgs = ['type_formation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -619,7 +619,7 @@ unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_forma
                                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                                     <option value="IMM+IMT">IMM+IMT</option>
                                     <option value="Autres">Autres</option>
-                            </select>
+                                </select>
                                 <?php $__errorArgs = ['type_formation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -912,7 +912,7 @@ unset($__errorArgs, $__bag); ?>
         var diplome = this.value;
         var etab = document.getElementById('etablissement').value;
         var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
-        var isMasterOrCycle = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        var isMasterOrCycle = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMasterOrCycle;
         var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
         document.getElementById('remunere').checked =isRemunere;
@@ -922,7 +922,7 @@ unset($__errorArgs, $__bag); ?>
         var etab = this.value;
         var diplome = document.getElementById('diplome').value;
         var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FSJES','AIAC']
-        var isMoCI = diplome === 'Cycle d\'ingénieur' || diplome === 'Master' || diplome === 'Master spécialisé' || diplome ==='Doctorat';
+        var isMoCI = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMoCI;
         var isRem = ( (isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
         document.getElementById('remunere').checked =isRem;
