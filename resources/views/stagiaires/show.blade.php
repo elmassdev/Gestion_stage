@@ -53,36 +53,36 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Niveau</span> <span class="text-left bottom">{{$stagiaire->niveau}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Niveau</b></span> <span class="text-left bottom">{{$stagiaire->niveau}}</span> </div>
                                             </td>
                                             <td class="col-md-3">
-                                                <div class="d-flex flex-column"> <span class="text-left head">Diplome</span> <span class="text-left bottom">{{$stagiaire->diplome}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Diplome</b> </span> <span class="text-left bottom">{{$stagiaire->diplome}}</span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Etablissement</span> <span class="text-left bottom">{{$stagiaire->etablissement}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Etablissement</b> </span> <span class="text-left bottom">{{$stagiaire->etablissement}}</span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Ville</span> <span class="text-left bottom">{{$stagiaire->ville}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Ville</b> </span> <span class="text-left bottom">{{$stagiaire->ville}}</span> </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Date de début</span> <span class="text-left bottom">{{ \Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y') }}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Date de début</b> </span> <span class="text-left bottom">{{ \Carbon\Carbon::parse($stagiaire->date_debut)->format('d/m/Y') }}</span> </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Date de fin</span> <span class="text-left bottom">{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Date de fin</b> </span> <span class="text-left bottom">{{\Carbon\Carbon::parse($stagiaire->date_fin)->format('d/m/Y')}}</span> </div>
                                             </td>
                                             <td>
                                                 <?php if(isset($service) && $service->sigle_service): ?>
                                                     <div class="d-flex flex-column">
-                                                        <span class="text-left head">Service d'accueil</span>
+                                                        <span class="text-left head"> <b>Service d'accueil</b> </span>
                                                         <span class="text-left bottom"><?php echo e($service->sigle_service); ?></span>
                                                     </div>
                                                 <?php endif; ?>
                                             </td>
 
                                             <td>
-                                                <div class="d-flex flex-column"> <span class="text-left head">Encadrant</span> <span class="text-left bottom">{{$encadrant->titre}} {{$encadrant->prenom}} {{$encadrant->nom}}</span> </div>
+                                                <div class="d-flex flex-column"> <span class="text-left head"> <b>Encadrant</b> </span> <span class="text-left bottom">{{$encadrant->titre}} {{$encadrant->prenom}} {{$encadrant->nom}}</span> </div>
                                             </td>
                                         </tr>
                                     </tbody>

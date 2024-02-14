@@ -174,6 +174,12 @@
         th{
             font:bold;
         }
+        .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 80%;
+      margin: 0 auto;
+    }
 
 
     </style>
@@ -181,7 +187,7 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm sticky-top" id="navbar">
-            <a class="navbar-brand mx-auto" href="{{ url('/') }}">
+            <a class="navbar-brand mx-auto " href="{{ url('/') }}">
                 <img src="/images/logo.svg" >
             </a>
             <div class="container">
@@ -193,6 +199,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" style="display:absolute" >
+                        <li class="navbarli"><a href="/">Accueil</a></li>
                         @if(auth()->check() && auth()->user()->hasRole('admin'))
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>
                         @endif
