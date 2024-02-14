@@ -68,7 +68,7 @@
         font-family: 'Roboto', sans-serif;
     }
 </style>
-<table>
+{{-- <table>
     <tr>
         <td>
             <img src="{{ asset('storage/images/profile/'.$stagiaire->photo)}}"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
@@ -98,7 +98,7 @@
             </ul>
         </td>
     </tr>
-</table>
+</table> --}}
 
 @endsection
 
