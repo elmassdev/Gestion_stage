@@ -296,5 +296,87 @@
   </div>
  </div>
 
+ <script>
+    const bodyElement = document.getElementById('body-element');
+    const toggleThemeButton = document.getElementById('toggler');
+    const navbar = document.getElementById('navbar');
+
+    // Function to set the theme based on user preference
+    const setTheme = (theme) => {
+        bodyElement.setAttribute('data-bs-theme', theme);
+        localStorage.setItem('theme', theme);
+    };
+
+    // Function to update the toggle button based on the dark mode state
+    const updateToggleButton = () => {
+        const darkModeToggle = document.getElementById('darkmode-toggle');
+        const toggler = document.getElementById('toggler');
+
+        if (darkModeToggle.checked) {
+            toggler.querySelector('svg.sun').style.fill = '#7e7e7e';
+            toggler.querySelector('svg.moon').style.fill = '#fff';
+            toggler.querySelector('svg.moon').style.left = '35px';
+        } else {
+            toggler.querySelector('svg.sun').style.fill = '#fff';
+            toggler.querySelector('svg.moon').style.fill = '#7e7e7e';
+            toggler.querySelector('svg.moon').style.left = '35px';
+        }
+    };
+
+    // Check for user's theme preference in local storage
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setTheme(storedTheme);
+        updateToggleButton();
+    }
+
+    // Set the initial state of the dark mode toggle button
+    const darkModeToggle = document.getElementById('darkmode-toggle');
+    darkModeToggle.checked = storedTheme === 'dark';
+
+    toggleThemeButton.addEventListener('click', () => {
+        const currentTheme = bodyElement.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+        navbar.classList.remove('navbar-dark', 'bg-dark', 'navbar-light', 'bg-light');
+        navbar.classList.add(`navbar-${newTheme}`, `bg-${newTheme}`);
+        if(newTheme==='dark'){
+            bodyElement.style.background = 'black';
+        }else{
+            bodyElement.style.background = 'url("/images/bg.jpg")';
+            bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundRepeat = 'no-repeat';
+            bodyElement.style.backgroundPosition= "center";
+            bodyElement.style.margin = '0';
+            bodyElement.style.padding = '0';
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
+        }
+        updateToggleButton();
+    });
+
+    window.onload = function() {
+        const currentTheme = bodyElement.getAttribute('data-bs-theme');
+        var navbar = document.getElementById('navbar');
+        if(currentTheme==='dark'){
+            navbar.classList.add(`navbar-dark`, `bg-dark`);
+            toggleThemeButton.style.backgroundColor = 'linear-gradient(180deg,#777,#3a3a3a)';
+            bodyElement.style.background = 'black';
+        }else{
+            navbar.classList.add(`navbar-light`, `bg-light`);
+            bodyElement.style.background = 'url("/images/bg.jpg")';
+            bodyElement.style.backgroundSize = 'cover';
+            bodyElement.style.backgroundRepeat = 'no-repeat';
+            bodyElement.style.backgroundPosition= "center";
+            bodyElement.style.margin = '0';
+            bodyElement.style.padding = '0';
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
+        }
+        updateToggleButton();
+    }
+
+</script>
+
 @endsection
 
