@@ -116,7 +116,7 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         $today = date('d F Y');
         return Excel::download(new ServicesExport, 'services - '.$today.'.xlsx');
     });
-    
+
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
@@ -125,6 +125,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/admin/permissions/assign-roles/{userId}', [PermissionController::class, 'assignRoles']);
     Route::post('/admin/permissions/assign-permissions/{roleId}', [PermissionController::class, 'assignPermissions']);
     Route::get('/user/assign-roles', [UserController::class, 'show'])->name('user.assignRoles');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::post('/user/assign-roles', [UserController::class, 'assignRoles'])->name('user.assignRoles');
     Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');

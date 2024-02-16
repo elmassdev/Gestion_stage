@@ -174,7 +174,7 @@
         th{
             font:bold;
         }
-        .container {
+        .warper {
       display: flex;
       flex-wrap: wrap;
       max-width: 80%;
@@ -190,7 +190,7 @@
             <a class="navbar-brand mx-auto " href="<?php echo e(url('/')); ?>">
                 <img src="/images/logo.svg" >
             </a>
-            <div class="container">
+            <div class="warper container">
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>

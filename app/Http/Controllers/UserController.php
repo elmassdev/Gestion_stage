@@ -57,4 +57,12 @@ class UserController extends Controller
         $role->syncPermissions($request->input('permissions'));
         return redirect()->back()->with('success', 'Permissions assigned successfully.');
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'Utilisateur supprimé');
+    }
+
 }

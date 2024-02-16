@@ -13,6 +13,7 @@
                     <th>Email</th>
                     <th>Service</th>
                     <th>Role</th>
+                    <th>Action</th>
                 </tr>
                 <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
@@ -21,6 +22,15 @@
                     <td><?php echo e($user->email); ?></td>
                     <td><?php echo e($user->sigle); ?></td>
                     <td><?php echo e($user->getRoleNames()->implode(', ')); ?></td>
+                    <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
+                    <td>
+                        <form action="<?php echo e(route('user.destroy', $user->id)); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
+                            <button class="btn text-danger" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </form>
+                    </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </table>
@@ -28,42 +38,52 @@
 
 
         </div>
-        <div class="container">
-            <h3 class="my-4" >Gérer les roles</h3>
-            <form method="post" action="<?php echo e(route('user.assignRoles')); ?>">
-                <?php echo csrf_field(); ?>
-
-                <div class="form-group py-2">
-                    <label for="user_id" class="mb-1"> <b>Choisir un utilisateur:</b> </label>
-                    <select name="user_id" class="form-control">
-                        <?php if(isset($users)): ?>
-                            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($user->id); ?>"><?php echo e($user->prenom); ?> <?php echo e($user->nom); ?> (<?php echo e($user->email); ?>)</option>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php endif; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="roles" class="mb-1"> <b> Affecter les roles: </b></label>
-                    <select name="roles[]" multiple class="form-control" size="6">
-                        <?php if(isset($roles)): ?>
-                            <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($role->name); ?>"><?php echo e($role->name); ?></option>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php endif; ?>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary my-1"> Valider</button>
-            </form>
-
-            <div class="py-4">
-                <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
-                <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un nouveau utilisateur</a>
-                <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Gérer les roles</a>
-                <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-permissions"> Gérer les Permissions</a>
-                <?php endif; ?>
+        <div class="container my-2">
+            <div class="py-2">
+                <h3>Gérer les roles</h3>
             </div>
+            <div class="py-4">
+                <div class="py-4">
+                    <form method="post" action="<?php echo e(route('user.assignRoles')); ?>">
+                        <?php echo csrf_field(); ?>
+                        <div class="form-group">
+                            <label for="user_id" class="mb-1"> <b>Choisir un utilisateur:</b> </label>
+                            <select name="user_id" class="form-control">
+                                <?php if(isset($users)): ?>
+                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($user->id); ?>"><?php echo e($user->prenom); ?> <?php echo e($user->nom); ?> (<?php echo e($user->email); ?>)</option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roles" class="mb-1"> <b> Affecter les roles: </b></label>
+                            <select name="roles[]" multiple class="form-control" size="6">
+                                <?php if(isset($roles)): ?>
+                                    <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($role->name); ?>"><?php echo e($role->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary my-1"> Valider</button>
+                    </form>
+
+                </div>
+
+            </div>
+            <div class="row">
+
+            </div>
+
+        </div>
+        <div class="container py-4">
+            <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un nouveau utilisateur</a>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Gérer les roles</a>
+            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-permissions"> Gérer les Permissions</a>
+            <?php endif; ?>
         </div>
 
     </div>
