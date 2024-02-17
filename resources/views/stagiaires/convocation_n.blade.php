@@ -10,12 +10,13 @@
         margin-left: 450px;
     }
     .note{
-        font-size: 16px;
+        font-size: 15px;
         margin-top: 20px;
         margin-left: 20px;
     }
 
     .nomsta{
+        font-size: 15px;
         margin-top: 05px;
         margin-left: 350px;
         font-family: sans-serif;
@@ -26,19 +27,27 @@
         margin-top: 75px;
     }
     span{
+        font-size: 15px;
         padding-left: 60px;
         padding-top: 40px;
     }
     p{
+        font-size: 15px;
         margin-left: 30px;
         margin-right: 30px;
         line-height: 15pt;
     }
     table{
+        font-size: 15px;
         margin-left: 20px;
     }
     .tdleft{
+        font-size: 15px;
         font-style: bold;
+    }
+    li{
+        font-size: 15px;
+        margin-left: 35px;
     }
 
 </style>
@@ -46,9 +55,19 @@
 <div class="top"> {{$stagiaire->site}}, le {{$today}}</div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
-<div class="nomsta"> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </div>
-<div><b>Objet        :</b> {{$stagiaire->type_stage}}     </div>
-<div><b>Réf       :</b> Votre demande du {{$ddemande}}     </div>
+<div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} -</small> </div>
+<table>
+    <tr>
+        <td> <b>Objet</b> </td>
+        <td>: {{$stagiaire->type_stage}} </td>
+    </tr>
+    <tr>
+        <td> <b>Réf</b> </td>
+        <td>: Votre demande du {{$ddemande}}  </td>
+    </tr>
+</table>
+{{-- <div><b>Objet        :</b> {{$stagiaire->type_stage}}     </div>
+<div><b>Réf       :</b> Votre demande du {{$ddemande}}     </div> --}}
 <p>{{$stagiaire->titre}}, <br>
 <p><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un {{$stagiaire->type_stage}} au sein du Groupe OCP.</p>
 <span>Nous vous donnons ci-après les indications relatives à l'organisation du stage :</span>

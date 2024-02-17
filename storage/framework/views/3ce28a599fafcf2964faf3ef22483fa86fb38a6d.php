@@ -9,12 +9,13 @@
         margin-left: 450px;
     }
     .note{
-        font-size: 16px;
+        font-size: 15px;
         margin-top: 20px;
         margin-left: 20px;
     }
 
     .nomsta{
+        font-size: 15px;
         margin-top: 05px;
         margin-left: 350px;
         font-family: sans-serif;
@@ -25,19 +26,27 @@
         margin-top: 75px;
     }
     span{
+        font-size: 15px;
         padding-left: 60px;
         padding-top: 40px;
     }
     p{
+        font-size: 15px;
         margin-left: 30px;
         margin-right: 30px;
         line-height: 15pt;
     }
     table{
+        font-size: 15px;
         margin-left: 20px;
     }
     .tdleft{
+        font-size: 15px;
         font-style: bold;
+    }
+    li{
+        font-size: 15px;
+        margin-left: 35px;
     }
 
 </style>
@@ -45,9 +54,18 @@
 <div class="top"> <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?></div>
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
-<div class="nomsta"> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> - </div>
-<div><b>Objet        :</b> <?php echo e($stagiaire->type_stage); ?>     </div>
-<div><b>Réf       :</b> Votre demande du <?php echo e($ddemande); ?>     </div>
+<div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> -</small> </div>
+<table>
+    <tr>
+        <td> <b>Objet</b> </td>
+        <td>: <?php echo e($stagiaire->type_stage); ?> </td>
+    </tr>
+    <tr>
+        <td> <b>Réf</b> </td>
+        <td>: Votre demande du <?php echo e($ddemande); ?>  </td>
+    </tr>
+</table>
+
 <p><?php echo e($stagiaire->titre); ?>, <br>
 <p><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un <?php echo e($stagiaire->type_stage); ?> au sein du Groupe OCP.</p>
 <span>Nous vous donnons ci-après les indications relatives à l'organisation du stage :</span>
