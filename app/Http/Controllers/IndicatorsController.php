@@ -23,6 +23,8 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 use App\Exports\StagiaireTypeFormationExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 
 
@@ -402,10 +404,12 @@ class IndicatorsController extends Controller
 
     public function exportStagiaireTypeFormation(Request $request)
     {
-        $year = $request->input('year'); // Default to current year if not provided
+        $year = $request->input('year');
         $today = Carbon::today()->format('d-m-Y');
         return Excel::download(new StagiaireTypeFormationExport($year), 'stagiaire_type_formation_année_' . $year . '_Extrait_le_' . $today . '.xlsx');
     }
+
+
 
 
 
@@ -444,6 +448,40 @@ class IndicatorsController extends Controller
             ->whereYear('date_debut', $year)
             ->count();
         return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount'));
+    }
+
+    public function backupDatabase(Request $request)
+    {
+        if ($request->has('table')) {
+            $tableName = $request->table;
+            $today = Carbon::today()->format('d-m-Y');
+            $exportFileName = $tableName . '_export_'.$today.'.sql';
+            $exportPath = storage_path('app/' . $exportFileName);
+
+            // Retrieve data from the specified table
+            $data = DB::table($tableName)->get()->toArray();
+
+            // Create SQL dump string
+            $sqlDump = "-- Export of the '$tableName' table\n\n";
+
+            foreach ($data as $row) {
+                $sqlDump .= "INSERT INTO `$tableName` (";
+                $columns = [];
+                $values = [];
+
+                foreach ($row as $column => $value) {
+                    $columns[] = "`$column`";
+                    $values[] = "'" . addslashes($value) . "'";
+                }
+
+                $sqlDump .= implode(', ', $columns) . ") VALUES (" . implode(', ', $values) . ");\n";
+            }
+
+            File::put($exportPath, $sqlDump);
+            return response()->download($exportPath, $exportFileName);
+        } else {
+            return redirect()->back()->with('error', 'il fault selectionner un tableau.');
+        }
     }
 
 

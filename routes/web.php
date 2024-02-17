@@ -130,6 +130,11 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
     Route::get('/export-users', function () { return Excel::download(new UsersExport, 'users.xlsx');});
+    //Route::get('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
+    Route::post('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
+    
+
+
 });
 
 Route::middleware(['auth', 'can:view_surete_page'])->group(function () {

@@ -9,6 +9,10 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
+
 Paginator::useBootstrap();
 
 class UserController extends Controller
@@ -64,5 +68,6 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back()->with('success', 'Utilisateur supprimé');
     }
+
 
 }
