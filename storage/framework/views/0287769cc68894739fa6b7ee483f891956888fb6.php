@@ -50,29 +50,24 @@ unset($__errorArgs, $__bag); ?>" name="table"  autocomplete="table">
             </div>
         </div>
     </div>
-
 </div>
 
 
 <div class="container">
     <div class="row card my-2">
-        <div class="card-header">
-            <div class="card">
-                <div class="card-header">Exporter les données en Excel: </div>
-                <a href="<?php echo e(route('backup.database')); ?>" class="btn btn-outline-primary col-md-4 my-2  mx-auto border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Sauvegarder le tableau stagiaires</a></a>
-                
-                <a href="/export-filieres" class="btn btn-outline-primary col-md-4 my-2  mx-auto border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Sauvgarder le tableau filieres</a>
-                <a href="/export-services" class="btn btn-outline-primary col-md-4 my-2  mx-auto border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Sauvgarder le tableau services</a>
-                <a href="/export-encadrants" class="btn btn-outline-primary col-md-4 my-2  mx-auto border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Sauvgarder le tableau encadrants</a>
-                <a href="/export-etablissements" class="btn btn-outline-primary col-md-4 my-2  mx-auto border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Sauvgarder le tableau etablissements</a>
+        <div class="card-header"> Exporter les données en Excel: </div>
+            <div class="card justify-content-center">
+                <div class="my-2">
+                    <a href="<?php echo e(route('backup.database')); ?>" class="btn btn-outline-primary col-md-2 my-2 border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Stagiaires</a></a>
+                    <a href="/export-filieres" class="btn btn-outline-primary col-md-2 my-2 border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Filieres</a>
+                    <a href="/export-services" class="btn btn-outline-primary col-md-2 my-2 border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Services</a>
+                    <a href="/export-encadrants" class="btn btn-outline-primary col-md-2 my-2 border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Encadrants</a>
+                    <a href="/export-etablissements" class="btn btn-outline-primary col-md-2 my-2 border border-primary rounded-pill fs-5"><i class="fa-solid fa-save"></i> Etablissements</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
 
 <?php $__env->stopSection(); ?>
 
