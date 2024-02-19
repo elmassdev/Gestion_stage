@@ -60,4 +60,36 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row card my-2">
+        <div class="card-header">
+            <div class="card">
+                <div class="card-header">Modifier les données: </div>
+                <form method="POST" class="mx-auto" action="{{ route('backup.database') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row my-4">
+                        <h6 class="col-md-5">Choisir le tableau :</h6>
+                        <div class="col-md-8">
+                            <select id="table" type="text" class="form-control @error('table') is-invalid @enderror" name="table"  autocomplete="table">
+                                <option value="stagiaires" >Stagiaires</option>
+                                <option value="filieres" selected>Filieres</option>
+                                <option value="services">Services</option>
+                                <option value="encadrants">Encadrants</option>
+                                <option value="etablissements">Etablissements</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Sauvegarder') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @endsection

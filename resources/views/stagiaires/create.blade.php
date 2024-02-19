@@ -391,7 +391,7 @@
                     <option value="stage ouvrier">stage ouvrier</option>
                     <option value="stage d'application">stage d'application</option>
                     <option value="stage d'observation">stage d'observation</option>
-                    <option value="stage PFE">Stage PFE</option>
+                    <option value="stage projet fin d'études">Stage PFE</option>
             </select>
                 @error('type_stage')
                     <span class="invalid-feedback" role="alert">
@@ -626,7 +626,7 @@
        var Etab = document.getElementById('etablissement');
 
        if ((diplomeInput === 'Master' && niveauInput === '2ème année') || (diplomeInput === 'Mastère spécialisé' && niveauInput === '2ème année') || (diplomeInput === 'Cycle d\'Ingénieur' &&  niveauInput === '3ème année')) {
-           typeStageSelect.value = 'stage PFE';
+           typeStageSelect.value = 'stage projet fin d\'études';
            typeF.value="EI";
        } else if ((diplomeInput === 'Master' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'Ingénieur' && niveauInput === '1ère année') || (diplomeInput === 'Cycle d\'Ingénieur' && niveauInput === '2ème année') || (diplomeInput==='Mastère spécialisé' && niveauInput === '1ère année')) {
            typeStageSelect.value = 'stage d\'application';

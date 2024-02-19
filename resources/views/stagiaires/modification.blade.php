@@ -381,7 +381,7 @@
                                     <option value="stage ouvrier">stage ouvrier</option>
                                     <option value="stage d'application">stage d'application</option>
                                     <option value="stage d'observation">stage d'observation</option>
-                                    <option value="stage PFE">Stage PFE</option>
+                                    <option value="stage projet fin d'études">Stage PFE</option>
                             </select>
                                 @error('type_stage')
                                     <span class="invalid-feedback" role="alert">
@@ -397,7 +397,7 @@
                                     <option value="{{$stagiaire->type_formation}}">{{$stagiaire->type_formation}}</option>
                                     <option value="EI">EI</option>
                                     <option value="OFPPT">OFPPT</option>
-                                    <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+                                    <option value="EST+FAC+BTS">EST+FAC+BTS</option>
                                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                                     <option value="IMM+IMT">IMM+IMT</option>
                                     <option value="Autres">Autres</option>

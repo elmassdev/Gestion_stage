@@ -82,13 +82,8 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::post('/encadrants/create', [App\Http\Controllers\EncadrantController::class, 'store'])->name('encadrants/create')->middleware('auth');
     Route::resource('etablissements', EtabController::class)->middleware('auth');
     Route::resource('filieres', FiliereController::class)->middleware('auth');
-    // Route::get('/stagiaires/{id}', 'App\Http\Controllers\StagiaireController@duplicate')->name('duplicate');
+    Route::post('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
     Route::get('/stagiaires/{id}/duplicate', 'App\Http\Controllers\StagiaireController@duplicate')->name('stagiaires.duplicate');
-
-    // Route::get('/stagiaires/{id}', 'StagiaireController@show')->name('stagiaires.show');
-
-
-
 
 
 
@@ -131,10 +126,6 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
     Route::get('/export-users', function () { return Excel::download(new UsersExport, 'users.xlsx');});
     //Route::get('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
-    Route::post('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
-    
-
-
 });
 
 Route::middleware(['auth', 'can:view_surete_page'])->group(function () {
