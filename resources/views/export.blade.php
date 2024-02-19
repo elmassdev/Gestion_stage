@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<div class="container">
+{{-- <div class="container">
     <div class="row card my-2">
         <div class="card-header">
             <div class="card">
@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 
