@@ -484,6 +484,49 @@ class IndicatorsController extends Controller
         }
     }
 
+    public function getColumns()
+    {
+        $Fcol = DB::getSchemaBuilder()->getColumnListing('filieres');
+        $Scol = DB::getSchemaBuilder()->getColumnListing('stagiaires');
+        $Ecol = DB::getSchemaBuilder()->getColumnListing('etablissements');
+        $Sercol = DB::getSchemaBuilder()->getColumnListing('services');
+        $Encol = DB::getSchemaBuilder()->getColumnListing('encadrants');
+
+        $columns = [
+            'filieres' => $Fcol,
+            'stagiaires' => $Scol,
+            'etablissements' => $Ecol,
+            'services' => $Sercol,
+            'encadrants' => $Encol,
+        ];
+        return view('export', ['columns' => $columns]);
+    }
+
+public function updateData(Request $request)
+    {
+        $table = $request->input('tableSelect');
+        $column = $request->input('columnSelect');
+        $condition = $request->input('condition');
+        $newValue = $request->input('new_value');
+
+        try {
+            DB::table($table)
+                ->whereRaw($condition)
+                ->update([$column => $newValue]);
+
+            return redirect()->back()->with('success', 'mise à jour avec succès.');
+        } catch (\Exception $e) {
+            Log::error('Failed to update data: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'mise à jour échouée: Une erreur est survenue.');
+        }
+
+    }
+
+
+
+
+
+
 
 
 }

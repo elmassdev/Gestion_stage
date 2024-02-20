@@ -69,6 +69,108 @@ unset($__errorArgs, $__bag); ?>" name="table"  autocomplete="table">
     </div>
 </div>
 
+
+
+
+<div class="container">
+    <div class="row card my-2">
+        <div class="card-header">
+            <div class="card">
+                <div class="card-header">Modifier les données:</div>
+                <form method="POST" class="mx-auto" action="<?php echo e(route('update.data')); ?>" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
+                    <div class="row my-4">
+                        <div class="col-md-8">
+                            <div class="col-md-5">
+                                <label for="tableSelect">Table:</label>
+                            </div>
+                            <select id="tableSelect" name="tableSelect" class="form-control">
+                                <option value="">Select a table</option>
+                                <?php $__currentLoopData = $columns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $table => $tableColumns): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($table); ?>"><?php echo e($table); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-md-8">
+                            <div class="col-md-5">
+                                <label for="columnSelect">column:</label>
+                            </div>
+                            <select id="columnSelect" name="columnSelect" class="form-control">
+                                <option value="">Select a column</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row my-4">
+                        <div class="col-md-5">
+                            <label for="condition">Ancienne valeur:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="condition" type="text" class="form-control <?php $__errorArgs = ['condition'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="condition" autocomplete="condition">
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-md-5">
+                            <label for="new_value">Nouvelle valeur :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="new_value" type="text" class="form-control <?php $__errorArgs = ['new_value'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="new_value" autocomplete="new_value">
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary"><?php echo e(__('Sauvegarder')); ?></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var columns = <?php echo json_encode($columns, 15, 512) ?>;
+    document.getElementById('tableSelect').addEventListener('change', function() {
+        var selectedTable = this.value;
+        var colDropdown = document.getElementById('columnSelect');
+        colDropdown.innerHTML = '';
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Select a column';
+        defaultOption.value = '';
+        colDropdown.add(defaultOption);
+        if (selectedTable && columns[selectedTable]) {
+            var columnOptions = columns[selectedTable];
+            columnOptions.forEach(function(column) {
+                var option = document.createElement('option');
+                option.text = column;
+                option.value = column;
+                colDropdown.add(option);
+            });
+        }
+    });
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views/export.blade.php ENDPATH**/ ?>

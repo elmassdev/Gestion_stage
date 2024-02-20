@@ -56,6 +56,8 @@ Route::middleware(['auth', 'can:view_indicators'])->group(function (){
     Route::get('/export/queries', [IndicatorsController::class, 'exportqueries'])->name('export.excel');
     Route::get('/indicators/graph', [IndicatorsController::class, 'graph'])->name('graph');
     Route::get('/indicators/export', [IndicatorsController::class, 'exportStagiaireTypeFormation'])->name('export');
+
+
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function (){
@@ -84,6 +86,11 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::resource('filieres', FiliereController::class)->middleware('auth');
     Route::post('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
     Route::get('/stagiaires/{id}/duplicate', 'App\Http\Controllers\StagiaireController@duplicate')->name('stagiaires.duplicate');
+
+
+
+
+
 
 
 
@@ -125,6 +132,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
     Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
     Route::get('/export-users', function () { return Excel::download(new UsersExport, 'users.xlsx');});
+    Route::get('/export', 'App\Http\Controllers\IndicatorsController@getColumns');
+    Route::get('/get-columns', 'App\Http\Controllers\IndicatorsController@getColumns')->name('get.columns');
+    Route::put('/update-data', 'App\Http\Controllers\IndicatorsController@updateData')->name('update.data');
     //Route::get('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
 });
 
