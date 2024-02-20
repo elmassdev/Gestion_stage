@@ -133,7 +133,7 @@ class StagiaireController extends Controller
             $stagiaire->remunere = $request->boolean('remunere');
             $stagiaire->EI = $request->boolean('EI');
             $stagiaire->observation= $request->input('observation');
-            $stagiaire->created_by= Auth::user()->name;
+            $stagiaire->created_by= Auth::user()->nom;
             $stagiaire->save();
             return back()->with('success', 'le stagiaire  '. $code.'   est enregistré avec succès.');
 
@@ -158,7 +158,7 @@ class StagiaireController extends Controller
             ->where(function($query) use($request, $columns) {
                 foreach ($columns as $column) {
                     if ($request->input('column') == $column) {
-                        $query->orWhere($column, '=', $request->input('term'));
+                        $query->orWhere($column, 'like', $request->input('term'));
                     }
                 }
             })->paginate(10);
@@ -246,7 +246,7 @@ class StagiaireController extends Controller
         $stagiaire->Att_remise_a = $request->input('Att_remise_a');
         $stagiaire->observation= $request->input('observation');
         $stagiaire->absence= $request->input('absence');
-        $stagiaire->edited_by= Auth::user()->name;
+        $stagiaire->edited_by= Auth::user()->nom;
 
         $stagiaire->update([
             $stagiaire->code,
