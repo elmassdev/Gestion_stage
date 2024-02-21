@@ -65,10 +65,10 @@
         <div class="card-header">
             <div class="card">
                 <div class="card-header">Modifier les données:</div>
-                <form method="POST" class="mx-auto" action="{{ route('update.data') }}" enctype="multipart/form-data">
+                <form method="POST" class="mx-auto my-2" action="{{ route('update.data') }}" enctype="multipart/form-data" style="border:1px solid black; border-radius:2%">
                     @csrf
                     @method('PUT')
-                    <div class="row my-4">
+                    <div class="row my-4 py-2 px-2">
                         <div class="col-md-8">
                             <div class="col-md-5">
                                 <label for="tableSelect">Table:</label>
@@ -81,46 +81,48 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="row my-4">
-                        <div class="col-md-8">
-                            <div class="col-md-12">
-                                <label for="column_to_edit">la coulonne à modifier:</label>
+                    <div class="bg-secondary py-2 px-2">
+                        <div class="row my-4">
+                            <div class="col-md-8">
+                                <div class="col-md-12">
+                                    <label for="column_to_edit">la coulonne à modifier:</label>
+                                </div>
+                                <select id="column_to_edit" name="column_to_edit" class="form-control">
+                                    <option value="">choisir la colounne: </option>
+                                </select>
                             </div>
-                            <select id="column_to_edit" name="column_to_edit" class="form-control">
-                                <option value="">choisir la colounne: </option>
-                            </select>
                         </div>
-                    </div>
-                    <div class="row my-4">
-                        <div class="col-md-5">
-                            <label for="new_value">la nouvelle valeur :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="new_value" type="text" class="form-control @error('new_value') is-invalid @enderror" name="new_value" autocomplete="new_value">
-                        </div>
-                    </div>
-
-                    <div class="row my-4">
-                        <div class="col-md-8">
+                        <div class="row my-4">
                             <div class="col-md-5">
-                                <label for="condition_col">Condition:</label>
+                                <label for="new_value">la nouvelle valeur :</label>
                             </div>
-                            <select id="condition_col" name="condition_col" class="form-control">
-                                <option value="">la coulounne repère</option>
-                            </select>
+                            <div class="col-md-8">
+                                <input id="new_value" type="text" class="form-control @error('new_value') is-invalid @enderror" name="new_value" autocomplete="new_value">
+                            </div>
                         </div>
                     </div>
+                    <div class="bg-warning py-2 px-2">
+                        <div class="row my-4">
+                            <div class="col-md-12">
+                                <div class="col-md-5">
+                                    <label for="condition_col" class="text-danger">Condition:</label>
+                                </div>
+                                <select id="condition_col" name="condition_col" class="form-control ">
+                                    <option value="">la coulounne repère</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div class="row my-4">
-                        <div class="col-md-5">
-                            <label for="condition_value">New Value:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="condition_value" type="text" class="form-control @error('condition_value') is-invalid @enderror" name="condition_value" autocomplete="condition_value">
+                        <div class="row my-4">
+                            <div class="col-md-12">
+                                <label for="condition_value" class="text-danger">la valeur de condition:</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input id="condition_value" type="text" class="form-control @error('condition_value') is-invalid @enderror" name="condition_value" autocomplete="condition_value">
+                            </div>
                         </div>
                     </div>
-                    <div class="row my-4">
+                    <div class="row my-4 py-2 px-2">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary">{{ __('Sauvegarder') }}</button>
                         </div>
