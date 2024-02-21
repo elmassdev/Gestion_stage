@@ -93,7 +93,7 @@ unset($__errorArgs, $__bag); ?>" name="table"  autocomplete="table">
 
                     <div class="row my-4">
                         <div class="col-md-8">
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <label for="column_to_edit">la coulonne à modifier:</label>
                             </div>
                             <select id="column_to_edit" name="column_to_edit" class="form-control">
