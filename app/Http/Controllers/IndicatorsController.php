@@ -502,25 +502,45 @@ class IndicatorsController extends Controller
         return view('export', ['columns' => $columns]);
     }
 
-public function updateData(Request $request)
+// public function updateData(Request $request)
+//     {
+//         $table = $request->input('tableSelect');
+//         $column = $request->input('columnSelect');
+//         $condition = $request->input('condition');
+//         $newValue = $request->input('new_value');
+
+//         try {
+//             DB::table($table)
+//                 ->whereRaw($condition)
+//                 ->update([$column => $newValue]);
+
+//             return redirect()->back()->with('success', 'mise à jour avec succès.');
+//         } catch (\Exception $e) {
+//             Log::error('Failed to update data: ' . $e->getMessage());
+//             return redirect()->back()->with('error', 'mise à jour échouée: Une erreur est survenue.');
+//         }
+
+//     }
+    public function updateData(Request $request)
     {
         $table = $request->input('tableSelect');
-        $column = $request->input('columnSelect');
-        $condition = $request->input('condition');
-        $newValue = $request->input('new_value');
+        $column_to_edit = $request->input('column_to_edit');
+        $new_value = $request->input('new_value');
+        $condition_col = $request->input('condition_col');
+        $condition_value = $request->input('condition_value');
 
         try {
             DB::table($table)
-                ->whereRaw($condition)
-                ->update([$column => $newValue]);
+                ->where($condition_col, $condition_value)
+                ->update([$column_to_edit => $new_value]);
 
             return redirect()->back()->with('success', 'mise à jour avec succès.');
         } catch (\Exception $e) {
             Log::error('Failed to update data: ' . $e->getMessage());
             return redirect()->back()->with('error', 'mise à jour échouée: Une erreur est survenue.');
         }
-
     }
+
 
 
 

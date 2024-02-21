@@ -354,6 +354,7 @@ class StagiaireController extends Controller
     {
         $stagiaire = Stagiaire::findOrFail($id);
         $originalAttributes = $stagiaire->getAttributes();
+        $stagiaire->edited_by= Auth::user()->nom;
         $validatedData = $request->validate([
             'dateLO' => 'nullable|date',
             'date_reception_FFS' => 'nullable|date',

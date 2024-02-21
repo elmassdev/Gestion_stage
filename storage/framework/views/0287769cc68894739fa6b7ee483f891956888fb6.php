@@ -69,9 +69,6 @@ unset($__errorArgs, $__bag); ?>" name="table"  autocomplete="table">
     </div>
 </div>
 
-
-
-
 <div class="container">
     <div class="row card my-2">
         <div class="card-header">
@@ -97,34 +94,16 @@ unset($__errorArgs, $__bag); ?>" name="table"  autocomplete="table">
                     <div class="row my-4">
                         <div class="col-md-8">
                             <div class="col-md-5">
-                                <label for="columnSelect">column:</label>
+                                <label for="column_to_edit">la coulonne à modifier:</label>
                             </div>
-                            <select id="columnSelect" name="columnSelect" class="form-control">
-                                <option value="">Select a column</option>
+                            <select id="column_to_edit" name="column_to_edit" class="form-control">
+                                <option value="">choisir la colounne: </option>
                             </select>
                         </div>
                     </div>
-
-
-
                     <div class="row my-4">
                         <div class="col-md-5">
-                            <label for="condition">Ancienne valeur:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="condition" type="text" class="form-control <?php $__errorArgs = ['condition'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="condition" autocomplete="condition">
-                        </div>
-                    </div>
-                    <div class="row my-4">
-                        <div class="col-md-5">
-                            <label for="new_value">Nouvelle valeur :</label>
+                            <label for="new_value">la nouvelle valeur :</label>
                         </div>
                         <div class="col-md-8">
                             <input id="new_value" type="text" class="form-control <?php $__errorArgs = ['new_value'];
@@ -135,6 +114,33 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="new_value" autocomplete="new_value">
+                        </div>
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-md-8">
+                            <div class="col-md-5">
+                                <label for="condition_col">Condition:</label>
+                            </div>
+                            <select id="condition_col" name="condition_col" class="form-control">
+                                <option value="">la coulounne repère</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-md-5">
+                            <label for="condition_value">New Value:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="condition_value" type="text" class="form-control <?php $__errorArgs = ['condition_value'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="condition_value" autocomplete="condition_value">
                         </div>
                     </div>
                     <div class="row my-4">
@@ -148,13 +154,12 @@ unset($__errorArgs, $__bag); ?>" name="new_value" autocomplete="new_value">
     </div>
 </div>
 
-
-
 <script>
     var columns = <?php echo json_encode($columns, 15, 512) ?>;
     document.getElementById('tableSelect').addEventListener('change', function() {
         var selectedTable = this.value;
-        var colDropdown = document.getElementById('columnSelect');
+        var colDropdown = document.getElementById('column_to_edit');
+        var colDropdown2 = document.getElementById('condition_col');
         colDropdown.innerHTML = '';
         var defaultOption = document.createElement('option');
         defaultOption.text = 'Select a column';
@@ -169,8 +174,24 @@ unset($__errorArgs, $__bag); ?>" name="new_value" autocomplete="new_value">
                 colDropdown.add(option);
             });
         }
+        colDropdown2.innerHTML = '';
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Select a column';
+        defaultOption.value = '';
+        colDropdown2.add(defaultOption);
+        if (selectedTable && columns[selectedTable]) {
+            var columnOptions = columns[selectedTable];
+            columnOptions.forEach(function(column) {
+                var option = document.createElement('option');
+                option.text = column;
+                option.value = column;
+                colDropdown2.add(option);
+            });
+        }
     });
 </script>
+
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views/export.blade.php ENDPATH**/ ?>

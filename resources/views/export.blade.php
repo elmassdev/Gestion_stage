@@ -60,12 +60,6 @@
     </div>
 </div>
 
-{{-- <script>
-    //change data values to json
-    var columns = @json($columns);
-</script> --}}
-
-
 <div class="container">
     <div class="row card my-2">
         <div class="card-header">
@@ -91,30 +85,39 @@
                     <div class="row my-4">
                         <div class="col-md-8">
                             <div class="col-md-5">
-                                <label for="columnSelect">column:</label>
+                                <label for="column_to_edit">la coulonne à modifier:</label>
                             </div>
-                            <select id="columnSelect" name="columnSelect" class="form-control">
-                                <option value="">Select a column</option>
+                            <select id="column_to_edit" name="column_to_edit" class="form-control">
+                                <option value="">choisir la colounne: </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-md-5">
+                            <label for="new_value">la nouvelle valeur :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="new_value" type="text" class="form-control @error('new_value') is-invalid @enderror" name="new_value" autocomplete="new_value">
+                        </div>
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-md-8">
+                            <div class="col-md-5">
+                                <label for="condition_col">Condition:</label>
+                            </div>
+                            <select id="condition_col" name="condition_col" class="form-control">
+                                <option value="">la coulounne repère</option>
                             </select>
                         </div>
                     </div>
 
-
-
                     <div class="row my-4">
                         <div class="col-md-5">
-                            <label for="condition">Ancienne valeur:</label>
+                            <label for="condition_value">New Value:</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="condition" type="text" class="form-control @error('condition') is-invalid @enderror" name="condition" autocomplete="condition">
-                        </div>
-                    </div>
-                    <div class="row my-4">
-                        <div class="col-md-5">
-                            <label for="new_value">Nouvelle valeur :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="new_value" type="text" class="form-control @error('new_value') is-invalid @enderror" name="new_value" autocomplete="new_value">
+                            <input id="condition_value" type="text" class="form-control @error('condition_value') is-invalid @enderror" name="condition_value" autocomplete="condition_value">
                         </div>
                     </div>
                     <div class="row my-4">
@@ -128,13 +131,12 @@
     </div>
 </div>
 
-
-
 <script>
     var columns = @json($columns);
     document.getElementById('tableSelect').addEventListener('change', function() {
         var selectedTable = this.value;
-        var colDropdown = document.getElementById('columnSelect');
+        var colDropdown = document.getElementById('column_to_edit');
+        var colDropdown2 = document.getElementById('condition_col');
         colDropdown.innerHTML = '';
         var defaultOption = document.createElement('option');
         defaultOption.text = 'Select a column';
@@ -149,6 +151,22 @@
                 colDropdown.add(option);
             });
         }
+        colDropdown2.innerHTML = '';
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Select a column';
+        defaultOption.value = '';
+        colDropdown2.add(defaultOption);
+        if (selectedTable && columns[selectedTable]) {
+            var columnOptions = columns[selectedTable];
+            columnOptions.forEach(function(column) {
+                var option = document.createElement('option');
+                option.text = column;
+                option.value = column;
+                colDropdown2.add(option);
+            });
+        }
     });
 </script>
+
+
 @endsection
