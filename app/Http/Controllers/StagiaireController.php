@@ -437,7 +437,9 @@ class StagiaireController extends Controller
             }
 
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
-        return $pdf->stream();
+        // return $pdf->stream();
+        $filename = 'Attestation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
+        return $pdf->stream($filename, ['blank' => true]);
     }
 
     public function generer_sujet($id){
@@ -482,7 +484,9 @@ class StagiaireController extends Controller
         $today = str_replace($englishMonths, $frenchMonths,$today);
 
         $pdf =Pdf::loadView('/stagiaires/sujet',compact('stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
-        return $pdf->stream();
+        $filename = 'Sujet_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
+        return $pdf->stream($filename, ['blank' => true]);
+
     }
 
 
@@ -533,7 +537,8 @@ class StagiaireController extends Controller
             }else{
                 $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
-            return $pdf->stream();
+            $filename = 'Convocation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
+        return $pdf->stream($filename, ['blank' => true]);
     }
 
     public function generer_op($id){
@@ -650,7 +655,8 @@ class StagiaireController extends Controller
         if($stagiaire->remunere){
             $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
         }
-        return $pdf->stream();
+        $filename = 'OP_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
+        return $pdf->stream($filename, ['blank' => true]);
     }
 }
 

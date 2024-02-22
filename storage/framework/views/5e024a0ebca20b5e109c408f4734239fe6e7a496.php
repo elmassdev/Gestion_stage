@@ -129,26 +129,26 @@
                             <td>
                                 <?php if(($stagiaire->date_fin<=now()) && !($stagiaire->annule)): ?>
                                 <div class="card col-md-12">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation" class="btn"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/attestation" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
                                 </div>
                                 <?php endif; ?>
                                 <?php if(($stagiaire->date_fin > now()) && !($stagiaire->annule)): ?>
                                 <div class=" card col-md-12">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" target="_blank" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if(($stagiaire->sujet!='') && !($stagiaire->annule)): ?>
                                 <div class="card col-md-12">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet" class="btn"><i class="fa fa-print text-primary"></i> Sujet de stage</a>
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/sujet" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Sujet de stage</a>
                                 </div>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if(($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule)): ?>
                                 <div class="card col-md-12">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/op" class="btn"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/op" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
                                 </div>
                                 <?php endif; ?>
                             </td>

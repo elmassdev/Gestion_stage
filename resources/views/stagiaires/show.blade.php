@@ -130,26 +130,26 @@
                             <td>
                                 @if (($stagiaire->date_fin<=now()) && !($stagiaire->annule))
                                 <div class="card col-md-12">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/attestation" class="btn"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/attestation" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Attestation de stage</a>
                                 </div>
                                 @endif
                                 @if(($stagiaire->date_fin > now()) && !($stagiaire->annule))
                                 <div class=" card col-md-12">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn" target="_blank" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
                                 @endif
                             </td>
                             <td>
                                 @if (($stagiaire->sujet!='') && !($stagiaire->annule))
                                 <div class="card col-md-12">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/sujet" class="btn"><i class="fa fa-print text-primary"></i> Sujet de stage</a>
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/sujet" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Sujet de stage</a>
                                 </div>
                                 @endif
                             </td>
                             <td>
                                 @if (($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule))
                                 <div class="card col-md-12">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/op" class="btn"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/op" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
                                 </div>
                                 @endif
                             </td>
