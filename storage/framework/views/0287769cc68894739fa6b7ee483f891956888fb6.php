@@ -90,7 +90,7 @@ unset($__errorArgs, $__bag); ?>" name="table"  autocomplete="table">
                             </select>
                         </div>
                     </div>
-                    <div class="bg-secondary py-2 px-2">
+                    <div class="bg-light py-2 px-2">
                         <div class="row my-4">
                             <div class="col-md-8">
                                 <div class="col-md-12">
@@ -117,11 +117,11 @@ unset($__errorArgs, $__bag); ?>" name="new_value" autocomplete="new_value">
                             </div>
                         </div>
                     </div>
-                    <div class="bg-warning py-2 px-2">
+                    <div class="bg-secondary py-2 px-2">
                         <div class="row my-4">
                             <div class="col-md-12">
                                 <div class="col-md-5">
-                                    <label for="condition_col" class="text-danger">Condition:</label>
+                                    <label for="condition_col" class="text-warning">Condition:</label>
                                 </div>
                                 <select id="condition_col" name="condition_col" class="form-control ">
                                     <option value="">la coulounne repère</option>
@@ -131,7 +131,7 @@ unset($__errorArgs, $__bag); ?>" name="new_value" autocomplete="new_value">
 
                         <div class="row my-4">
                             <div class="col-md-12">
-                                <label for="condition_value" class="text-danger">la valeur de condition:</label>
+                                <label for="condition_value" class="text-warning">la valeur de condition:</label>
                             </div>
                             <div class="col-md-12">
                                 <input id="condition_value" type="text" class="form-control <?php $__errorArgs = ['condition_value'];

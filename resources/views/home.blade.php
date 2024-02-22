@@ -208,7 +208,7 @@
 
  <div id="home">
     <div class="row">
-        <h1 class="dep"> Département Développement RH  </h1>
+        <h1 class="dep"> Département Développement RH &copy; </h1>
     </div>
 
   <div class="menu">
@@ -249,7 +249,7 @@
               </div>
         </div>
         @endif
-        
+
         <div class="square">
             <div class="info">
                 <a class="btn col-md-12  " href="/stagiaires/1"> Rechercher</a>

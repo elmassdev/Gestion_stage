@@ -519,7 +519,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" oninput="validateDates()">
-                                    {{ __('Enregisterer la modifcation') }}
+                                    {{ __('Enregistrer la modifcation') }}
                                 </button>
                             </div>
                         </div>

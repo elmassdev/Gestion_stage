@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+    
 
     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
     <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
