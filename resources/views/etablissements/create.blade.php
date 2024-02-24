@@ -4,7 +4,9 @@
 
 @section('content')
 
+
 <div class="container py-4">
+    <a href="/etablissements" class="btn btn-primary col-md-2  mx-2 my-2">Liste des établissements</a>
     <div class="card">
         <div class="card-header">{{ __('Ajouter un nouveau établissement') }}</div>
         <div class="card-body">

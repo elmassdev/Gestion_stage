@@ -1,9 +1,8 @@
-<!-- resources/views/services/create.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-
+<div class="row py-4 px-4">
     <div class="col-md-6">
 
         <div class="card">
@@ -23,7 +22,6 @@
 
         <form action="{{ route('services.store') }}" method="POST">
             @csrf
-            <!-- Add form fields as needed -->
             <div class="form-group">
                 <label for="sigle_service">Sigle Service:</label>
                 <input type="text" name="sigle_service" class="form-control" required>
@@ -70,9 +68,10 @@
             <div class="card-header">{{ __('Autre informations à ajouter:') }}</div>
             <table>
                 <tr>
+                    <a href="/services" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Liste des services</a>
+                    <a href="/services/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un service</a>
                     <a href="/encadrants" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Liste des encadrants</a>
                     <a href="/encadrants/1" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Rechercher un encadrant</a>
-                    <a href="/services/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un service</a>
                     <a href="/stagiaires/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter un stagiaire </a>
                     <a href="/villes/create" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Ajouter une ville</a>
                 </tr>

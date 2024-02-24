@@ -842,7 +842,7 @@ unset($__errorArgs, $__bag); ?>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" oninput="validateDates()">
-                                    <?php echo e(__('Enregisterer la modifcation')); ?>
+                                    <?php echo e(__('Enregistrer la modifcation')); ?>
 
                                 </button>
                             </div>

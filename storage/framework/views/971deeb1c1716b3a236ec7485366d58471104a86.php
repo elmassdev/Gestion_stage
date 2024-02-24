@@ -1,13 +1,11 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ route('services.create') }}" class="btn btn-btn btn-primary my-2 mt-4 mx-3">Ajouter un Service</a>
+<a href="<?php echo e(route('services.create')); ?>" class="btn btn-btn btn-primary my-2 mt-4 mx-3">Ajouter un Service</a>
 <div class="row col-md-12 px-3">
     <div class="col-md-8">
 
         <div class="card">
-            <div class="card-header">{{ __('List des services') }}</div>
+            <div class="card-header"><?php echo e(__('List des services')); ?></div>
 
             <div class="card-body">
                 <table class="table table-row my-auto h-10">
@@ -19,31 +17,32 @@
                         </tr>
                     </thead>
                     <tbody class="table table-row my-auto h-10">
-                        @foreach ($services as $service)
+                        <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td>{{ $service->sigle_service }}</td>
-                                <td>{{ $service->libelle }}</td>
+                                <td><?php echo e($service->sigle_service); ?></td>
+                                <td><?php echo e($service->libelle); ?></td>
                                 <td>
-                                    <a href="{{ route('services.show', $service->id) }}"><i class="fa fa-eye text-primary"></i></a>
-                                    <a href="{{ route('services.edit', $service->id) }}"><i class="fa fa-edit text-warning"></i></a>
-                                    <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline">
-                                        @csrf
-                                        @method('DELETE')
+                                    <a href="<?php echo e(route('services.show', $service->id)); ?>"><i class="fa fa-eye text-primary"></i></a>
+                                    <a href="<?php echo e(route('services.edit', $service->id)); ?>"><i class="fa fa-edit text-warning"></i></a>
+                                    <form action="<?php echo e(route('services.destroy', $service->id)); ?>" method="POST" style="display:inline">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
                                         <button type="submit" class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer ce service?')"><i class="fa fa-trash text-danger"></i></button>
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
-                {{ $services->links() }}
+                <?php echo e($services->links()); ?>
+
 
             </div>
         </div>
     </div>
     <div class="col-md-3 float-right" style="top: 5; right: 0;">
         <div class="card col-md-11">
-            <div class="card-header bg-primary">{{ __('Autre informations à ajouter:') }}</div>
+            <div class="card-header bg-primary"><?php echo e(__('Autre informations à ajouter:')); ?></div>
             <table >
                 <tr>
                     <a href="/encadrants" target="/blank" class=" col-md-8 mx-auto my-2 btn btn-primary">Liste des encadrants</a>
@@ -57,4 +56,6 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views/services/index.blade.php ENDPATH**/ ?>

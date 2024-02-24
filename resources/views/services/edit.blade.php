@@ -1,4 +1,4 @@
-<!-- resources/views/services/edit.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
@@ -21,7 +21,6 @@
     <form action="{{ route('services.update', $service->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <!-- Add form fields as needed -->
         <div class="form-group">
             <label for="sigle_service">Sigle Service:</label>
             <input type="text" name="sigle_service" class="form-control" value="{{ $service->sigle_service }}" required>

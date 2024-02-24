@@ -14,7 +14,7 @@
                 </tr>
                 <tr>
                     <th>Etablissement</th>
-                    <td>{{ $etablissement->etab }}</td>
+                    <td>{{ $etablissement->Etab }}</td>
                 </tr>
                 <tr>
                     <th>Statut</th>

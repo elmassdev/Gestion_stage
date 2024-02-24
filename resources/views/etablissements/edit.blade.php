@@ -3,8 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Mettre à  jour l'établissement</h2>
 
+    <div class="container py-4">
+        <a href="/etablissements" class="btn btn-primary col-md-2  mx-2 my-2">Liste des établissements</a>
+        <div class="card">
+            <div class="card-header">{{ __('Modifier les informations de:  '.$etablissement->sigle_etab) }}</div>
+            <div class="card-body">
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

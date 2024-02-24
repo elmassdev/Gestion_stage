@@ -1,8 +1,8 @@
 <!-- resources/views/filieres/create.blade.php -->
 
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 <div class="container">
     <div class="row card my-2">
@@ -11,17 +11,17 @@
             <div class="card">
                 <div class="card-header">Ajouter une nouvelle filière:</div>
                 <div class="px-2 py-2 ">
-                    @if ($errors->any())
+                    <?php if($errors->any()): ?>
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><?php echo e($error); ?></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
-                @endif
-                <form action="{{ route('filieres.store') }}" method="POST">
-                    @csrf
+                <?php endif; ?>
+                <form action="<?php echo e(route('filieres.store')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="mb-3">
                         <label for="filiere" class="form-label">Filière</label>
                         <input type="text" class="form-control" id="filiere" name="filiere" required>
@@ -38,4 +38,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views/filieres/create.blade.php ENDPATH**/ ?>
