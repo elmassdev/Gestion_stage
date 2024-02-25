@@ -302,6 +302,33 @@
                 </div>
             </div>
 
+            {{-- <div class="row mb-3">
+                <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplôme</label>
+
+                <div class="col-md-8">
+                    <input list="diplome-list" id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome" autocomplete="diplome">
+                    <datalist id="diplome-list">
+                        <option value="Qualification Professionnelle">
+                        <option value="Technicien">
+                        <option value="Technicien spécialisé">
+                        <option value="DUT">
+                        <option value="BTS">
+                        <option value="Licence fondamentale">
+                        <option value="Licence professionnelle">
+                        <option value="Cycle d'Ingénieur">
+                        <option value="Master">
+                        <option value="Mastère spécialisé">
+                        <option value="Doctorat">
+                    </datalist>
+                    @error('diplome')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div> --}}
+
+
 
             <div class="row mb-3">
                 <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplôme</label>
@@ -329,7 +356,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
                 <div class="col-md-8">
                     <select id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
@@ -361,10 +388,48 @@
                     @enderror
                 </div>
             </div>
+        </div> --}}
+
+        <div class="row mb-3">
+            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
+            <div class="col-md-8">
+                <input list="filiere-list" id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
+                <datalist id="filiere-list">
+                    <option selected disabled> -- Filières-- </option>
+                    @foreach($filieres as $f)
+                        <option value="{{ $f->filiere }}">
+                    @endforeach
+                </datalist>
+                @error('filiere')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
 
+        <div class="row mb-3">
+            <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
+            <div class="col-md-8">
+                <input list="etablissement-list" id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
+                <datalist id="etablissement-list">
+                    <!-- Options generated dynamically from PHP -->
+                    @foreach($etablissements as $etab)
+                        <option value="{{ $etab->sigle_etab }} - {{ $etab->Etab }}">
+                    @endforeach
+                </datalist>
+                @error('etablissement')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
 
-      <div class="col border border-solid rounded pt-2">
+
+
+      {{-- <div class="col border border-solid rounded pt-2">
         <div class="row mb-3">
             <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
             <div class="col-md-8">
@@ -382,7 +447,27 @@
                     </span>
                 @enderror
             </div>
-        </div>
+        </div> --}}
+        <div class="col border border-solid rounded pt-2">
+            <div class="row mb-3">
+                <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
+                <div class="col-md-8">
+                    <input list="ville-list" id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville" autocomplete="ville">
+                    <datalist id="ville-list">
+                        <option selected disabled> -- ----- -- </option>
+                        @foreach($villes as $ville)
+                            <option value="{{ $ville->ville }}">
+                        @endforeach
+                    </datalist>
+
+                    @error('ville')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
         <div class="row mb-3">
             <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type Stage</label>
             <div class="col-md-8">
@@ -541,6 +626,11 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#diplome').select2();
+    });
+</script>
 
 
 
