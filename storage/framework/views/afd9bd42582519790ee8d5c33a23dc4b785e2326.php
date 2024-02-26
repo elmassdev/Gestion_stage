@@ -340,7 +340,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="row mb-3">
-                <label for="phone" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Phone')); ?></label>
+                <label for="phone" class="col-md-3 col-form-label text-md-left"><?php echo e(__('Téléphone')); ?></label>
 
                 <div class="col-md-8">
                     <input id="phone" type="tel" class="form-control <?php $__errorArgs = ['phone'];
@@ -445,7 +445,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                        <option selected value="" disabled>----Diplôme----</option>
+                        <option selected value=""></option>
                         <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                         <option value="Technicien">Technicien</option>
                         <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -476,7 +476,7 @@ unset($__errorArgs, $__bag); ?>
             
 
         <div class="row mb-3">
-            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
+            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filière</label>
             <div class="col-md-8">
                 <input list="filiere-list" id="filiere" type="text" class="form-control <?php $__errorArgs = ['filiere'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -521,7 +521,7 @@ unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="eta
                 <datalist id="etablissement-list">
                     <!-- Options generated dynamically from PHP -->
                     <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?>">
+                        <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->Etab); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </datalist>
                 <?php $__errorArgs = ['etablissement'];

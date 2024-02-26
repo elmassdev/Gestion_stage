@@ -40,6 +40,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="statut"  autocomplete="statut" value="<?php echo e($etablissement->statut); ?>">
+                <option value="<?php echo e($etablissement->statut); ?>" selected><?php echo e($etablissement->statut); ?></option>
                 <option value="Etatique" >Etatique</option>
                 <option value="Privé">Privé</option>
                 <option value="Etranger">Etranger</option>
@@ -55,6 +56,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type"  autocomplete="type" value="<?php echo e($etablissement->type); ?>">
+                <option value="<?php echo e($etablissement->type); ?>" selected ><?php echo e($etablissement->type); ?></option>
                 <option value="Ecoles Supérieures" >ECOLES SUPERIEURES</option>
                 <option value="OFPPT">OFPPT</option>
                 <option value="Faculté">Faculté</option>
@@ -69,7 +71,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="article"  autocomplete="article" value="<?php echo e($etablissement->etab); ?>">
+unset($__errorArgs, $__bag); ?>" name="article"  autocomplete="article" value="<?php echo e($etablissement->article); ?>">
+                <option value="<?php echo e($etablissement->article); ?>"><?php echo e($etablissement->article); ?></option>
                 <option value="à la">à la</option>
                 <option value="à">à</option>
                 <option value="au">au</option>

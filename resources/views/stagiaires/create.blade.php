@@ -255,7 +255,7 @@
             </div>
 
             <div class="row mb-3">
-                <label for="phone" class="col-md-3 col-form-label text-md-left">{{ __('Phone') }}</label>
+                <label for="phone" class="col-md-3 col-form-label text-md-left">{{ __('Téléphone') }}</label>
 
                 <div class="col-md-8">
                     <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', '+212') }}"  autocomplete="phone"  placeholder="ex: +212662077439" autofocus>
@@ -335,7 +335,7 @@
 
                 <div class="col-md-8">
                     <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                        <option selected value="" disabled>----Diplôme----</option>
+                        <option selected value=""></option>
                         <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                         <option value="Technicien">Technicien</option>
                         <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -391,7 +391,7 @@
         </div> --}}
 
         <div class="row mb-3">
-            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
+            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filière</label>
             <div class="col-md-8">
                 <input list="filiere-list" id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
                 <datalist id="filiere-list">
@@ -415,7 +415,7 @@
                 <datalist id="etablissement-list">
                     <!-- Options generated dynamically from PHP -->
                     @foreach($etablissements as $etab)
-                        <option value="{{ $etab->sigle_etab }} - {{ $etab->Etab }}">
+                        <option value="{{ $etab->sigle_etab }}">{{ $etab->Etab }}</option>
                     @endforeach
                 </datalist>
                 @error('etablissement')

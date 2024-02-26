@@ -25,6 +25,7 @@ use Maatwebsite\Excel\Files\FileType;
 // use Maatwebsite\Excel\Files\FileType as ExcelFileType;
 use Maatwebsite\Excel\Excel as ExcelFileType;
 use Illuminate\Support\Facades\Response;
+use App\Models\Stagiaire;
 
 
 
@@ -40,11 +41,16 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
-
+//get the last Id
+// $lastId = Stagiaire::max('id');
 
 Auth::routes();
 Route::view('/contact', 'contact');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', function () {
+    $lastId = Stagiaire::max('id');
+    return view('home', ['lastId' => $lastId]);
+})->name('home')->middleware('auth');
 
 Route::middleware(['auth', 'can:view_indicators'])->group(function (){
     Route::resource('indicators/index', IndicatorsController::class)->middleware('auth');

@@ -33,6 +33,7 @@
         <div class="mb-3">
             <label for="statut" class="form-label">Statut</label>
             <select id="statut" type="text" class="form-control @error('statut') is-invalid @enderror" name="statut"  autocomplete="statut" value="{{ $etablissement->statut }}">
+                <option value="{{$etablissement->statut}}" selected>{{$etablissement->statut}}</option>
                 <option value="Etatique" >Etatique</option>
                 <option value="Privé">Privé</option>
                 <option value="Etranger">Etranger</option>
@@ -41,6 +42,7 @@
         <div class="mb-3">
             <label for="type" class="form-label">Type</label>
             <select id="type" type="text" class="form-control @error('type') is-invalid @enderror" name="type"  autocomplete="type" value="{{ $etablissement->type }}">
+                <option value="{{ $etablissement->type }}" selected >{{ $etablissement->type }}</option>
                 <option value="Ecoles Supérieures" >ECOLES SUPERIEURES</option>
                 <option value="OFPPT">OFPPT</option>
                 <option value="Faculté">Faculté</option>
@@ -48,7 +50,8 @@
         </div>
         <div class="mb-3">
             <label for="article" class="form-label">Article</label>
-            <select id="article" type="text" class="form-control @error('article') is-invalid @enderror" name="article"  autocomplete="article" value="{{ $etablissement->etab }}">
+            <select id="article" type="text" class="form-control @error('article') is-invalid @enderror" name="article"  autocomplete="article" value="{{ $etablissement->article }}">
+                <option value="{{ $etablissement->article }}">{{ $etablissement->article }}</option>
                 <option value="à la">à la</option>
                 <option value="à">à</option>
                 <option value="au">au</option>

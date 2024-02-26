@@ -36,6 +36,8 @@ class StagiaireController extends Controller
      */
     public function index()
     {
+        //get the last Id
+        $lastId = Stagiaire::max('id');
         $stagiaires = DB::table('stagiaires')
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->leftJoin('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
@@ -43,7 +45,7 @@ class StagiaireController extends Controller
         ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
         ->orderBy('stagiaires.code', 'desc')
         ->paginate(10);
-        return view('stagiaires.index', compact('stagiaires'));
+        return view('stagiaires.index', compact('lastId','stagiaires'));
     }
 
 
@@ -82,6 +84,8 @@ class StagiaireController extends Controller
                 'date_debut' => 'required',
                 'date_fin'=>'required',
             ]);
+
+
 
 
             // incrementation du code.
@@ -151,9 +155,7 @@ class StagiaireController extends Controller
      */
     public function show($id, Request $request)
     {
-
         $columns = ['nom', 'cin', 'code'];
-
         $results = DB::table('stagiaires')->where('stagiaires.site', '=', Auth::user()->site)
             ->where(function($query) use($request, $columns) {
                 foreach ($columns as $column) {
