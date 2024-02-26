@@ -519,7 +519,6 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement">
                 <datalist id="etablissement-list">
-                    <!-- Options generated dynamically from PHP -->
                     <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->Etab); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -540,7 +539,41 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 
+    <script>
+        document.getElementById('filiere').addEventListener('input', function() {
+            var input = this.value;
+            var options = document.getElementById('filiere-list').getElementsByTagName('option');
+            var match = false;
+            for (var i = 0; i < options.length; i++) {
+                if (input === options[i].value) {
+                    match = true;
+                    break;
+                }
+            }
+            if (!match) {
+                this.setCustomValidity('Merci de selectionner une filière de la liste!');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
 
+        // document.getElementById('etablissement').addEventListener('input', function() {
+        //     var input = this.value;
+        //     var options = document.getElementById('etablissement-list').getElementsByTagName('option');
+        //     var match = false;
+        //     for (var i = 0; i < options.length; i++) {
+        //         if (input === options[i].value) {
+        //             match = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!match) {
+        //         this.setCustomValidity('Merci de selectionner un établissement de la liste!');
+        //     } else {
+        //         this.setCustomValidity('');
+        //     }
+        // });
+    </script>
 
       
         <div class="col border border-solid rounded pt-2">

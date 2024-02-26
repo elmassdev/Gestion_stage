@@ -413,7 +413,6 @@
             <div class="col-md-8">
                 <input list="etablissement-list" id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
                 <datalist id="etablissement-list">
-                    <!-- Options generated dynamically from PHP -->
                     @foreach($etablissements as $etab)
                         <option value="{{ $etab->sigle_etab }}">{{ $etab->Etab }}</option>
                     @endforeach
@@ -427,7 +426,41 @@
         </div>
     </div>
 
+    <script>
+        // document.getElementById('filiere').addEventListener('input', function() {
+        //     var input = this.value;
+        //     var options = document.getElementById('filiere-list').getElementsByTagName('option');
+        //     var match = false;
+        //     for (var i = 0; i < options.length; i++) {
+        //         if (input === options[i].value) {
+        //             match = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!match) {
+        //         this.setCustomValidity('Merci de selectionner une filière de la liste!');
+        //     } else {
+        //         this.setCustomValidity('');
+        //     }
+        // });
 
+        // document.getElementById('etablissement').addEventListener('input', function() {
+        //     var input = this.value;
+        //     var options = document.getElementById('etablissement-list').getElementsByTagName('option');
+        //     var match = false;
+        //     for (var i = 0; i < options.length; i++) {
+        //         if (input === options[i].value) {
+        //             match = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!match) {
+        //         this.setCustomValidity('Merci de selectionner un établissement de la liste!');
+        //     } else {
+        //         this.setCustomValidity('');
+        //     }
+        // });
+    </script>
 
       {{-- <div class="col border border-solid rounded pt-2">
         <div class="row mb-3">
