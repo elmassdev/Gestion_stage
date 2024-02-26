@@ -540,22 +540,22 @@ unset($__errorArgs, $__bag); ?>
     </div>
 
     <script>
-        document.getElementById('filiere').addEventListener('input', function() {
-            var input = this.value;
-            var options = document.getElementById('filiere-list').getElementsByTagName('option');
-            var match = false;
-            for (var i = 0; i < options.length; i++) {
-                if (input === options[i].value) {
-                    match = true;
-                    break;
-                }
-            }
-            if (!match) {
-                this.setCustomValidity('Merci de selectionner une filière de la liste!');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
+        // document.getElementById('filiere').addEventListener('input', function() {
+        //     var input = this.value;
+        //     var options = document.getElementById('filiere-list').getElementsByTagName('option');
+        //     var match = false;
+        //     for (var i = 0; i < options.length; i++) {
+        //         if (input === options[i].value) {
+        //             match = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!match) {
+        //         this.setCustomValidity('Merci de selectionner une filière de la liste!');
+        //     } else {
+        //         this.setCustomValidity('');
+        //     }
+        // });
 
         // document.getElementById('etablissement').addEventListener('input', function() {
         //     var input = this.value;
