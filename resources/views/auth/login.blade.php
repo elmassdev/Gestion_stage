@@ -248,12 +248,12 @@
         </nav>
         <div class="container">
             <div id="topdec" class="hidden col-md-6">
-                <i id="user" class="fa-solid fa-user fa-2xl"></i>
-                <i id="env" class="fa-regular fa-envelope fa-beat-fade fa-2xl" style="color: #ff4500;"></i>
-                <i id="at" class="fa-solid fa-at fa-beat-fade fa-2xl" style="color: #005eff;"></i>
-                <i id="key" class="fa-solid fa-key fa-2xl" style="color: #2fb646;"></i>
-                <i id="lock" class="fa-solid fa-lock  fa-2xl" style="color: #ff4500;"></i>
-                <i id="unlock" class="fa-solid fa-unlock  fa-2xl" style="color: #ff4500;"></i>
+                <i id="user" class="fa fa-user fa-2xl"></i>
+                <i id="env" class="fa fa-envelope fa-beat-fade fa-2xl" style="color: #ff4500;"></i>
+                <i id="at" class="fa fa-at fa-beat-fade fa-2xl" style="color: #005eff;"></i>
+                <i id="key" class="fa fa-key fa-2xl" style="color: #2fb646;"></i>
+                <i id="lock" class="fa fa-lock  fa-2xl" style="color: #ff4500;"></i>
+                <i id="unlock" class="fa fa-unlock  fa-2xl" style="color: #ff4500;"></i>
             </div>
             <div class="login col-md-4 mx-auto">
                 <div class="card">

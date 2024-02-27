@@ -11,6 +11,15 @@
         height: 10vh;
         padding-left: 10%;
     }
+    .bienvenue{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 36px;
+        font-weight: bolder;
+        color: rgb(157, 157, 157);
+        padding: 2%;
+        height: 32vh;
+        padding-left: 10%;
+    }
     .menu{
         margin-right: 35%;
         margin-top: 5%;
@@ -211,6 +220,12 @@
     </div>
 
   <div class="menu">
+    <?php if(auth()->check() && auth()->user()->hasRole('manager')): ?>
+        <div class="bienvenue">
+            <h3> Bienvenue,  dans votre espace pour consulter les indicateurs des stages. </h3>
+        </div>
+        <?php endif; ?>
+
     <div class="container">
         <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
         <div class="square">
@@ -221,6 +236,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="32" width="28" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff7a00" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
               </div>
         </div>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_indicators')): ?>
         <div class="square">
             <div class="info">
                 <a class="btn col-md-12" href="/indicators/index"> Indicateurs</a>
@@ -229,6 +246,9 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff7a00" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></svg>
               </div>
         </div>
+        <?php endif; ?>
+
+        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
         <div class="square">
             <div class="info">
                 <a class="btn col-md-12" href="/stagiaires"> Stagiaires</a>
@@ -237,6 +257,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff7a00" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
               </div>
         </div>
+        <?php endif; ?>
 
         <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
         <div class="square">
@@ -248,6 +269,7 @@
               </div>
         </div>
         <?php endif; ?>
+        <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
 
         <div class="square">
             <div class="info">
@@ -264,6 +286,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="32" width="36" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff7a00" d="M256 32c-17.7 0-32 14.3-32 32v2.3 99.6c0 5.6-4.5 10.1-10.1 10.1c-3.6 0-7-1.9-8.8-5.1L157.1 87C83 123.5 32 199.8 32 288v64H544l0-66.4c-.9-87.2-51.7-162.4-125.1-198.6l-48 83.9c-1.8 3.2-5.2 5.1-8.8 5.1c-5.6 0-10.1-4.5-10.1-10.1V66.3 64c0-17.7-14.3-32-32-32H256zM16.6 384C7.4 384 0 391.4 0 400.6c0 4.7 2 9.2 5.8 11.9C27.5 428.4 111.8 480 288 480s260.5-51.6 282.2-67.5c3.8-2.8 5.8-7.2 5.8-11.9c0-9.2-7.4-16.6-16.6-16.6H16.6z"/></svg>
               </div>
         </div>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view_indicators')): ?>
         <div class="square">
             <div class="info">
                 <a class="btn col-md-12" href="/indicators/graph"> Diagrammes</a>
@@ -273,6 +297,7 @@
               </div>
         </div>
         <?php endif; ?>
+
 
         <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
         <div class="square">
