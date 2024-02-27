@@ -19,7 +19,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    
+
     public function service()
     {
         return $this->hasOne(Service::class);
@@ -32,6 +32,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'titre',
         'prenom',
         'nom',
         'email',
