@@ -1,20 +1,14 @@
 <?php $__env->startSection('content'); ?>
 
 
-<div class="row">
-    <?php if(Session::has('success')): ?>
+
+<?php if(session('success')): ?>
     <div class="alert alert-success">
-        <?php echo e(Session::get('success')); ?>
+        <?php echo session('success'); ?>
 
     </div>
-    <?php endif; ?>
-    <?php if(Session::has('error')): ?>
-        <div class="alert alert-danger">
-            <?php echo e(Session::get('error')); ?>
+<?php endif; ?>
 
-        </div>
-    <?php endif; ?>
-</div>
 <div class="d-flex align-items-center py-4">
     <div class="container card">
         <div class="card-header"> <h5><?php echo e(__('Ajouter un stagiaire')); ?></h5>  </div>

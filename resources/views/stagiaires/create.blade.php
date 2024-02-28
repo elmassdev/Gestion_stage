@@ -8,7 +8,7 @@
     <a href="/encadrants/create" target="/_blank" class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter un encadrant </a>
     <a href="/villes/create" target="/_blank" class=" btn btn-outline-success col-md-2  mx-auto  rounded-pill ">Ajouter une ville</a>
 </div> --}}
-<div class="row">
+{{-- <div class="row">
     @if (Session::has('success'))
     <div class="alert alert-success">
         {{ Session::get('success') }}
@@ -19,7 +19,13 @@
             {{ Session::get('error') }}
         </div>
     @endif
-</div>
+</div> --}}
+@if(session('success'))
+    <div class="alert alert-success">
+        {!! session('success') !!}
+    </div>
+@endif
+
 <div class="d-flex align-items-center py-4">
     <div class="container card">
         <div class="card-header"> <h5>{{ __('Ajouter un stagiaire') }}</h5>  </div>

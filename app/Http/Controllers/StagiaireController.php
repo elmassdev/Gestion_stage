@@ -139,8 +139,20 @@ class StagiaireController extends Controller
             $stagiaire->observation= $request->input('observation');
             $stagiaire->created_by= Auth::user()->nom;
             $stagiaire->save();
-            return back()->with('success', 'le stagiaire  '. $code.'   est enregistré avec succès.');
 
+
+            if (!is_null($stagiaire->sujet)) {
+                $dot="";
+                $textsujet=", et le sujet ";
+                $sujetLink = '<a href="/stagiaires/' . $stagiaire->id .'/sujet" target="_blank"> <b>ICI</b> </a>';
+            } else {
+                $dot =".";
+                $textsujet="";
+                $sujetLink = '';
+            }
+
+            return back()->with('success', 'Le stagiaire <b> ' . $code . ' </b> est enregistré avec succès. vous pouvez imprimer la convocation <a href="/stagiaires/' . $stagiaire->id . '/convocation" target="_blank"><b>ICI</b></a> '.$dot .$textsujet. $sujetLink . '');
+            // return back()->with('success', 'le stagiaire  '. $code.'   est enregistré avec succès.');
         }catch (\Exception $e) {
             // Catch the exception and add it to the validation errors
             return redirect()->back()->withErrors(['cin' => $e->getMessage()]);
