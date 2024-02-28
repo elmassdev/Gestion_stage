@@ -8,6 +8,7 @@
             <h3 class="my-4"> les utilisateurs: </h3>
             <table class="table table-striped table-responsive mx-auto">
                 <tr>
+                    <th>Titre</th>
                     <th>Prénom</th>
                     <th>nom</th>
                     <th>Email</th>
@@ -17,6 +18,7 @@
                 </tr>
                 <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
+                    <td><?php echo e($user->titre); ?></td>
                     <td><?php echo e($user->prenom); ?> </td>
                     <td><?php echo e($user->nom); ?></td>
                     <td><?php echo e($user->email); ?></td>
@@ -51,7 +53,7 @@
                             <select name="user_id" class="form-control">
                                 <?php if(isset($users)): ?>
                                     <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($user->id); ?>"><?php echo e($user->prenom); ?> <?php echo e($user->nom); ?> (<?php echo e($user->email); ?>)</option>
+                                        <option value="<?php echo e($user->id); ?>"> <?php echo e($user->prenom); ?> <?php echo e($user->nom); ?> (<?php echo e($user->email); ?>)</option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php endif; ?>
                             </select>

@@ -8,6 +8,7 @@
             <h3 class="my-4"> les utilisateurs: </h3>
             <table class="table table-striped table-responsive mx-auto">
                 <tr>
+                    <th>Titre</th>
                     <th>Prénom</th>
                     <th>nom</th>
                     <th>Email</th>
@@ -17,6 +18,7 @@
                 </tr>
                 @foreach($users as $user)
                 <tr>
+                    <td>{{ $user->titre }}</td>
                     <td>{{ $user->prenom }} </td>
                     <td>{{ $user->nom }}</td>
                     <td>{{ $user->email }}</td>
@@ -50,7 +52,7 @@
                             <select name="user_id" class="form-control">
                                 @isset($users)
                                     @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->prenom }} {{ $user->nom }} ({{ $user->email }})</option>
+                                        <option value="{{ $user->id }}"> {{ $user->prenom }} {{ $user->nom }} ({{ $user->email }})</option>
                                     @endforeach
                                 @endisset
                             </select>
