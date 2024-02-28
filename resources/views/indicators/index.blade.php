@@ -349,8 +349,118 @@
         <div class="col-md-12">
             <canvas id="monthlyStagiairesChart" width="400" height="300"></canvas>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
             <script>
+                var dailyStaData = @json($dailysta);
+
+                var dates = [];
+                var counts = [];
+
+                // Extract dates and counts from the JSON data
+                dailyStaData.forEach(function(item) {
+                    dates.push(item.date_debut);
+                    counts.push(item.total);
+                });
+
+                function calculateColors(counts) {
+                    var backgroundColors = [];
+                    counts.forEach(function(count) {
+                        if (count > 15) {
+                            backgroundColors.push('rgba(255, 0, 0, 0.7)'); // Red color for counts more than 15
+                        } else {
+                            backgroundColors.push('rgba(54, 162, 235, 0.2)'); // Blue color for other counts
+                        }
+                    });
+                    return backgroundColors;
+                }
+
+                var backgroundColors = calculateColors(counts);
+
+                var ctx = document.getElementById('monthlyStagiairesChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'nombre de stagiaires dans les deux prochaines semaines',
+                            data: counts,
+                            fill: false, // Set to false to display a line without filling the area underneath
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            pointRadius: 5, // Set to adjust the size of data points
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Set to the color of data points
+                            tension: 0.4,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </div>
+
+        {{-- <div class="col-md-12">
+            <canvas id="monthlyStagiairesChart" width="400" height="300"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                var dailyStaData = @json($dailysta);
+
+                var dates = [];
+                var counts = [];
+
+                // Extract dates and counts from the JSON data
+                dailyStaData.forEach(function(item) {
+                    dates.push(item.date_debut);
+                    counts.push(item.total);
+                });
+                function calculateColor(value) {
+                    if (value > 5) {
+                        return 'rgba(255, 0, 0, 0.7)'; // Red color for counts more than 15
+                    } else {
+                        return 'rgba(54, 162, 235, 0.2)'; // Default color
+                    }
+                }
+
+                    var backgroundColors = values.map(function(value) {
+                        return calculateColor(value);
+                    });
+
+                var ctx = document.getElementById('monthlyStagiairesChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'nombre de stagiaires dans les deux prochaines semaines',
+                            data: counts,
+                            data: counts,
+                            fill: false, // Set to false to display a line without filling the area underneath,
+                            borderWidth: 2,
+                            pointRadius: 5, // Set to adjust the size of data points
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Set to the color of data points
+                            tension: 0.4,
+                            backgroundColor:backgroundColors, //'rgba(54, 162, 235, 0.2)',
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script> --}}
+
+            {{-- <script>
                 var data = @json($monthlysta);
                 var months = [];
                 var counts = [];
@@ -397,7 +507,7 @@
                         }
                     }
                 });
-            </script>
+            </script> --}}
 
             {{-- <script>
                 var data = @json($monthlysta);

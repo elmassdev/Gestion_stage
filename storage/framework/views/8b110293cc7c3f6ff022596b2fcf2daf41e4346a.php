@@ -394,24 +394,39 @@ unset($__errorArgs, $__bag); ?>
         <div class="col-md-12">
             <canvas id="monthlyStagiairesChart" width="400" height="300"></canvas>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
             <script>
-                var data = <?php echo json_encode($monthlysta, 15, 512) ?>;
-                var months = [];
+                var dailyStaData = <?php echo json_encode($dailysta, 15, 512) ?>;
+
+                var dates = [];
                 var counts = [];
 
-                data.forEach(function(item) {
-                    months.push(item.mois + '/' + item.annee);
+                // Extract dates and counts from the JSON data
+                dailyStaData.forEach(function(item) {
+                    dates.push(item.date_debut);
                     counts.push(item.total);
                 });
 
+                function calculateColors(counts) {
+                    var backgroundColors = [];
+                    counts.forEach(function(count) {
+                        if (count > 5) {
+                            backgroundColors.push('rgba(255, 0, 0, 0.7)'); // Red color for counts more than 15
+                        } else {
+                            backgroundColors.push('rgba(54, 162, 235, 0.2)'); // Blue color for other counts
+                        }
+                    });
+                    return backgroundColors;
+                }
+
+                var backgroundColors = calculateColors(counts);
+
                 var ctx = document.getElementById('monthlyStagiairesChart').getContext('2d');
                 var myChart = new Chart(ctx, {
-                    type: 'line',
+                    type: 'bar',
                     data: {
-                        labels: months,
+                        labels: dates,
                         datasets: [{
-                            label: 'Stagiaires per Month',
+                            label: 'nombre de stagiaires dans les deux prochaines semaines',
                             data: counts,
                             fill: false, // Set to false to display a line without filling the area underneath
                             borderColor: 'rgba(75, 192, 192, 1)',
@@ -419,30 +434,25 @@ unset($__errorArgs, $__bag); ?>
                             pointRadius: 5, // Set to adjust the size of data points
                             pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Set to the color of data points
                             tension: 0.4,
+                            backgroundColor: backgroundColors
                         }]
                     },
                     options: {
-                        plugins: {
-                                title: {
-                                    display: true,
-                                    text: 'Bilan des stagiaires par mois : ',
-                                    padding: {
-                                        top: 10,
-                                        bottom: 30
-                                    }
-                                },
-                                legend: {
-                                    display: false
-                                }
-                            },
                         scales: {
-                            y: {
-                                beginAtZero: true
-                            }
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
                         }
                     }
                 });
             </script>
+        </div>
+
+        
+
+            
 
             
 

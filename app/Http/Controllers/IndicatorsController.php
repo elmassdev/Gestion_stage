@@ -91,15 +91,25 @@ class IndicatorsController extends Controller
         ->whereRaw('date_debut >= NOW()')
         ->where('stagiaires.annule', '=', false)->paginate(4);
 
-        $monthlysta = Stagiaire::select(DB::raw('COUNT(*) as total'), DB::raw('MONTH(date_debut) as mois'), DB::raw('YEAR(date_debut) as annee'))
-            ->whereRaw('date_debut >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)')
-            ->where('stagiaires.site', '=', Auth::user()->site)
-            ->groupBy(DB::raw('YEAR(date_debut)'), DB::raw('MONTH(date_debut)'))
-            ->orderBy('annee', 'asc')
-            ->orderBy('mois', 'asc')
-            ->get();
+        // $monthlysta = Stagiaire::select(DB::raw('COUNT(*) as total'), DB::raw('MONTH(date_debut) as mois'), DB::raw('YEAR(date_debut) as annee'))
+        //     ->whereRaw('date_debut >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)')
+        //     ->where('stagiaires.site', '=', Auth::user()->site)
+        //     ->groupBy(DB::raw('YEAR(date_debut)'), DB::raw('MONTH(date_debut)'))
+        //     ->orderBy('annee', 'asc')
+        //     ->orderBy('mois', 'asc')
+        //     ->get();
+            $startDate = now();
+            $endDate = now()->addDays(14);
 
-        return view('indicators.index',compact('stagiaires','stagenc','paginatedstagiaires','paginatedstagenc','statoday','results','monthlysta'));
+            $dailysta = Stagiaire::select(DB::raw('COUNT(*) as total'), 'date_debut')
+                ->whereBetween('date_debut', [$startDate, $endDate])
+                ->where('site', '=', Auth::user()->site)
+                ->groupBy('date_debut')
+                ->orderBy('date_debut', 'asc')
+                ->get();
+
+
+        return view('indicators.index',compact('stagiaires','stagenc','paginatedstagiaires','paginatedstagenc','statoday','results','dailysta'));
     }
 
 
@@ -502,25 +512,7 @@ class IndicatorsController extends Controller
         return view('export', ['columns' => $columns]);
     }
 
-// public function updateData(Request $request)
-//     {
-//         $table = $request->input('tableSelect');
-//         $column = $request->input('columnSelect');
-//         $condition = $request->input('condition');
-//         $newValue = $request->input('new_value');
 
-//         try {
-//             DB::table($table)
-//                 ->whereRaw($condition)
-//                 ->update([$column => $newValue]);
-
-//             return redirect()->back()->with('success', 'mise à jour avec succès.');
-//         } catch (\Exception $e) {
-//             Log::error('Failed to update data: ' . $e->getMessage());
-//             return redirect()->back()->with('error', 'mise à jour échouée: Une erreur est survenue.');
-//         }
-
-//     }
     public function updateData(Request $request)
     {
         $table = $request->input('tableSelect');
