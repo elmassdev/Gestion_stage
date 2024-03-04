@@ -84,12 +84,7 @@ class StagiaireController extends Controller
                 'date_debut' => 'required',
                 'date_fin'=>'required',
             ]);
-
-
-
-
             // incrementation du code.
-
             $year = now()->year;
             $count = Stagiaire::whereYear('created_at', $year)->count() + 1;
             if($count>0){
@@ -99,7 +94,6 @@ class StagiaireController extends Controller
                 $formattedCount = sprintf('%04d', 1);
                 $code = $year.$formattedCount;
             }
-
             $stagiaire = new Stagiaire();
             $stagiaire->code =$code;
             $stagiaire->Date_demande = $request->input('date_demande');
@@ -140,7 +134,6 @@ class StagiaireController extends Controller
             $stagiaire->created_by= Auth::user()->nom;
             $stagiaire->save();
 
-
             if (!is_null($stagiaire->sujet)) {
                 $dot="";
                 $textsujet=", et le sujet: ";
@@ -152,7 +145,6 @@ class StagiaireController extends Controller
             }
 
             return back()->with('success', 'Le stagiaire <b> ' . $code . ' </b> est enregistré avec succès. vous pouvez imprimer la convocation:  <a href="/stagiaires/' . $stagiaire->id . '/convocation" target="_blank"><i class="fa fa-print text-primary"></i></a> '.$dot .$textsujet. $sujetLink . '');
-            // return back()->with('success', 'le stagiaire  '. $code.'   est enregistré avec succès.');
         }catch (\Exception $e) {
             // Catch the exception and add it to the validation errors
             return redirect()->back()->withErrors(['cin' => $e->getMessage()]);
