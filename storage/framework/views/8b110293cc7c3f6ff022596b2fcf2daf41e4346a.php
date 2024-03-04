@@ -409,7 +409,7 @@ unset($__errorArgs, $__bag); ?>
                 function calculateColors(counts) {
                     var backgroundColors = [];
                     counts.forEach(function(count) {
-                        if (count > 5) {
+                        if (count > 15) {
                             backgroundColors.push('rgba(255, 0, 0, 0.7)'); // Red color for counts more than 15
                         } else {
                             backgroundColors.push('rgba(54, 162, 235, 0.2)'); // Blue color for other counts

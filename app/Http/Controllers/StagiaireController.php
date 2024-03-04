@@ -143,15 +143,15 @@ class StagiaireController extends Controller
 
             if (!is_null($stagiaire->sujet)) {
                 $dot="";
-                $textsujet=", et le sujet ";
-                $sujetLink = '<a href="/stagiaires/' . $stagiaire->id .'/sujet" target="_blank"> <b>ICI</b> </a>';
+                $textsujet=", et le sujet: ";
+                $sujetLink = '<a href="/stagiaires/' . $stagiaire->id .'/sujet" target="_blank"> <i class="fa fa-print text-primary"></i> </a>';
             } else {
                 $dot =".";
                 $textsujet="";
                 $sujetLink = '';
             }
 
-            return back()->with('success', 'Le stagiaire <b> ' . $code . ' </b> est enregistré avec succès. vous pouvez imprimer la convocation <a href="/stagiaires/' . $stagiaire->id . '/convocation" target="_blank"><b>ICI</b></a> '.$dot .$textsujet. $sujetLink . '');
+            return back()->with('success', 'Le stagiaire <b> ' . $code . ' </b> est enregistré avec succès. vous pouvez imprimer la convocation:  <a href="/stagiaires/' . $stagiaire->id . '/convocation" target="_blank"><i class="fa fa-print text-primary"></i></a> '.$dot .$textsujet. $sujetLink . '');
             // return back()->with('success', 'le stagiaire  '. $code.'   est enregistré avec succès.');
         }catch (\Exception $e) {
             // Catch the exception and add it to the validation errors
