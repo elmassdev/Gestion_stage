@@ -101,7 +101,7 @@
 
         <div>
             <div class="container">
-                <p class=" row text-center mx-auto py-1" id="title"> Ordre de paiement</p>
+                <p class=" row text-center mx-auto py-1 " id="title"> Ordre de paiement</p>
             </div>
                 <p class="row text-center mx-auto fs-2">Imputation: ____________</p>
             </div>
