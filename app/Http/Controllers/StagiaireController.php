@@ -598,7 +598,11 @@ class StagiaireController extends Controller
             if($numberOfDays>120){
                 $numberOfDays=120;
             }
-        } elseif ($niveau == '4ème année' && $diplome == '') {
+        } elseif ($niveau == '3ème année' && $diplome == '') {
+            if($numberOfDays>30){
+                $numberOfDays=30;
+            }
+        }elseif ($niveau == '4ème année' && $diplome == '') {
             if($numberOfDays>60){
                 $numberOfDays=60;
             }
@@ -636,6 +640,8 @@ class StagiaireController extends Controller
             $dailyFee = 100;
         } elseif ($niveau == '2ème année' && $diplome == 'Doctorat') {
             $dailyFee = 100;
+        }elseif ($niveau == '3ème année' && $diplome == '') {
+            $dailyFee = 50;
         }elseif ($niveau == '4ème année' && $diplome == '') {
             $dailyFee = 60;
         } elseif ($niveau == '5ème année' && $diplome == '') {

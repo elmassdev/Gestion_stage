@@ -79,7 +79,7 @@
                 <td>
                     <div>
                         <img class="my-2" src="<?php echo e(public_path("/images/logow.jpg")); ?>"> <br>
-                        <b>SBU Industrial Facility Management <br>
+                        <b>SBU-Mining <br>
                         Direction Industrielle Mines Gantour <br>
                         Direction Capital Humain Gantour <br>
                         Developpement RH <br></b>

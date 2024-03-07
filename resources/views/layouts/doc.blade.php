@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-    
+
 
 <head>
     <meta charset="utf-8">
@@ -33,12 +33,12 @@
             <div class="container">
                 <div>
                     <img src="{{ public_path("/images/logow.jpg") }}" alt="" style="width: 140px; height: 50px;"> <br>
-                 <b>SBU Industrial Facility Management <br>
+                 <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
-                    Developpement RH <br></b> <div class="phones">
-                    <small>Tel: +212 662 07 74 39</small> <br>
-                    <small>Fax: +212 524 64 60 86   </small>     </div>
+                    Développement RH <br></b> <div class="phones">
+                    <small>Tel: +212 662 07 74 39</small><br>
+                    <small>Fax: +212 524 64 60 86</small></div>
                 </div>
             </div>
         </div>
