@@ -481,8 +481,8 @@ class StagiaireController extends Controller
         //3- longer date form
         $dayNumber = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
         $dayNumberText = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-Sept","dix-huit","dix-neuf","vingt","vingt et un","vingt deux","vingt trois","vingt quatre","vingt cinq","vingt six","vingt sept","vingt huit","vingt neuf","trente","trente et un");
-        $yearNumber = array("2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
-        $yearText = array("deux mille","deux mille un","deux mille deux","deux mille trois","deux mille quatre","deux mille cinq","deux mille six","deux mille sept","deux mille huit","deux mille neuf","deux mille dix","deux mille onze","deux mille douze","deux mille treize","deux mille quatorze","deux mille quinze","deux mille seize","deux mille dix-sept","deux mille dix-huit","deux mille dix-neuf","deux mille vingt","deux mille vingt et un","deux mille vingt-deux","deux mille vingt-trois", "deux mille vingt-quatre","deux mille vingt-cinq","deux mille vingt-six","deux mille vingt-sept","deux mille vingt-huit","deux mille vingt-neuf","deux mille trente");
+        $yearNumber = array("2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035");
+        $yearText = array("deux mille","deux mille un","deux mille deux","deux mille trois","deux mille quatre","deux mille cinq","deux mille six","deux mille sept","deux mille huit","deux mille neuf","deux mille dix","deux mille onze","deux mille douze","deux mille treize","deux mille quatorze","deux mille quinze","deux mille seize","deux mille dix-sept","deux mille dix-huit","deux mille dix-neuf","deux mille vingt","deux mille vingt et un","deux mille vingt-deux","deux mille vingt-trois", "deux mille vingt-quatre","deux mille vingt-cinq","deux mille vingt-six","deux mille vingt-sept","deux mille vingt-huit","deux mille vingt-neuf","deux mille trente","deux mille trente et un","deux mille trente-deux","deux mille trente-trois","deux mille-quatre","deux mille trente-cinq");
         $dd_long1 = str_replace($yearNumber,$yearText,$dd_short);
         $dd_long = str_replace($dayNumber, $dayNumberText, $dd_long1);
         $fin_long1 = str_replace($yearNumber,$yearText,$fin_short);
@@ -669,6 +669,7 @@ class StagiaireController extends Controller
         }
         $filename = 'OP_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);
+
     }
 }
 
