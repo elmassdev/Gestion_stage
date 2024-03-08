@@ -33,12 +33,14 @@
             <div class="container">
                 <div>
                     <img src="<?php echo e(public_path("/images/logow.jpg")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
-                 <b>SBU-Mining <br>
+                    <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
-                    Développement RH <br></b> <div class="phones">
-                    <small>Tel: +212 662 07 74 39</small><br>
-                    <small>Fax: +212 524 64 60 86</small></div>
+                    Développement RH <br></b>
+                    <div class="phones">
+                        <small>Tel: +212 662 07 74 39</small><br>
+                        <small>Fax: +212 524 64 60 86</small>
+                    </div>
                 </div>
             </div>
         </div>

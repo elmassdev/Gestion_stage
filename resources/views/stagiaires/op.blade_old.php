@@ -37,10 +37,9 @@
 
         #title {
             font-family: sans-serif;
-            font-size: 1.3rem;
+            font-size: 22px;
             border: 1px solid black;
-            padding: 2%;
-            /* width: 38%; */
+            width: 38%;
             font-weight: bold;
             background-color: #8bb6e8;
         }
@@ -51,9 +50,15 @@
             padding-top: 0px;
             padding-left:10%;
             font-size: 12px;
+
+        }
+        .imp{
+            padding-top: 0px;
+            font-size: 12px;
+
         }
         .intro{
-            margin-top: 6%;
+            margin-top: 3%;
         }
         span{
         padding-left: 60px;
@@ -64,23 +69,6 @@
             margin-right: 30px;
             line-height: 15pt;
         }
-        .ref .logo{
-            margin: 1% 1% 1%;
-        }
-        .ref{
-            margin: 3% 0% 0% 0%;
-            font-size: 0.9rem;
-        }
-        .titre{
-            margin-left: 30%;
-            margin-right: 30%;
-            text-align: center;
-        }
-        .imp{
-            margin-left: 25%;
-            margin-right: 30%;
-            text-align: center;
-        }
 
     </style>
 
@@ -90,13 +78,13 @@
             <tr>
                 <td>
                     <div>
-                        <img class="logo" src="{{ public_path("/images/logow.jpg") }}"> <br>
+                        <img class="my-2" src="{{ public_path("/images/logow.jpg") }}"> <br>
                         <b>SBU-Mining <br>
                         Direction Industrielle Mines Gantour <br>
                         Direction Capital Humain Gantour <br>
-                        Développement RH <br></b>
+                        Developpement RH <br></b>
                     </div>
-                    <div class="ref">
+                    <div class="py-2">
                         <p>OIG/H/D -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
                     </div>
                 </td>
@@ -112,10 +100,10 @@
 
 
         <div>
-            <div class="titre">
-                <p id="title"> Ordre de paiement</p>
+            <div class="container">
+                <p class=" row text-center mx-auto py-1 " id="title"> Ordre de paiement</p>
             </div>
-                <p class="imp">Imputation: ____________</p>
+                <p class="row text-center mx-auto fs-2">Imputation: ____________</p>
             </div>
             <div class="intro">
                 <p>
@@ -202,6 +190,7 @@
         padding-left: 15%;
     }
     .bottom{
+
         position: fixed;
         bottom: 0;
         left: 0;

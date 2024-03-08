@@ -113,7 +113,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
     </li>
 </ul>
 <p><span>Veuillez agréer, {{$stagiaire->titre}}, l'expression de nos sentiments distingués.</span></p>
-<p>NB : Le stage ne peut en aucun cas être prolongé au delà de la durée contractée</p>
+<p>NB : Le stage ne peut en aucun cas être prolongé au-delà de la durée contractée</p>
 
 
 
