@@ -253,7 +253,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="prenom" value="<?php echo e(old('prenom')); ?>"  required autocomplete="prenom"  autofocus>
+unset($__errorArgs, $__bag); ?>"  oninput="capitalizeFirstLetter(this)" name="prenom" value="<?php echo e(old('prenom')); ?>"  required autocomplete="prenom"  autofocus>
 
                         <?php $__errorArgs = ['prenom'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -269,6 +269,15 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
+
+                <script>
+                    function capitalizeFirstLetter(input) {
+                        var lowercase = input.value.toLowerCase();
+                        var capitalized = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+                        input.value = capitalized;
+                    }
+                </script>
+
 
 
                 <div class="row mb-3">

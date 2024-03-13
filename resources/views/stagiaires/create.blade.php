@@ -221,7 +221,7 @@
                     <label for="prenom" class="col-md-3 col-form-label text-md-left">{{ __('Prénom') }}</label>
 
                     <div class="col-md-8">
-                        <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="prenom" value="{{ old('prenom') }}"  required autocomplete="prenom"  autofocus>
+                        <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror"  oninput="capitalizeFirstLetter(this)" name="prenom" value="{{ old('prenom') }}"  required autocomplete="prenom"  autofocus>
 
                         @error('prenom')
                             <span class="invalid-feedback" role="alert">
@@ -230,6 +230,15 @@
                         @enderror
                     </div>
                 </div>
+
+                <script>
+                    function capitalizeFirstLetter(input) {
+                        var lowercase = input.value.toLowerCase();
+                        var capitalized = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+                        input.value = capitalized;
+                    }
+                </script>
+
 
 
                 <div class="row mb-3">
