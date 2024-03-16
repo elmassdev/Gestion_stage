@@ -401,14 +401,14 @@ class IndicatorsController extends Controller
             $sheet->setCellValue('H' . ($row + 2), $rowData->type_stage);
             $sheet->setCellValue('I' . ($row + 2), $rowData->nomenc);
             $sheet->setCellValue('J' . ($row + 2), $rowData->sigle);
-            $sheet->setCellValue('K' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
-            $sheet->setCellValue('L' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
+            $sheet->setCellValue('K' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d/m/Y'));
+            $sheet->setCellValue('L' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d/m/Y'));
             $sheet->setCellValue('M' . ($row + 2), $rowData->sujet);
             $sheet->setCellValue('N' . ($row + 2), $rowData->type_formation);
             $sheet->setCellValue('O' . ($row + 2), $rowData->remunere);
             $sheet->setCellValue('P' . ($row + 2), $rowData->annule);
             $sheet->setCellValue('Q' . ($row + 2), $rowData->OP_etabli);
-            $sheet->setCellValue('R' . ($row + 2), $rowData->OP_etabli_le);
+            $sheet->setCellValue('R' . ($row + 2), \Carbon\Carbon::parse($rowData->OP_etabli_le)->format('d/m/Y'));
         }
         // Set the response headers for Excel file download
         $filename = 'Extraction_requête_'.$today.'.xlsx';
