@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 
 
@@ -450,6 +449,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                                     <option value="<?php echo e($stagiaire->diplome); ?>" selected><?php echo e($stagiaire->diplome); ?></option>
+                                    <option selected value=""></option>
                                     <option value="Qualification professionnelle" >Qualification professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>

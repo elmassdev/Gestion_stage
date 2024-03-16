@@ -17,6 +17,12 @@
             <option value="1" {{ request('remunere') == 1 ? 'selected' : '' }}>Oui</option>
             <option value="0" {{ request('remunere') == 0 ? 'selected' : '' }}>Non</option>
         </select>
+        <label for="OP_etabli">OP établi:</label>
+        <select name="OP_etabli">
+            <option value="" selected></option>
+            <option value="1" {{ request('OP_etabli') == 1 ? 'selected' : '' }}>Oui</option>
+            <option value="0" {{ request('OP_etabli') == 0 ? 'selected' : '' }}>Non</option>
+        </select>
         <label for="service"> Service</label>
         <select name="service" class="col-md-1">
             <option value="" {{ request('service') === '' ? 'selected' : '' }}></option>
@@ -90,6 +96,7 @@
                     <th>Encadrant</th>
                     <th>Date debut</th>
                     <th>Date fin</th>
+                    <th>OP établi le</th>
                     <th>Actions</th>
 
                 </tr>
@@ -106,6 +113,7 @@
                     <td>{{ $result->nomenc}}</td>
                     <td>{{\Carbon\Carbon::parse($result->date_debut)->format('d/m/Y')}}</td>
                     <td>{{\Carbon\Carbon::parse($result->date_fin)->format('d/m/Y')}}</td>
+                    <td>{{ \Carbon\Carbon::parse($result->OP_etabli_le)->format('d/m/Y')}}</td>
                     <td><a  href="/stagiaires/{{$result->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
                         <form action="/stagiaires/{{$result->id}}" method="POST"  style="display:inline">
                             @csrf

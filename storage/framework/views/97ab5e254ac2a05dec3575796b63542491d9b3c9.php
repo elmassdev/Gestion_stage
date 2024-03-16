@@ -26,13 +26,17 @@
             font-family: sans-serif;
             font-family: Arial, Helvetica, sans-serif;
         }
+        .logo{
+            margin: 0% 0% 1% 0%;
+        }
+
     </style>
 
     <div id="app">
         <div class="row">
             <div class="container">
                 <div>
-                    <img src="<?php echo e(public_path("/images/logow.jpg")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
+                    <img class="logo" src="<?php echo e(public_path("/images/logow.jpg")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
                     <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>

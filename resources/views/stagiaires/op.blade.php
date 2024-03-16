@@ -64,8 +64,8 @@
             margin-right: 30px;
             line-height: 15pt;
         }
-        .ref .logo{
-            margin: 1% 1% 1%;
+         .logo{
+            margin: 0% 0% 1% 0%;
         }
         .ref{
             margin: 3% 0% 0% 0%;

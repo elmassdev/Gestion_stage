@@ -309,37 +309,44 @@ class IndicatorsController extends Controller
 
     public function buildQuery(Request $request){
         return DB::table('stagiaires')
-        ->join('services', 'stagiaires.service', '=', 'services.id')
-        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
-        ->where('stagiaires.site', '=', Auth::user()->site)
-        ->where('stagiaires.annule', '=', false)
-        ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
-        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
-            return $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
-        })
-        ->when($request->filled('remunere'), function ($query) use ($request) {
-            return $query->where('remunere', $request->input('remunere'));
-        })
-        ->when($request->filled('service'), function ($query) use ($request) {
-            return $query->where('stagiaires.service', $request->input('service'));
-        })
-        ->when($request->filled('type_formation'),  function ($query) use ($request) {
-            return $query->where('type_formation', $request->input('type_formation'));
-        })
-        ->when($request->filled('type_stage'),  function ($query) use ($request) {
-            return $query->where('type_stage', $request->input('type_stage'));
-        })
-        ->when($request->filled('diplome'),  function ($query) use ($request) {
-            return $query->where('diplome', $request->input('diplome'));
-        })
-        ->when($request->filled('encadrant'),  function ($query) use ($request) {
-            return $query->where('stagiaires.encadrant', $request->input('encadrant'));
-        })
-        ->when($request->filled('etablissement'),  function ($query) use ($request) {
-            return $query->where('stagiaires.etablissement', $request->input('etablissement'));
-        });
+            ->join('services', 'stagiaires.service', '=', 'services.id')
+            ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
+            ->where('stagiaires.site', '=', Auth::user()->site)
+            ->where('stagiaires.annule', '=', false)
+            ->select('stagiaires.*', 'services.sigle_service as sigle', DB::raw("IFNULL(encadrants.nom, '-') as nomenc"))
+            ->when($request->filled('remunere'), function ($query) use ($request) {
+                return $query->where('remunere', $request->input('remunere'));
+            })
+            ->when($request->filled('service'), function ($query) use ($request) {
+                return $query->where('stagiaires.service', $request->input('service'));
+            })
+            ->when($request->filled('type_formation'),  function ($query) use ($request) {
+                return $query->where('type_formation', $request->input('type_formation'));
+            })
+            ->when($request->filled('type_stage'),  function ($query) use ($request) {
+                return $query->where('type_stage', $request->input('type_stage'));
+            })
+            ->when($request->filled('diplome'),  function ($query) use ($request) {
+                return $query->where('diplome', $request->input('diplome'));
+            })
+            ->when($request->filled('encadrant'),  function ($query) use ($request) {
+                return $query->where('stagiaires.encadrant', $request->input('encadrant'));
+            })
+            ->when($request->filled('etablissement'),  function ($query) use ($request) {
+                return $query->where('stagiaires.etablissement', $request->input('etablissement'));
+            })
+            ->when($request->filled('OP_etabli'),  function ($query) use ($request) {
+                return $query->where('stagiaires.OP_etabli', $request->input('OP_etabli'))
+                    ->whereBetween('OP_etabli_le', [$request->input('start_date'), $request->input('end_date')]);
+            })
+            ->when(!$request->filled('OP_etabli'), function ($query) use ($request) {
+                return $query->whereBetween('date_debut', [$request->input('start_date'), $request->input('end_date')]);
+            });
+    }
 
-}
+
+
+
 
 
     public function queries(Request $request){
@@ -377,6 +384,7 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('O1', 'rémunéré');
         $sheet->setCellValue('P1', 'Annulé');
         $sheet->setCellValue('Q1', 'OP établi');
+        $sheet->setCellValue('R1', 'OP établi le');
 
         $query = $this->buildQuery($request);
         $results = $query->get();
@@ -400,6 +408,7 @@ class IndicatorsController extends Controller
             $sheet->setCellValue('O' . ($row + 2), $rowData->remunere);
             $sheet->setCellValue('P' . ($row + 2), $rowData->annule);
             $sheet->setCellValue('Q' . ($row + 2), $rowData->OP_etabli);
+            $sheet->setCellValue('R' . ($row + 2), $rowData->OP_etabli_le);
         }
         // Set the response headers for Excel file download
         $filename = 'Extraction_requête_'.$today.'.xlsx';

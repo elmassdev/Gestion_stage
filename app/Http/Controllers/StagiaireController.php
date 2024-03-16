@@ -355,33 +355,65 @@ class StagiaireController extends Controller
         return $randomCin;
     }
 
-
     public function updater(Request $request, $id)
-    {
-        $stagiaire = Stagiaire::findOrFail($id);
-        $originalAttributes = $stagiaire->getAttributes();
-        $stagiaire->edited_by= Auth::user()->nom;
-        $validatedData = $request->validate([
-            'dateLO' => 'nullable|date',
-            'date_reception_FFS' => 'nullable|date',
-            'date_Att_etablie' => 'nullable|date',
-            'Attestation_remise_le' => 'nullable|date',
-            'Att_remise_a' => 'nullable|string',
-            'OP_etabli_le' => 'nullable|date',
-            'indemnite_remise_le' => 'nullable|date',
-        ]);
+{
+    $stagiaire = Stagiaire::findOrFail($id);
+    $originalAttributes = $stagiaire->getAttributes();
+    $stagiaire->edited_by = Auth::user()->nom;
+    $validatedData = $request->validate([
+        'dateLO' => 'nullable|date',
+        'date_reception_FFS' => 'nullable|date',
+        'date_Att_etablie' => 'nullable|date',
+        'Attestation_remise_le' => 'nullable|date',
+        'Att_remise_a' => 'nullable|string',
+        'OP_etabli_le' => 'nullable|date',
+        'indemnite_remise_le' => 'nullable|date',
+    ]);
 
-        $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
-            return $originalAttributes[$key] != $value;
-        }, ARRAY_FILTER_USE_BOTH);
-        //Pour modifier OP_etabli
-        if (isset($modifiedAttributes['OP_etabli_le']) && $modifiedAttributes['OP_etabli_le'] !== null) {
-            $modifiedAttributes['OP_etabli'] = true;
-        }
+    $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
+        return $originalAttributes[$key] != $value;
+    }, ARRAY_FILTER_USE_BOTH);
 
-        $stagiaire->update($modifiedAttributes);
-        return redirect()->back()->with('success', 'Information modifiée avec succès');
+    // Check if OP_etabli_le is empty, then set OP_etabli to false
+    if (empty($validatedData['OP_etabli_le'])) {
+        $modifiedAttributes['OP_etabli'] = false;
+    } else {
+        // If OP_etabli_le is not empty, set OP_etabli to true
+        $modifiedAttributes['OP_etabli'] = true;
     }
+
+    $stagiaire->update($modifiedAttributes);
+    return redirect()->back()->with('success', 'Information modifiée avec succès');
+}
+
+
+
+    // public function updater(Request $request, $id)
+    // {
+    //     $stagiaire = Stagiaire::findOrFail($id);
+    //     $originalAttributes = $stagiaire->getAttributes();
+    //     $stagiaire->edited_by= Auth::user()->nom;
+    //     $validatedData = $request->validate([
+    //         'dateLO' => 'nullable|date',
+    //         'date_reception_FFS' => 'nullable|date',
+    //         'date_Att_etablie' => 'nullable|date',
+    //         'Attestation_remise_le' => 'nullable|date',
+    //         'Att_remise_a' => 'nullable|string',
+    //         'OP_etabli_le' => 'nullable|date',
+    //         'indemnite_remise_le' => 'nullable|date',
+    //     ]);
+
+    //     $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
+    //         return $originalAttributes[$key] != $value;
+    //     }, ARRAY_FILTER_USE_BOTH);
+    //     //Pour modifier OP_etabli
+    //     if (isset($modifiedAttributes['OP_etabli_le']) && $modifiedAttributes['OP_etabli_le'] !== null) {
+    //         $modifiedAttributes['OP_etabli'] = true;
+    //     }
+
+    //     $stagiaire->update($modifiedAttributes);
+    //     return redirect()->back()->with('success', 'Information modifiée avec succès');
+    // }
 
     /**
      * Remove the specified resource from storage.
