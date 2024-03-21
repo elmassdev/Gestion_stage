@@ -35,7 +35,7 @@
     <div id="app">
         <div class="row">
             <div class="container">
-                <div>
+                <div style="margin-left:1%;">
                     <img class="logo" src="{{ public_path("/images/logow.jpg") }}" alt="" style="width: 140px; height: 50px;"> <br>
                     <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>

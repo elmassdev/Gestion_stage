@@ -402,9 +402,10 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
 
-                        <div class="row mb-3">
-                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
+                        
 
+                        <div class="row mb-3">
+                            <label for="niveau" class="col-md-3 col-form-label text-md-left">Niveau</label>
                             <div class="col-md-8">
                                 <select id="niveau" type="text" class="form-control <?php $__errorArgs = ['niveau'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -413,9 +414,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau">
-                                    <option value="<?php echo e($stagiaire->niveau); ?>" selected><?php echo e($stagiaire->niveau); ?></option>
-                                    <option value="1ère année" >1ère année</option>
+unset($__errorArgs, $__bag); ?>" name="niveau" autocomplete="niveau">
+                                    <option value="1ère année">1ère année</option>
                                     <option value="2ème année">2ème année</option>
                                     <option value="3ème année">3ème année</option>
                                     <option value="4ème année">4ème année</option>
@@ -426,15 +426,29 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong><?php echo e($message); ?></strong>
+                                </span>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+
+
+                        <script>
+                            // Retrieve the old value from PHP and set it as the selected option in the dropdown
+                            var oldNiveau = "<?php echo e($stagiaire->niveau); ?>";
+                            var selectElement = document.getElementById('niveau');
+                            for (var i = 0; i < selectElement.options.length; i++) {
+                                if (selectElement.options[i].value === oldNiveau) {
+                                    selectElement.options[i].selected = true;
+                                    break;
+                                }
+                            }
+                        </script>
+
 
 
                         <div class="row mb-3">
@@ -448,8 +462,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                                    <option value="<?php echo e($stagiaire->diplome); ?>" selected><?php echo e($stagiaire->diplome); ?></option>
-                                    <option selected value=""></option>
+                                    
+                                    <option value=""></option>
                                     <option value="Qualification professionnelle" >Qualification professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -478,11 +492,24 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col border border-solid rounded  mx-1 py-2">
-                        <div class="row mb-3">
-                            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
-                            <div class="col-md-8">
-                                <select id="filiere" type="text" class="form-control <?php $__errorArgs = ['filiere'];
+                    <script>
+                        var oldDiplome = "<?php echo e($stagiaire->diplome); ?>";
+                        var selectElement = document.getElementById('diplome');
+                        for (var i = 0; i < selectElement.options.length; i++) {
+                            if (selectElement.options[i].value === oldDiplome) {
+                                selectElement.options[i].selected = true;
+                                break;
+                            }
+                        }
+                    </script>
+
+                    
+
+                        <div class="col border border-solid rounded mx-1 py-2">
+                            <div class="row mb-3">
+                                <label for="filiere" class="col-md-3 col-form-label text-md-left">Filiere</label>
+                                <div class="col-md-8">
+                                    <select id="filiere" class="form-control <?php $__errorArgs = ['filiere'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -490,29 +517,36 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere">
-                                <option value="<?php echo e($stagiaire->filiere); ?>" selected ><?php echo e($stagiaire->filiere); ?></option>
-                                <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($f->filiere); ?>"><?php echo e($f->filiere); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                                <?php $__errorArgs = ['filiere'];
+                                        <option value="">Select Filiere</option>
+                                        <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filiere): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($filiere->filiere); ?>" <?php echo e(old('filiere', $stagiaire->filiere) == $filiere->filiere ? 'selected' : ''); ?>>
+                                                <?php echo e($filiere->filiere); ?>
+
+                                            </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <?php $__errorArgs = ['filiere'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
+
+
+                        
+
                         <div class="row mb-3">
-                            <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
+                            <label for="etablissement" class="col-md-3 col-form-label text-md-left">Etablissement</label>
                             <div class="col-md-8">
-                                <select id="etablissement" type="text" class="form-control <?php $__errorArgs = ['etablissement'];
+                                <select id="etablissement" class="form-control <?php $__errorArgs = ['etablissement'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -520,11 +554,14 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement">
-                                <option  value="<?php echo e($stagiaire->etablissement); ?>" selected ><?php echo e($stagiaire->etablissement); ?></option>
-                                <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                                    <option value="">Select Etablissement</option>
+                                    <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($etab->sigle_etab); ?>" <?php echo e(old('etablissement', $stagiaire->etablissement) == $etab->sigle_etab ? 'selected' : ''); ?>>
+                                            <?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
                                 <?php $__errorArgs = ['etablissement'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -539,21 +576,30 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+
+
+                        
+
+
+                    
+
                         <div class="row mb-3">
-                            <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
+                            <label for="ville" class="col-md-3 col-form-label text-md-left">Ville</label>
                             <div class="col-md-8">
-                                <select id="ville" type="text" class="form-control <?php $__errorArgs = ['ville'];
+                                <select id="ville" class="form-control <?php $__errorArgs = ['ville'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="ville"  autocomplete="ville">
-                                    <option value="<?php echo e($stagiaire->ville); ?>" selected><?php echo e($stagiaire->ville); ?></option>
-                                       <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($ville->ville); ?>"><?php echo e($ville->ville); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+unset($__errorArgs, $__bag); ?>" name="ville" autocomplete="ville">
+                                    <?php $__currentLoopData = $villes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ville): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($ville->ville); ?>" <?php echo e(old('ville', $stagiaire->ville) == $ville->ville ? 'selected' : ''); ?>>
+                                            <?php echo e($ville->ville); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <?php $__errorArgs = ['ville'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -636,10 +682,12 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
+                        
+
                         <div class="row mb-3">
-                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
+                            <label for="encadrant" class="col-md-3 col-form-label text-md-left">Encadrant</label>
                             <div class="col-md-8">
-                                <select id="encadrant" type="text" class="form-control <?php $__errorArgs = ['encadrant'];
+                                <select id="encadrant" class="form-control <?php $__errorArgs = ['encadrant'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -647,11 +695,14 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="encadrant" required autocomplete="encadrant">
-                                <option value="<?php echo e($encadr->id); ?>" selected ><?php echo e($encadr->nom); ?>  <?php echo e($encadr->prenom); ?></option>
-                                <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($encadrant->id); ?>"><?php echo e($encadrant->nom); ?>  <?php echo e($encadrant->prenom); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                                    <option value="">Select Encadrant</option>
+                                    <?php $__currentLoopData = $encadrants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $encadrant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($encadrant->id); ?>" <?php echo e(old('encadrant', $encadr->id) == $encadrant->id ? 'selected' : ''); ?>>
+                                            <?php echo e($encadrant->nom); ?> <?php echo e($encadrant->prenom); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
                                 <?php $__errorArgs = ['encadrant'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -668,9 +719,9 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
+                            <label for="service" class="col-md-3 col-form-label text-md-left">Service d'accueil</label>
                             <div class="col-md-8">
-                                <select id="service" type="text" class="form-control <?php $__errorArgs = ['service'];
+                                <select id="service" class="form-control <?php $__errorArgs = ['service'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -678,11 +729,14 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="service" required autocomplete="service">
-                                <option  value="<?php echo e($serv->id); ?>" selected ><?php echo e($serv->sigle_service); ?></option>
-                                <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($service->id); ?>"><?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                                    <option value="">Select Service d'accueil</option>
+                                    <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($service->id); ?>" <?php echo e(old('service', $serv->id) == $service->id ? 'selected' : ''); ?>>
+                                            <?php echo e($service->sigle_service); ?> - <?php echo e($service->libelle); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
                                 <?php $__errorArgs = ['service'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -697,6 +751,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+
+
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>

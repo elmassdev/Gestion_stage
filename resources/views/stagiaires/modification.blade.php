@@ -275,9 +275,8 @@
                         </div>
 
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
-
                             <div class="col-md-8">
                                 <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau"  autocomplete="niveau">
                                     <option value="{{$stagiaire->niveau}}" selected>{{$stagiaire->niveau}}</option>
@@ -293,15 +292,47 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="niveau" class="col-md-3 col-form-label text-md-left">Niveau</label>
+                            <div class="col-md-8">
+                                <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau" autocomplete="niveau">
+                                    <option value="1ère année">1ère année</option>
+                                    <option value="2ème année">2ème année</option>
+                                    <option value="3ème année">3ème année</option>
+                                    <option value="4ème année">4ème année</option>
+                                    <option value="5ème année">5ème année</option>
+                                </select>
+                                @error('niveau')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
+
+
+                        <script>
+                            // Retrieve the old value from PHP and set it as the selected option in the dropdown
+                            var oldNiveau = "{{ $stagiaire->niveau }}";
+                            var selectElement = document.getElementById('niveau');
+                            for (var i = 0; i < selectElement.options.length; i++) {
+                                if (selectElement.options[i].value === oldNiveau) {
+                                    selectElement.options[i].selected = true;
+                                    break;
+                                }
+                            }
+                        </script>
+
 
 
                         <div class="row mb-3">
                             <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                                    <option value="{{$stagiaire->diplome}}" selected>{{$stagiaire->diplome}}</option>
-                                    <option selected value=""></option>
+                                    {{-- <option selected value="{{$stagiaire->diplome}}" selected>{{$stagiaire->diplome}}</option> --}}
+                                    <option value=""></option>
                                     <option value="Qualification professionnelle" >Qualification professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -323,7 +354,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col border border-solid rounded  mx-1 py-2">
+                    <script>
+                        var oldDiplome = "{{ $stagiaire->diplome }}";
+                        var selectElement = document.getElementById('diplome');
+                        for (var i = 0; i < selectElement.options.length; i++) {
+                            if (selectElement.options[i].value === oldDiplome) {
+                                selectElement.options[i].selected = true;
+                                break;
+                            }
+                        }
+                    </script>
+
+                    {{-- < class="col border border-solid rounded  mx-1 py-2">
                         <div class="row mb-3">
                             <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
                             <div class="col-md-8">
@@ -339,8 +381,30 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row mb-3">
+                        </div> --}}
+
+                        <div class="col border border-solid rounded mx-1 py-2">
+                            <div class="row mb-3">
+                                <label for="filiere" class="col-md-3 col-form-label text-md-left">Filiere</label>
+                                <div class="col-md-8">
+                                    <select id="filiere" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
+                                        <option value="">Select Filiere</option>
+                                        @foreach($filieres as $filiere)
+                                            <option value="{{ $filiere->filiere }}" {{ old('filiere', $stagiaire->filiere) == $filiere->filiere ? 'selected' : '' }}>
+                                                {{ $filiere->filiere }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('filiere')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                        {{-- <div class="row mb-3">
                             <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
                             <div class="col-md-8">
                                 <select id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
@@ -355,8 +419,29 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
+
                         <div class="row mb-3">
+                            <label for="etablissement" class="col-md-3 col-form-label text-md-left">Etablissement</label>
+                            <div class="col-md-8">
+                                <select id="etablissement" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
+                                    <option value="">Select Etablissement</option>
+                                    @foreach($etablissements as $etab)
+                                        <option value="{{ $etab->sigle_etab }}" {{ old('etablissement', $stagiaire->etablissement) == $etab->sigle_etab ? 'selected' : '' }}>
+                                            {{ $etab->sigle_etab }} - {{ $etab->Etab }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('etablissement')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        {{-- <div class="row mb-3">
                             <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
                             <div class="col-md-8">
                                 <select id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville"  autocomplete="ville">
@@ -364,6 +449,60 @@
                                        @foreach($villes as $ville)
                                 <option value="{{ $ville->ville }}">{{$ville->ville}}</option>
                                 @endforeach
+                                </select>
+                                @error('ville')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+
+                    {{--
+                        <div class="row mb-3">
+                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
+                            <div class="col-md-8">
+                                <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
+                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
+                                @foreach($encadrants as $encadrant)
+                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
+                                @endforeach
+                            </select>
+                                @error('encadrant')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
+                            <div class="col-md-8">
+                                <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
+                                <option  value="{{$serv->id}}" selected >{{$serv->sigle_service}}</option>
+                                @foreach($services as $service)
+                                <option value="{{ $service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
+                                @endforeach
+                            </select>
+                                @error('service')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="ville" class="col-md-3 col-form-label text-md-left">Ville</label>
+                            <div class="col-md-8">
+                                <select id="ville" class="form-control @error('ville') is-invalid @enderror" name="ville" autocomplete="ville">
+                                    @foreach($villes as $ville)
+                                        <option value="{{ $ville->ville }}" {{ old('ville', $stagiaire->ville) == $ville->ville ? 'selected' : '' }}>
+                                            {{ $ville->ville }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('ville')
                                     <span class="invalid-feedback" role="alert">
@@ -411,15 +550,53 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
+                        {{-- <div class="row mb-3">
+                            <label for="type_stage" class="col-md-3 col-form-label text-md-left">Type Stage</label>
                             <div class="col-md-8">
-                                <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
-                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
-                                @foreach($encadrants as $encadrant)
-                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
-                                @endforeach
-                            </select>
+                                <select id="type_stage" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage" autocomplete="type_stage">
+                                    @foreach(['stage ouvrier', 'stage d\'application', 'stage d\'observation', 'stage projet fin d\'études'] as $type)
+                                        <option value="{{ $type }}" {{ old('type_stage', $stagiaire->type_stage) == $type ? 'selected' : '' }}>
+                                            {{ $type }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('type_stage')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="type_formation" class="col-md-3 col-form-label text-md-left">Type Formation</label>
+                            <div class="col-md-8">
+                                <select id="type_formation" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation" autocomplete="type_formation">
+                                    @foreach(['EI', 'OFPPT', 'EST+FAC+BTS', 'Cycle Préparatoire (CI)', 'IMM+IMT', 'Autres'] as $type)
+                                        <option value="{{ $type }}" {{ old('type_formation', $stagiaire->type_formation) == $type ? 'selected' : '' }}>
+                                            {{ $type }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('type_formation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="encadrant" class="col-md-3 col-form-label text-md-left">Encadrant</label>
+                            <div class="col-md-8">
+                                <select id="encadrant" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
+                                    <option value="">Select Encadrant</option>
+                                    @foreach($encadrants as $encadrant)
+                                        <option value="{{ $encadrant->id }}" {{ old('encadrant', $encadr->id) == $encadrant->id ? 'selected' : '' }}>
+                                            {{ $encadrant->nom }} {{ $encadrant->prenom }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('encadrant')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -429,14 +606,16 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
+                            <label for="service" class="col-md-3 col-form-label text-md-left">Service d'accueil</label>
                             <div class="col-md-8">
-                                <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
-                                <option  value="{{$serv->id}}" selected >{{$serv->sigle_service}}</option>
-                                @foreach($services as $service)
-                                <option value="{{ $service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
-                                @endforeach
-                            </select>
+                                <select id="service" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
+                                    <option value="">Select Service d'accueil</option>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->id }}" {{ old('service', $serv->id) == $service->id ? 'selected' : '' }}>
+                                            {{ $service->sigle_service }} - {{ $service->libelle }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('service')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -444,6 +623,8 @@
                                 @enderror
                             </div>
                         </div>
+
+
 
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>

@@ -86,9 +86,8 @@
         <table class="table table-striped table-responsive">
             <thead>
                 <tr class="small">
-                    <th>Titre</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
+                    <th>CIN</th>
+                    <th>Nom Prénom</th>
                     <th>Niveau</th>
                     <th>Diplôme</th>
                     <th>Etablissement</th>
@@ -97,15 +96,15 @@
                     <th>Date debut</th>
                     <th>Date fin</th>
                     <th>OP établi le</th>
+                    <th>OP établi par</th>
                     <th>Actions</th>
 
                 </tr>
             </thead>
             <tbody>@foreach($results as $result)
                 <tr class=" table table-row my-auto h-10 small">
-                    <td>{{ $result->civilite}}</td>
-                    <td>{{ $result->prenom}}</td>
-                    <td>{{ $result->nom}}</td>
+                    <td>{{ $result->cin}}</td>
+                    <td>{{ $result->nom}} {{ $result->prenom}}</td>
                     <td>{{ $result->niveau}}</td>
                     <td>{{ $result->diplome}}</td>
                     <td>{{ $result->etablissement}}</td>
@@ -114,12 +113,15 @@
                     <td>{{\Carbon\Carbon::parse($result->date_debut)->format('d/m/Y')}}</td>
                     <td>{{\Carbon\Carbon::parse($result->date_fin)->format('d/m/Y')}}</td>
                     <td>{{ \Carbon\Carbon::parse($result->OP_etabli_le)->format('d/m/Y')}}</td>
+                    <td>{{ $result->edited_by}}</td>
                     <td><a  href="/stagiaires/{{$result->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
+                        @if(auth()->check() && auth()->user()->hasRole('superadmin'))
                         <form action="/stagiaires/{{$result->id}}" method="POST"  style="display:inline">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
                         </form>
+                        @endif
                         <a  href="/stagiaires/{{$result->id}}"><i class="fa fa-print text-primary"></i></a>
                     </td>
                 </tr>

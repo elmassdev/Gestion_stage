@@ -85,9 +85,8 @@
         <table class="table table-striped table-responsive">
             <thead>
                 <tr class="small">
-                    <th>Titre</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
+                    <th>CIN</th>
+                    <th>Nom Prénom</th>
                     <th>Niveau</th>
                     <th>Diplôme</th>
                     <th>Etablissement</th>
@@ -96,15 +95,15 @@
                     <th>Date debut</th>
                     <th>Date fin</th>
                     <th>OP établi le</th>
+                    <th>OP établi par</th>
                     <th>Actions</th>
 
                 </tr>
             </thead>
             <tbody><?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr class=" table table-row my-auto h-10 small">
-                    <td><?php echo e($result->civilite); ?></td>
-                    <td><?php echo e($result->prenom); ?></td>
-                    <td><?php echo e($result->nom); ?></td>
+                    <td><?php echo e($result->cin); ?></td>
+                    <td><?php echo e($result->nom); ?> <?php echo e($result->prenom); ?></td>
                     <td><?php echo e($result->niveau); ?></td>
                     <td><?php echo e($result->diplome); ?></td>
                     <td><?php echo e($result->etablissement); ?></td>
@@ -113,12 +112,15 @@
                     <td><?php echo e(\Carbon\Carbon::parse($result->date_debut)->format('d/m/Y')); ?></td>
                     <td><?php echo e(\Carbon\Carbon::parse($result->date_fin)->format('d/m/Y')); ?></td>
                     <td><?php echo e(\Carbon\Carbon::parse($result->OP_etabli_le)->format('d/m/Y')); ?></td>
+                    <td><?php echo e($result->edited_by); ?></td>
                     <td><a  href="/stagiaires/<?php echo e($result->id); ?>/modification"> <i class="fa fa-edit text-warning"></i></a>
+                        <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
                         <form action="/stagiaires/<?php echo e($result->id); ?>" method="POST"  style="display:inline">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
                             <button class="btn btn-sm" onclick="return confirm('Voulez-vous supprimer cet enregistrement?')"><i class="fa fa-trash text-danger"></i></button>
                         </form>
+                        <?php endif; ?>
                         <a  href="/stagiaires/<?php echo e($result->id); ?>"><i class="fa fa-print text-primary"></i></a>
                     </td>
                 </tr>
