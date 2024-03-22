@@ -52,16 +52,16 @@
 
 {{-- <div class="top"> {{$stagiaire->site}}, le {{$today}}</div> --}}
 <div class="top">
-    @if($dateLO)
-    {{$stagiaire->site}}, le {{$dateLO}}
+    @if(isset($dateLO))
+        {{$stagiaire->site}}, le {{$dateLO}}
     @else
-    @if($stagiaire->date_debut < $today)
-        {{$stagiaire->site}}, le {{$ddemande}}
-    @else
-        {{$stagiaire->site}}, le {{$today}}
-    @endif
+        {{$stagiaire->site}}, le {{$dateToShow}}
     @endif
 </div>
+
+
+
+
 
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>

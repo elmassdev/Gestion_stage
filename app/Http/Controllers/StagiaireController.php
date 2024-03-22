@@ -517,6 +517,10 @@ class StagiaireController extends Controller
         $year = date('Y');
 
 
+        // $diff = now()->diffInDays(Carbon::parse($stagiaire->date_debut), false);
+
+
+
 
         $ddd = $stagiaire->date_debut;
         $ddemande      = $stagiaire->date_demande;
@@ -547,11 +551,18 @@ class StagiaireController extends Controller
         $today = str_replace($englishMonths, $frenchMonths,$today);
         $dateLO = str_replace($englishMonths, $frenchMonths,$dateLO);
 
+        $date_debut = Carbon::parse($stagiaire->date_debut);
+        if ($date_debut->isPast()) {
+            $dateToShow = $ddemande;
+        } else {
+            $dateToShow = $today;
+        }
+
 
             if($stagiaire->EI){
-                $pdf =Pdf::loadView('/stagiaires/convocation',compact('stagiaire','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/convocation',compact('stagiaire','dateToShow','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }else{
-                $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','dateToShow','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
             $filename = 'Convocation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);

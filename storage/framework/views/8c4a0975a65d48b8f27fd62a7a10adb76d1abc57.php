@@ -51,19 +51,18 @@
 
 
 <div class="top">
-    <?php if($dateLO): ?>
-    <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
+    <?php if(isset($dateLO)): ?>
+        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
 
     <?php else: ?>
-    <?php if($stagiaire->date_debut < $today): ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($ddemande); ?>
+        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateToShow); ?>
 
-    <?php else: ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?>
-
-    <?php endif; ?>
     <?php endif; ?>
 </div>
+
+
+
+
 
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>

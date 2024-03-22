@@ -53,19 +53,23 @@
 
 
 <div class="top">
-    <?php if($dateLO): ?>
-    <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
+    <?php if(isset($dateLO)): ?>
+        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
 
-    <?php else: ?>
-    <?php if($stagiaire->date_debut < $today): ?>
+    <?php elseif(Carbon\Carbon::parse($stagiaire->date_debut)->isPast()): ?>
         <?php echo e($stagiaire->site); ?>, le <?php echo e($ddemande); ?>
 
     <?php else: ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?>
+        <?php echo e($stagiaire->site); ?>, le <?php echo e($ddemande); ?>
 
     <?php endif; ?>
-    <?php endif; ?>
 </div>
+
+
+
+
+
+
 
 <div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 <div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> -</small> </div>
