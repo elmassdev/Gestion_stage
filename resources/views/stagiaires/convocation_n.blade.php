@@ -56,10 +56,8 @@
 <div class="top">
     @if(isset($dateLO))
         {{$stagiaire->site}}, le {{$dateLO}}
-    @elseif(Carbon\Carbon::parse($stagiaire->date_debut)->isPast())
-        {{$stagiaire->site}}, le {{$ddemande}}
     @else
-        {{$stagiaire->site}}, le {{$ddemande}}
+        {{$stagiaire->site}}, le {{$dateToShow}}
     @endif
 </div>
 

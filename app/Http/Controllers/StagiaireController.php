@@ -551,12 +551,13 @@ class StagiaireController extends Controller
         $today = str_replace($englishMonths, $frenchMonths,$today);
         $dateLO = str_replace($englishMonths, $frenchMonths,$dateLO);
 
-        $date_debut = Carbon::parse($stagiaire->date_debut);
-        if ($date_debut->isPast()) {
+        $startdate = Carbon::parse($stagiaire->date_debut);
+        if ($startdate->isPast()) {
             $dateToShow = $ddemande;
         } else {
             $dateToShow = $today;
         }
+
 
 
             if($stagiaire->EI){

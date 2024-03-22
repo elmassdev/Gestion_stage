@@ -56,11 +56,8 @@
     <?php if(isset($dateLO)): ?>
         <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
 
-    <?php elseif(Carbon\Carbon::parse($stagiaire->date_debut)->isPast()): ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($ddemande); ?>
-
     <?php else: ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($ddemande); ?>
+        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateToShow); ?>
 
     <?php endif; ?>
 </div>
