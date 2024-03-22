@@ -20,6 +20,8 @@
         </div>
     @endif
 </div> --}}
+
+
 @if(session('success'))
     <div class="alert alert-success">
         {!! session('success') !!}
@@ -33,13 +35,11 @@
             <div class="col border border-solid rounded pt-2">
                 <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
                     @csrf
-                    {{-- Verification date debut date fin  --}}
                     <script>
                     $(document).ready(function() {
                         $('#filiere').select2();
                     });
                     function validateDates() {
-                        // Get the input elements
                         let today = new Date();
                         const holidays = [];
                         const year = new Date().getFullYear();
@@ -106,7 +106,6 @@
                         const formattedBeginningDate = startDate.toISOString().slice(0, 10);
                         const formattedEndDate = endDate.toISOString().slice(0, 10);
 
-                        // Check if the beginning date input is a holiday
                         if (holidays.includes(formattedBeginningDate)){
                             alert('La date de debut est un jour ferié.');
                             return false;
@@ -302,7 +301,7 @@
                     <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
 
                     <div class="col-md-8">
-                        <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau"  autocomplete="niveau">
+                        <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau"  autocomplete="niveau" >
                             <option value="1ère année" >1ère année</option>
                             <option value="2ème année">2ème année</option>
                             <option value="3ème année">3ème année</option>
@@ -406,10 +405,12 @@
                 </div>
             </div> --}}
 
+
+
             <div class="row mb-3">
                 <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filière</label>
                 <div class="col-md-8">
-                    <input list="filiere-list" id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere" required>
+                    <input list="filiere-list" id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere"  required>
                     <datalist id="filiere-list">
                         <option selected disabled> -- Filières-- </option>
                         @foreach($filieres as $f)
@@ -423,6 +424,10 @@
                     @enderror
                 </div>
             </div>
+
+
+
+
 
             <div class="row mb-3">
                 <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
@@ -688,7 +693,6 @@
         $('#diplome').select2();
     });
 </script>
-
 
 
 

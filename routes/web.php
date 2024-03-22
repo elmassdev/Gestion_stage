@@ -66,6 +66,10 @@ Route::middleware(['auth', 'can:view_indicators'])->group(function (){
 
 });
 
+
+
+
+
 Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::view('/export', 'export');
     Route::get('/stagiaires', [App\Http\Controllers\StagiaireController::class, 'index'])->name('stagiaires/index')->middleware('auth');

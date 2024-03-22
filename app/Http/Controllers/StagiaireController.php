@@ -167,7 +167,7 @@ class StagiaireController extends Controller
                         $query->orWhere($column, 'like', $request->input('term'));
                     }
                 }
-            })->paginate(10);
+            })->paginate(13);
         $stagiaire = Stagiaire::findOrFail($id);
         $previous = Stagiaire::where('id', '<', $stagiaire->id)->max('id');
         $next = Stagiaire::where('id', '>', $stagiaire->id)->min('id');
@@ -366,6 +366,7 @@ class StagiaireController extends Controller
         'date_Att_etablie' => 'nullable|date',
         'Attestation_remise_le' => 'nullable|date',
         'Att_remise_a' => 'nullable|string',
+        'observation' => 'nullable|string',
         'OP_etabli_le' => 'nullable|date',
         'indemnite_remise_le' => 'nullable|date',
     ]);
@@ -388,32 +389,6 @@ class StagiaireController extends Controller
 
 
 
-    // public function updater(Request $request, $id)
-    // {
-    //     $stagiaire = Stagiaire::findOrFail($id);
-    //     $originalAttributes = $stagiaire->getAttributes();
-    //     $stagiaire->edited_by= Auth::user()->nom;
-    //     $validatedData = $request->validate([
-    //         'dateLO' => 'nullable|date',
-    //         'date_reception_FFS' => 'nullable|date',
-    //         'date_Att_etablie' => 'nullable|date',
-    //         'Attestation_remise_le' => 'nullable|date',
-    //         'Att_remise_a' => 'nullable|string',
-    //         'OP_etabli_le' => 'nullable|date',
-    //         'indemnite_remise_le' => 'nullable|date',
-    //     ]);
-
-    //     $modifiedAttributes = array_filter($validatedData, function ($value, $key) use ($originalAttributes) {
-    //         return $originalAttributes[$key] != $value;
-    //     }, ARRAY_FILTER_USE_BOTH);
-    //     //Pour modifier OP_etabli
-    //     if (isset($modifiedAttributes['OP_etabli_le']) && $modifiedAttributes['OP_etabli_le'] !== null) {
-    //         $modifiedAttributes['OP_etabli'] = true;
-    //     }
-
-    //     $stagiaire->update($modifiedAttributes);
-    //     return redirect()->back()->with('success', 'Information modifiée avec succès');
-    // }
 
     /**
      * Remove the specified resource from storage.
@@ -534,7 +509,7 @@ class StagiaireController extends Controller
         ->join('services', 'stagiaires.service','=','services.id')
         ->join('encadrants','stagiaires.encadrant','=','encadrants.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','services.sigle_service as sigle','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
+               ->get(['civilite.civilite as titre','stagiaires.id','stagiaires.code','stagiaires.date_demande','stagiaires.dateLO','stagiaires.nom','stagiaires.prenom', 'stagiaires.site','stagiaires.diplome', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI', 'stagiaires.encadrant','stagiaires.service','stagiaires.niveau', 'services.libelle as lib','services.sigle_service as sigle','encadrants.titre as titreenc','encadrants.nom as nomenc','encadrants.prenom as prenomenc', 'stagiaires.sujet'])->first();
 
 
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
@@ -546,6 +521,8 @@ class StagiaireController extends Controller
         $ddd = $stagiaire->date_debut;
         $ddemande      = $stagiaire->date_demande;
         $ddemande = Carbon::parse($ddemande)->format('d F Y');
+        $dateLO      = $stagiaire->dateLO;
+        $dateLO = Carbon::parse($dateLO)->format('d F Y');
         $dd = Carbon::parse($ddd)->format('d F Y');
         $fin=$stagiaire->date_fin;
 
@@ -568,12 +545,13 @@ class StagiaireController extends Controller
         $fin_long1 = str_replace($yearNumber,$yearText,$fin_short);
         $fin_long = str_replace($dayNumber, $dayNumberText, $fin_long1);
         $today = str_replace($englishMonths, $frenchMonths,$today);
+        $dateLO = str_replace($englishMonths, $frenchMonths,$dateLO);
 
 
             if($stagiaire->EI){
-                $pdf =Pdf::loadView('/stagiaires/convocation',compact('stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/convocation',compact('stagiaire','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }else{
-                $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
             $filename = 'Convocation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);

@@ -135,7 +135,7 @@
                                 <?php endif; ?>
                                 <?php if(($stagiaire->date_fin > now()) && !($stagiaire->annule)): ?>
                                 <div class=" card col-md-12">
-                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" target="_blank" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                    <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/convocation" class="btn" target="_blank" id="LO" class="print-link" data-id="<?php echo e($stagiaire->id); ?>><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
                                 <?php endif; ?>
                             </td>
@@ -300,6 +300,34 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <?php if($stagiaire->Att_remise_a): ?>
                             <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e($stagiaire->Att_remise_a); ?></p></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="observation" class="col-md-3 mx-1 col-form-label text-md-left"><?php echo e(__('Observation: ')); ?></label>
+                            <div class="col-md-5">
+                                <input id="observation" type="text" value="<?php echo e($stagiaire->observation); ?>" class="form-control <?php $__errorArgs = ['observation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="observation"    autocomplete="observation"  autofocus>
+                                <?php $__errorArgs = ['observation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <?php if($stagiaire->observation): ?>
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e($stagiaire->observation); ?></p></div>
                             <?php endif; ?>
                         </div>
                         <div class="row mb-3">
@@ -491,7 +519,6 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 </div>
-
 
 
 <?php $__env->stopSection(); ?>

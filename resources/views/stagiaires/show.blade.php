@@ -136,7 +136,7 @@
                                 @endif
                                 @if(($stagiaire->date_fin > now()) && !($stagiaire->annule))
                                 <div class=" card col-md-12">
-                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn" target="_blank" id="LO" ><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
+                                    <a  href="/stagiaires/{{$stagiaire->id}}/convocation" class="btn" target="_blank" id="LO" class="print-link" data-id="{{ $stagiaire->id }}><i class="fa fa-print text-primary"></i> Lettre d'offre</a>
                                 </div>
                                 @endif
                             </td>
@@ -231,6 +231,20 @@
                             </div>
                             @if($stagiaire->Att_remise_a)
                             <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{ $stagiaire->Att_remise_a }}</p></div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label for="observation" class="col-md-3 mx-1 col-form-label text-md-left">{{ __('Observation: ') }}</label>
+                            <div class="col-md-5">
+                                <input id="observation" type="text" value="{{ $stagiaire->observation }}" class="form-control @error('observation') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="observation"    autocomplete="observation"  autofocus>
+                                @error('observation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @if($stagiaire->observation)
+                            <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{ $stagiaire->observation }}</p></div>
                             @endif
                         </div>
                         <div class="row mb-3">
@@ -364,7 +378,6 @@
         </div>
     </div>
 </div>
-
 
 
 @endsection

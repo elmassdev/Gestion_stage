@@ -2,6 +2,8 @@
 
 
 
+
+
 <?php if(session('success')): ?>
     <div class="alert alert-success">
         <?php echo session('success'); ?>
@@ -16,13 +18,11 @@
             <div class="col border border-solid rounded pt-2">
                 <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
                     <?php echo csrf_field(); ?>
-                    
                     <script>
                     $(document).ready(function() {
                         $('#filiere').select2();
                     });
                     function validateDates() {
-                        // Get the input elements
                         let today = new Date();
                         const holidays = [];
                         const year = new Date().getFullYear();
@@ -89,7 +89,6 @@
                         const formattedBeginningDate = startDate.toISOString().slice(0, 10);
                         const formattedEndDate = endDate.toISOString().slice(0, 10);
 
-                        // Check if the beginning date input is a holiday
                         if (holidays.includes(formattedBeginningDate)){
                             alert('La date de debut est un jour ferié.');
                             return false;
@@ -404,7 +403,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau">
+unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau" >
                             <option value="1ère année" >1ère année</option>
                             <option value="2ème année">2ème année</option>
                             <option value="3ème année">3ème année</option>
@@ -472,6 +471,8 @@ unset($__errorArgs, $__bag); ?>
 
                 
 
+
+
             <div class="row mb-3">
                 <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filière</label>
                 <div class="col-md-8">
@@ -482,7 +483,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere" required>
+unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere"  required>
                     <datalist id="filiere-list">
                         <option selected disabled> -- Filières-- </option>
                         <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $f): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -503,6 +504,10 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
+
+
+
+
 
             <div class="row mb-3">
                 <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
@@ -889,7 +894,6 @@ unset($__errorArgs, $__bag); ?>
         $('#diplome').select2();
     });
 </script>
-
 
 
 
