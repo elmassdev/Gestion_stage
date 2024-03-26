@@ -54,10 +54,10 @@
 
 {{-- <div class="top"> {{$stagiaire->site}}, le {{$today}}</div> --}}
 <div class="top">
-    @if(isset($dateLO))
-        {{$stagiaire->site}}, le {{$dateLO}}
+    @if(isset($dateLO) && !empty($dateLO))
+    {{$stagiaire->site}}, le {{$dateLO}}
     @else
-        {{$stagiaire->site}}, le {{$dateToShow}}
+    {{$stagiaire->site}}, le {{$dateToShow}}
     @endif
 </div>
 
@@ -79,8 +79,7 @@
         <td>: Votre demande du {{$ddemande}}  </td>
     </tr>
 </table>
-{{-- <div><b>Objet        :</b> {{$stagiaire->type_stage}}     </div>
-<div><b>Réf       :</b> Votre demande du {{$ddemande}}     </div> --}}
+
 <p>{{$stagiaire->titre}}, <br>
 <p><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un {{$stagiaire->type_stage}} au sein du Groupe OCP.</p>
 <span>Nous vous donnons ci-après les indications relatives à l'organisation du stage :</span>

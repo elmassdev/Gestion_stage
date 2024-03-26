@@ -340,6 +340,7 @@
                                     <option value="DUT">BTS</option>
                                     <option value="Licence fondamentale">Licence fondamentale</option>
                                     <option value="Licence professionnelle">Licence professionnelle</option>
+                                    <option value="Licence sciences et techniques">Licence sciences et techniques</option>
                                     <option value="Cycle d'Ingénieur">Cycle d'Ingénieur</option>
                                     <option value="Master">Master</option>
                                     <option value="Mastère spécialisé">Mastère spécialisé</option>

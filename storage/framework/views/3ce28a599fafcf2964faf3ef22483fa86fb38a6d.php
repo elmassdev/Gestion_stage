@@ -53,11 +53,11 @@
 
 
 <div class="top">
-    <?php if(isset($dateLO)): ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
+    <?php if(isset($dateLO) && !empty($dateLO)): ?>
+    <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
 
     <?php else: ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateToShow); ?>
+    <?php echo e($stagiaire->site); ?>, le <?php echo e($dateToShow); ?>
 
     <?php endif; ?>
 </div>

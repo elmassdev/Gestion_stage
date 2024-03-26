@@ -131,6 +131,7 @@ class StagiaireController extends Controller
             $stagiaire->remunere = $request->boolean('remunere');
             $stagiaire->EI = $request->boolean('EI');
             $stagiaire->observation= $request->input('observation');
+            $stagiaire->dateLO = today();
             $stagiaire->created_by= Auth::user()->nom;
             $stagiaire->save();
 

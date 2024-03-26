@@ -358,6 +358,7 @@
                             <option value="DUT">BTS</option>
                             <option value="Licence fondamentale">Licence fondamentale</option>
                             <option value="Licence professionnelle">Licence professionnelle</option>
+                            <option value="Licence sciences et techniques">Licence sciences et techniques</option>
                             <option value="Cycle d'Ingénieur">Cycle d'Ingénieur</option>
                             <option value="Master">Master</option>
                             <option value="Mastère spécialisé">Mastère spécialisé</option>
@@ -752,7 +753,7 @@
     document.getElementById('diplome').addEventListener('change', function(){
         var diplome = this.value;
         var etab = document.getElementById('etablissement').value;
-        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENSET','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ESITH','ENA','ENSA','ENSIAS','ENSAM','ENSET','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
         var isMasterOrCycle = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMasterOrCycle;
         var isRemunere = ((isMasterOrCycle && ListEtab.includes(etab))|| etab ==='IMM'|| etab ==='IMT');
@@ -762,7 +763,7 @@
     document.getElementById('etablissement').addEventListener('change', function(){
         var etab = this.value;
         var diplome = document.getElementById('diplome').value;
-        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ENA','ENSA','ENSIAS','ENSAM','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
+        var ListEtab = ['ENSMR','EMI','EHTP','ESI','ESITH','ENA','ENSA','ENSIAS','ENSAM','ENSET','ENCG','ISCAE','EMINES','FS','FST','FSJES','UM6P','AIAC','ENSEM','FSS']
         var isMoCI = diplome === 'Cycle d\'Ingénieur' || diplome === 'Master' || diplome === 'Mastère spécialisé' || diplome ==='Doctorat';
         document.getElementById('EI').checked = isMoCI;
         var isRem = ((isMoCI && ListEtab.includes(etab)) || etab ==='IMM'|| etab ==='IMT');
@@ -792,7 +793,7 @@
        }
        if(Etab.value === 'IMM' || Etab.value === 'IMT'){
         typeF.value="IMM+IMT";
-       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'EMVIFMBTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
         typeF.value="OFPPT";
        }
    }
