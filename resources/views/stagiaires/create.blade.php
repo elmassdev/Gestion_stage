@@ -354,6 +354,7 @@
                             <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                             <option value="Technicien">Technicien</option>
                             <option value="Technicien spécialisé">Technicien spécialisé</option>
+                            <option value="Technicien supérieur">Technicien supérieur</option>
                             <option value="DUT">DUT</option>
                             <option value="DUT">BTS</option>
                             <option value="Licence fondamentale">Licence fondamentale</option>
