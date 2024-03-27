@@ -331,9 +331,9 @@
                             <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                                    {{-- <option selected value="{{$stagiaire->diplome}}" selected>{{$stagiaire->diplome}}</option> --}}
+                                    <option selected value="{{$stagiaire->diplome}}" selected>{{$stagiaire->diplome}}</option>
                                     <option value=""></option>
-                                    <option value="Qualification professionnelle" >Qualification professionnelle</option>
+                                    <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
                                     <option value="Technicien supérieur">Technicien supérieur</option>
@@ -346,7 +346,6 @@
                                     <option value="Master">Master</option>
                                     <option value="Mastère spécialisé">Mastère spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
-                                    <option value=" ">Master ENCG</option>
                             </select>
                                 @error('diplome')
                                     <span class="invalid-feedback" role="alert">
@@ -356,16 +355,8 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        var oldDiplome = "{{ $stagiaire->diplome }}";
-                        var selectElement = document.getElementById('diplome');
-                        for (var i = 0; i < selectElement.options.length; i++) {
-                            if (selectElement.options[i].value === oldDiplome) {
-                                selectElement.options[i].selected = true;
-                                break;
-                            }
-                        }
-                    </script>
+
+
 
                     {{-- < class="col border border-solid rounded  mx-1 py-2">
                         <div class="row mb-3">
@@ -390,7 +381,7 @@
                                 <label for="filiere" class="col-md-3 col-form-label text-md-left">Filiere</label>
                                 <div class="col-md-8">
                                     <select id="filiere" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
-                                        <option value="">Select Filiere</option>
+                                        <option value=""></option>
                                         @foreach($filieres as $filiere)
                                             <option value="{{ $filiere->filiere }}" {{ old('filiere', $stagiaire->filiere) == $filiere->filiere ? 'selected' : '' }}>
                                                 {{ $filiere->filiere }}
@@ -427,7 +418,7 @@
                             <label for="etablissement" class="col-md-3 col-form-label text-md-left">Etablissement</label>
                             <div class="col-md-8">
                                 <select id="etablissement" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
-                                    <option value="">Select Etablissement</option>
+                                    <option value=""></option>
                                     @foreach($etablissements as $etab)
                                         <option value="{{ $etab->sigle_etab }}" {{ old('etablissement', $stagiaire->etablissement) == $etab->sigle_etab ? 'selected' : '' }}>
                                             {{ $etab->sigle_etab }} - {{ $etab->Etab }}

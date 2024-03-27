@@ -462,20 +462,21 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                                    
+                                    <option selected value="<?php echo e($stagiaire->diplome); ?>" selected><?php echo e($stagiaire->diplome); ?></option>
                                     <option value=""></option>
-                                    <option value="Qualification professionnelle" >Qualification professionnelle</option>
+                                    <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
+                                    <option value="Technicien supérieur">Technicien supérieur</option>
                                     <option value="DUT">DUT</option>
                                     <option value="DUT">BTS</option>
                                     <option value="Licence fondamentale">Licence fondamentale</option>
                                     <option value="Licence professionnelle">Licence professionnelle</option>
+                                    <option value="Licence sciences et techniques">Licence sciences et techniques</option>
                                     <option value="Cycle d'Ingénieur">Cycle d'Ingénieur</option>
                                     <option value="Master">Master</option>
                                     <option value="Mastère spécialisé">Mastère spécialisé</option>
                                     <option value="Doctorat">Doctorat</option>
-                                    <option value=" ">Master ENCG</option>
                             </select>
                                 <?php $__errorArgs = ['diplome'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -492,16 +493,8 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                     </div>
-                    <script>
-                        var oldDiplome = "<?php echo e($stagiaire->diplome); ?>";
-                        var selectElement = document.getElementById('diplome');
-                        for (var i = 0; i < selectElement.options.length; i++) {
-                            if (selectElement.options[i].value === oldDiplome) {
-                                selectElement.options[i].selected = true;
-                                break;
-                            }
-                        }
-                    </script>
+
+
 
                     
 
@@ -517,7 +510,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="filiere" required autocomplete="filiere">
-                                        <option value="">Select Filiere</option>
+                                        <option value=""></option>
                                         <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filiere): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($filiere->filiere); ?>" <?php echo e(old('filiere', $stagiaire->filiere) == $filiere->filiere ? 'selected' : ''); ?>>
                                                 <?php echo e($filiere->filiere); ?>
@@ -554,7 +547,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement">
-                                    <option value="">Select Etablissement</option>
+                                    <option value=""></option>
                                     <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($etab->sigle_etab); ?>" <?php echo e(old('etablissement', $stagiaire->etablissement) == $etab->sigle_etab ? 'selected' : ''); ?>>
                                             <?php echo e($etab->sigle_etab); ?> - <?php echo e($etab->Etab); ?>

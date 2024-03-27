@@ -692,7 +692,6 @@ class StagiaireController extends Controller
         }
         $filename = 'OP_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);
-
     }
 }
 
