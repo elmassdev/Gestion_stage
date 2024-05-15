@@ -14,13 +14,13 @@
         margin-left: 450px;
     }
     .note{
-        font-size: 15px;
+        font-size: 14px;
         margin-top: 20px;
         margin-left: 20px;
     }
 
     .nomsta{
-        font-size: 15px;
+        font-size: 14px;
         margin-top: 05px;
         margin-left: 350px;
         font-family: sans-serif;
@@ -31,36 +31,37 @@
         margin-top: 75px;
     }
     span{
-        font-size: 15px;
+        font-size: 14px;
         padding-left: 60px;
         padding-top: 40px;
     }
     p{
-        font-size: 15px;
+        font-size: 14px;
         margin-left: 30px;
         margin-right: 30px;
         line-height: 15pt;
     }
     table{
-        font-size: 15px;
+        font-size: 14px;
         margin-left: 20px;
     }
     .tdleft{
-        font-size: 15px;
+        font-size: 14px;
         font-style: bold;
     }
     li{
-        font-size: 15px;
+        font-size: 14px;
         margin-left: 35px;
     }
     .first{
-        line-height: 14px;
+        line-height: 0.7;
     }
     .last{
-        line-height: 12px;
+        line-height: 0.7;
     }
     ul{
         margin-top: 0;
+        font-size: 14px;
     }
 
 </style>
@@ -164,12 +165,13 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
         <style>
             .nb{
-                font-size: 12px;
+                margin-top: 0.5;
+                font-size: 11px;
             }
             .sign{
                 text-align: left;
                 margin-left: 320px;
-                line-height: 4px;
+                line-height: 0.7;
             }
             .sujet{
                 font-size: 10px;

@@ -402,8 +402,6 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
 
-                        
-
                         <div class="row mb-3">
                             <label for="niveau" class="col-md-3 col-form-label text-md-left">Niveau</label>
                             <div class="col-md-8">
@@ -495,9 +493,6 @@ unset($__errorArgs, $__bag); ?>
                     </div>
 
 
-
-                    
-
                         <div class="col border border-solid rounded mx-1 py-2">
                             <div class="row mb-3">
                                 <label for="filiere" class="col-md-3 col-form-label text-md-left">Filiere</label>
@@ -533,9 +528,6 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
 
-
-                        
-
                         <div class="row mb-3">
                             <label for="etablissement" class="col-md-3 col-form-label text-md-left">Etablissement</label>
                             <div class="col-md-8">
@@ -569,12 +561,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
-
-                        
-
-
-                    
 
                         <div class="row mb-3">
                             <label for="ville" class="col-md-3 col-form-label text-md-left">Ville</label>
@@ -674,8 +660,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
-                        
 
                         <div class="row mb-3">
                             <label for="encadrant" class="col-md-3 col-form-label text-md-left">Encadrant</label>

@@ -65,8 +65,9 @@
         footer{
             position: absolute;
             bottom: 1px;
-            font-size: 11px;
-            font-family: 'Times New Roman', Times, serif;
+            font-size: 9px;
+            /* font-family: 'Times New Roman', Times, serif; */
+            font-family: 'Poppins', sans-serif;
         }
     </style>
 

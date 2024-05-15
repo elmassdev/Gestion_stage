@@ -156,7 +156,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
             .sign{
                 text-align: left;
                 margin-left: 320px;
-                line-height: 4px;
+                line-height: 0.7;
             }
             .sujet{
                 font-size: 10px;
@@ -165,7 +165,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
         <div class="sign">  <p> <b>
             P. Le Président Directeur Général & p.o., <br>
-            P. Le Responsable développement RH </b> </p>
+            P. Le Responsable Développement RH </b> </p>
 
         </div>
 

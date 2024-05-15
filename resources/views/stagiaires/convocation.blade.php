@@ -151,7 +151,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
             .sign{
                 text-align: left;
                 margin-left: 320px;
-                line-height: 4px;
+                line-height: 0.7;
             }
             .sujet{
                 font-size: 10px;

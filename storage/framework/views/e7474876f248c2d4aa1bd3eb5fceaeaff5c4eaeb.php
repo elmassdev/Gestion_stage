@@ -36,24 +36,21 @@
         <style>
             .sign{
                 text-align: left;
-                margin-top: 30px;
-                margin-left: 370px;
-                line-height: 10pt;
+                margin-left: 340px;
+                line-height: 0.9;
             }
             .date{
                 text-align: left;
                 margin-top: 70px;
-                margin-left: 370px;
+                margin-left: 340px;
             }
         </style>
 
 <p class="date"><?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> <br></p>
-        <div class="sign">
-
+        <p class="sign">
             P. Le président Directeur Générale et p.o. <br>
             P. Le Responsable Développement RH
-
-        </div>
+        </p>
 
 
 

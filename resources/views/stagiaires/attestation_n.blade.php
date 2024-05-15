@@ -39,14 +39,22 @@
         <style>
             .sign{
                 text-align: left;
+                margin-left: 370px;
+                line-height: 0.7;
+            }
+            .date{
+                text-align: left;
+                font-size: 15px;
                 margin-top: 40px;
                 margin-left: 370px;
-                line-height: 18pt;
             }
         </style>
+        <p class="date">
+            {{$stagiaire->site}}, le {{$today}} <br>
+        </p>
 
         <div class="sign">
-            {{$stagiaire->site}}, le {{$today}} <br>
+
             P. Le Responsable Développement RH
 
         </div>

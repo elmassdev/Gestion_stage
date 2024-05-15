@@ -447,7 +447,7 @@ unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                             <option value="Technicien spécialisé">Technicien spécialisé</option>
                             <option value="Technicien supérieur">Technicien supérieur</option>
                             <option value="DUT">DUT</option>
-                            <option value="DUT">BTS</option>
+                            <option value="BTS">BTS</option>
                             <option value="Licence fondamentale">Licence fondamentale</option>
                             <option value="Licence professionnelle">Licence professionnelle</option>
                             <option value="Licence sciences et techniques">Licence sciences et techniques</option>
