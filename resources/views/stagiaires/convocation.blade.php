@@ -3,6 +3,9 @@
 
 
 <style>
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
 
     .top{
         position: absolute;
@@ -48,6 +51,15 @@
         font-size: 15px;
         margin-left: 35px;
     }
+    .first{
+        line-height: 14px;
+    }
+    .last{
+        line-height: 12px;
+    }
+    ul{
+        margin-top: 0;
+    }
 </style>
 
 {{-- <div class="top"> {{$stagiaire->site}}, le {{$today}}</div> --}}
@@ -68,7 +80,7 @@
 <div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </small> </div>
 
 <p>{{$stagiaire->titre}}, <br>
-<p><span>Suite à votre demande, </span>nous avons l’honneur de vous faire part de notre accord pour l'organisation d'un {{$stagiaire->type_stage}} au sein du Groupe OCP.</p>
+<p class="first"><span>Suite à votre demande, </span>nous avons l’honneur de vous faire part de notre accord pour l'organisation d'un {{$stagiaire->type_stage}} au sein du Groupe OCP.</p>
 
 <table>
     <tr>
@@ -124,8 +136,8 @@
 du Groupe OCP (accident de travail, de trajet, maladie,...)
     </li>
 </ul>
-<p><span>Veuillez agréer, {{$stagiaire->titre}}, l'expression de nos sentiments distingués.</span></p>
-<p>NB : Le stage ne peut en aucun cas être prolongé au-delà de la durée contractée</p>
+<p class="last"><span>Veuillez agréer, {{$stagiaire->titre}}, l'expression de nos sentiments distingués.</span></p>
+<p class="nb">NB : Le stage ne peut en aucun cas être prolongé au-delà de la durée contractée</p>
 
 
 
@@ -133,11 +145,13 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
         <style>
+            .nb{
+                font-size: 12px;
+            }
             .sign{
                 text-align: left;
-                margin-top: 40px;
                 margin-left: 320px;
-                line-height: 22pt;
+                line-height: 4px;
             }
             .sujet{
                 font-size: 10px;
@@ -146,7 +160,7 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
         <div class="sign">  <p> <b>
             P. Le Président Directeur Général & p.o., <br>
-            P. Le Responsable développement RH </b> </p>
+            P. Le Responsable Développement RH </b> </p>
 
         </div>
 

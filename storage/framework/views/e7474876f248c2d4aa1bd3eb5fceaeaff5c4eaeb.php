@@ -1,9 +1,11 @@
-
 <?php $__env->startSection('content'); ?>
 
 <style>
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
     .Att_title{
-        text-align: center; 
+        text-align: center;
         padding-bottom: 70px;
         margin-top: 80px;
     }
@@ -14,12 +16,12 @@
     p{
         margin-left: 30px;
         margin-right: 30px;
-        line-height: 26pt;
+        line-height: 16pt;
     }
 </style>
 <?php
     \Carbon\Carbon::setLocale('fr');
-    setlocale (LC_TIME, 'fr_FR.utf8','fra');    
+    setlocale (LC_TIME, 'fr_FR.utf8','fra');
 ?>
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>
@@ -28,24 +30,30 @@
         Specialité:<?php echo e($stagiaire->filiere); ?> a effectué un <?php echo e($stagiaire->type_stage); ?> au sein de la <?php echo e($stagiaire->direction); ?> et ce pendant la période du <?php echo $dd_long  ?> au <?php echo e($fin_long); ?> ( du <?php echo e($dd_short); ?> au <?php echo e($fin_short); ?>)     <br>   </p>
         <p>
             <span>Faite</span> à la demande de l'intéressé<?php echo e($stagiaire->genre); ?> pour servir et valoir ce que de droit.
-            
+
         </p>
 
         <style>
             .sign{
                 text-align: left;
+                margin-top: 30px;
+                margin-left: 370px;
+                line-height: 10pt;
+            }
+            .date{
+                text-align: left;
                 margin-top: 70px;
                 margin-left: 370px;
-                line-height: 18pt;
             }
         </style>
 
+<p class="date"><?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> <br></p>
         <div class="sign">
-            <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> <br>
-            P. Le président Directeur Générale et p.o. <br>
-            P. Le Responsable développement RH
 
-        </div>     
+            P. Le président Directeur Générale et p.o. <br>
+            P. Le Responsable Développement RH
+
+        </div>
 
 
 
@@ -56,4 +64,5 @@
 
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.doc', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views//stagiaires/attestation.blade.php ENDPATH**/ ?>

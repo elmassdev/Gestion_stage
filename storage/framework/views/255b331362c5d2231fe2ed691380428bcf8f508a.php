@@ -1,9 +1,11 @@
-
 <?php $__env->startSection('content'); ?>
 
 <style>
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
     .Att_title{
-        text-align: center; 
+        text-align: center;
         padding-bottom: 70px;
         margin-top: 80px;
     }
@@ -14,7 +16,7 @@
     p{
         margin-left: 30px;
         margin-right: 30px;
-        line-height: 26pt;
+        line-height: 16pt;
     }
 </style>
 
@@ -29,14 +31,14 @@
         - du <b> <?php echo $dd_long  ?> au <?php echo e($fin_long); ?> ( du <?php echo e($dd_short); ?> au <?php echo e($fin_short); ?>)   </b>  <br>   </p>
         <p>
             <span>La présente attestation est délivrée à l'intéressé<?php echo e($stagiaire->genre); ?> pour servir et
-                valoir ce que de droit.</span> 
-            
+                valoir ce que de droit.</span>
+
         </p>
 
         <style>
             .sign{
                 text-align: left;
-                margin-top: 70px;
+                margin-top: 40px;
                 margin-left: 370px;
                 line-height: 18pt;
             }
@@ -46,7 +48,7 @@
             <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> <br>
             P. Le Responsable développement RH
 
-        </div>     
+        </div>
 
 
 
@@ -57,4 +59,5 @@
 
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.doc', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Share\main\Gestion_stage\resources\views//stagiaires/attestation_n.blade.php ENDPATH**/ ?>

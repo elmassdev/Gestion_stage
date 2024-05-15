@@ -14,6 +14,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
 
@@ -23,20 +24,19 @@
 <body>
     <style>
         body{
-            font-family: sans-serif;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            line-height: 0.9;
         }
         .logo{
             margin: 0% 0% 1% 0%;
         }
-
     </style>
 
     <div id="app">
         <div class="row">
-            <div class="container">
+            <div class="container entete">
                 <div style="margin-left:1%;">
-                    <img class="logo" src="<?php echo e(public_path("/images/logow.jpg")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
+                    <img class="logo" src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
                     <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
@@ -56,13 +56,15 @@
         </main>
     </div>
     <style>
+        .entete{
+            line-height: 0.7;
+        }
         .phones{
             margin-top: 5px;
         }
         footer{
-
             position: absolute;
-            bottom: 20px;
+            bottom: 1px;
             font-size: 11px;
             font-family: 'Times New Roman', Times, serif;
         }

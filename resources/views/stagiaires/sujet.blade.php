@@ -1,6 +1,6 @@
 <style>
     *{
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
     table{
         margin-left: 30px;

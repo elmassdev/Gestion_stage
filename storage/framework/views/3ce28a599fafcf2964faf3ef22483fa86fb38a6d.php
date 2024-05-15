@@ -2,6 +2,9 @@
 
 
 <style>
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
 
     .top{
         position: absolute;
@@ -48,6 +51,15 @@
         font-size: 15px;
         margin-left: 35px;
     }
+    .first{
+        line-height: 14px;
+    }
+    .last{
+        line-height: 12px;
+    }
+    ul{
+        margin-top: 0;
+    }
 
 </style>
 
@@ -82,7 +94,7 @@
 </table>
 
 <p><?php echo e($stagiaire->titre); ?>, <br>
-<p><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un <?php echo e($stagiaire->type_stage); ?> au sein du Groupe OCP.</p>
+<p class="first"><span>Suite à votre demande citée en référence,</span>nous avons l’honneur de vous faire part de notre accord pour un <?php echo e($stagiaire->type_stage); ?> au sein du Groupe OCP.</p>
 <span>Nous vous donnons ci-après les indications relatives à l'organisation du stage :</span>
 <table>
     <tr>
@@ -134,8 +146,8 @@
 du Groupe OCP (accident de travail, de trajet, maladie,...)
     </li>
 </ul>
-<p><span>Veuillez agréer, <?php echo e($stagiaire->titre); ?>, l'expression de nos sentiments distingués</span></p>
-<p>NB : Le stage ne peut en aucun cas être prolongé au-delà de la durée contractée</p>
+<p class="last"><span>Veuillez agréer, <?php echo e($stagiaire->titre); ?>, l'expression de nos sentiments distingués</span></p>
+<p class="nb">NB : Le stage ne peut en aucun cas être prolongé au-delà de la durée contractée</p>
 
 
 
@@ -143,11 +155,13 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
         <style>
+            .nb{
+                font-size: 12px;
+            }
             .sign{
                 text-align: left;
-                margin-top: 15;
                 margin-left: 320px;
-                line-height: 22pt;
+                line-height: 4px;
             }
             .sujet{
                 font-size: 10px;
