@@ -275,25 +275,6 @@
                         </div>
 
 
-                        {{-- <div class="row mb-3">
-                            <label for="niveau" class="col-md-3 col-form-label text-md-left"> Niveau</label>
-                            <div class="col-md-8">
-                                <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau"  autocomplete="niveau">
-                                    <option value="{{$stagiaire->niveau}}" selected>{{$stagiaire->niveau}}</option>
-                                    <option value="1ère année" >1ère année</option>
-                                    <option value="2ème année">2ème année</option>
-                                    <option value="3ème année">3ème année</option>
-                                    <option value="4ème année">4ème année</option>
-                                    <option value="5ème année">5ème année</option>
-                                </select>
-                                @error('niveau')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
                         <div class="row mb-3">
                             <label for="niveau" class="col-md-3 col-form-label text-md-left">Niveau</label>
                             <div class="col-md-8">
@@ -357,25 +338,6 @@
                     </div>
 
 
-
-                    {{-- < class="col border border-solid rounded  mx-1 py-2">
-                        <div class="row mb-3">
-                            <label for="filiere" class="col-md-3 col-form-label text-md-left"> Filiere</label>
-                            <div class="col-md-8">
-                                <select id="filiere" type="text" class="form-control @error('filiere') is-invalid @enderror" name="filiere" required autocomplete="filiere">
-                                <option value="{{$stagiaire->filiere}}" selected >{{$stagiaire->filiere}}</option>
-                                @foreach($filieres as $f)
-                                <option value="{{ $f->filiere}}">{{$f->filiere}}</option>
-                                @endforeach
-                            </select>
-                                @error('filiere')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
                         <div class="col border border-solid rounded mx-1 py-2">
                             <div class="row mb-3">
                                 <label for="filiere" class="col-md-3 col-form-label text-md-left">Filiere</label>
@@ -396,24 +358,6 @@
                                 </div>
                             </div>
 
-
-                        {{-- <div class="row mb-3">
-                            <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
-                            <div class="col-md-8">
-                                <select id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement">
-                                <option  value="{{ $stagiaire->etablissement }}" selected >{{ $stagiaire->etablissement }}</option>
-                                @foreach($etablissements as $etab)
-                                <option value="{{ $etab->sigle_etab}}">{{$etab->sigle_etab}} - {{ $etab->Etab}}</option>
-                                @endforeach
-                            </select>
-                                @error('etablissement')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
                         <div class="row mb-3">
                             <label for="etablissement" class="col-md-3 col-form-label text-md-left">Etablissement</label>
                             <div class="col-md-8">
@@ -432,60 +376,6 @@
                                 @enderror
                             </div>
                         </div>
-
-
-                        {{-- <div class="row mb-3">
-                            <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
-                            <div class="col-md-8">
-                                <select id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville"  autocomplete="ville">
-                                    <option value="{{$stagiaire->ville}}" selected>{{$stagiaire->ville}}</option>
-                                       @foreach($villes as $ville)
-                                <option value="{{ $ville->ville }}">{{$ville->ville}}</option>
-                                @endforeach
-                                </select>
-                                @error('ville')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
-
-                    {{--
-                        <div class="row mb-3">
-                            <label for="encadrant" class="col-md-3 col-form-label text-md-left"> Encadrant</label>
-                            <div class="col-md-8">
-                                <select id="encadrant" type="text" class="form-control @error('encadrant') is-invalid @enderror" name="encadrant" required autocomplete="encadrant">
-                                <option value="{{$encadr->id}}" selected >{{$encadr->nom}}  {{ $encadr->prenom}}</option>
-                                @foreach($encadrants as $encadrant)
-                                <option value="{{ $encadrant->id}}">{{$encadrant->nom}}  {{ $encadrant->prenom}}</option>
-                                @endforeach
-                            </select>
-                                @error('encadrant')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
-                            <div class="col-md-8">
-                                <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service">
-                                <option  value="{{$serv->id}}" selected >{{$serv->sigle_service}}</option>
-                                @foreach($services as $service)
-                                <option value="{{ $service->id}}">{{$service->sigle_service}} - {{ $service->libelle}}</option>
-                                @endforeach
-                            </select>
-                                @error('service')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <div class="row mb-3">
                             <label for="ville" class="col-md-3 col-form-label text-md-left">Ville</label>
@@ -542,42 +432,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        {{-- <div class="row mb-3">
-                            <label for="type_stage" class="col-md-3 col-form-label text-md-left">Type Stage</label>
-                            <div class="col-md-8">
-                                <select id="type_stage" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage" autocomplete="type_stage">
-                                    @foreach(['stage ouvrier', 'stage d\'application', 'stage d\'observation', 'stage projet fin d\'études'] as $type)
-                                        <option value="{{ $type }}" {{ old('type_stage', $stagiaire->type_stage) == $type ? 'selected' : '' }}>
-                                            {{ $type }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('type_stage')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="type_formation" class="col-md-3 col-form-label text-md-left">Type Formation</label>
-                            <div class="col-md-8">
-                                <select id="type_formation" class="form-control @error('type_formation') is-invalid @enderror" name="type_formation" autocomplete="type_formation">
-                                    @foreach(['EI', 'OFPPT', 'EST+FAC+BTS', 'Cycle Préparatoire (CI)', 'IMM+IMT', 'Autres'] as $type)
-                                        <option value="{{ $type }}" {{ old('type_formation', $stagiaire->type_formation) == $type ? 'selected' : '' }}>
-                                            {{ $type }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('type_formation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <div class="row mb-3">
                             <label for="encadrant" class="col-md-3 col-form-label text-md-left">Encadrant</label>
