@@ -2,12 +2,14 @@
 
 
 <style>
-    *{
-        font-family: 'Poppins', sans-serif;
-    }
 
+p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
+    font-family: 'poppins', sans-serif;
+    line-height: 0.9;
+}
 
     .top{
+        font-size: 14px;
         position: absolute;
         top: 40px;
         margin-left: 450px;
@@ -20,9 +22,9 @@
 
     .nomsta{
         font-size: 14px;
+        line-height: 0.8;
         margin-top: 05px;
         margin-left: 350px;
-        font-family: sans-serif;
     }
     .Att_title{
         text-align: center;
@@ -46,7 +48,6 @@
     }
     .tdleft{
         font-size: 14px;
-        font-style: bold;
     }
     li{
         font-size: 14px;
@@ -82,15 +83,15 @@
 
 
 
-<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
-<div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> -</small> </div>
+<div class="note"> <small>  OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?>  </small> </div>
+<div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?></b> <br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> -</small> </div>
 <table>
     <tr>
-        <td> <b>Objet</b> </td>
+        <td> Objet </td>
         <td>: <?php echo e($stagiaire->type_stage); ?> </td>
     </tr>
     <tr>
-        <td> <b>Réf</b> </td>
+        <td> Réf </td>
         <td>: Votre demande du <?php echo e($ddemande); ?>  </td>
     </tr>
 </table>
@@ -163,17 +164,21 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
             }
             .sign{
                 text-align: left;
-                margin-left: 320px;
-                line-height: 0.7;
+                margin-left: 370px;
+                margin-top: 30px;
+                font-size: 15px;
+                font-family: 'poppins', sans-serif;
+                line-height: 0.8;
+                /* font-style: bold; */
             }
             .sujet{
                 font-size: 10px;
             }
         </style>
 
-<div class="sign">  <p> <b>
+<div class="sign">
     P. Le Président Directeur Général & p.o., <br>
-    P. Le Responsable Développement RH </b> </p>
+    P. Le Responsable Développement RH
 
 </div>
 

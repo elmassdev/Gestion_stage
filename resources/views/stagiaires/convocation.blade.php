@@ -3,13 +3,16 @@
 
 
 <style>
-    *{
-        font-family: 'Poppins', sans-serif;
-    }
+
+p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
+    font-family: 'poppins', sans-serif;
+    line-height: 0.9;
+}
 
     .top{
         position: absolute;
         top: 40px;
+        font-size: 14px;
         margin-left: 450px;
     }
     .note{
@@ -21,8 +24,8 @@
     .nomsta{
         font-size: 15px;
         margin-top: 05px;
+        line-height: 0.8;
         margin-left: 350px;
-        font-family: sans-serif;
     }
     .Att_title{
         text-align: center;
@@ -44,9 +47,9 @@
         font-size: 15px;
         margin-left: 30px;
     }
-    .tdleft{
+    /* .tdleft{
         font-style: bold;
-    }
+    } */
     li{
         font-size: 15px;
         margin-left: 35px;
@@ -59,6 +62,21 @@
     }
     ul{
         margin-top: 0;
+    }
+    .nb{
+        font-size: 12px;
+    }
+    .sign{
+        text-align: left;
+        margin-left: 340px;
+        margin-top: 30px;
+        font-size: 15px;
+        font-family: 'poppins', sans-serif;
+        line-height: 0.8;
+        /* font-style: bold; */
+    }
+    .sujet{
+        font-size: 10px;
     }
 </style>
 
@@ -76,7 +94,7 @@
 
 
 
-<div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small>  OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}  </small> </div>
 <div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </small> </div>
 
 <p>{{$stagiaire->titre}}, <br>
@@ -144,23 +162,10 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
 
-        <style>
-            .nb{
-                font-size: 12px;
-            }
-            .sign{
-                text-align: left;
-                margin-left: 320px;
-                line-height: 0.7;
-            }
-            .sujet{
-                font-size: 10px;
-            }
-        </style>
 
-        <div class="sign">  <p> <b>
+        <div class="sign">
             P. Le Président Directeur Général & p.o., <br>
-            P. Le Responsable Développement RH </b> </p>
+            P. Le Responsable Développement RH
 
         </div>
 

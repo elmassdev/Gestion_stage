@@ -312,8 +312,8 @@
                             <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                                    <option selected value="{{$stagiaire->diplome}}" selected>{{$stagiaire->diplome}}</option>
-                                    <option value=""></option>
+                                    <option selected value="{{$stagiaire->diplome}}" >{{$stagiaire->diplome}}</option>
+                                    <option  value=""></option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>

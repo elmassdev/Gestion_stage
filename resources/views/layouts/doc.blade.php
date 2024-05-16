@@ -22,25 +22,17 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <style>
-        body{
-            font-family: 'Poppins', sans-serif;
-            line-height: 0.9;
-        }
-        .logo{
-            margin: 0% 0% 1% 0%;
-        }
-    </style>
+
 
     <div id="app">
         <div class="row">
             <div class="container entete">
                 <div style="margin-left:1%;">
                     <img class="logo" src="{{ public_path("/images/logow.png") }}" alt="" style="width: 140px; height: 50px;"> <br>
-                    <b>SBU-Mining <br>
+                    SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
-                    Développement RH <br></b>
+                    Développement RH <br>
                     <div class="phones">
                         <small>Tel: +212 662 07 74 39</small><br>
                         <small>Fax: +212 524 64 60 86</small>
@@ -56,8 +48,13 @@
         </main>
     </div>
     <style>
+    .logo{
+            margin: 0% 0% 1% 0%;
+        }
         .entete{
-            line-height: 0.7;
+            line-height: 0.8;
+            font-size: 14px;
+            font-family:'poppins',  sans-serif;
         }
         .phones{
             margin-top: 5px;
@@ -66,8 +63,7 @@
             position: absolute;
             bottom: 1px;
             font-size: 9px;
-            /* font-family: 'Times New Roman', Times, serif; */
-            font-family: 'Poppins', sans-serif;
+            font-family:'MazzardH',  sans-serif;
         }
     </style>
 

@@ -3,12 +3,14 @@
 
 
 <style>
-    *{
-        font-family: 'Poppins', sans-serif;
-    }
 
+p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
+    font-family: 'poppins', sans-serif;
+    line-height: 0.9;
+}
 
     .top{
+        font-size: 14px;
         position: absolute;
         top: 40px;
         margin-left: 450px;
@@ -21,9 +23,9 @@
 
     .nomsta{
         font-size: 14px;
+        line-height: 0.8;
         margin-top: 05px;
         margin-left: 350px;
-        font-family: sans-serif;
     }
     .Att_title{
         text-align: center;
@@ -47,7 +49,6 @@
     }
     .tdleft{
         font-size: 14px;
-        font-style: bold;
     }
     li{
         font-size: 14px;
@@ -62,6 +63,22 @@
     ul{
         margin-top: 0;
         font-size: 14px;
+    }
+    .nb{
+        margin-top: 0.5;
+        font-size: 11px;
+    }
+    .sign{
+        text-align: left;
+        margin-left: 370px;
+        margin-top: 30px;
+        font-size: 15px;
+        font-family: 'poppins', sans-serif;
+        line-height: 0.8;
+        /* font-style: bold; */
+    }
+    .sujet{
+        font-size: 10px;
     }
 
 </style>
@@ -81,15 +98,15 @@
 
 
 
-<div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
-<div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} -</small> </div>
+<div class="note"> <small>  OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}  </small> </div>
+<div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}}</b> <br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} -</small> </div>
 <table>
     <tr>
-        <td> <b>Objet</b> </td>
+        <td> Objet </td>
         <td>: {{$stagiaire->type_stage}} </td>
     </tr>
     <tr>
-        <td> <b>Réf</b> </td>
+        <td> Réf </td>
         <td>: Votre demande du {{$ddemande}}  </td>
     </tr>
 </table>
@@ -163,24 +180,10 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
 
 
 
-        <style>
-            .nb{
-                margin-top: 0.5;
-                font-size: 11px;
-            }
-            .sign{
-                text-align: left;
-                margin-left: 320px;
-                line-height: 0.7;
-            }
-            .sujet{
-                font-size: 10px;
-            }
-        </style>
 
-<div class="sign">  <p> <b>
+<div class="sign">
     P. Le Président Directeur Général & p.o., <br>
-    P. Le Responsable Développement RH </b> </p>
+    P. Le Responsable Développement RH
 
 </div>
 
