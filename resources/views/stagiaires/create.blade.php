@@ -550,7 +550,8 @@
                         <option  selected disabled>  </option>
                         <option value="EI">EI</option>
                         <option value="OFPPT">OFPPT</option>
-                        <option value="EST+FAC+BTS">EST+FAC+BTS</option>
+                        <option value="EST+FAC">EST+FAC</option>
+                        <option value="BTS">BTS</option>
                         <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                         <option value="IMM+IMT">IMM+IMT</option>
                         <option value="Autres">Autres</option>
@@ -789,12 +790,14 @@
        }
        if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";
-       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
-        typeF.value="EST+FAC+BTS";
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT'){
+        typeF.value="EST+FAC";
+       }else if( diplomeInput === 'BTS'){
+        typeF.value="BTS";
        }
        if(Etab.value === 'IMM' || Etab.value === 'IMT'){
         typeF.value="IMM+IMT";
-       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'EMVIFMBTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'EMVIFMBTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC' || Etab.value === 'ISTA IE' || Etab.value === 'ITA'){
         typeF.value="OFPPT";
        }
    }
