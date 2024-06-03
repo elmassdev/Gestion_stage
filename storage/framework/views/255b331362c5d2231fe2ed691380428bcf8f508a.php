@@ -1,9 +1,7 @@
 <?php $__env->startSection('content'); ?>
 
 <style>
-    *{
-        font-family: 'Poppins', sans-serif;
-    }
+   
     .Att_title{
         text-align: center;
         padding-bottom: 70px;

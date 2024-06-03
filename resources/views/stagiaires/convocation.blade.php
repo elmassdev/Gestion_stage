@@ -4,10 +4,9 @@
 
 <style>
 
-p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
-    font-family: 'Poppins', sans-serif;
+/* p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
     line-height: 0.9;
-}
+} */
 
     .top{
         position: absolute;
@@ -24,7 +23,6 @@ p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
     .nomsta{
         font-size: 15px;
         margin-top: 05px;
-        line-height: 0.8;
         margin-left: 350px;
     }
     .Att_title{
@@ -54,12 +52,12 @@ p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
         font-size: 15px;
         margin-left: 35px;
     }
-    .first{
+    /* .first{
         line-height: 14px;
     }
     .last{
         line-height: 12px;
-    }
+    } */
     ul{
         margin-top: 0;
     }
@@ -71,8 +69,6 @@ p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
         margin-left: 340px;
         margin-top: 30px;
         font-size: 15px;
-        font-family: 'Poppins', sans-serif;
-        line-height: 0.8;
         /* font-style: bold; */
     }
     .sujet{

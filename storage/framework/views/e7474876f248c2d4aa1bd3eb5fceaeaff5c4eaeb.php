@@ -2,12 +2,10 @@
 
 <style>
 
-
     .Att_title{
         text-align: center;
         padding-bottom: 20px;
         margin-top: 80px;
-        font-family: 'Poppins';
     }
     span{
         padding-left: 60px;
@@ -17,13 +15,12 @@
         margin-left: 30px;
         margin-right: 30px;
         line-height: 16pt;
-        font-family: 'Poppins';
     }
     .sign{
         text-align: left;
         margin-left: 340px;
         line-height: 0.9;
-        font-family: 'Poppins';
+
     }
     .date{
         text-align: left;

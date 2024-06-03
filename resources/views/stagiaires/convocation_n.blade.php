@@ -5,7 +5,6 @@
 <style>
 
 p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
-    font-family: 'Poppins', sans-serif;
     line-height: 0.9;
 }
 
@@ -73,7 +72,6 @@ p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
         margin-left: 370px;
         margin-top: 30px;
         font-size: 15px;
-        font-family: 'Poppins', sans-serif;
         line-height: 0.8;
         /* font-style: bold; */
     }

@@ -23,13 +23,18 @@
     <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.scss', 'resources/js/app.js']); ?>
 </head>
 <body>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+    </style>
 
 
     <div id="app">
         <div class="row">
             <div class="container entete">
                 <div style="margin-left:1%;">
-                    <img class="logo" src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 140px; height: 50px;"> <br>
+                    <img class="logo" src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 120px; height: 40px;"> <br>
                     SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
@@ -53,9 +58,9 @@
             margin: 0% 0% 1% 0%;
         }
         .entete{
-            line-height: 0.8;
+            line-height: 0.9;
             font-size: 14px;
-            font-family:'Poppins',  sans-serif;
+            font-weight: bold;
         }
         .phones{
             margin-top: 5px;
@@ -64,7 +69,6 @@
             position: absolute;
             bottom: 1px;
             font-size: 9px;
-            font-family:'Poppins',  sans-serif;
         }
     </style>
 

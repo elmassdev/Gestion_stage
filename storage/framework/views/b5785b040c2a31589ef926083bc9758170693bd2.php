@@ -641,7 +641,8 @@ unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_forma
                                     <option value="<?php echo e($stagiaire->type_formation); ?>"><?php echo e($stagiaire->type_formation); ?></option>
                                     <option value="EI">EI</option>
                                     <option value="OFPPT">OFPPT</option>
-                                    <option value="EST+FAC+BTS">EST+FAC+BTS</option>
+                                    <option value="EST+FAC">EST+FAC</option>
+                                    <option value="BTS">BTS</option>
                                     <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
                                     <option value="IMM+IMT">IMM+IMT</option>
                                     <option value="Autres">Autres</option>
