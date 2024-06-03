@@ -14,6 +14,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="<?php echo e(mix('css/app.css')); ?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
@@ -54,7 +55,7 @@
         .entete{
             line-height: 0.8;
             font-size: 14px;
-            font-family:'poppins',  sans-serif;
+            font-family:'Poppins',  sans-serif;
         }
         .phones{
             margin-top: 5px;
@@ -63,7 +64,7 @@
             position: absolute;
             bottom: 1px;
             font-size: 9px;
-            font-family:'MazzardH',  sans-serif;
+            font-family:'Poppins',  sans-serif;
         }
     </style>
 

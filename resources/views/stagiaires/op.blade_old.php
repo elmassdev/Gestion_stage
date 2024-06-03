@@ -79,7 +79,7 @@
             <tr>
                 <td>
                     <div>
-                        <img class="my-2" src="{{ public_path("/images/logow.jpg") }}"> <br>
+                        <img class="my-2" src="{{ public_path('/images/logow.jpg') }}"> <br>
                         <b>SBU-Mining <br>
                         Direction Industrielle Mines Gantour <br>
                         Direction Capital Humain Gantour <br>
