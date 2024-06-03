@@ -26,6 +26,8 @@ use Maatwebsite\Excel\Files\FileType;
 use Maatwebsite\Excel\Excel as ExcelFileType;
 use Illuminate\Support\Facades\Response;
 use App\Models\Stagiaire;
+use App\Models\visites;
+use App\Http\Controllers\VisiteController;
 
 
 
@@ -96,6 +98,15 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::resource('filieres', FiliereController::class)->middleware('auth');
     Route::post('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
     Route::get('/stagiaires/{id}/duplicate', 'App\Http\Controllers\StagiaireController@duplicate')->name('stagiaires.duplicate');
+
+
+
+    Route::get('/visites', [VisiteController::class, 'index'])->name('visites.index');
+    Route::get('/visites/create', [VisiteController::class, 'create'])->name('visites.create');
+    Route::post('/visites', [VisiteController::class, 'store'])->name('visites.store');
+    Route::get('/visites/{visite}/edit', [VisiteController::class, 'edit'])->name('visites.edit');
+    Route::put('/visites/{visite}', [VisiteController::class, 'update'])->name('visites.update');
+    Route::delete('/visites/{id}', [VisiteController::class, 'destroy'])->name('visites.destroy');
 
 
 

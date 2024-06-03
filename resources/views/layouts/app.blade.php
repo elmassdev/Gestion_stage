@@ -206,6 +206,9 @@
                         @can('view_indicators')
                         <li class="navbarli"><a href="/indicators/index">Indicateurs</a></li>
                         @endcan
+                        @if(auth()->check() && auth()->user()->hasRole('admin'))
+                        <li class="navbarli"><a href="/visites">Visites</a></li>
+                        @endif
                         <li class="navbarli"><a href="/contact">Contact</a></li>
                         <li class="navbarli" style="display: inline" >
                             <input type="checkbox" id="darkmode-toggle"/>
