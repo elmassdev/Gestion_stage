@@ -20,7 +20,6 @@
     .sign{
         text-align: left;
         margin-left: 340px;
-        line-height: 0.9;
 
     }
     .date{

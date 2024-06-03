@@ -37,11 +37,12 @@ p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
         padding-top: 40px;
     }
     p{
-        font-size: 14px;
+        font-size: 15px;
         margin-left: 30px;
         margin-right: 30px;
         line-height: 15pt;
     }
+
     table{
         font-size: 14px;
         margin-left: 20px;

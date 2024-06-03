@@ -15,7 +15,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="/css/style.css" rel="stylesheet">
     <link href="<?php echo e(mix('css/app.css')); ?>" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
 
@@ -58,7 +57,6 @@
             margin: 0% 0% 1% 0%;
         }
         .entete{
-            line-height: 0.9;
             font-size: 14px;
             font-weight: bold;
         }
