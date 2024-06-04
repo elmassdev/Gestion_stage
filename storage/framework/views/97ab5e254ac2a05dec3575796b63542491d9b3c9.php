@@ -57,8 +57,8 @@
 
             position: absolute;
             bottom: 20px;
-            font-size: 11px;
-            font-family: 'Times New Roman', Times, serif;
+            font-size: 10px;
+            font-family: sans-serif;
         }
     </style>
 
