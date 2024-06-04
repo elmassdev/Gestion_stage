@@ -14,7 +14,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="<?php echo e(mix('css/app.css')); ?>" rel="stylesheet">
 
 
 
@@ -24,24 +23,22 @@
 <body>
     <style>
         body{
-            font-family: 'Roboto',  sans-serif;
+            font-family: sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
     </style>
 
-
     <div id="app">
         <div class="row">
-            <div class="container entete">
-                <div style="margin-left:1%;">
-                    <img class="logo" src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 120px; height: 40px;"> <br>
-                    SBU-Mining <br>
+            <div class="container">
+                <div>
+                    <img src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 110px; height: 35px;"> <br>
+                 <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>
-                    Développement RH <br>
-                    <div class="phones">
-                        <small>Tel: +212 662 07 74 39</small><br>
-                        <small>Fax: +212 524 64 60 86</small>
-                    </div>
+                    Développement RH <br></b> <div class="phones">
+                    <small>Tel: +212 662 07 74 39</small> <br>
+                    <small>Fax: +212 524 64 60 86   </small>     </div>
                 </div>
             </div>
         </div>
@@ -53,20 +50,15 @@
         </main>
     </div>
     <style>
-    .logo{
-            margin: 0% 0% 1% 0%;
-        }
-        .entete{
-            font-size: 14px;
-            font-weight: bold;
-        }
         .phones{
             margin-top: 5px;
         }
         footer{
+
             position: absolute;
-            bottom: 1px;
-            font-size: 9px;
+            bottom: 20px;
+            font-size: 11px;
+            font-family: 'Times New Roman', Times, serif;
         }
     </style>
 

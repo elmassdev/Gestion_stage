@@ -93,7 +93,7 @@
             <tr>
                 <td>
                     <div>
-                        <img class="logo" src="<?php echo e(public_path("/images/logow.jpg")); ?>"> <br>
+                        <img class="logo" src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 110px; height: 35px;"> <br>
                         <b>SBU-Mining <br>
                         Direction Industrielle Mines Gantour <br>
                         Direction Capital Humain Gantour <br>

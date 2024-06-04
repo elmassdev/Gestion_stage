@@ -3,24 +3,18 @@
 
 <style>
 
-/* p, span, table, ul, li, .top, .first, .last, .top,.note,.nomsta,.Att_title{
-    line-height: 0.9;
-} */
-
     .top{
         position: absolute;
         top: 40px;
-        font-size: 14px;
         margin-left: 450px;
     }
     .note{
-        font-size: 15px;
+        font-size: 16px;
         margin-top: 20px;
         margin-left: 20px;
     }
 
     .nomsta{
-        font-size: 15px;
         margin-top: 05px;
         margin-left: 350px;
     }
@@ -30,72 +24,32 @@
         margin-top: 80px;
     }
     span{
-        font-size: 15px;
         padding-left: 60px;
         padding-top: 100px;
     }
     p{
-        font-size: 15px;
         margin-left: 30px;
         margin-right: 30px;
         line-height: 15pt;
     }
     table{
-        font-size: 15px;
         margin-left: 30px;
     }
-    /* .tdleft{
+    .tdleft{
         font-style: bold;
-    } */
+    }
     li{
-        font-size: 15px;
         margin-left: 35px;
-    }
-    /* .first{
-        line-height: 14px;
-    }
-    .last{
-        line-height: 12px;
-    } */
-    ul{
-        margin-top: 0;
-    }
-    .nb{
-        font-size: 12px;
-    }
-    .sign{
-        text-align: left;
-        margin-left: 340px;
-        margin-top: 30px;
-        font-size: 15px;
-        /* font-style: bold; */
-    }
-    .sujet{
-        font-size: 10px;
     }
 </style>
 
+<div class="top"> <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?></div>
 
-<div class="top">
-    <?php if(isset($dateLO)): ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?>
-
-    <?php else: ?>
-        <?php echo e($stagiaire->site); ?>, le <?php echo e($dateToShow); ?>
-
-    <?php endif; ?>
-</div>
-
-
-
-
-
-
-<div class="note"> <small>  OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?>  </small> </div>
-<div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> - </small> </div>
+<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="nomsta"> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> <?php echo e($stagiaire->ville); ?> </div>
 
 <p><?php echo e($stagiaire->titre); ?>, <br>
-<p class="first"><span>Suite à votre demande, </span>nous avons l’honneur de vous faire part de notre accord pour l'organisation d'un <?php echo e($stagiaire->type_stage); ?> au sein du Groupe OCP.</p>
+<p><span>Suite à votre demande, </span>nous avons l’honneur de vous faire part de notre accord pour l'organisation d'un <?php echo e($stagiaire->type_stage); ?> au sein du Groupe OCP.</p>
 
 <table>
     <tr>
@@ -155,18 +109,29 @@
 du Groupe OCP (accident de travail, de trajet, maladie,...)
     </li>
 </ul>
-<p class="last"><span>Veuillez agréer, <?php echo e($stagiaire->titre); ?>, l'expression de nos sentiments distingués.</span></p>
-<p class="nb">NB : Le stage ne peut en aucun cas être prolongé au-delà de la durée contractée</p>
+<p><span>Veuillez agréer, <?php echo e($stagiaire->titre); ?>, l'expression de nos sentiments distingués.</span></p>
+<p>NB : Le stage ne peut en aucun cas être prolongé au delà de la durée contractée</p>
 
 
 
 
 
 
+        <style>
+            .sign{
+                text-align: left;
+                margin-top: 40px;
+                margin-left: 320px;
+                line-height: 22pt;
+            }
+            .sujet{
+                font-size: 10px;
+            }
+        </style>
 
-        <div class="sign">
+        <div class="sign">  <p> <b>
             P. Le Président Directeur Général & p.o., <br>
-            P. Le Responsable Développement RH
+            P. Le Responsable développement RH </b> </p>
 
         </div>
 
