@@ -42,7 +42,7 @@
         <div class="sign">
             <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> <br>
             P. Le président Directeur Générale et p.o. <br>
-            P. Le Responsable développement RH
+            P. Le Responsable Développement RH
 
         </div>
 
