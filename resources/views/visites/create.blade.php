@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container my-4">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card">
@@ -32,14 +32,14 @@
                             <label for="destination">Destination:</label>
                             <input type="text" class="form-control" id="destination" name="destination" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display:none">
                             <label for="annule">Annulé:</label>
                             <select class="form-control" id="annule" name="annule" required>
                                 <option value="1">Oui</option>
-                                <option value="0">Non</option>
+                                <option selected value="0">Non</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <button type="submit" class="btn btn-primary my-2">Confirmer</button>
                     </form>
                 </div>
             </div>

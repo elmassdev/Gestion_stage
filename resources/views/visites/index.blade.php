@@ -2,12 +2,13 @@
 
 @section('content')
 
-<div class="container">
-    <a href="{{ route('visites.create') }}" class="btn btn-primary mb-3 my-4">Ajouter une visite</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-9" >
+            <a href="{{ route('visites.create') }}" class="btn btn-primary mb-3 my-4">Ajouter une visite</a>
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Date Demande</th>
                 <th>Date Visite</th>
                 <th>Demandeur</th>
@@ -20,7 +21,6 @@
         <tbody>
             @foreach ($visites as $visite)
                 <tr>
-                    <td>{{ $visite->id }}</td>
                     <td>{{ $visite->date_demande }}</td>
                     <td>{{ $visite->date_visite }}</td>
                     <td>{{ $visite->demandeur }}</td>
@@ -41,12 +41,9 @@
             @endforeach
         </tbody>
     </table>
-</div>
-
-<div class="container">
-
-
-    <h2>Statistiques</h2>
+        </div>
+        <div class="col-3 my-5" >
+            <h2>Statistiques</h2>
     <table class="table">
         <thead>
             <tr>
@@ -65,7 +62,10 @@
             @endforeach
         </tbody>
     </table>
+        </div>
+    </div>
 </div>
+
 
 @endsection
 

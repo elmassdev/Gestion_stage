@@ -17,6 +17,7 @@ class VisiteController extends Controller
             DB::raw('COUNT(*) as number_of_visits'),
             DB::raw('SUM(effectif) as total_effectif')
         )
+        ->where('annule', false)
         ->groupBy('year')
         ->orderBy('year', 'asc')
         ->get();

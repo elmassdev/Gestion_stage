@@ -1,11 +1,12 @@
 <?php $__env->startSection('content'); ?>
 
-<div class="container">
-    <a href="<?php echo e(route('visites.create')); ?>" class="btn btn-primary mb-3 my-4">Ajouter une visite</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-9" >
+            <a href="<?php echo e(route('visites.create')); ?>" class="btn btn-primary mb-3 my-4">Ajouter une visite</a>
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Date Demande</th>
                 <th>Date Visite</th>
                 <th>Demandeur</th>
@@ -18,7 +19,6 @@
         <tbody>
             <?php $__currentLoopData = $visites; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $visite): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td><?php echo e($visite->id); ?></td>
                     <td><?php echo e($visite->date_demande); ?></td>
                     <td><?php echo e($visite->date_visite); ?></td>
                     <td><?php echo e($visite->demandeur); ?></td>
@@ -39,12 +39,9 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
-</div>
-
-<div class="container">
-
-
-    <h2>Statistiques</h2>
+        </div>
+        <div class="col-3 my-5" >
+            <h2>Statistiques</h2>
     <table class="table">
         <thead>
             <tr>
@@ -63,7 +60,10 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
+        </div>
+    </div>
 </div>
+
 
 <?php $__env->stopSection(); ?>
 
