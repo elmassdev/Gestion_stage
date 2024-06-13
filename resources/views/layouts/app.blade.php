@@ -154,7 +154,7 @@
 
 
         .navbarli{
-            margin-left: 10rem;
+            margin-left: 2rem;
             font-size: 18px;
             font-weight:bold;
         }
@@ -174,12 +174,29 @@
         th{
             font:bold;
         }
-        .warper {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: 80%;
-      margin: 0 auto;
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 100%;
+            margin: 0 auto;
     }
+    .navbar-nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px){
+        navbarli{
+            margin-left: 0;
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+
+
+
 
 
     </style>
@@ -190,7 +207,7 @@
             <a class="navbar-brand mx-auto " href="{{ url('/') }}">
                 <img src="/images/logo.svg" >
             </a>
-            <div class="warper container">
+            <div class="wrapper container">
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -198,7 +215,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto" style="display:absolute" >
+                    <ul class="navbar-nav me-auto">
                         <li class="navbarli"><a href="/">Accueil</a></li>
                         @if(auth()->check() && auth()->user()->hasRole('admin'))
                         <li class="navbarli"><a href="/stagiaires">Stagiaires</a></li>

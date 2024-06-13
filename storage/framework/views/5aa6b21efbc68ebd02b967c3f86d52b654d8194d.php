@@ -25,7 +25,7 @@
         margin-top: 5%;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
-    .container {
+    .all {
       display: flex;
       flex-wrap: wrap;
       max-width: 80%;
@@ -226,7 +226,7 @@
         </div>
         <?php endif; ?>
 
-    <div class="container">
+    <div class="all">
         <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
         <div class="square">
             <div class="info">

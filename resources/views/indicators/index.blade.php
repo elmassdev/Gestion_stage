@@ -199,7 +199,7 @@
                         <div class="row">
                             <h6 class="col-md-5">Liste des stagiaires pour une date:</h6>
                             <div class="col-md-3">
-                                <input id="search" type="date" value="<?php echo date('Y-m-d');?>" class="form-control @error('search') is-invalid @enderror"   name="search" value="{{ old('search') }}"  required autocomplete="search"   autofocus>
+                                <input id="search" type="date" value="<?php echo date('Y-m-d');?>" class="form-control @error('search') is-invalid @enderror"   name="search" value="{{ old('search') }}"  required autocomplete="search">
                                 @error('search')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
