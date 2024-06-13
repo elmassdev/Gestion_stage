@@ -148,7 +148,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if (($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule))
+                                @if (($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule) &&($stagiaire->OP_etabli_le==null))
                                 <div class="card col-md-12">
                                     <a  href="/stagiaires/{{$stagiaire->id}}/op" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
                                 </div>

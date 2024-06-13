@@ -147,7 +147,7 @@
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <?php if(($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule)): ?>
+                                <?php if(($stagiaire->date_fin<=now()) && ($stagiaire->remunere) && !($stagiaire->annule) &&($stagiaire->OP_etabli_le==null)): ?>
                                 <div class="card col-md-12">
                                     <a  href="/stagiaires/<?php echo e($stagiaire->id); ?>/op" class="btn" target="_blank"><i class="fa fa-print text-primary"></i> Ordre de paiement</a>
                                 </div>
