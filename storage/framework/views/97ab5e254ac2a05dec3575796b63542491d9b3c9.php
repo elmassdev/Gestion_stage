@@ -32,7 +32,7 @@
         <div class="row">
             <div class="container">
                 <div>
-                    <img src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 110px; height: 35px;"> <br>
+                    <img src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 110px; height: 35px; margin-bottom: 1%;"> <br>
                  <b>SBU-Mining <br>
                     Direction Industrielle Mines Gantour <br>
                     Direction Capital Humain Gantour <br>

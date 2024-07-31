@@ -269,12 +269,28 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
 
+                
                 <script>
                     function capitalizeFirstLetter(input) {
-                        var lowercase = input.value.toLowerCase();
-                        var capitalized = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
-                        input.value = capitalized;
+                        // Get the current value and convert it to lowercase
+                        var value = input.value.toLowerCase();
+
+                        // Capitalize the first letter of each word
+                        var capitalizedValue = value.split(/\s+/)
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ');
+
+                        // Set the capitalized value back to the input
+                        input.value = capitalizedValue;
                     }
+
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const textInput = document.getElementById('textInput');
+
+                        textInput.addEventListener('input', () => {
+                            capitalizeWords(textInput);
+                        });
+                    });
                 </script>
 
 
@@ -446,6 +462,9 @@ unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                             <option value="Technicien">Technicien</option>
                             <option value="Technicien spécialisé">Technicien spécialisé</option>
                             <option value="Technicien supérieur">Technicien supérieur</option>
+                            <option value="Cycle Préparatoire">Cycle Préparatoire</option>
+                            <option value="DEUG">DEUG</option>
+                            <option value="DEUST">DEUST</option>
                             <option value="DUT">DUT</option>
                             <option value="BTS">BTS</option>
                             <option value="Licence fondamentale">Licence fondamentale</option>
@@ -663,7 +682,7 @@ unset($__errorArgs, $__bag); ?>" name="type_formation"  autocomplete="type_forma
                         <option value="OFPPT">OFPPT</option>
                         <option value="EST+FAC">EST+FAC</option>
                         <option value="BTS">BTS</option>
-                        <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
+                        <option value="Cycle Préparatoire">Cycle Préparatoire</option>
                         <option value="IMM+IMT">IMM+IMT</option>
                         <option value="Autres">Autres</option>
                 </select>
@@ -991,7 +1010,7 @@ unset($__errorArgs, $__bag); ?>
        }
        if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";
-       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT'){
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput==='Licence sciences et techniques' || diplomeInput === 'DUT'){
         typeF.value="EST+FAC";
        }else if( diplomeInput === 'BTS'){
         typeF.value="BTS";
@@ -1016,12 +1035,16 @@ unset($__errorArgs, $__bag); ?>
 
        if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";
-       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'BTS'){
-        typeF.value="EST+FAC+BTS";
+       }else if(diplomeInput==='Licence' || diplomeInput==='Licence professionnelle' || diplomeInput==='Licence fondamentale' || diplomeInput === 'DUT' || diplomeInput === 'DEUG' || diplomeInput === 'DEUST' || diplomeInput === 'Licence sciences et techniques'){
+        typeF.value="EST+FAC";
+       }else if(diplomeInput==='BTS'){
+        typeF.value="BTS";
+       }else if(diplomeInput==='Cycle Préparatoire'){
+        typeF.value="Cycle Préparatoire";
        }
        if(Etab.value === 'IMM' || Etab.value === 'IMT'){
         typeF.value="IMM+IMT";
-       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'ISTA IE' || Etab.value === 'ISTA GM' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC'){
+       }else if(Etab.value === 'ISTA' || Etab.value === 'ISMTRL' || Etab.value === 'ISTA IE' || Etab.value === 'ISTA GM' || Etab.value === 'EMVIFMTP' || Etab.value === 'ITA' || Etab.value === 'ISTAMH' || Etab.value === 'ISTA NTIC' || Etab.value === 'ISGI'){
         typeF.value="OFPPT";
        }else if(Etab.value === 'IIPM' || Etab.value === 'SAGI'){
         typeF.value="Autres";

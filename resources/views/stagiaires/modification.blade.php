@@ -207,7 +207,7 @@
                             <label for="prenom" class="col-md-3 col-form-label text-md-left">{{ __('Prénom') }}</label>
 
                             <div class="col-md-8">
-                                <input id="prenom" type="text" value="{{ $stagiaire->prenom }}" class="form-control @error('prenom') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="prenom"   required autocomplete="prenom"  autofocus>
+                                <input id="prenom" type="text" value="{{ $stagiaire->prenom }}" class="form-control @error('prenom') is-invalid @enderror"  oninput="capitalizeFirstLetter(this)"  name="prenom"   required autocomplete="prenom"  autofocus>
 
                                 @error('prenom')
                                     <span class="invalid-feedback" role="alert">
@@ -313,11 +313,14 @@
                             <div class="col-md-8">
                                 <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
                                     <option selected value="{{$stagiaire->diplome}}" >{{$stagiaire->diplome}}</option>
-                                    <option  value=""></option>
+                                    <option selected value=""></option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>
                                     <option value="Technicien supérieur">Technicien supérieur</option>
+                                    <option value="Cycle Préparatoire">Cycle Préparatoire</option>
+                                    <option value="DEUG">DEUG</option>
+                                    <option value="DEUST">DEUST</option>
                                     <option value="DUT">DUT</option>
                                     <option value="BTS">BTS</option>
                                     <option value="Licence fondamentale">Licence fondamentale</option>
@@ -569,6 +572,29 @@
     </div>
 </div>
 
+
+<script>
+    function capitalizeFirstLetter(input) {
+        // Get the current value and convert it to lowercase
+        var value = input.value.toLowerCase();
+
+        // Capitalize the first letter of each word
+        var capitalizedValue = value.split(/\s+/)
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+
+        // Set the capitalized value back to the input
+        input.value = capitalizedValue;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const textInput = document.getElementById('textInput');
+
+        textInput.addEventListener('input', () => {
+            capitalizeWords(textInput);
+        });
+    });
+</script>
 
 
 <script>
