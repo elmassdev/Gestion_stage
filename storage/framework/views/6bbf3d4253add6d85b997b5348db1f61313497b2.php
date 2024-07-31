@@ -58,7 +58,8 @@
             <option value="" selected></option>
             <option value="EI" >EI</option>
             <option value="OFPPT">OFPPT</option>
-            <option value="EST+ FAC+BTS">EST+ FAC+BTS</option>
+            <option value="EST+FAC">EST+FAC</option>
+            <option value="BTS">BTS</option>
             <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
             <option value="IMM+IMT">IMM+IMT</option>
             <option value="Autres">Autres</option>
