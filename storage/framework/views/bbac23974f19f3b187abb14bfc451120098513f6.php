@@ -19,8 +19,8 @@
         <tbody>
             <?php $__currentLoopData = $visites; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $visite): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td><?php echo e($visite->date_demande); ?></td>
-                    <td><?php echo e($visite->date_visite); ?></td>
+                    <td><?php echo e(\Carbon\Carbon::parse($visite->date_demande)->format('d/m/Y')); ?></td>
+                    <td><?php echo e(\Carbon\Carbon::parse($visite->date_visite)->format('d/m/Y')); ?></td>
                     <td><?php echo e($visite->demandeur); ?></td>
                     <td><?php echo e($visite->effectif); ?></td>
                     <td><?php echo e($visite->destination); ?></td>

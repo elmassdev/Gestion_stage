@@ -461,7 +461,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
                                     <option selected value="<?php echo e($stagiaire->diplome); ?>" ><?php echo e($stagiaire->diplome); ?></option>
-                                    <option selected value=""></option>
+                                    <option value=""></option>
                                     <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                                     <option value="Technicien">Technicien</option>
                                     <option value="Technicien spécialisé">Technicien spécialisé</option>

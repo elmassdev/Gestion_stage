@@ -60,7 +60,7 @@
             <option value="OFPPT">OFPPT</option>
             <option value="EST+FAC">EST+FAC</option>
             <option value="BTS">BTS</option>
-            <option value="Cycle Préparatoire (CI)">Cycle Préparatoire (CI)</option>
+            <option value="Cycle Préparatoire">Cycle Préparatoire</option>
             <option value="IMM+IMT">IMM+IMT</option>
             <option value="Autres">Autres</option>
         </select>

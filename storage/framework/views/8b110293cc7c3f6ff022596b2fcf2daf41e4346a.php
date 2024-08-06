@@ -384,7 +384,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <div class="col-md-4 ">
-                        <button type="submit" id="export-button" class="btn btn-primary rounded-pill" onclick="validateDate()">
+                        <button type="submit" id="export-button" class="btn btn-primary my-2" onclick="validateDate()">
                             Exporter
                         </button>
                     </div>

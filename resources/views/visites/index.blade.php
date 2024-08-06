@@ -21,8 +21,8 @@
         <tbody>
             @foreach ($visites as $visite)
                 <tr>
-                    <td>{{ $visite->date_demande }}</td>
-                    <td>{{ $visite->date_visite }}</td>
+                    <td>{{ \Carbon\Carbon::parse($visite->date_demande)->format('d/m/Y')  }}</td>
+                    <td>{{ \Carbon\Carbon::parse($visite->date_visite)->format('d/m/Y')  }}</td>
                     <td>{{ $visite->demandeur }}</td>
                     <td>{{ $visite->effectif }}</td>
                     <td>{{ $visite->destination }}</td>

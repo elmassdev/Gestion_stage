@@ -268,8 +268,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
-
-                
+  
                 <script>
                     function capitalizeFirstLetter(input) {
                         // Get the current value and convert it to lowercase
