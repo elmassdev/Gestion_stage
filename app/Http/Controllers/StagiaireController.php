@@ -417,13 +417,14 @@ class StagiaireController extends Controller
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['civilite.civilite as titre','stagiaires.nom','stagiaires.prenom', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
+               ->get(['civilite.civilite as titre','stagiaires.code','stagiaires.nom','stagiaires.prenom', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
         $today = date('d F Y');
         $now = Carbon::now();
         // dd($stagiaire);
 
 
         $dd = $stagiaire->date_debut;
+        $year = Carbon::parse($dd)->format('Y');
 
         $dd = Carbon::parse($dd)->format('d F Y');
         $fin=$stagiaire->date_fin;
@@ -445,9 +446,9 @@ class StagiaireController extends Controller
         $today = str_replace($englishMonths, $frenchMonths,$today);
 
             if($stagiaire->EI){
-                $pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
+                $pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today','year'));
             }else{
-                $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
+                $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
 
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
@@ -467,7 +468,7 @@ class StagiaireController extends Controller
          //ELMASSOUDI Abdelaadim
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
-        $year = date('Y');
+        //$year = date('Y');
         $now = Carbon::now();
 
 
@@ -475,6 +476,7 @@ class StagiaireController extends Controller
         $ddemande      = $stagiaire->date_demande;
         $ddemande = Carbon::parse($ddemande)->format('d F Y');
         $dd = Carbon::parse($dd)->format('d F Y');
+        $year = Carbon::parse($dd)->format('Y');
         $fin=$stagiaire->date_fin;
 
         $fin = Carbon::parse($fin)->format('d F Y');
@@ -515,7 +517,7 @@ class StagiaireController extends Controller
 
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
-        $year = date('Y');
+        //$year = date('Y');
 
 
         // $diff = now()->diffInDays(Carbon::parse($stagiaire->date_debut), false);
@@ -524,6 +526,7 @@ class StagiaireController extends Controller
 
 
         $ddd = $stagiaire->date_debut;
+        $year = Carbon::parse($ddd)->format('Y');
         $ddemande      = $stagiaire->date_demande;
         $ddemande = Carbon::parse($ddemande)->format('d F Y');
         $dateLO      = $stagiaire->dateLO;
@@ -578,6 +581,7 @@ class StagiaireController extends Controller
 
         $dateLO = Carbon::parse($stagiaire->dateLO)->format('d/m/Y');
         $dd = $stagiaire->date_debut;
+        $year = Carbon::parse($dd)->format('Y');
         $dd = Carbon::parse($dd)->format('d F Y');
         $fin=$stagiaire->date_fin;
         $fin = Carbon::parse($fin)->format('d F Y');

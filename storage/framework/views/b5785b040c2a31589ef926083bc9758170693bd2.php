@@ -447,8 +447,6 @@ unset($__errorArgs, $__bag); ?>
                             }
                         </script>
 
-
-
                         <div class="row mb-3">
                             <label for="diplome" class="col-md-3 col-form-label text-md-left"> Diplome</label>
                             <div class="col-md-8">

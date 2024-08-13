@@ -16,7 +16,15 @@
         margin-right: 30px;
         line-height: 26pt;
     }
+
+    .note{
+        font-size: 14px;
+        margin-top: 20px;
+        margin-left: 5px;
+        font-family: 'Roboto', sans-serif;
+    }
 </style>
+<div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 @php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');

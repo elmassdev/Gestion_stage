@@ -15,7 +15,20 @@
         margin-right: 30px;
         line-height: 26pt;
     }
+    @font-face {
+  font-family: 'Roboto';
+  src: url('path/to/Roboto-Regular.woff') format('woff'),
+       url('path/to/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400; /* Regular weight */
+}
+    .note{
+        font-size: 14px;
+        margin-top: 20px;
+        margin-left: 5px;
+        font-family: 'Roboto', sans-serif;
+    }
 </style>
+<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 <?php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
