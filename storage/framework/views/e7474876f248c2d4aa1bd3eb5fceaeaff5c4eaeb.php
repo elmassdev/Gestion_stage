@@ -15,12 +15,7 @@
         margin-right: 30px;
         line-height: 26pt;
     }
-    @font-face {
-  font-family: 'Roboto';
-  src: url('path/to/Roboto-Regular.woff') format('woff'),
-       url('path/to/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400; /* Regular weight */
-}
+
     .note{
         font-size: 14px;
         margin-top: 20px;
@@ -36,7 +31,9 @@
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>
 
-        <p> <span><?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, </span> étudiant<?php echo e($stagiaire->genre); ?> <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) de <?php echo e($stagiaire->ville); ?>,
+        <p> <span><?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, <?php if(isset($stagiaire->cin) && !empty($stagiaire->cin)): ?>
+            titulaire de la CIN n°: <?php echo e($stagiaire->cin); ?><?php endif; ?>,
+         </span> étudiant<?php echo e($stagiaire->genre); ?> <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) de <?php echo e($stagiaire->ville); ?>,
         Specialité:<?php echo e($stagiaire->filiere); ?> a effectué un <?php echo e($stagiaire->type_stage); ?> au sein de la <?php echo e($stagiaire->direction); ?> et ce pendant la période du <?php echo $dd_long  ?> au <?php echo e($fin_long); ?> ( du <?php echo e($dd_short); ?> au <?php echo e($fin_short); ?>)     <br>   </p>
         <p>
             <span>Faite</span> à la demande de l'intéressé<?php echo e($stagiaire->genre); ?> pour servir et valoir ce que de droit.

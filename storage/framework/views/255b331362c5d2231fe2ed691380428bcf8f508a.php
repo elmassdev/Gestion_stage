@@ -15,13 +15,20 @@
         margin-right: 30px;
         line-height: 26pt;
     }
+    .note{
+        font-size: 14px;
+        margin-top: 20px;
+        margin-left: 5px;
+    }
 </style>
+<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>
 
     <p><span>Le Responsable Développement RH</span> de Gantour du Groupe OCP.sa certifie que
-        <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> étudiant<?php echo e($stagiaire->genre); ?> <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) de <?php echo e($stagiaire->ville); ?>, Spécialité: <?php echo e($stagiaire->filiere); ?>, a effectué avec assiduité un <?php echo e($stagiaire->type_stage); ?> :</p>
+        <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?>, <?php if(isset($stagiaire->cin) && !empty($stagiaire->cin)): ?>
+        titulaire de la CIN n°: <?php echo e($stagiaire->cin); ?><?php endif; ?>, étudiant<?php echo e($stagiaire->genre); ?> <?php echo e($stagiaire->article); ?> <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) de <?php echo e($stagiaire->ville); ?>, Spécialité: <?php echo e($stagiaire->filiere); ?>, a effectué avec assiduité un <?php echo e($stagiaire->type_stage); ?> :</p>
 
         <p>
         - à la <?php echo e($stagiaire->direction); ?>  <br>

@@ -28,7 +28,8 @@
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>
 
     <p><span>Le Responsable Développement RH</span> de Gantour du Groupe OCP.sa certifie que
-        {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} étudiant{{$stagiaire->genre}} {{$stagiaire->article}} {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) de {{$stagiaire->ville}}, Spécialité: {{$stagiaire->filiere}}, a effectué avec assiduité un {{$stagiaire->type_stage}} :</p>
+        {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}}, @if(isset($stagiaire->cin) && !empty($stagiaire->cin))
+        titulaire de la CIN n°: {{$stagiaire->cin}}@endif, étudiant{{$stagiaire->genre}} {{$stagiaire->article}} {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) de {{$stagiaire->ville}}, Spécialité: {{$stagiaire->filiere}}, a effectué avec assiduité un {{$stagiaire->type_stage}} :</p>
 
         <p>
         - à la {{$stagiaire->direction}}  <br>

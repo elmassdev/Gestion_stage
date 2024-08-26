@@ -250,23 +250,24 @@ class IndicatorsController extends Controller
         $begdate = $request->input('firstdate');
         $enddate = $request->input('secdate');
 
-        $sheet->setCellValue('A1', "Titre");
-        $sheet->setCellValue('B1', 'nom');
-        $sheet->setCellValue('C1', 'prénom');
-        $sheet->setCellValue('D1', 'CIN');
-        $sheet->setCellValue('E1', 'niveau');
-        $sheet->setCellValue('F1', 'diplome');
-        $sheet->setCellValue('G1', 'Ecole');
-        $sheet->setCellValue('H1', 'Type de stage');
-        $sheet->setCellValue('I1', 'Encadrant');
-        $sheet->setCellValue('J1', 'Service');
-        $sheet->setCellValue('K1', 'Date début');
-        $sheet->setCellValue('L1', 'Date fin');
-        $sheet->setCellValue('M1', 'Sujet');
-        $sheet->setCellValue('N1', 'Type formation');
-        $sheet->setCellValue('O1', 'rémunéré');
-        $sheet->setCellValue('P1', 'Annulé');
-        $sheet->setCellValue('Q1', 'OP établi');
+        $sheet->setCellValue('A1', "Code");
+        $sheet->setCellValue('B1', "Titre");
+        $sheet->setCellValue('C1', 'nom');
+        $sheet->setCellValue('D1', 'prénom');
+        $sheet->setCellValue('E1', 'CIN');
+        $sheet->setCellValue('F1', 'niveau');
+        $sheet->setCellValue('G1', 'diplome');
+        $sheet->setCellValue('H1', 'Ecole');
+        $sheet->setCellValue('I1', 'Type de stage');
+        $sheet->setCellValue('J1', 'Encadrant');
+        $sheet->setCellValue('K1', 'Service');
+        $sheet->setCellValue('L1', 'Date début');
+        $sheet->setCellValue('M1', 'Date fin');
+        $sheet->setCellValue('N1', 'Sujet');
+        $sheet->setCellValue('O1', 'Type formation');
+        $sheet->setCellValue('P1', 'rémunéré');
+        $sheet->setCellValue('Q1', 'Annulé');
+        $sheet->setCellValue('R1', 'OP établi');
 
         $data = DB::table('stagiaires')->where('stagiaires.site', '=', Auth::user()->site)
         ->join('services', 'stagiaires.service', '=', 'services.id')
@@ -278,23 +279,24 @@ class IndicatorsController extends Controller
 
         // Add data to the sheet
         foreach ($data as $row => $rowData) {
-            $sheet->setCellValue('A' . ($row + 2), $rowData->civilite);
-            $sheet->setCellValue('B' . ($row + 2), $rowData->nom);
-            $sheet->setCellValue('C' . ($row + 2), $rowData->prenom);
-            $sheet->setCellValue('D' . ($row + 2), $rowData->cin);
-            $sheet->setCellValue('E' . ($row + 2), $rowData->niveau);
-            $sheet->setCellValue('F' . ($row + 2), $rowData->diplome);
-            $sheet->setCellValue('G' . ($row + 2), $rowData->etablissement);
-            $sheet->setCellValue('H' . ($row + 2), $rowData->type_stage);
-            $sheet->setCellValue('I' . ($row + 2), $rowData->nomenc);
-            $sheet->setCellValue('J' . ($row + 2), $rowData->sigle);
-            $sheet->setCellValue('K' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
-            $sheet->setCellValue('L' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
-            $sheet->setCellValue('M' . ($row + 2), $rowData->sujet);
-            $sheet->setCellValue('N' . ($row + 2), $rowData->type_formation);
-            $sheet->setCellValue('O' . ($row + 2), $rowData->remunere);
-            $sheet->setCellValue('P' . ($row + 2), $rowData->annule);
-            $sheet->setCellValue('Q' . ($row + 2), $rowData->OP_etabli);
+            $sheet->setCellValue('A' . ($row + 2), $rowData->code);
+            $sheet->setCellValue('B' . ($row + 2), $rowData->civilite);
+            $sheet->setCellValue('C' . ($row + 2), $rowData->nom);
+            $sheet->setCellValue('D' . ($row + 2), $rowData->prenom);
+            $sheet->setCellValue('E' . ($row + 2), $rowData->cin);
+            $sheet->setCellValue('F' . ($row + 2), $rowData->niveau);
+            $sheet->setCellValue('G' . ($row + 2), $rowData->diplome);
+            $sheet->setCellValue('H' . ($row + 2), $rowData->etablissement);
+            $sheet->setCellValue('I' . ($row + 2), $rowData->type_stage);
+            $sheet->setCellValue('J' . ($row + 2), $rowData->nomenc);
+            $sheet->setCellValue('K' . ($row + 2), $rowData->sigle);
+            $sheet->setCellValue('L' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
+            $sheet->setCellValue('M' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
+            $sheet->setCellValue('N' . ($row + 2), $rowData->sujet);
+            $sheet->setCellValue('O' . ($row + 2), $rowData->type_formation);
+            $sheet->setCellValue('P' . ($row + 2), $rowData->remunere);
+            $sheet->setCellValue('Q' . ($row + 2), $rowData->annule);
+            $sheet->setCellValue('R' . ($row + 2), $rowData->OP_etabli);
         }
         // Set the response headers for Excel file download
         $filename = 'Extraction_stagiaires_'.$today.'.xlsx';
