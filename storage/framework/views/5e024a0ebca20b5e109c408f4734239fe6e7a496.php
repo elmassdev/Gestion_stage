@@ -171,7 +171,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   name="dateLO" value="<?php echo e(old('dateLO')); ?>"    autocomplete="dateLO"  autofocus>
+unset($__errorArgs, $__bag); ?>"   name="dateLO" value="<?php echo e(old('dateLO')); ?>"    autocomplete="dateLO"  >
                                 <?php $__errorArgs = ['dateLO'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -200,7 +200,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   name="date_reception_FFS" value="<?php echo e(old('date_reception_FFS')); ?>"    autocomplete="date_reception_FFS" lang="fr-CA" autofocus>
+unset($__errorArgs, $__bag); ?>"   name="date_reception_FFS" value="<?php echo e(old('date_reception_FFS')); ?>"    autocomplete="date_reception_FFS" lang="fr-CA" >
                                 <?php $__errorArgs = ['date_reception_FFS'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -228,7 +228,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   name="date_Att_etablie" value="<?php echo e(old('date_Att_etablie')); ?>"    autocomplete="date_Att_etablie" lang="fr-CA" autofocus>
+unset($__errorArgs, $__bag); ?>"   name="date_Att_etablie" value="<?php echo e(old('date_Att_etablie')); ?>"    autocomplete="date_Att_etablie" lang="fr-CA" >
                                 <?php $__errorArgs = ['date_Att_etablie'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -256,7 +256,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   name="Attestation_remise_le" value="<?php echo e(old('Attestation_remise_le')); ?>"    autocomplete="Attestation_remise_le" lang="fr-CA" autofocus>
+unset($__errorArgs, $__bag); ?>"   name="Attestation_remise_le" value="<?php echo e(old('Attestation_remise_le')); ?>"    autocomplete="Attestation_remise_le" lang="fr-CA" >
                                 <?php $__errorArgs = ['Attestation_remise_le'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -284,7 +284,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="Att_remise_a"    autocomplete="Att_remise_a"  autofocus>
+unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="Att_remise_a"    autocomplete="Att_remise_a"  >
                                 <?php $__errorArgs = ['Att_remise_a'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -312,7 +312,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="observation"    autocomplete="observation"  autofocus>
+unset($__errorArgs, $__bag); ?>"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="observation"    autocomplete="observation"  >
                                 <?php $__errorArgs = ['observation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -330,6 +330,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e($stagiaire->observation); ?></p></div>
                             <?php endif; ?>
                         </div>
+                        <?php if($stagiaire->remunere): ?>
                         <div class="row mb-3">
                             <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établie le: </label>
                             <div class="col-md-5">
@@ -340,7 +341,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   name="OP_etabli_le" value="<?php echo e(old('OP_etabli_le')); ?>"    autocomplete="OP_etabli_le" lang="fr-CA" autofocus>
+unset($__errorArgs, $__bag); ?>"   name="OP_etabli_le" value="<?php echo e(old('OP_etabli_le')); ?>"    autocomplete="OP_etabli_le" lang="fr-CA" >
                                 <?php $__errorArgs = ['OP_etabli_le'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -368,7 +369,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   name="indemnite_remise_le" value="<?php echo e(old('indemnite_remise_le')); ?>"    autocomplete="indemnite_remise_le" lang="fr-CA" autofocus>
+unset($__errorArgs, $__bag); ?>"   name="indemnite_remise_le" value="<?php echo e(old('indemnite_remise_le')); ?>"    autocomplete="indemnite_remise_le" lang="fr-CA" >
                                 <?php $__errorArgs = ['indemnite_remise_le'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -386,6 +387,8 @@ unset($__errorArgs, $__bag); ?>
                             <div class="col-md-3 mx-auto border border-warning"> <p class="text-center"><?php echo e(\Carbon\Carbon::parse($stagiaire->indemnite_remise_le)->format('d/m/Y')); ?></p></div>
                             <?php endif; ?>
                         </div>
+                        <?php endif; ?>
+
                         <div class="row mb-0">
                             <div class="sign d-flex flex-column"> <span class="text-primary"> <small>Saisi par: <?php echo e($stagiaire->created_by); ?> : <?php echo e($stagiaire->created_at); ?></small> </span> </div>
                             <div class="sign d-flex flex-column"> <span class="text-primary"> <small>Modifié par: <?php echo e($stagiaire->edited_by); ?> : <?php echo e($stagiaire->updated_at); ?></small> </span> </div>

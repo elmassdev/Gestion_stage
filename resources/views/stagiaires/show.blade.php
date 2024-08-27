@@ -165,7 +165,7 @@
                         <div class="row mb-3">
                             <label for="dateLO" class="col-md-3 mx-1 col-form-label text-md-left"> Lettre d'offre éditée le: </label>
                             <div class="col-md-5">
-                                <input id="dateLO" type="date" value = "{{$stagiaire->dateLO}}" class="form-control datepicker  @error('dateLO') is-invalid @enderror"   name="dateLO" value="{{ old('dateLO') }}"    autocomplete="dateLO"  autofocus>
+                                <input id="dateLO" type="date" value = "{{$stagiaire->dateLO}}" class="form-control datepicker  @error('dateLO') is-invalid @enderror"   name="dateLO" value="{{ old('dateLO') }}"    autocomplete="dateLO"  >
                                 @error('dateLO')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -180,7 +180,7 @@
                         <div class="row mb-3">
                             <label for="date_reception_FFS" class="col-md-3 mx-1 col-form-label text-md-left"> FA + FP reçues le: </label>
                             <div class="col-md-5">
-                                <input id="date_reception_FFS" type="date" value = "{{$stagiaire->date_reception_FFS}}" class="form-control datepicker  @error('date_reception_FFS') is-invalid @enderror"   name="date_reception_FFS" value="{{ old('date_reception_FFS') }}"    autocomplete="date_reception_FFS" lang="fr-CA" autofocus>
+                                <input id="date_reception_FFS" type="date" value = "{{$stagiaire->date_reception_FFS}}" class="form-control datepicker  @error('date_reception_FFS') is-invalid @enderror"   name="date_reception_FFS" value="{{ old('date_reception_FFS') }}"    autocomplete="date_reception_FFS" lang="fr-CA" >
                                 @error('date_reception_FFS')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -194,7 +194,7 @@
                         <div class="row mb-3">
                             <label for="date_Att_etablie" class="col-md-3 mx-1 col-form-label text-md-left"> Attestation établie le: </label>
                             <div class="col-md-5">
-                                <input id="date_Att_etablie" type="date" value = "{{$stagiaire->date_Att_etablie}}" class="form-control datepicker  @error('date_Att_etablie') is-invalid @enderror"   name="date_Att_etablie" value="{{ old('date_Att_etablie') }}"    autocomplete="date_Att_etablie" lang="fr-CA" autofocus>
+                                <input id="date_Att_etablie" type="date" value = "{{$stagiaire->date_Att_etablie}}" class="form-control datepicker  @error('date_Att_etablie') is-invalid @enderror"   name="date_Att_etablie" value="{{ old('date_Att_etablie') }}"    autocomplete="date_Att_etablie" lang="fr-CA" >
                                 @error('date_Att_etablie')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -208,7 +208,7 @@
                         <div class="row mb-3">
                             <label for="Attestation_remise_le" class="col-md-3  mx-1 col-form-label text-md-left"> Attestation remise le:</label>
                             <div class="col-md-5">
-                                <input id="Attestation_remise_le" type="date" value = "{{$stagiaire->Attestation_remise_le}}" class="form-control datepicker  @error('Attestation_remise_le') is-invalid @enderror"   name="Attestation_remise_le" value="{{ old('Attestation_remise_le') }}"    autocomplete="Attestation_remise_le" lang="fr-CA" autofocus>
+                                <input id="Attestation_remise_le" type="date" value = "{{$stagiaire->Attestation_remise_le}}" class="form-control datepicker  @error('Attestation_remise_le') is-invalid @enderror"   name="Attestation_remise_le" value="{{ old('Attestation_remise_le') }}"    autocomplete="Attestation_remise_le" lang="fr-CA" >
                                 @error('Attestation_remise_le')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -222,7 +222,7 @@
                         <div class="row mb-3">
                             <label for="Att_remise_a" class="col-md-3 mx-1 col-form-label text-md-left">{{ __('Attestation remise à: ') }}</label>
                             <div class="col-md-5">
-                                <input id="Att_remise_a" type="text" value="{{ $stagiaire->Att_remise_a }}" class="form-control @error('Att_remise_a') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="Att_remise_a"    autocomplete="Att_remise_a"  autofocus>
+                                <input id="Att_remise_a" type="text" value="{{ $stagiaire->Att_remise_a }}" class="form-control @error('Att_remise_a') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="Att_remise_a"    autocomplete="Att_remise_a"  >
                                 @error('Att_remise_a')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -236,7 +236,7 @@
                         <div class="row mb-3">
                             <label for="observation" class="col-md-3 mx-1 col-form-label text-md-left">{{ __('Observation: ') }}</label>
                             <div class="col-md-5">
-                                <input id="observation" type="text" value="{{ $stagiaire->observation }}" class="form-control @error('observation') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="observation"    autocomplete="observation"  autofocus>
+                                <input id="observation" type="text" value="{{ $stagiaire->observation }}" class="form-control @error('observation') is-invalid @enderror"  oninput="this.value = this.value.charAt(0).toUpperCase()+ this.value.slice(1)" name="observation"    autocomplete="observation"  >
                                 @error('observation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -247,10 +247,11 @@
                             <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{ $stagiaire->observation }}</p></div>
                             @endif
                         </div>
+                        @if($stagiaire->remunere)
                         <div class="row mb-3">
                             <label for="OP_etabli_le" class="col-md-3 mx-1 col-form-label text-md-left"> OP établie le: </label>
                             <div class="col-md-5">
-                                <input id="OP_etabli_le" type="date" value = "{{$stagiaire->OP_etabli_le}}" class="form-control datepicker  @error('OP_etabli_le') is-invalid @enderror"   name="OP_etabli_le" value="{{ old('OP_etabli_le') }}"    autocomplete="OP_etabli_le" lang="fr-CA" autofocus>
+                                <input id="OP_etabli_le" type="date" value = "{{$stagiaire->OP_etabli_le}}" class="form-control datepicker  @error('OP_etabli_le') is-invalid @enderror"   name="OP_etabli_le" value="{{ old('OP_etabli_le') }}"    autocomplete="OP_etabli_le" lang="fr-CA" >
                                 @error('OP_etabli_le')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -264,7 +265,7 @@
                         <div class="row mb-3">
                             <label for="indemnite_remise_le" class="col-md-3 mx-1 col-form-label text-md-left"> Indemnité remise le:</label>
                             <div class="col-md-5">
-                                <input id="indemnite_remise_le" type="date" value = "{{$stagiaire->indemnite_remise_le}}" class="form-control datepicker  @error('indemnite_remise_le') is-invalid @enderror"   name="indemnite_remise_le" value="{{ old('indemnite_remise_le') }}"    autocomplete="indemnite_remise_le" lang="fr-CA" autofocus>
+                                <input id="indemnite_remise_le" type="date" value = "{{$stagiaire->indemnite_remise_le}}" class="form-control datepicker  @error('indemnite_remise_le') is-invalid @enderror"   name="indemnite_remise_le" value="{{ old('indemnite_remise_le') }}"    autocomplete="indemnite_remise_le" lang="fr-CA" >
                                 @error('indemnite_remise_le')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -275,6 +276,8 @@
                             <div class="col-md-3 mx-auto border border-warning"> <p class="text-center">{{\Carbon\Carbon::parse($stagiaire->indemnite_remise_le)->format('d/m/Y') }}</p></div>
                             @endif
                         </div>
+                        @endif
+
                         <div class="row mb-0">
                             <div class="sign d-flex flex-column"> <span class="text-primary"> <small>Saisi par: {{$stagiaire->created_by}} : {{$stagiaire->created_at}}</small> </span> </div>
                             <div class="sign d-flex flex-column"> <span class="text-primary"> <small>Modifié par: {{$stagiaire->edited_by}} : {{$stagiaire->updated_at}}</small> </span> </div>
