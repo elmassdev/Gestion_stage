@@ -114,7 +114,7 @@
                     <td>{{\Carbon\Carbon::parse($result->date_debut)->format('d/m/Y')}}</td>
                     <td>{{\Carbon\Carbon::parse($result->date_fin)->format('d/m/Y')}}</td>
                     <td>{{ \Carbon\Carbon::parse($result->OP_etabli_le)->format('d/m/Y')}}</td>
-                    <td>{{ $result->edited_by}}</td>
+                    <td>{{ $result->Op_etabli_par}}</td>
                     <td><a  href="/stagiaires/{{$result->id}}/modification"> <i class="fa fa-edit text-warning"></i></a>
                         @if(auth()->check() && auth()->user()->hasRole('superadmin'))
                         <form action="/stagiaires/{{$result->id}}" method="POST"  style="display:inline">

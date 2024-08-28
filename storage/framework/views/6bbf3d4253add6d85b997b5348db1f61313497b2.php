@@ -113,7 +113,7 @@
                     <td><?php echo e(\Carbon\Carbon::parse($result->date_debut)->format('d/m/Y')); ?></td>
                     <td><?php echo e(\Carbon\Carbon::parse($result->date_fin)->format('d/m/Y')); ?></td>
                     <td><?php echo e(\Carbon\Carbon::parse($result->OP_etabli_le)->format('d/m/Y')); ?></td>
-                    <td><?php echo e($result->edited_by); ?></td>
+                    <td><?php echo e($result->Op_etabli_par); ?></td>
                     <td><a  href="/stagiaires/<?php echo e($result->id); ?>/modification"> <i class="fa fa-edit text-warning"></i></a>
                         <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
                         <form action="/stagiaires/<?php echo e($result->id); ?>" method="POST"  style="display:inline">

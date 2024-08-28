@@ -108,6 +108,9 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::put('/visites/{visite}', [VisiteController::class, 'update'])->name('visites.update');
     Route::delete('/visites/{id}', [VisiteController::class, 'destroy'])->name('visites.destroy');
 
+    // Route::get('/stagiaires/{id}/attestation', [StagiaireController::class, 'generer_attestation'])->name('stagiaires.attestation');
+
+
 
 
 

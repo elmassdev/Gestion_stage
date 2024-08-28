@@ -413,6 +413,7 @@ class StagiaireController extends Controller
     //the below code will be used in the printable documents
 
     public function generer_attestation($id){
+        $stagiaireModel = Stagiaire::findOrFail($id);
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
@@ -450,12 +451,76 @@ class StagiaireController extends Controller
             }else{
                 $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
+    $stagiaireModel->update(['date_Att_etablie' => Carbon::now()]);
+
 
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
         // return $pdf->stream();
         $filename = 'Attestation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);
     }
+
+//     public function generer_attestation($id)
+// {
+//     // Fetch the Stagiaire model instance first
+//     $stagiaireModel = Stagiaire::findOrFail($id);
+
+//     // Use join query to get additional data required for the PDF
+//     $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
+//         ->join('etablissements', 'stagiaires.etablissement', '=', 'etablissements.sigle_etab')
+//         ->join('services', 'stagiaires.service', '=', 'services.id')
+//         ->where('stagiaires.id', '=', $id)
+//         ->get([
+//             'civilite.civilite as titre',
+//             'stagiaires.code',
+//             'stagiaires.nom',
+//             'stagiaires.prenom',
+//             'stagiaires.cin',
+//             'stagiaires.site',
+//             'civilite.genre as genre',
+//             'etablissements.etab as etab',
+//             'etablissements.sigle_etab as sigle_etab',
+//             'etablissements.article as article',
+//             'stagiaires.ville',
+//             'stagiaires.filiere',
+//             'stagiaires.type_stage',
+//             'services.direction as direction',
+//             'stagiaires.date_debut',
+//             'stagiaires.date_fin',
+//             'stagiaires.site',
+//             'stagiaires.EI'
+//         ])->first();
+
+//     if (!$stagiaire) {
+//         return redirect()->back()->with('error', 'Stagiaire not found.');
+//     }
+
+//     // Set locale for French formatting
+//     Carbon::setLocale('fr');
+
+//     // Date handling
+//     $dd = Carbon::parse($stagiaire->date_debut);
+//     $fin = Carbon::parse($stagiaire->date_fin);
+
+//     // Format dates
+//     $dd_short = $dd->translatedFormat('d F Y');
+//     $fin_short = $fin->translatedFormat('d F Y');
+//     $dd_long = $dd->translatedFormat('l j F Y');
+//     $fin_long = $fin->translatedFormat('l j F Y');
+//     $today = Carbon::now()->translatedFormat('d F Y');
+//     $year = $dd->translatedFormat('Y');
+
+//     // Determine the PDF view based on EI condition
+//     $pdfView = $stagiaire->EI ? '/stagiaires/attestation' : '/stagiaires/attestation_n';
+//     $pdf = Pdf::loadView($pdfView, compact('stagiaire', 'dd_short', 'dd_long', 'fin_short', 'fin_long', 'today', 'year'));
+
+//     // Update the date_Att_etablie field using the original model instance
+//     $stagiaireModel->update(['date_Att_etablie' => Carbon::now()]);
+
+//     // Generate filename and stream the PDF
+//     $filename = 'Attestation_' . $stagiaire->nom . '_' . $stagiaire->prenom . '_' . $stagiaire->sigle_etab . '.pdf';
+//     return $pdf->stream($filename, ['blank' => true]);
+// }
 
     public function generer_sujet($id){
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
@@ -574,6 +639,7 @@ class StagiaireController extends Controller
     }
 
     public function generer_op($id){
+        $stagiaireModel = Stagiaire::findOrFail($id);
         $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
@@ -695,7 +761,13 @@ class StagiaireController extends Controller
             $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
         }
         $filename = 'OP_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
+        $stagiaireModel->update([
+            'OP_etabli_le' => Carbon::now(),
+            'OP_etabli' => true,
+            'Op_etabli_par' => Auth::user()->nom
+        ]);
         return $pdf->stream($filename, ['blank' => true]);
+
     }
 }
 

@@ -51,6 +51,7 @@ return new class extends Migration
             $table->string('Att_remise_a')->nullable();
             $table->boolean('OP_etabli')->nullable();
             $table->date('OP_etabli_le')->nullable();
+            $table->string('Op_etabli_par')->nullable();
             $table->date('indemnite_remise_le')->nullable();
             $table->string('created_by')->nullable();
             $table->string('edited_by')->nullable();
