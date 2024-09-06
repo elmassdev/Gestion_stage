@@ -376,11 +376,9 @@ class StagiaireController extends Controller
         return $originalAttributes[$key] != $value;
     }, ARRAY_FILTER_USE_BOTH);
 
-    // Check if OP_etabli_le is empty, then set OP_etabli to false
     if (empty($validatedData['OP_etabli_le'])) {
         $modifiedAttributes['OP_etabli'] = false;
     } else {
-        // If OP_etabli_le is not empty, set OP_etabli to true
         $modifiedAttributes['OP_etabli'] = true;
     }
 

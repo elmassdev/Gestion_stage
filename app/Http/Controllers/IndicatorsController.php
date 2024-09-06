@@ -72,24 +72,25 @@ class IndicatorsController extends Controller
             ->groupBy('nomenc')
             ->orderBy('total','desc')->get();
 
+            // interface pour afficher des stagiaires aujourd'hui annulé de la page indicateurs
 
-        $query = $request->input('search');
-        $results = DB::table('stagiaires')
-            ->join('services', 'stagiaires.service', '=', 'services.id')
-            ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-            ->where('stagiaires.site', '=', Auth::user()->site)
-            ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
-            ->where('date_debut', '=', $query)->where('stagiaires.annule', '=', false)
-            ->orderBy('code', 'desc')
-            ->paginate(20);
+        // $query = $request->input('search');
+        // $results = DB::table('stagiaires')
+        //     ->join('services', 'stagiaires.service', '=', 'services.id')
+        //     ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        //     ->where('stagiaires.site', '=', Auth::user()->site)
+        //     ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
+        //     ->where('date_debut', '=', $query)->where('stagiaires.annule', '=', false)
+        //     ->orderBy('code', 'desc')
+        //     ->paginate(20);
 
-        $statoday = DB::table('stagiaires')
-        ->join('services', 'stagiaires.service', '=', 'services.id')
-        ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
-        ->where('stagiaires.site', '=', Auth::user()->site)
-        ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
-        ->whereRaw('date_debut >= NOW()')
-        ->where('stagiaires.annule', '=', false)->paginate(4);
+        // $statoday = DB::table('stagiaires')
+        // ->join('services', 'stagiaires.service', '=', 'services.id')
+        // ->leftJoin('encadrants',  'stagiaires.encadrant', '=', 'encadrants.id')
+        // ->where('stagiaires.site', '=', Auth::user()->site)
+        // ->select(DB::raw('stagiaires.*, encadrants.titre as titreenc, encadrants.nom as nomenc, services.sigle_service as service'))
+        // ->whereRaw('date_debut >= NOW()')
+        // ->where('stagiaires.annule', '=', false)->paginate(4);
 
         // $monthlysta = Stagiaire::select(DB::raw('COUNT(*) as total'), DB::raw('MONTH(date_debut) as mois'), DB::raw('YEAR(date_debut) as annee'))
         //     ->whereRaw('date_debut >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)')
@@ -109,7 +110,7 @@ class IndicatorsController extends Controller
                 ->get();
 
 
-        return view('indicators.index',compact('stagiaires','stagenc','paginatedstagiaires','paginatedstagenc','statoday','results','dailysta'));
+        return view('indicators.index',compact('stagiaires','stagenc','paginatedstagiaires','paginatedstagenc','dailysta'));
     }
 
 
@@ -258,16 +259,20 @@ class IndicatorsController extends Controller
         $sheet->setCellValue('F1', 'niveau');
         $sheet->setCellValue('G1', 'diplome');
         $sheet->setCellValue('H1', 'Ecole');
-        $sheet->setCellValue('I1', 'Type de stage');
-        $sheet->setCellValue('J1', 'Encadrant');
-        $sheet->setCellValue('K1', 'Service');
-        $sheet->setCellValue('L1', 'Date début');
-        $sheet->setCellValue('M1', 'Date fin');
-        $sheet->setCellValue('N1', 'Sujet');
-        $sheet->setCellValue('O1', 'Type formation');
-        $sheet->setCellValue('P1', 'rémunéré');
-        $sheet->setCellValue('Q1', 'Annulé');
-        $sheet->setCellValue('R1', 'OP établi');
+        $sheet->setCellValue('I1', 'Ville');
+        $sheet->setCellValue('J1', 'Type de stage');
+        $sheet->setCellValue('K1', 'Encadrant');
+        $sheet->setCellValue('L1', 'Service');
+        $sheet->setCellValue('M1', 'Date début');
+        $sheet->setCellValue('N1', 'Date fin');
+        $sheet->setCellValue('O1', 'Sujet');
+        $sheet->setCellValue('P1', 'Type formation');
+        $sheet->setCellValue('Q1', 'rémunéré');
+        $sheet->setCellValue('R1', 'Annulé');
+        $sheet->setCellValue('S1', 'OP établi');
+        $sheet->setCellValue('T1', 'OP établi par');
+        $sheet->setCellValue('U1', 'date OP');
+        $sheet->setCellValue('V1', 'MAD remise le');
 
         $data = DB::table('stagiaires')->where('stagiaires.site', '=', Auth::user()->site)
         ->join('services', 'stagiaires.service', '=', 'services.id')
@@ -287,16 +292,20 @@ class IndicatorsController extends Controller
             $sheet->setCellValue('F' . ($row + 2), $rowData->niveau);
             $sheet->setCellValue('G' . ($row + 2), $rowData->diplome);
             $sheet->setCellValue('H' . ($row + 2), $rowData->etablissement);
-            $sheet->setCellValue('I' . ($row + 2), $rowData->type_stage);
-            $sheet->setCellValue('J' . ($row + 2), $rowData->nomenc);
-            $sheet->setCellValue('K' . ($row + 2), $rowData->sigle);
-            $sheet->setCellValue('L' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
-            $sheet->setCellValue('M' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
-            $sheet->setCellValue('N' . ($row + 2), $rowData->sujet);
-            $sheet->setCellValue('O' . ($row + 2), $rowData->type_formation);
-            $sheet->setCellValue('P' . ($row + 2), $rowData->remunere);
-            $sheet->setCellValue('Q' . ($row + 2), $rowData->annule);
-            $sheet->setCellValue('R' . ($row + 2), $rowData->OP_etabli);
+            $sheet->setCellValue('I' . ($row + 2), $rowData->ville);
+            $sheet->setCellValue('J' . ($row + 2), $rowData->type_stage);
+            $sheet->setCellValue('K' . ($row + 2), $rowData->nomenc);
+            $sheet->setCellValue('L' . ($row + 2), $rowData->sigle);
+            $sheet->setCellValue('M' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
+            $sheet->setCellValue('N' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
+            $sheet->setCellValue('O' . ($row + 2), $rowData->sujet);
+            $sheet->setCellValue('P' . ($row + 2), $rowData->type_formation);
+            $sheet->setCellValue('Q' . ($row + 2), $rowData->remunere);
+            $sheet->setCellValue('R' . ($row + 2), $rowData->annule);
+            $sheet->setCellValue('S' . ($row + 2), $rowData->OP_etabli);
+            $sheet->setCellValue('T' . ($row + 2), $rowData->Op_etabli_par);
+            $sheet->setCellValue('U' . ($row + 2), $rowData->indemnite_remise_le);
+            $sheet->setCellValue('V' . ($row + 2), $rowData->indemnite_remise_le);
         }
         // Set the response headers for Excel file download
         $filename = 'Extraction_stagiaires_'.$today.'.xlsx';
