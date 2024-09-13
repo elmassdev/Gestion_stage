@@ -100,7 +100,7 @@
                         Développement RH <br></b>
                     </div>
                     <div class="ref">
-                        <p>OIG/H/D -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
+                        <p>MIG/H/D -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
                     </div>
                 </td>
                 <td>

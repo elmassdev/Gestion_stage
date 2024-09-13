@@ -24,7 +24,7 @@
         font-family: 'Roboto', sans-serif;
     }
 </style>
-<div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b> MIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 @php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');

@@ -70,7 +70,7 @@
 
 
 
-<div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b> MIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 <div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>  S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} -</small> </div>
 <table>
     <tr>

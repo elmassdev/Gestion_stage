@@ -21,7 +21,7 @@
         margin-left: 5px;
     }
 </style>
-<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="note"> <small> <b> MIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>

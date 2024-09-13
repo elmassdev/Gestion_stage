@@ -22,7 +22,7 @@
         margin-left: 5px;
     }
 </style>
-<div class="note"> <small> <b> OIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b> MIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>

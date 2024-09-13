@@ -100,7 +100,7 @@
                         Développement RH <br></b>
                     </div>
                     <div class="ref">
-                        <p>OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
+                        <p>MIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
                     </div>
                 </td>
                 <td>

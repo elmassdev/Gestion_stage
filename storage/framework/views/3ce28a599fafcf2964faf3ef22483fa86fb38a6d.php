@@ -55,7 +55,7 @@
 
 
 
-<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="note"> <small> <b> MIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 <div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>  S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> -</small> </div>
 <table>
     <tr>
