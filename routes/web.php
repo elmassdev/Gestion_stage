@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Stagiaire;
 use App\Models\visites;
 use App\Http\Controllers\VisiteController;
-
+use App\Http\Controllers\SignatureController;
 
 
 
@@ -167,6 +167,44 @@ Route::middleware(['auth', 'can:view_surete_page'])->group(function () {
     Route::get('/surete/save', [App\Http\Controllers\SureteController::class, 'canvasStage']);
 });
 
+
+
+
+// Route::resource('signatures', SignatureController::class);
+
+// // Route specifically for exporting the active signature
+// Route::get('/signatures', [SignatureController::class, 'export'])->name('signatures.export');
+
+
+
+
+Route::prefix('signatures')->group(function () {
+    // List all signatures
+    Route::get('/', [SignatureController::class, 'index'])->name('signatures.index');
+
+    // Show form to create a new signature
+    Route::get('/create', [SignatureController::class, 'create'])->name('signatures.create');
+
+    // Store a new signature
+    Route::post('/', [SignatureController::class, 'store'])->name('signatures.store');
+
+    // Show form to edit an existing signature
+    Route::get('/{id}/edit', [SignatureController::class, 'edit'])->name('signatures.edit');
+    //Route::put('/signatures/{signature}', [SignatureController::class, 'update'])->name('signatures.update');
+
+
+    // Update an existing signature
+    // Route::put('/{id}', [SignatureController::class, 'update'])->name('signatures.update');
+    Route::put('/signatures/{id}', [SignatureController::class, 'update'])->name('signatures.update');
+
+
+
+    // Delete an existing signature
+    Route::delete('/{id}', [SignatureController::class, 'destroy'])->name('signatures.destroy');
+
+    // Display active signature for export
+    Route::get('/export', [SignatureController::class, 'export'])->name('signatures.export');
+});
 
 
 

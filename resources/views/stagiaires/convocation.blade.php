@@ -52,7 +52,7 @@
 
 
 
-<div class="note"> <small> <b> MIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b>{{ $activeSignature->sigle }}  - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 <div class="nomsta"><small> <b> {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}} </b><br>S/C de: {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) <br> - {{$stagiaire->ville}} - </small> </div>
 
 <p>{{$stagiaire->titre}}, <br>
@@ -124,8 +124,8 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
             }
         </style>
         <div class="sign">  <p> <b>
-            P. Le Président Directeur Général & p.o., <br>
-            P. Le Responsable Développement RH </b> </p>
+            {{ $activeSignature->sign2 }} <br>
+            {{ $activeSignature->sign1 }} </b> </p>
         </div>
         @if ($stagiaire->sujet!='')
         <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>

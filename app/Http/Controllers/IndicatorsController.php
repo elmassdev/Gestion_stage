@@ -452,19 +452,22 @@ class IndicatorsController extends Controller
 
         $sta_type_f = Stagiaire::select('type_formation', DB::raw('COUNT(*) as count'))
         ->whereYear('date_debut', $year)
-        ->groupBy('type_formation')->get();
+        ->groupBy('type_formation')
+        ->orderBy('count','desc')->get();
 
 
         $sta_ser = Stagiaire::select('services.sigle_service', DB::raw('COUNT(*) as count'))
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->whereYear('stagiaires.date_debut', $year)
         ->groupBy('services.sigle_service')
+        ->orderBy('count','desc')
         ->get();
 
         $sta_ent = Stagiaire::select('services.entite', DB::raw('COUNT(*) as count'))
         ->join('services', 'stagiaires.service', '=', 'services.id')
         ->whereYear('stagiaires.date_debut', $year)
         ->groupBy('services.entite')
+        ->orderBy('count','desc')
         ->get();
         $remunereCount = Stagiaire::where('remunere', true)->where('annule',false)
         ->whereYear('date_debut', $year)

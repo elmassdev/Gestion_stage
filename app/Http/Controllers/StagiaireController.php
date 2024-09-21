@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Stagiaire;
+use App\Models\Signature;
 use App\Models\Ville;
 use App\Models\Etablissement;
 use App\Models\Encadrant;
@@ -47,6 +48,7 @@ class StagiaireController extends Controller
         ->paginate(10);
         return view('stagiaires.index', compact('lastId','stagiaires'));
     }
+
 
 
     /**
@@ -412,11 +414,15 @@ class StagiaireController extends Controller
 
     public function generer_attestation($id){
         $stagiaireModel = Stagiaire::findOrFail($id);
+        $activeSignature = Signature::where('is_active', true)->first();
+
+
+
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
         ->where('stagiaires.id','=',$id)
-               ->get(['civilite.civilite as titre','stagiaires.code','stagiaires.nom','stagiaires.prenom','stagiaires.cin', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI'])->first();
+               ->get(['civilite.civilite as titre','stagiaires.code','stagiaires.nom','stagiaires.prenom','stagiaires.cin', 'stagiaires.site', 'civilite.genre as genre','etablissements.etab as etab','etablissements.sigle_etab as sigle_etab','etablissements.article as article','stagiaires.ville','stagiaires.filiere','stagiaires.type_stage','services.direction as direction','stagiaires.date_debut','stagiaires.date_fin','stagiaires.site','stagiaires.EI','date_Att_etablie'])->first();
         $today = date('d F Y');
         $now = Carbon::now();
         // dd($stagiaire);
@@ -443,11 +449,14 @@ class StagiaireController extends Controller
         $fin_long1 = str_replace($yearNumber,$yearText,$fin_short);
         $fin_long = str_replace($dayNumber, $dayNumberText, $fin_long1);
         $today = str_replace($englishMonths, $frenchMonths,$today);
+        $Att = $stagiaire->date_Att_etablie;
+        $d_Att = Carbon::parse($Att)->format('d F Y');
+        $date_Att = str_replace($englishMonths, $frenchMonths,$d_Att);
 
             if($stagiaire->EI){
-                $pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/attestation',compact('activeSignature','stagiaire','dd_short','dd_long','fin_short','fin_long','today','year','date_Att'));
             }else{
-                $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('activeSignature','stagiaire','dd_short','dd_long','fin_short','fin_long','today','year','date_Att'));
             }
     $stagiaireModel->update(['date_Att_etablie' => Carbon::now()]);
 
@@ -455,7 +464,7 @@ class StagiaireController extends Controller
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
         // return $pdf->stream();
         $filename = 'Attestation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
-        return $pdf->stream($filename, ['blank' => true]);
+        return $pdf->stream($filename, ['blank' => true,  'activeSignature' => $activeSignature]);
     }
 
 //     public function generer_attestation($id)
@@ -501,10 +510,13 @@ class StagiaireController extends Controller
 //     $fin = Carbon::parse($stagiaire->date_fin);
 
 //     // Format dates
+//      $Att = $stagiaire->date_Att_etablie;
+//      $date_Att = $Att->translatedFormat('d F Y');
 //     $dd_short = $dd->translatedFormat('d F Y');
 //     $fin_short = $fin->translatedFormat('d F Y');
 //     $dd_long = $dd->translatedFormat('l j F Y');
-//     $fin_long = $fin->translatedFormat('l j F Y');
+//     $fin_short = $fin->translatedFormat('d F Y');
+
 //     $today = Carbon::now()->translatedFormat('d F Y');
 //     $year = $dd->translatedFormat('Y');
 
@@ -521,6 +533,7 @@ class StagiaireController extends Controller
 // }
 
     public function generer_sujet($id){
+        $activeSignature = Signature::where('is_active', true)->first();
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
@@ -562,7 +575,7 @@ class StagiaireController extends Controller
         $fin_long = str_replace($dayNumber, $dayNumberText, $fin_long1);
         $today = str_replace($englishMonths, $frenchMonths,$today);
 
-        $pdf =Pdf::loadView('/stagiaires/sujet',compact('stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+        $pdf =Pdf::loadView('/stagiaires/sujet',compact('activeSignature','stagiaire','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
         $filename = 'Sujet_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);
 
@@ -570,6 +583,7 @@ class StagiaireController extends Controller
 
 
     public function generer_convocation($id){
+        $activeSignature = Signature::where('is_active', true)->first();
         $stagiaire = Stagiaire::join('civilite', 'stagiaires.civilite', '=', 'civilite.titre')
         ->join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
@@ -580,14 +594,6 @@ class StagiaireController extends Controller
 
          // 1 - format the variable date brought from the database to make it easy to translate ( ex : 01 February 2023)
         $today = date('d F Y');
-        //$year = date('Y');
-
-
-        // $diff = now()->diffInDays(Carbon::parse($stagiaire->date_debut), false);
-
-
-
-
         $ddd = $stagiaire->date_debut;
         $year = Carbon::parse($ddd)->format('Y');
         $ddemande      = $stagiaire->date_demande;
@@ -628,15 +634,16 @@ class StagiaireController extends Controller
 
 
             if($stagiaire->EI){
-                $pdf =Pdf::loadView('/stagiaires/convocation',compact('stagiaire','dateToShow','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/convocation',compact('activeSignature','stagiaire','dateToShow','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }else{
-                $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('stagiaire','dateToShow','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
+                $pdf =Pdf::loadView('/stagiaires/convocation_n',compact('activeSignature','stagiaire','dateToShow','dateLO','ddemande','date_debut','date_fin','dd_short','dd_long','fin_short','fin_long','today','year'));
             }
             $filename = 'Convocation_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         return $pdf->stream($filename, ['blank' => true]);
     }
 
     public function generer_op($id){
+        $activeSignature = Signature::where('is_active', true)->first();
         $stagiaireModel = Stagiaire::findOrFail($id);
         $stagiaire = Stagiaire::join('etablissements','stagiaires.etablissement','=','etablissements.sigle_etab')
         ->join('services', 'stagiaires.service','=','services.id')
@@ -756,7 +763,7 @@ class StagiaireController extends Controller
         $Le_net = htmlspecialchars($net_lettres_string);
 
         if($stagiaire->remunere){
-            $pdf =Pdf::loadView('/stagiaires/op',compact('stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
+            $pdf =Pdf::loadView('/stagiaires/op',compact('activeSignature','stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
         }
         $filename = 'OP_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
         $stagiaireModel->update([

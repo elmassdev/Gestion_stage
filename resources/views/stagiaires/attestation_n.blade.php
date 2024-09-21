@@ -22,7 +22,7 @@
         margin-left: 5px;
     }
 </style>
-<div class="note"> <small> <b> MIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b> {{ $activeSignature->sigle }}  - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>
@@ -51,7 +51,7 @@
 
         <div class="sign">
             {{$stagiaire->site}}, le {{$today}} <br>
-            P. Le Responsable Développement RH
+            {{ $activeSignature->sign1 }}
 
         </div>
 

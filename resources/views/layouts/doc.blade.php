@@ -33,12 +33,12 @@
             <div class="container">
                 <div>
                     <img src="{{ public_path("/images/logow.png") }}" alt="" style="width: 110px; height: 35px; margin-bottom: 1%;"> <br>
-                 <b>SBU-Mining <br>
-                    Direction Industrielle Mines Gantour <br>
-                    Direction Capital Humain Gantour <br>
-                    Développement RH <br></b> <div class="phones">
-                    <small>Tel: +212 662 07 74 39</small> <br>
-                    <small>Fax: +212 524 64 60 86   </small>     </div>
+                 <b>{{ $activeSignature->head1 }} <br>
+                    {{ $activeSignature->head2 }}<br>
+                    {{ $activeSignature->head3 }}<br>
+                    {{ $activeSignature->head4 }} <br></b> <div class="phones">
+                    <small>Tel: {{ $activeSignature->phone }}</small> <br>
+                    <small>Fax: {{ $activeSignature->Fax }}   </small>     </div>
                 </div>
             </div>
         </div>

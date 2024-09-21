@@ -51,7 +51,7 @@
 
 
 
-<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="note"> <small> <b><?php echo e($activeSignature->sigle); ?>  - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 <div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> - </small> </div>
 
 <p><?php echo e($stagiaire->titre); ?>, <br>
@@ -127,8 +127,8 @@ du Groupe OCP (accident de travail, de trajet, maladie,...)
             }
         </style>
         <div class="sign">  <p> <b>
-            P. Le Président Directeur Général & p.o., <br>
-            P. Le Responsable Développement RH </b> </p>
+            <?php echo e($activeSignature->sign2); ?> <br>
+            <?php echo e($activeSignature->sign1); ?> </b> </p>
         </div>
         <?php if($stagiaire->sujet!=''): ?>
         <div class="sujet"><small> <i>PJ: Sujet de stage </i>  </small></div>

@@ -24,7 +24,7 @@
         font-family: 'Roboto', sans-serif;
     }
 </style>
-<div class="note"> <small> <b> MIG/H/DH - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b> {{ $activeSignature->sigle }} - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
 @php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
@@ -51,9 +51,9 @@
         </style>
 
         <div class="sign">
-            {{$stagiaire->site}}, le {{$today}} <br>
-            P. Le président Directeur Générale et p.o. <br>
-            P. Le Responsable Développement RH
+            {{$stagiaire->site}}, le {{$date_Att}} <br>
+            {{ $activeSignature->sign2 }}  <br>
+            {{ $activeSignature->sign1 }}
 
         </div>
 

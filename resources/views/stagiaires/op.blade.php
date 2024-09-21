@@ -94,13 +94,13 @@
                 <td>
                     <div>
                         <img class="logo" src="{{ public_path("/images/logow.png") }}" alt="" style="width: 110px; height: 35px;"> <br>
-                        <b>SBU-Mining <br>
-                        Direction Industrielle Mines Gantour <br>
-                        Direction Capital Humain Gantour <br>
-                        Développement RH <br></b>
+                        <b>{{ $activeSignature->head1 }} <br>
+                            {{ $activeSignature->head2 }} <br>
+                            {{ $activeSignature->head3 }} <br>
+                            {{ $activeSignature->head4 }} <br></b>
                     </div>
                     <div class="ref">
-                        <p>MIG/H/D -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
+                        <p>{{ $activeSignature->sigle }} -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
                     </div>
                 </td>
                 <td>

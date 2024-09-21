@@ -23,7 +23,7 @@
         font-family: 'Roboto', sans-serif;
     }
 </style>
-<div class="note"> <small> <b> OIG/H/DH - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="note"> <small> <b> <?php echo e($activeSignature->sigle); ?> - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
 <?php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
@@ -50,9 +50,10 @@
         </style>
 
         <div class="sign">
-            <?php echo e($stagiaire->site); ?>, le <?php echo e($today); ?> <br>
-            P. Le président Directeur Générale et p.o. <br>
-            P. Le Responsable Développement RH
+            <?php echo e($stagiaire->site); ?>, le <?php echo e($date_Att); ?> <br>
+            <?php echo e($activeSignature->sign2); ?>  <br>
+            <?php echo e($activeSignature->sign1); ?>
+
 
         </div>
 

@@ -94,13 +94,13 @@
                 <td>
                     <div>
                         <img class="logo" src="<?php echo e(public_path("/images/logow.png")); ?>" alt="" style="width: 110px; height: 35px;"> <br>
-                        <b>SBU-Mining <br>
-                        Direction Industrielle Mines Gantour <br>
-                        Direction Capital Humain Gantour <br>
-                        Développement RH <br></b>
+                        <b><?php echo e($activeSignature->head1); ?> <br>
+                            <?php echo e($activeSignature->head2); ?> <br>
+                            <?php echo e($activeSignature->head3); ?> <br>
+                            <?php echo e($activeSignature->head4); ?> <br></b>
                     </div>
                     <div class="ref">
-                        <p>MIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
+                        <p><?php echo e($activeSignature->sigle); ?> -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
                     </div>
                 </td>
                 <td>
