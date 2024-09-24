@@ -16,23 +16,23 @@ class SignatureController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
     public function generateConvocation($id) {
-        // Fetch active signature
-        $activeSignature = Signature::where('is_active', true)->first();
-
-        // Check if the signature exists
+        $user = auth()->user();
+        $activeSignature = Signature::where('is_active', true)
+            ->where('site', $user->site)
+            ->first();
         if (!$activeSignature) {
-            return back()->withErrors('No active signature found.');
+            return back()->withErrors('No active signature found for your site.');
         }
-
-        // Pass the signature to the view
         return view('layouts.doc', compact('activeSignature'));
     }
 
 
+
      public function index()
     {
-        $signatures = Signature::orderBy('is_active', 'desc')->get();
+        $signatures = Signature::orderBy('created_at', 'desc')->get();
         return view('signatures.index', compact('signatures'));
     }
 
@@ -44,6 +44,7 @@ class SignatureController extends Controller
 
     public function store(Request $request)
     {
+        $user = auth()->user();
         $request->validate([
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'head1' => 'required|string|max:255',
@@ -56,12 +57,13 @@ class SignatureController extends Controller
             'sigle' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'Fax' => 'required|string|max:20',
+            'site' => 'required|string|max:20',
             'is_active' => 'nullable|boolean',
             'effective_date' => 'required|date',
         ]);
         $isActive = $request->has('is_active') ? true : false;
         if ($isActive) {
-            Signature::where('is_active', true)->update(['is_active' => false]);
+            Signature::where('is_active', true)->where('site', $user->site)->update(['is_active' => false]);
         }
 
         $signature = new Signature();
@@ -75,6 +77,7 @@ class SignatureController extends Controller
         $signature->sigle = $request->sigle;
         $signature->phone = $request->phone;
         $signature->Fax = $request->Fax;
+        $signature->site = $request->site;
         $signature->is_active = $isActive;
         $signature->effective_date = $request->effective_date;
 
@@ -98,109 +101,37 @@ class SignatureController extends Controller
     }
 
 
+    public function update(Request $request, $id){
+        $signature = Signature::findOrFail($id);
+        $isActive = $request->has('is_active');
+        $logoPath = $signature->logo;
 
-
-    // public function update(Request $request, $id)
-    // {
-    //     $signature = Signature::findOrFail($id);
-    //     // Validate the incoming request data
-    //     $request->validate([
-    //         'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional logo validation
-    //         'head1' => 'required|string|max:255',
-    //         'head2' => 'required|string|max:255',
-    //         'head3' => 'required|string|max:255',
-    //         'head4' => 'required|string|max:255',
-    //         'sign1' => 'required|string|max:255',
-    //         'sign2' => 'required|string|max:255',
-    //         'sign_op' => 'required|string|max:255',
-    //         'sigle' => 'required|string|max:255',
-    //         'phone' => 'required|string|max:20',
-    //         'Fax' => 'required|string|max:20',
-    //         'is_active' => 'nullable|boolean',
-    //         'effective_date' => 'required|date',
-    //     ]);
-
-    //     $isActive = $request->has('is_active') ? true : false;
-    //     $logoPath = $signature->logo;
-    //     // if ($request->hasFile('logo')) {
-    //     //     // Delete the old logo if it exists
-    //     //     if ($logoPath && Storage::disk('public')->exists('images/logos/' . $logoPath)) {
-    //     //         Storage::disk('public')->delete('images/logos/' . $logoPath);
-    //     //     }
-    //     //     // Store the new logo
-    //     //     $fileName = time() . '.' . $request->logo->extension();
-    //     //     $path = $request->logo->storeAs('images/logos', $fileName, 'public');
-    //     //     $logoPath = $fileName; // Update the logo path
-    //     // }
-
-    //     if($request->hasFile('logo')){
-    //         $old_logos ='storage/images/logos/'.$signature->logos;
-    //         File::delete($old_logos);
-    //         $fileName = time() . '.' . $request->logo->extension();
-    //         $request->file('logo')->storeAs('images/logos', $fileName,'public');
-    //         $signature->update(['logo' => $fileName]);
-    //     }
-
-    //     // Update the signature record
-    //     $signature->update([
-    //         'logo' => $logoPath,
-    //         'head1' => $request->head1,
-    //         'head2' => $request->head2,
-    //         'head3' => $request->head3,
-    //         'head4' => $request->head4,
-    //         'sign1' => $request->sign1,
-    //         'sign2' => $request->sign2,
-    //         'sign_op' => $request->sign_op,
-    //         'sigle' => $request->sigle,
-    //         'phone' => $request->phone,
-    //         'Fax' => $request->Fax,
-    //         'is_active' => $isActive,
-    //         'effective_date' => $request->effective_date,
-    //     ]);
-
-    //     return redirect()->route('signatures.index')->with('success', 'Signature mise à jour.');
-    // }
-
-
-    public function update(Request $request, $id)
-{
-    $signature = Signature::findOrFail($id);
-
-
-    $isActive = $request->has('is_active');
-    $logoPath = $signature->logo;
-
-    // Handle the logo upload if a new file is provided
-    if ($request->hasFile('logo')) {
-        // Delete the old logo if it exists
-        if ($logoPath && Storage::disk('public')->exists('images/logos/' . $logoPath)) {
-            Storage::disk('public')->delete('images/logos/' . $logoPath);
+        if ($request->hasFile('logo')) {
+            if ($logoPath && Storage::disk('public')->exists('images/logos/' . $logoPath)) {
+                Storage::disk('public')->delete('images/logos/' . $logoPath);
+            }
+            $fileName = time() . '.' . $request->logo->extension();
+            $request->file('logo')->storeAs('images/logos', $fileName, 'public');
+            $logoPath = $fileName;
+        }else{
+            $logoPath=$signature->logo;
         }
-
-        // Store the new logo and update the path
-        $fileName = time() . '.' . $request->logo->extension();
-        $request->file('logo')->storeAs('images/logos', $fileName, 'public');
-        $logoPath = $fileName;
-    }else{
-        $logoPath=$signature->logo;
-    }
-
-    // Update the signature record
-    $signature->update([
-        'logo' => $logoPath,
-        'head1' => $request->head1,
-        'head2' => $request->head2,
-        'head3' => $request->head3,
-        'head4' => $request->head4,
-        'sign1' => $request->sign1,
-        'sign2' => $request->sign2,
-        'sign_op' => $request->sign_op,
-        'sigle' => $request->sigle,
-        'phone' => $request->phone,
-        'Fax' => $request->Fax,
-        'is_active' => $isActive,
-        'effective_date' => $request->effective_date,
-    ]);
+        $signature->update([
+            'logo' => $logoPath,
+            'head1' => $request->head1,
+            'head2' => $request->head2,
+            'head3' => $request->head3,
+            'head4' => $request->head4,
+            'sign1' => $request->sign1,
+            'sign2' => $request->sign2,
+            'sign_op' => $request->sign_op,
+            'sigle' => $request->sigle,
+            'phone' => $request->phone,
+            'Fax' => $request->Fax,
+            'site' => $request->site,
+            'is_active' => $isActive,
+            'effective_date' => $request->effective_date,
+        ]);
 
     return redirect()->route('signatures.index')->with('success', 'Signature mise à jour.');
 }

@@ -17,6 +17,7 @@
                 <p><strong>Ligne 4:</strong> {{ $activeSignature->head4 }}</p>
                 <p><strong>Signature 1:</strong> {{ $activeSignature->sign1 }}</p>
                 <p><strong>Signature 2:</strong> {{ $activeSignature->sign2 }}</p>
+                <p><strong>Site:</strong> {{ $activeSignature->site }}</p>
             </div>
         </div>
     @endif

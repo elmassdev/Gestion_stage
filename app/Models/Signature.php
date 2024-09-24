@@ -33,6 +33,7 @@ class Signature extends Model
         'sigle',
         'phone',
         'Fax',
+        'site',
         'is_active',
         'effective_date',
     ];
