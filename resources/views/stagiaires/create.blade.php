@@ -29,11 +29,12 @@
 @endif
 
 <div class="d-flex align-items-center py-4">
-    <div class="container card">
-        <div class="card-header"> <h5>{{ __('Ajouter un stagiaire') }}</h5>  </div>
-        <div class="row  card-body">
-            <div class="col border border-solid rounded pt-2">
-                <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
+    <div class="container">
+        <div class="card my-4">
+            <div class="card-header text-center"> <h5>{{ __('Ajouter un stagiaire') }} </h5>  </div>
+            <div class="row  card-body">
+                <div class="col border border-solid rounded pt-2">
+                    <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
                     @csrf
                     <script>
                     $(document).ready(function() {
@@ -204,7 +205,8 @@
 
                     <div class="col-md-8">
                         <select id="civilite" type="text" class="form-control @error('civilite') is-invalid @enderror" name="civilite" required autocomplete="civilite">
-                            <option value="M." selected>Monsieur</option>
+                            <option disabled="disabled" selected></option>
+                            <option value="M." >Monsieur</option>
                             <option value="Mlle">Mademoiselle</option>
                             <option value="Mme">Madame</option>
                     </select>
@@ -229,7 +231,7 @@
                         @enderror
                     </div>
                 </div>
-  
+
                 <script>
                     function capitalizeFirstLetter(input) {
                         // Get the current value and convert it to lowercase
@@ -317,6 +319,7 @@
 
                     <div class="col-md-8">
                         <select id="niveau" type="text" class="form-control @error('niveau') is-invalid @enderror" name="niveau"  autocomplete="niveau" >
+                            <option disabled="disabled" selected></option>
                             <option value="1ère année" >1ère année</option>
                             <option value="2ème année">2ème année</option>
                             <option value="3ème année">3ème année</option>
@@ -365,7 +368,8 @@
 
                     <div class="col-md-8">
                         <select id="diplome" type="text" class="form-control @error('diplome') is-invalid @enderror" name="diplome"  autocomplete="diplome">
-                            <option selected value=""></option>
+                            <option disabled="disabled" selected></option>
+                            <option value=""></option>
                             <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                             <option value="Technicien">Technicien</option>
                             <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -449,22 +453,7 @@
 
 
 
-            <div class="row mb-3">
-                <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
-                <div class="col-md-8">
-                    <input list="etablissement-list" id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement" required>
-                    <datalist id="etablissement-list">
-                        @foreach($etablissements as $etab)
-                            <option value="{{ $etab->sigle_etab }}">{{ $etab->Etab }}</option>
-                        @endforeach
-                    </datalist>
-                    @error('etablissement')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
+
         </div>
 
         <script>
@@ -524,6 +513,23 @@
             </div> --}}
             <div class="col border border-solid rounded pt-2">
                 <div class="row mb-3">
+                    <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
+                    <div class="col-md-8">
+                        <input list="etablissement-list" id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" required autocomplete="etablissement" required>
+                        <datalist id="etablissement-list">
+                            @foreach($etablissements as $etab)
+                                <option value="{{ $etab->sigle_etab }}">{{ $etab->Etab }}</option>
+                            @endforeach
+                        </datalist>
+                        @error('etablissement')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
                     <div class="col-md-8">
                         <input list="ville-list" id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville" autocomplete="ville" required>
@@ -543,14 +549,14 @@
                 </div>
 
             <div class="row mb-3">
-                <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type Stage</label>
+                <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type de stage</label>
                 <div class="col-md-8">
                     <select id="type_stage" type="text" class="form-control @error('type_stage') is-invalid @enderror" name="type_stage"  autocomplete="type_stage" required>
-                        <option  selected disabled></option>
+                        <option  selected disabled>  </option>
                         <option value="stage ouvrier">stage ouvrier</option>
                         <option value="stage d'application">stage d'application</option>
                         <option value="stage d'observation">stage d'observation</option>
-                        <option value="stage projet fin d'études">Stage PFE</option>
+                        <option value="stage projet fin d'études">stage PFE</option>
                 </select>
                     @error('type_stage')
                         <span class="invalid-feedback" role="alert">
@@ -597,7 +603,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3" hidden>
                 <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
                 <div class="col-md-8">
                     <select id="service" type="text" class="form-control @error('service') is-invalid @enderror" name="service" required autocomplete="service" required>
@@ -696,6 +702,7 @@
                 </div>
             </div>
         </form>
+            </div>
     </div>
 </div>
 
@@ -804,7 +811,7 @@
            typeStageSelect.value = 'stage d\'application';
            typeF.value="EI";
        } else {
-           typeStageSelect.value = 'stage d\'observation';
+        //    typeStageSelect.value = 'stage d\'observation';
        }
        if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";

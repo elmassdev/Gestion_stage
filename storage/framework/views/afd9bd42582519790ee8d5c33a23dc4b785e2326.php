@@ -12,11 +12,12 @@
 <?php endif; ?>
 
 <div class="d-flex align-items-center py-4">
-    <div class="container card">
-        <div class="card-header"> <h5><?php echo e(__('Ajouter un stagiaire')); ?></h5>  </div>
-        <div class="row  card-body">
-            <div class="col border border-solid rounded pt-2">
-                <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
+    <div class="container">
+        <div class="card my-4">
+            <div class="card-header text-center"> <h5><?php echo e(__('Ajouter un stagiaire')); ?> </h5>  </div>
+            <div class="row  card-body">
+                <div class="col border border-solid rounded pt-2">
+                    <form method="POST" action="/stagiaires/create" enctype="multipart/form-data" onsubmit="return validateDates()">
                     <?php echo csrf_field(); ?>
                     <script>
                     $(document).ready(function() {
@@ -222,7 +223,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="civilite" required autocomplete="civilite">
-                            <option value="M." selected>Monsieur</option>
+                            <option disabled="disabled" selected></option>
+                            <option value="M." >Monsieur</option>
                             <option value="Mlle">Mademoiselle</option>
                             <option value="Mme">Madame</option>
                     </select>
@@ -268,7 +270,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
-  
+
                 <script>
                     function capitalizeFirstLetter(input) {
                         // Get the current value and convert it to lowercase
@@ -419,6 +421,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="niveau"  autocomplete="niveau" >
+                            <option disabled="disabled" selected></option>
                             <option value="1ère année" >1ère année</option>
                             <option value="2ème année">2ème année</option>
                             <option value="3ème année">3ème année</option>
@@ -456,7 +459,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="diplome"  autocomplete="diplome">
-                            <option selected value=""></option>
+                            <option disabled="disabled" selected></option>
+                            <option value=""></option>
                             <option value="Qualification Professionnelle">Qualification Professionnelle</option>
                             <option value="Technicien">Technicien</option>
                             <option value="Technicien spécialisé">Technicien spécialisé</option>
@@ -529,36 +533,7 @@ unset($__errorArgs, $__bag); ?>
 
 
 
-            <div class="row mb-3">
-                <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
-                <div class="col-md-8">
-                    <input list="etablissement-list" id="etablissement" type="text" class="form-control <?php $__errorArgs = ['etablissement'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement" required>
-                    <datalist id="etablissement-list">
-                        <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->Etab); ?></option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </datalist>
-                    <?php $__errorArgs = ['etablissement'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <span class="invalid-feedback" role="alert">
-                            <strong><?php echo e($message); ?></strong>
-                        </span>
-                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                </div>
-            </div>
+
         </div>
 
         <script>
@@ -600,6 +575,37 @@ unset($__errorArgs, $__bag); ?>
         
             <div class="col border border-solid rounded pt-2">
                 <div class="row mb-3">
+                    <label for="etablissement" class="col-md-3 col-form-label text-md-left"> Etablissement</label>
+                    <div class="col-md-8">
+                        <input list="etablissement-list" id="etablissement" type="text" class="form-control <?php $__errorArgs = ['etablissement'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="etablissement" required autocomplete="etablissement" required>
+                        <datalist id="etablissement-list">
+                            <?php $__currentLoopData = $etablissements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $etab): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($etab->sigle_etab); ?>"><?php echo e($etab->Etab); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </datalist>
+                        <?php $__errorArgs = ['etablissement'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <span class="invalid-feedback" role="alert">
+                                <strong><?php echo e($message); ?></strong>
+                            </span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <label for="ville" class="col-md-3 col-form-label text-md-left"> Ville </label>
                     <div class="col-md-8">
                         <input list="ville-list" id="ville" type="text" class="form-control <?php $__errorArgs = ['ville'];
@@ -633,7 +639,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
             <div class="row mb-3">
-                <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type Stage</label>
+                <label for="type_stage" class="col-md-3 col-form-label text-md-left"> Type de stage</label>
                 <div class="col-md-8">
                     <select id="type_stage" type="text" class="form-control <?php $__errorArgs = ['type_stage'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -643,11 +649,11 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="type_stage"  autocomplete="type_stage" required>
-                        <option  selected disabled></option>
+                        <option  selected disabled>  </option>
                         <option value="stage ouvrier">stage ouvrier</option>
                         <option value="stage d'application">stage d'application</option>
                         <option value="stage d'observation">stage d'observation</option>
-                        <option value="stage projet fin d'études">Stage PFE</option>
+                        <option value="stage projet fin d'études">stage PFE</option>
                 </select>
                     <?php $__errorArgs = ['type_stage'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -729,7 +735,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3" hidden>
                 <label for="service" class="col-md-3 col-form-label text-md-left"> Service d'accueil</label>
                 <div class="col-md-8">
                     <select id="service" type="text" class="form-control <?php $__errorArgs = ['service'];
@@ -897,6 +903,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
         </form>
+            </div>
     </div>
 </div>
 
@@ -1005,7 +1012,7 @@ unset($__errorArgs, $__bag); ?>
            typeStageSelect.value = 'stage d\'application';
            typeF.value="EI";
        } else {
-           typeStageSelect.value = 'stage d\'observation';
+        //    typeStageSelect.value = 'stage d\'observation';
        }
        if(diplomeInput==='Master' || diplomeInput === 'Cycle d\'Ingénieur' || diplomeInput==='Mastère spécialisé' || diplomeInput==='Doctorat' ){
         typeF.value="EI";

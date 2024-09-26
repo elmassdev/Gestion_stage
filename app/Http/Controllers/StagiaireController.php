@@ -461,7 +461,11 @@ class StagiaireController extends Controller
             }else{
                 $pdf =Pdf::loadView('/stagiaires/attestation_n',compact('activeSignature','stagiaire','dd_short','dd_long','fin_short','fin_long','today','year','date_Att'));
             }
-    $stagiaireModel->update(['date_Att_etablie' => Carbon::now()]);
+    // $stagiaireModel->update(['date_Att_etablie' => Carbon::now()]);
+    if (is_null($stagiaireModel->date_Att_etablie)) {
+        $stagiaireModel->update(['date_Att_etablie' => Carbon::now()]);
+    }
+
 
 
         //$pdf =Pdf::loadView('/stagiaires/attestation',compact('stagiaire','dd_short','dd_long','fin_short','fin_long','today'));
@@ -715,11 +719,13 @@ class StagiaireController extends Controller
             $pdf =Pdf::loadView('/stagiaires/op',compact('activeSignature','stagiaire','date_debut','date_fin','dateLO','today','year','somme','retenue','net','Le_net'));
         }
         $filename = 'OP_'.$stagiaire->nom.'_'.$stagiaire->prenom.'_'.$stagiaire->sigle_etab.'.pdf';
-        $stagiaireModel->update([
-            'OP_etabli_le' => Carbon::now(),
-            'OP_etabli' => true,
-            'Op_etabli_par' => Auth::user()->nom
-        ]);
+        if (is_null($stagiaireModel->OP_etabli_le)) {
+            $stagiaireModel->update([
+                'OP_etabli_le' => Carbon::now(),
+                'OP_etabli' => true,
+                'Op_etabli_par' => Auth::user()->nom
+            ]);
+        }
         return $pdf->stream($filename, ['blank' => true]);
 
     }
