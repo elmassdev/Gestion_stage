@@ -187,12 +187,34 @@
 }
 
 @media screen and (max-width: 600px){
-        navbarli{
+        .navbarli{
             margin-left: 0;
             text-align: center;
             width: 100%;
         }
     }
+    .navbarli {
+            font-size: 1rem; /* Adjusted to rem for responsiveness */
+            margin-left: 0.5rem; /* Reduced margin for better alignment */
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            .navbarli {
+                font-size: 0.9rem;
+                margin-left: 0;
+            }
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem; /* Spacing around nav links for better touch targets */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
 
 
 

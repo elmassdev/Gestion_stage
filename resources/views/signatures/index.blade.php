@@ -35,12 +35,13 @@
                     <td>{{ $signature->is_active ? 'Oui' : 'Non' }}</td>
                     <td>
                         <a href="{{ route('signatures.edit', $signature->id) }}" class="btn btn-sm "><i class="fa fa-edit text-warning"></i></a>
-
+                        @if(auth()->check() && auth()->user()->hasRole('superadmin'))
                         <form action="{{ route('signatures.destroy', $signature->id) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm" onclick="return confirm('Etes-vous sûr de bien vouloir supprimer?');"><i class="fa fa-trash text-danger"></i></button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

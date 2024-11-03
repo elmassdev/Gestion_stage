@@ -64,8 +64,6 @@ Route::middleware(['auth', 'can:view_indicators'])->group(function (){
     Route::get('/export/queries', [IndicatorsController::class, 'exportqueries'])->name('export.excel');
     Route::get('/indicators/graph', [IndicatorsController::class, 'graph'])->name('graph');
     Route::get('/indicators/export', [IndicatorsController::class, 'exportStagiaireTypeFormation'])->name('export');
-
-
 });
 
 

@@ -35,12 +35,13 @@
                     <td><?php echo e($signature->is_active ? 'Oui' : 'Non'); ?></td>
                     <td>
                         <a href="<?php echo e(route('signatures.edit', $signature->id)); ?>" class="btn btn-sm "><i class="fa fa-edit text-warning"></i></a>
-
+                        <?php if(auth()->check() && auth()->user()->hasRole('superadmin')): ?>
                         <form action="<?php echo e(route('signatures.destroy', $signature->id)); ?>" method="POST" style="display: inline-block;">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="btn btn-sm" onclick="return confirm('Etes-vous sûr de bien vouloir supprimer?');"><i class="fa fa-trash text-danger"></i></button>
                         </form>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -482,7 +482,14 @@ class IndicatorsController extends Controller
         $notOpEtabliCount = Stagiaire::where('OP_etabli', false)->where('remunere',true)->where('annule',false)
             ->whereYear('date_debut', $year)
             ->count();
-        return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount'));
+
+        $sta_per_month = Stagiaire::select(DB::raw('MONTH(date_debut) as month'), DB::raw('COUNT(*) as count'))
+        ->whereYear('date_debut', $year)
+        ->groupBy(DB::raw('MONTH(date_debut)'))
+        ->orderBy('month')
+        ->get();
+
+        return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount','sta_per_month'));
     }
 
     public function backupDatabase(Request $request)
