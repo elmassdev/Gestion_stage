@@ -469,6 +469,14 @@ class IndicatorsController extends Controller
         ->groupBy('services.entite')
         ->orderBy('count','desc')
         ->get();
+
+        $sta_enc = Stagiaire::select('encadrants.nom', DB::raw('COUNT(*) as count'))
+        ->join('encadrants', 'stagiaires.encadrant', '=', 'encadrants.id')
+        ->whereYear('stagiaires.date_debut', $year)
+        ->groupBy('encadrants.nom')
+        ->orderBy('count', 'desc')
+        ->get();
+
         $remunereCount = Stagiaire::where('remunere', true)->where('annule',false)
         ->whereYear('date_debut', $year)
         ->count();
@@ -489,7 +497,7 @@ class IndicatorsController extends Controller
         ->orderBy('month')
         ->get();
 
-        return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount','sta_per_month'));
+        return view('indicators.graph',compact('sta_type_f','sta_ser','sta_ent','sta_enc','remunereCount','notRemunereCount','opEtabliCount','notOpEtabliCount','sta_per_month'));
     }
 
     public function backupDatabase(Request $request)
