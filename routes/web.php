@@ -157,6 +157,8 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/export', 'App\Http\Controllers\IndicatorsController@getColumns');
     Route::get('/get-columns', 'App\Http\Controllers\IndicatorsController@getColumns')->name('get.columns');
     Route::put('/update-data', 'App\Http\Controllers\IndicatorsController@updateData')->name('update.data');
+    Route::post('/partial-update', [IndicatorsController::class, 'partialUpdate'])->name('partial.update');
+
     //Route::get('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
 });
 

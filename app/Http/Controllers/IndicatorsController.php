@@ -573,6 +573,34 @@ class IndicatorsController extends Controller
         }
     }
 
+    public function partialUpdate(Request $request)
+        {
+            $request->validate([
+                'tableSelect' => 'required|string',
+                'column_to_edit' => 'required|string',
+                'old_value' => 'required|string',
+                'new_value' => 'required|string',
+            ]);
+
+            $table = $request->input('tableSelect');
+            $column_to_edit = $request->input('column_to_edit');
+            $old_value = $request->input('old_value');
+            $new_value = $request->input('new_value');
+
+            try {
+                DB::table($table)->update([
+                    $column_to_edit => DB::raw("REPLACE($column_to_edit, '$old_value', '$new_value')")
+                ]);
+
+                return redirect()->back()->with('success', 'Mise à jour partielle réussie.');
+            } catch (\Exception $e) {
+                Log::error('Échec de la mise à jour partielle: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Échec de la mise à jour partielle: Une erreur est survenue.');
+            }
+        }
+
+
+
 
 
 
