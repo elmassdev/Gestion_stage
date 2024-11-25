@@ -117,7 +117,7 @@
                 labels: ['Remunéré', 'Non Remunéré'],
                 datasets: [{
                     data: [<?php echo e($remunereCount); ?>, <?php echo e($notRemunereCount); ?>],
-                    backgroundColor: ['#36A21B', '#FFCE56']
+                    backgroundColor: ['#FFD700', '#FF4500']
                 }]
             },
             options: {
@@ -148,7 +148,7 @@
                 labels: ['OP établi', 'OP non établi'],
                 datasets: [{
                     data: [<?php echo e($opEtabliCount); ?>, <?php echo e($notOpEtabliCount); ?>],
-                    backgroundColor: ['#36A21B', '#FFCE56']
+                    backgroundColor: ['#00ff00', '#FF0F0F']
                 }]
             },
             options: {

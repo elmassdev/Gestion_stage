@@ -296,8 +296,8 @@ class IndicatorsController extends Controller
             $sheet->setCellValue('J' . ($row + 2), $rowData->type_stage);
             $sheet->setCellValue('K' . ($row + 2), $rowData->nomenc);
             $sheet->setCellValue('L' . ($row + 2), $rowData->sigle);
-            $sheet->setCellValue('M' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d-m-Y'));
-            $sheet->setCellValue('N' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d-m-Y'));
+            $sheet->setCellValue('M' . ($row + 2), \Carbon\Carbon::parse($rowData->date_debut)->format('d/m/Y'));
+            $sheet->setCellValue('N' . ($row + 2), \Carbon\Carbon::parse($rowData->date_fin)->format('d/m/Y'));
             $sheet->setCellValue('O' . ($row + 2), $rowData->sujet);
             $sheet->setCellValue('P' . ($row + 2), $rowData->type_formation);
             $sheet->setCellValue('Q' . ($row + 2), $rowData->remunere);
