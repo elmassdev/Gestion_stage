@@ -100,7 +100,7 @@
                             {{ $activeSignature->head4 }} <br></b>
                     </div>
                     <div class="ref">
-                        <p>{{ $activeSignature->sigle }} -  {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}}</p>
+                        <p>{{ $activeSignature->sigle }}{{substr($stagiaire->code, -4);}}{{substr($stagiaire->site,0,1)}}/{{substr($year,-2)}}</p>
                     </div>
                 </td>
                 <td>
@@ -167,7 +167,7 @@
         </tr>
         <tr>
             <td>
-                <div>- Indemnité de stage pour la période allant du {{ $date_debut }} au {{ $date_fin }} à {{ $stagiaire->sigle}} (*) <br> (OIG/H/D -  {{substr($stagiaire->code, -4)}} /{{substr($stagiaire->site,0,1)}}/{{$year}} du {{$dateLO}}) <br>
+                <div>- Indemnité de stage pour la période allant du {{ $date_debut }} au {{ $date_fin }} à {{ $stagiaire->sigle}} (*) <br> ({{ $activeSignature->sigle }}{{substr($stagiaire->code, -4);}}{{substr($stagiaire->site,0,1)}}/{{substr($year,-2)}} du {{$dateLO}}) <br>
                 </div>
                 <div> <br> - Absentéisme</div>
 

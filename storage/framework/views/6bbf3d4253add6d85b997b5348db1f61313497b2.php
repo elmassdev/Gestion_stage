@@ -87,7 +87,8 @@
             <thead>
                 <tr class="small">
                     <th>CIN</th>
-                    <th>Nom Prénom</th>
+                    <th>Nom </th>
+                    <th>Prénom</th>
                     <th>Niveau</th>
                     <th>Diplôme</th>
                     <th>Etablissement</th>
@@ -104,7 +105,8 @@
             <tbody><?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr class=" table table-row my-auto h-10 small">
                     <td><?php echo e($result->cin); ?></td>
-                    <td><?php echo e($result->nom); ?> <?php echo e($result->prenom); ?></td>
+                    <td><?php echo e($result->nom); ?> </td>
+                    <td><?php echo e($result->prenom); ?></td>
                     <td><?php echo e($result->niveau); ?></td>
                     <td><?php echo e($result->diplome); ?></td>
                     <td><?php echo e($result->etablissement); ?></td>

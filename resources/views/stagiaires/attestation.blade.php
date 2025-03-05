@@ -24,7 +24,7 @@
         font-family: 'Roboto', sans-serif;
     }
 </style>
-<div class="note"> <small> <b> {{ $activeSignature->sigle }} - ES n° {{substr($stagiaire->code, -4);}} /{{substr($stagiaire->site,0,1)}}/{{$year}} </b> </small> </div>
+<div class="note"> <small> <b> {{ $activeSignature->sigle }} - ES n° {{substr($stagiaire->code, -4);}}/{{substr($stagiaire->site,0,1)}}/{{substr($year,-2)}} </b> </small> </div>
 @php
     \Carbon\Carbon::setLocale('fr');
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
@@ -35,7 +35,7 @@
         <p> <span>{{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}}, @if(isset($stagiaire->cin) && !empty($stagiaire->cin))
             titulaire de la CIN n°: {{$stagiaire->cin}}@endif,
          </span> étudiant{{$stagiaire->genre}} {{$stagiaire->article}} {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) de {{$stagiaire->ville}},
-        Specialité:{{$stagiaire->filiere}} a effectué un {{$stagiaire->type_stage}} au sein de la {{$stagiaire->direction}} et ce pendant la période du @php echo $dd_long  @endphp au {{ $fin_long }} ( du {{$dd_short}} au {{$fin_short}})     <br>   </p>
+        Specialité:{{$stagiaire->filiere}} a effectué un {{$stagiaire->type_stage}} au sein de la {{$stagiaire->direction}} et ce pendant la période du @php echo $dd_long  @endphp au {{ $fin_long }} (du {{$dd_short}} au {{$fin_short}})     <br>   </p>
         <p>
             <span>Faite</span> à la demande de l'intéressé{{$stagiaire->genre}} pour servir et valoir ce que de droit.
 

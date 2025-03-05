@@ -100,7 +100,7 @@
                             <?php echo e($activeSignature->head4); ?> <br></b>
                     </div>
                     <div class="ref">
-                        <p><?php echo e($activeSignature->sigle); ?> -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?></p>
+                        <p><?php echo e($activeSignature->sigle); ?><?php echo e(substr($stagiaire->code, -4)); ?><?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e(substr($year,-2)); ?></p>
                     </div>
                 </td>
                 <td>
@@ -167,7 +167,7 @@
         </tr>
         <tr>
             <td>
-                <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->sigle); ?> (*) <br> (OIG/H/D -  <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> du <?php echo e($dateLO); ?>) <br>
+                <div>- Indemnité de stage pour la période allant du <?php echo e($date_debut); ?> au <?php echo e($date_fin); ?> à <?php echo e($stagiaire->sigle); ?> (*) <br> (<?php echo e($activeSignature->sigle); ?><?php echo e(substr($stagiaire->code, -4)); ?><?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e(substr($year,-2)); ?> du <?php echo e($dateLO); ?>) <br>
                 </div>
                 <div> <br> - Absentéisme</div>
 

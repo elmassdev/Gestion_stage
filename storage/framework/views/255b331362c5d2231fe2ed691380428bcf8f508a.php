@@ -21,7 +21,7 @@
         margin-left: 5px;
     }
 </style>
-<div class="note"> <small> <b> <?php echo e($activeSignature->sigle); ?>  - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="note"> <small> <b> <?php echo e($activeSignature->sigle); ?>-ES n° <?php echo e(substr($stagiaire->code, -4)); ?>/<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e(substr($year,-2)); ?> </b> </small> </div>
 
 
     <h4 class="Att_title"> ATTESTATION DE STAGE</h4>
@@ -32,7 +32,7 @@
 
         <p>
         - à la <?php echo e($stagiaire->direction); ?>  <br>
-        - du  <?php echo $dd_long  ?> au <?php echo e($fin_long); ?> ( du <?php echo e($dd_short); ?> au <?php echo e($fin_short); ?>)     <br>   </p>
+        - du  <?php echo $dd_long  ?> au <?php echo e($fin_long); ?> (du <?php echo e($dd_short); ?> au <?php echo e($fin_short); ?>)     <br>   </p>
         <p>
             <span>La présente attestation est délivrée à l'intéressé<?php echo e($stagiaire->genre); ?> pour servir et
                 valoir ce que de droit.</span>

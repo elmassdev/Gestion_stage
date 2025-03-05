@@ -88,7 +88,8 @@
             <thead>
                 <tr class="small">
                     <th>CIN</th>
-                    <th>Nom Prénom</th>
+                    <th>Nom </th>
+                    <th>Prénom</th>
                     <th>Niveau</th>
                     <th>Diplôme</th>
                     <th>Etablissement</th>
@@ -105,7 +106,8 @@
             <tbody>@foreach($results as $result)
                 <tr class=" table table-row my-auto h-10 small">
                     <td>{{ $result->cin}}</td>
-                    <td>{{ $result->nom}} {{ $result->prenom}}</td>
+                    <td>{{ $result->nom}} </td>
+                    <td>{{ $result->prenom}}</td>
                     <td>{{ $result->niveau}}</td>
                     <td>{{ $result->diplome}}</td>
                     <td>{{ $result->etablissement}}</td>

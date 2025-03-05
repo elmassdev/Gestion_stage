@@ -51,7 +51,7 @@
 
 
 
-<div class="note"> <small> <b><?php echo e($activeSignature->sigle); ?>  - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e($year); ?> </b> </small> </div>
+<div class="note"> <small> <b><?php echo e($activeSignature->sigle); ?>  - ES n° <?php echo e(substr($stagiaire->code, -4)); ?> /<?php echo e(substr($stagiaire->site,0,1)); ?>/<?php echo e(substr($year,-2)); ?> </b> </small> </div>
 <div class="nomsta"><small> <b> <?php echo e($stagiaire->titre); ?> <?php echo e($stagiaire->prenom); ?> <?php echo e($stagiaire->nom); ?> </b><br>S/C de: <?php echo e($stagiaire->etab); ?> (<?php echo e($stagiaire->sigle_etab); ?>) <br> - <?php echo e($stagiaire->ville); ?> - </small> </div>
 
 <p><?php echo e($stagiaire->titre); ?>, <br>
