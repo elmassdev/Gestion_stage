@@ -46,7 +46,7 @@
     }
 </style>
 
-<div class="top"> {{$stagiaire->site}}, le {{$dateToShow}}</div>
+<div class="top"> {{$stagiaire->site}}, le {{$dateLO}}</div>
 
 
 

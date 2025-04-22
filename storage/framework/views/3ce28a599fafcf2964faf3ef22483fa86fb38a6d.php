@@ -49,7 +49,7 @@
 
 
 
-<div class="top"> <?php echo e($stagiaire->site); ?>, le <?php echo e($dateToShow); ?></div>
+<div class="top"> <?php echo e($stagiaire->site); ?>, le <?php echo e($dateLO); ?></div>
 
 
 
