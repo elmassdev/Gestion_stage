@@ -161,8 +161,6 @@ Route::middleware(['auth', 'can:view_surete_page'])->group(function () {
 
 
 // Route::resource('signatures', SignatureController::class);
-
-// // Route specifically for exporting the active signature
 // Route::get('/signatures', [SignatureController::class, 'export'])->name('signatures.export');
 
 
