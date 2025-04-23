@@ -108,15 +108,6 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
 
     // Route::get('/stagiaires/{id}/attestation', [StagiaireController::class, 'generer_attestation'])->name('stagiaires.attestation');
 
-
-
-
-
-
-
-
-
-
     //export DB to Excel
     $today = date('d F Y');
 
@@ -158,7 +149,6 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/get-columns', 'App\Http\Controllers\IndicatorsController@getColumns')->name('get.columns');
     Route::put('/update-data', 'App\Http\Controllers\IndicatorsController@updateData')->name('update.data');
     Route::post('/partial-update', [IndicatorsController::class, 'partialUpdate'])->name('partial.update');
-
     //Route::get('/export', [IndicatorsController::class, 'backupDatabase'])->name('backup.database');
 });
 
