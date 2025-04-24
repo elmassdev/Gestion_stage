@@ -141,9 +141,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/admin/permissions/assign-permissions/{roleId}', [PermissionController::class, 'assignPermissions']);
     Route::get('/user/assign-roles', [UserController::class, 'show'])->name('user.assignRoles');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-    Route::post('/user/assign-roles', [UserController::class, 'assignRoles'])->name('user.assignRoles');
+    Route::post('/user/assign-roles', [UserController::class, 'assignRoles'])->name('user.assignRoles.submit');
     Route::get('/user/assign-permissions', [UserController::class, 'showPermissions'])->name('user.assignPermissions');
-    Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions');
+    Route::post('/user/assign-permissions', [UserController::class, 'assignPermissions'])->name('user.assignPermissions.submit');
     Route::get('/export-users', function () { return Excel::download(new UsersExport, 'users.xlsx');});
     Route::get('/export', 'App\Http\Controllers\IndicatorsController@getColumns');
     Route::get('/get-columns', 'App\Http\Controllers\IndicatorsController@getColumns')->name('get.columns');
