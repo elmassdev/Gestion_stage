@@ -29,7 +29,17 @@
 
     <p><span>Le Responsable Développement RH</span> de Gantour du Groupe OCP.sa certifie que
         {{$stagiaire->titre}} {{$stagiaire->prenom}} {{$stagiaire->nom}}, @if(isset($stagiaire->cin) && !empty($stagiaire->cin))
-        titulaire de la CIN n°: {{$stagiaire->cin}}@endif, étudiant{{$stagiaire->genre}} {{$stagiaire->article}} {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) de {{$stagiaire->ville}}, Spécialité: {{$stagiaire->filiere}}, a effectué avec assiduité un {{$stagiaire->type_stage}} :</p>
+    @php
+        $lastCharacter = substr($stagiaire->cin, -1); // Get the last character
+    @endphp
+
+    @if(ctype_alpha($lastCharacter)) <!-- Check if the last character is a letter -->
+        titulaire de la carte d'immatriculation n°: {{$stagiaire->cin}}
+    @else
+        titulaire de la CNI n°: {{$stagiaire->cin}}
+    @endif
+@endif
+, étudiant{{$stagiaire->genre}} {{$stagiaire->article}} {{$stagiaire->etab}} ({{$stagiaire->sigle_etab}}) de {{$stagiaire->ville}}, Spécialité: {{$stagiaire->filiere}}, a effectué avec assiduité un {{$stagiaire->type_stage}} :</p>
 
         <p>
         - à la {{$stagiaire->direction}}  <br>
