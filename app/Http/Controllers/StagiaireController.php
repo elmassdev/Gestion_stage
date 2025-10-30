@@ -107,7 +107,7 @@ class StagiaireController extends Controller
             $stagiaire->phone = $request->input('phone');
             $stagiaire->email = $request->input('email');
             if($request->hasFile('photo')){
-                $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
+                $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.$code.'.'.$request->photo->extension();
                 $request->file('photo')->storeAs('images/profile', $fileName,'public');
                 $requestData["photo"] = $fileName;
                 $stagiaire->photo = $requestData["photo"];
@@ -291,7 +291,7 @@ class StagiaireController extends Controller
             if(File::exists($old_photo)&&($stagiaire->photo!=='default_f.png'&& $stagiaire->photo !=='default_m.jpg')){
                 File::delete($old_photo);
             }
-            $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.time().'.'.$request->photo->extension();
+            $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.$stagiaire->code.'.'.$request->photo->extension();
             $request->file('photo')->storeAs('images/profile', $fileName,'public');
             $stagiaire->update(['photo' => $fileName]);
         }
