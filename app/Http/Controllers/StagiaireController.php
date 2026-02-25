@@ -98,7 +98,7 @@ class StagiaireController extends Controller
             }
             $stagiaire = new Stagiaire();
             $stagiaire->code =$code;
-            $stagiaire->Date_demande = $request->input('date_demande');
+            $stagiaire->date_demande = $request->input('date_demande');
             $stagiaire->site = $request->input('site');
             $stagiaire->civilite = $request->input('civilite');
             $stagiaire->prenom =ucwords($request->input('prenom'));
@@ -106,6 +106,7 @@ class StagiaireController extends Controller
             $stagiaire->cin = strtoupper($request->input('cin'));
             $stagiaire->phone = $request->input('phone');
             $stagiaire->email = $request->input('email');
+
             if($request->hasFile('photo')){
                 $fileName = ucwords($request->input('nom')).'-'.ucwords($request->input('prenom')).'-'.$code.'.'.$request->photo->extension();
                 $request->file('photo')->storeAs('images/profile', $fileName,'public');
@@ -227,7 +228,7 @@ class StagiaireController extends Controller
         }
     }
         $stagiaire->code = $request->input('code');
-        $stagiaire->Date_demande = $request->input('date_demande');
+        $stagiaire->date_demande = $request->input('date_demande');
         $stagiaire->site = $request->input('site');
         $stagiaire->civilite = $request->input('civilite');
         $stagiaire->prenom =ucwords($request->input('prenom'));

@@ -28,7 +28,7 @@
                     <div class="row ">
                                 <div class="col-md-3  p-2">
                                     <div class="center mx-4">
-                                        <img src="{{ asset('storage/images/profile/'.$stagiaire->photo)}}"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
+                                        <img src="{{ asset('storage/images/profile/'.$stagiaire->photo) }}"  class="img-fluid img-thumbnail mh-80"  style="max-height: 6rem; min-width:2rem" alt="photo de profile" >
                                     </div>
                                 </div>
                                 <div class="col-md-6  position my-auto top-0 end-0">

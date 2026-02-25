@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
     {
         // Create admin user and assign 'admin' role
         $SuperAdmin = User::create([
+            'titre'=>'M.',
             'nom'=>'EL MASSOUDI',
             'prenom' => 'Abdelaadim',
             'email' => 'abdelaadim.elmassoudi@ocpgroup.ma',
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
         $SuperAdmin->assignRole($SuperAdminRole);
 
         $admin = User::create([
+            'titre'=>'M.',
             'nom' => 'ED-DHHAK',
             'prenom'=>'Younes',
             'email' => 'EDDHHAK@ocpgroup.ma',
@@ -41,6 +43,7 @@ class UsersTableSeeder extends Seeder
         $admin->assignRole($adminRole);
 
         $admin = User::create([
+            'titre'=>'M.',
             'nom' => 'Kourimi',
             'prenom'=>'Younes',
             'email' => 'kourimi@ocpgroup.ma',
@@ -52,6 +55,7 @@ class UsersTableSeeder extends Seeder
         $admin->assignRole($adminRole);
 
         $admin = User::create([
+            'titre'=>'Mme',
             'nom' => 'KHOMRI',
             'prenom'=>'Es-saadia',
             'email' => 'KHOMRI@ocpgroup.ma',

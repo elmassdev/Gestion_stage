@@ -135,17 +135,26 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="row mb-3">
                             <label for="date_demande" class="col-md-3 col-form-label text-md-left"> Date demande</label>
-                            <div class="col-md-8">
-                                <input id="date_demande" type="date" value = "{{$stagiaire->date_demande}}" class="form-control datepicker  @error('date_demande') is-invalid @enderror"   name="date_demande" value="{{ old('date_demande') }}" pattern="dd/mm/yyyy"  required autocomplete="date_demande" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
+                            <div class="col-md-8">    
+                                
+                                <input 
+    type="date"
+    name="date_demande"
+    class="form-control @error('date_demande') is-invalid @enderror"
+    value="{{ old('date_demande', $stagiaire->date_demande?->format('Y-m-d')) }}"
+    min="1997-01-01"
+    max="2090-12-31"
+    required
+>
                                 @error('date_demande')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-
                         </div>
 
                         <div class="row mb-3">
@@ -478,7 +487,7 @@
                         <div class="row mb-3">
                             <label for="date_debut" class="col-md-3 col-form-label text-md-left"> Date de début</label>
                             <div class="col-md-8">
-                                <input id="date_debut" type="date"  class="form-control datepicker  @error('date_debut') is-invalid @enderror"   name="date_debut" value="{{$stagiaire->date_debut}}" pattern="dd/mm/yyyy"  required autocomplete="date_debut" placeholder="dd/mm/yyyy" value="" min="1997-01-01" max="2045-12-31" autofocus>
+                                <input id="date_debut" type="date"  class="form-control datepicker  @error('date_debut') is-invalid @enderror"   name="date_debut" value="{{$stagiaire->date_debut}}" pattern="dd/mm/yyyy"  required autocomplete="date_debut" placeholder="dd/mm/yyyy" value="" min="1997-01-01" max="2090-12-31" autofocus>
                                 @error('date_debut')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -490,7 +499,7 @@
                         <div class="row mb-3">
                             <label for="date_fin" class="col-md-3 col-form-label text-md-left"> Date de fin</label>
                             <div class="col-md-8">
-                                <input id="date_fin" type="date"  class="form-control datepicker  @error('date_fin') is-invalid @enderror"   name="date_fin" value="{{$stagiaire->date_fin}}" pattern="dd/mm/yyyy"  required autocomplete="date_fin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" autofocus>
+                                <input id="date_fin" type="date"  class="form-control datepicker  @error('date_fin') is-invalid @enderror"   name="date_fin" value="{{$stagiaire->date_fin}}" pattern="dd/mm/yyyy"  required autocomplete="date_fin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2090-12-31" autofocus>
                                 @error('date_fin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
