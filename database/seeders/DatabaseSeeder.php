@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+        RolesAndPermissionsSeeder::class,
+        UsersTableSeeder::class,
+    ]);
        $user = User::where('email', 'abdelaadim.elmassoudi@ocpgroup.ma')->first();
 
         if ($user) {
