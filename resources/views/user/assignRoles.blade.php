@@ -81,10 +81,10 @@
         </div>
         <div class="container">
             @if(auth()->check() && auth()->user()->hasRole('superadmin'))
-            <a class="btn btn-outline-warning col-md-3  mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un nouveau utilisateur</a>
-            <a class="btn btn-outline-warning col-md-2  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Gérer les roles</a>
-            <a class="btn btn-outline-warning col-md-2  mx-auto border border-warning rounded-pill fs-5" href="/user/assign-permissions"> Gérer les Permissions</a>
-            <a class="btn btn-outline-warning col-md-2  mx-auto border border-warning rounded-pill fs-5" href="/signatures"> Gérer les en-têtes</a>
+            <a class="btn btn-outline-warning mx-auto border border-warning rounded-pill fs-5" href="/register"> Ajouter un nouveau utilisateur</a>
+            <a class="btn btn-outline-warning mx-auto border border-warning rounded-pill fs-5" href="/user/assign-roles"> Gérer les roles</a>
+            <a class="btn btn-outline-warning mx-auto border border-warning rounded-pill fs-5" href="/user/assign-permissions"> Gérer les Permissions</a>
+            <a class="btn btn-outline-warning mx-auto border border-warning rounded-pill fs-5" href="/signatures"> Gérer les en-têtes</a>
             @endif
         </div>
 
